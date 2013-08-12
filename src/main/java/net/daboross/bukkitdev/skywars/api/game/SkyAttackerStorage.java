@@ -26,8 +26,9 @@ public interface SkyAttackerStorage {
      * Gets the person who last damaged a given player. This is reset every time
      * a player leaves a game.
      *
-     * @param playerName
-     * @return
+     * @param playerName the name of the player to check for
+     * @return the name of the last player who hit the player with the given
+     * name, or null if no one has hit that player since they last left a game.
      */
     public String getKiller(String playerName);
 }

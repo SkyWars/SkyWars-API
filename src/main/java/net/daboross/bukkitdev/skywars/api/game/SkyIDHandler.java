@@ -44,7 +44,7 @@ public interface SkyIDHandler {
     /**
      * Gets an unmodifiable list containing all IDs of running games.
      *
-     * @return
+     * @return an unmodifiable list containing an ID for each running game.
      */
     public List<Integer> getCurrentIDs();
 }

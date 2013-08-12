@@ -25,16 +25,16 @@ public interface SkyCurrentGameTracker {
     /**
      * Gets if a player is currently in a game.
      *
-     * @param playerName The name of the player to check.
-     * @return Whether or not the given player is in a game.
+     * @param playerName the name of the player to check.
+     * @return whether or not the given player is in a game.
      */
     public boolean isInGame(String playerName);
 
     /**
      * Gets the ID of the game a given player is in.
      *
-     * @param playerName The name of the player to check.
-     * @return The ID of the game the given player is in, or -1 if none.
+     * @param playerName the name of the player to check.
+     * @return the ID of the game the given player is in, or -1 if none.
      */
     public int getGameID(String playerName);
 }
