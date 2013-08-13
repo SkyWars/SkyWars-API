@@ -37,13 +37,26 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     public final double x;
     public final double y;
     public final double z;
+    public final double yaw;
+    public final double pitch;
     public final String world;
+
+    public SkyPlayerLocation(double x, double y, double z, double yaw, double pitch, String world) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.yaw = yaw;
+        this.pitch = pitch;
+        this.world = world;
+    }
 
     public SkyPlayerLocation(double x, double y, double z, String world) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.world = world.toLowerCase();
+        this.yaw = 0;
+        this.pitch = 0;
+        this.world = world;
     }
 
     public SkyPlayerLocation(Block block) {
@@ -51,11 +64,15 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     public SkyPlayerLocation(Location location) {
-        this(location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld().getName());
+        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch(), location.getWorld().getName());
     }
 
     public SkyPlayerLocation(Entity entity) {
         this(entity.getLocation());
+    }
+
+    public SkyPlayerLocation(SkyBlockLocation location) {
+        this(location.x, location.y, location.z, location.world);
     }
 
     public SkyPlayerLocation add(double x, double y, double z) {
@@ -89,6 +106,8 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         map.put("xpos", x);
         map.put("ypos", y);
         map.put("zpos", z);
+        map.put("yaw", yaw);
+        map.put("pitch", pitch);
         map.put("world", world);
         return map;
     }
@@ -97,15 +116,18 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         Object worldO = map.get("world");
         Double x = get(map.get("xpos")),
                 y = get(map.get("ypos")),
-                z = get(map.get("zpos"));
-        if (x == null || y == null || z == null || worldO == null
-                || !(x instanceof Double)
-                || !(y instanceof Double)
-                || !(z instanceof Double)) {
+                z = get(map.get("zpos")),
+                yaw = get(map.get("yaw")),
+                pitch = get(map.get("pitch"));
+        if (x == null || y == null || z == null || worldO == null) {
             return null;
         }
         String world = worldO.toString();
-        return new SkyPlayerLocation(x, y, z, world);
+        if (yaw != null && pitch != null) {
+            return new SkyPlayerLocation(x, y, z, yaw, pitch, world);
+        } else {
+            return new SkyPlayerLocation(x, y, z, world);
+        }
     }
 
     private static Double get(Object o) {
