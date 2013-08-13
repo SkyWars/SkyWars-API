@@ -22,29 +22,11 @@ import java.util.List;
  *
  * @author daboross
  */
-public interface SkyIDHandler {
+public interface SkyGame {
 
-    /**
-     * Checks whether or not a game is running with the given ID.
-     *
-     * @param id The ID to check.
-     * @return true if there is a game running with the given id, false
-     * otherwise.
-     */
-    public boolean gameRunning(int id);
+    public int getID();
 
-    /**
-     * Gets the _real_ list of players in a given game.
-     *
-     * @param id The ID of the game.
-     * @return The underlying array of players in the game.
-     */
-    public SkyGame getGame(int id);
+    public List<String> getAlivePlayers();
 
-    /**
-     * Gets an unmodifiable list containing all IDs of running games.
-     *
-     * @return an unmodifiable list containing an ID for each running game.
-     */
-    public List<Integer> getCurrentIDs();
+    public List<String> getDeadPlayers();
 }
