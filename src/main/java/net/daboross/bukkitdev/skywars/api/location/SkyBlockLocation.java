@@ -23,6 +23,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
@@ -70,6 +71,10 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
+    public SkyBlockLocation changeWorld(String newWorld) {
+        return new SkyBlockLocation(x, y, z, newWorld);
+    }
+
     public boolean isNear(Location loc) {
         return world.equals(loc.getWorld().getName())
                 && x <= loc.getX() + 1 && x >= loc.getX() - 1
@@ -78,10 +83,12 @@ public class SkyBlockLocation implements ConfigurationSerializable {
     }
 
     public Location toLocation() {
-        World bukkitWorld = Bukkit.getWorld(world);
+        World bukkitWorld = null;
+        if (world != null) {
+            bukkitWorld = Bukkit.getWorld(world);
+        }
         if (bukkitWorld == null) {
-            Bukkit.getLogger().log(Level.WARNING, "[CopsAndRobbers] World ''{0}'' not found!", world);
-            return null;
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{world, this});
         }
         return new Location(bukkitWorld, x, y, z);
     }
@@ -92,7 +99,9 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         map.put("xpos", x);
         map.put("ypos", y);
         map.put("zpos", z);
-        map.put("world", world);
+        if (world != null) {
+            map.put("world", world);
+        }
         return map;
     }
 
@@ -101,14 +110,28 @@ public class SkyBlockLocation implements ConfigurationSerializable {
                 yObject = map.get("ypos"),
                 zObject = map.get("zpos"),
                 worldObject = map.get("world");
-        if (xObject == null || yObject == null || zObject == null || worldObject == null
-                || !(xObject instanceof Integer)
-                || !(yObject instanceof Integer)
-                || !(zObject instanceof Integer)) {
+        if (!(xObject instanceof Integer && yObject instanceof Integer && zObject instanceof Integer)) {
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
             return null;
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
-        String worldString = worldObject.toString();
+        String worldString = worldObject == null ? null : worldObject.toString();
+        return new SkyBlockLocation(x, y, z, worldString);
+    }
+
+    public static SkyBlockLocation deserialize(ConfigurationSection configurationSection) {
+        Object xObject = configurationSection.get("xpos"),
+                yObject = configurationSection.get("ypos"),
+                zObject = configurationSection.get("zpos"),
+                worldObject = configurationSection.get("world");
+        if (!(xObject instanceof Integer
+                && yObject instanceof Integer
+                && zObject instanceof Integer)) {
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
+            return null;
+        }
+        Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
+        String worldString = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
         return new SkyBlockLocation(x, y, z, worldString);
     }
 
@@ -133,6 +156,6 @@ public class SkyBlockLocation implements ConfigurationSerializable {
 
     @Override
     public String toString() {
-        return "SkyLocation:x=" + x + ":y=" + y + ":z=" + z + ":world=" + world;
+        return "SkyBlockLocation{x=" + x + ",y=" + y + ",z=" + z + ",world=" + world + "]";
     }
 }
