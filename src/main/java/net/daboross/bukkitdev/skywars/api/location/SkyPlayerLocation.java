@@ -23,6 +23,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
@@ -51,12 +52,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     public SkyPlayerLocation(double x, double y, double z, String world) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.yaw = 0;
-        this.pitch = 0;
-        this.world = world;
+        this(x, y, z, 0, 0, world);
     }
 
     public SkyPlayerLocation(Block block) {
@@ -92,10 +88,12 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     public Location toLocation() {
-        World bukkitWorld = Bukkit.getWorld(world);
+        World bukkitWorld = null;
+        if (world != null) {
+            bukkitWorld = Bukkit.getWorld(world);
+        }
         if (bukkitWorld == null) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] World ''{0}'' not found!", world);
-            return null;
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{world, this});
         }
         return new Location(bukkitWorld, x, y, z);
     }
@@ -108,7 +106,9 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         map.put("zpos", z);
         map.put("yaw", yaw);
         map.put("pitch", pitch);
-        map.put("world", world);
+        if (world != null) {
+            map.put("world", world);
+        }
         return map;
     }
 
@@ -119,15 +119,27 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
                 z = get(map.get("zpos")),
                 yaw = get(map.get("yaw")),
                 pitch = get(map.get("pitch"));
-        if (x == null || y == null || z == null || worldO == null) {
+        if (x == null || y == null || z == null) {
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
             return null;
         }
-        String world = worldO.toString();
-        if (yaw != null && pitch != null) {
-            return new SkyPlayerLocation(x, y, z, yaw, pitch, world);
-        } else {
-            return new SkyPlayerLocation(x, y, z, world);
+        String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
+        return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
+    }
+
+    public static SkyPlayerLocation deserialize(ConfigurationSection configurationSection) {
+        Object worldO = configurationSection.get("world");
+        Double x = get(configurationSection.get("xpos")),
+                y = get(configurationSection.get("ypos")),
+                z = get(configurationSection.get("zpos")),
+                yaw = get(configurationSection.get("yaw")),
+                pitch = get(configurationSection.get("pitch"));
+        if (x == null || y == null || z == null) {
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
+            return null;
         }
+        String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
+        return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
     }
 
     private static Double get(Object o) {
@@ -160,5 +172,10 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.z) ^ (Double.doubleToLongBits(this.z) >>> 32));
         hash = 97 * hash + (this.world != null ? this.world.hashCode() : 0);
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "SkyPlayerLocation{x=" + x + ",y=" + y + ",z=" + z + ",pitch=" + pitch + ",yaw=" + yaw + ",world=" + world + "}";
     }
 }
