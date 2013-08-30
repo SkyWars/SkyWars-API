@@ -92,24 +92,6 @@ public class ArenaMessages extends Parentable<ArenaMessages> implements Configur
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ArenaMessages)) {
-            return false;
-        }
-        ArenaMessages other = (ArenaMessages) obj;
-        return (other.parent == null ? this.parent == null : other.parent.equals(this.parent))
-                && other.messages.equals(this.messages);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (this.messages != null ? this.messages.hashCode() : 0);
-        hash = 97 * hash + (this.parent != null ? this.parent.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
     public String toString() {
         return "ArenaMessages{parent=" + parent + ",messages=" + messages + "}";
     }
