@@ -19,12 +19,14 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 import java.util.HashMap;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 /**
  *
  * @author daboross
  */
-public class ArenaMessages extends Parentable<ArenaMessages> {
+public class ArenaMessages extends Parentable<ArenaMessages> implements ConfigurationSerializable {
 
     private final Map<String, String> messages = new HashMap<String, String>();
 
@@ -60,6 +62,51 @@ public class ArenaMessages extends Parentable<ArenaMessages> {
         } else {
             messages.put(key.toLowerCase(), message);
         }
+    }
+
+    @Override
+    public Map<String, Object> serialize() {
+        return new HashMap<String, Object>(messages);
+    }
+
+    public static ArenaMessages deserialize(Map<String, Object> map) {
+        ArenaMessages returnValue = new ArenaMessages();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            Object o = entry.getValue();
+            if (o != null) {
+                returnValue.setMessage(entry.getKey(), o instanceof String ? (String) o : o.toString());
+            }
+        }
+        return returnValue;
+    }
+
+    public static ArenaMessages deserialize(ConfigurationSection configurationSection) {
+        ArenaMessages returnValue = new ArenaMessages();
+        for (String key : configurationSection.getKeys(true)) {
+            String value = configurationSection.getString(key);
+            if (value != null) {
+                returnValue.setMessage(key, value);
+            }
+        }
+        return returnValue;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ArenaMessages)) {
+            return false;
+        }
+        ArenaMessages other = (ArenaMessages) obj;
+        return (other.parent == null ? this.parent == null : other.parent.equals(this.parent))
+                && other.messages.equals(this.messages);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + (this.messages != null ? this.messages.hashCode() : 0);
+        hash = 97 * hash + (this.parent != null ? this.parent.hashCode() : 0);
+        return hash;
     }
 
     @Override
