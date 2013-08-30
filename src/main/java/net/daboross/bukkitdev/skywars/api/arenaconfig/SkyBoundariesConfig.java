@@ -16,40 +16,45 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+import java.util.HashMap;
+import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
  * @author daboross
  */
-public class ArenaBoundaries extends Parentable<ArenaBoundaries> {
+@SerializableAs("SkyBoundaries")
+public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable {
 
     private SkyBlockLocationRange origin;
     private SkyBlockLocationRange building;
     private SkyBlockLocationRange clearing;
 
-    public ArenaBoundaries() {
+    public SkyBoundariesConfig() {
     }
 
-    public ArenaBoundaries(ArenaBoundaries parent) {
+    public SkyBoundariesConfig(SkyBoundariesConfig parent) {
         super(parent);
     }
 
-    public ArenaBoundaries(SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing) {
+    public SkyBoundariesConfig(SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing) {
         this.origin = origin;
         this.building = building;
         this.clearing = clearing;
     }
 
-    public ArenaBoundaries(ArenaBoundaries parent, SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing) {
+    public SkyBoundariesConfig(SkyBoundariesConfig parent, SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing) {
         super(parent);
         this.origin = origin;
         this.building = building;
         this.clearing = clearing;
     }
 
-    public void copyDataFrom(ArenaBoundaries boundaries) {
+    public void copyDataFrom(SkyBoundariesConfig boundaries) {
         this.origin = boundaries.origin;
         this.building = boundaries.building;
         this.clearing = boundaries.clearing;
@@ -98,6 +103,25 @@ public class ArenaBoundaries extends Parentable<ArenaBoundaries> {
 
     public void setClearing(SkyBlockLocationRange clearing) {
         this.clearing = clearing;
+    }
+
+    @Override
+    public Map<String, Object> serialize() {
+        HashMap<String, Object> map = new HashMap<String, Object>(3);
+        map.put("origin", origin);
+        map.put("building", building);
+        map.put("clearing", clearing);
+        return map;
+    }
+
+    public static SkyBoundariesConfig deserialize(Map<String, Object> map) {
+        Object originObj = map.get("origin"),
+                buildingObj = map.get("building"),
+                clearingObj = map.get("clearing");
+        SkyBlockLocationRange origin = originObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) originObj : null,
+                building = buildingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) buildingObj : null,
+                clearing = clearingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) clearingObj : null;
+        return new SkyBoundariesConfig(origin, building, clearing);
     }
 
     @Override

@@ -24,14 +24,14 @@ import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
  *
  * @author daboross
  */
-public class ArenaConfig extends Parentable<ArenaConfig> {
+public class SkyArenaConfig extends Parentable<SkyArenaConfig> {
 
     private List<SkyPlayerLocation> spawns;
     private Integer numPlayers;
-    private final ArenaBoundaries boundaries = new ArenaBoundaries();
-    private final ArenaMessages messages = new ArenaMessages();
+    private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
+    private final SkyMessagesConfig messages = new SkyMessagesConfig();
 
-    public ArenaConfig(ArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, ArenaBoundaries boundaries) {
+    public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries) {
         this.parent = parent;
         this.spawns = spawns;
         this.numPlayers = numPlayers;
@@ -44,7 +44,7 @@ public class ArenaConfig extends Parentable<ArenaConfig> {
     }
 
     @Override
-    public void setParent(ArenaConfig parent) {
+    public void setParent(SkyArenaConfig parent) {
         super.setParent(parent);
         if (parent != null) {
             messages.setParent(parent.getMessages());
@@ -87,11 +87,11 @@ public class ArenaConfig extends Parentable<ArenaConfig> {
         this.numPlayers = numPlayers;
     }
 
-    public ArenaBoundaries getBoundaries() {
+    public SkyBoundariesConfig getBoundaries() {
         return boundaries;
     }
 
-    public ArenaMessages getMessages() {
+    public SkyMessagesConfig getMessages() {
         return messages;
     }
 

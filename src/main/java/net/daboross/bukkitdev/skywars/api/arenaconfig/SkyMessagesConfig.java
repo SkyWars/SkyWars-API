@@ -21,19 +21,21 @@ import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
  * @author daboross
  */
-public class ArenaMessages extends Parentable<ArenaMessages> implements ConfigurationSerializable {
+@SerializableAs("SkyMessagesConfig")
+public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable {
 
     private final Map<String, String> messages = new HashMap<String, String>();
 
-    public ArenaMessages() {
+    public SkyMessagesConfig() {
     }
 
-    public ArenaMessages(ArenaMessages parent) {
+    public SkyMessagesConfig(SkyMessagesConfig parent) {
         super(parent);
     }
 
@@ -69,8 +71,8 @@ public class ArenaMessages extends Parentable<ArenaMessages> implements Configur
         return new HashMap<String, Object>(messages);
     }
 
-    public static ArenaMessages deserialize(Map<String, Object> map) {
-        ArenaMessages returnValue = new ArenaMessages();
+    public static SkyMessagesConfig deserialize(Map<String, Object> map) {
+        SkyMessagesConfig returnValue = new SkyMessagesConfig();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object o = entry.getValue();
             if (o != null) {
@@ -80,8 +82,8 @@ public class ArenaMessages extends Parentable<ArenaMessages> implements Configur
         return returnValue;
     }
 
-    public static ArenaMessages deserialize(ConfigurationSection configurationSection) {
-        ArenaMessages returnValue = new ArenaMessages();
+    public static SkyMessagesConfig deserialize(ConfigurationSection configurationSection) {
+        SkyMessagesConfig returnValue = new SkyMessagesConfig();
         for (String key : configurationSection.getKeys(true)) {
             String value = configurationSection.getString(key);
             if (value != null) {
