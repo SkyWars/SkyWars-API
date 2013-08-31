@@ -61,6 +61,10 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         this.clearing = boundaries.clearing;
     }
 
+    public boolean definesAnything() {
+        return origin != null || building != null || clearing != null;
+    }
+
     public SkyBlockLocationRange getOrigin() {
         if (this.origin == null) {
             if (parent == null) {

@@ -39,6 +39,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         super(parent);
     }
 
+    public void copyDataFrom(SkyMessagesConfig config) {
+        this.messages.putAll(config.messages);
+    }
+
+    public boolean definesAnything() {
+        return !messages.isEmpty();
+    }
+
     public String getMessage(String key) {
         if (key == null) {
             throw new IllegalArgumentException("Null key");
