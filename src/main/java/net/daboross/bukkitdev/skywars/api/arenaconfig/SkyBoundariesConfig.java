@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
@@ -121,6 +122,13 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         SkyBlockLocationRange origin = originObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) originObj : null,
                 building = buildingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) buildingObj : null,
                 clearing = clearingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) clearingObj : null;
+        return new SkyBoundariesConfig(origin, building, clearing);
+    }
+
+    public static SkyBoundariesConfig deserialize(ConfigurationSection configurationSection) {
+        SkyBlockLocationRange origin = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("origin")),
+                building = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("building")),
+                clearing = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("clearing"));
         return new SkyBoundariesConfig(origin, building, clearing);
     }
 
