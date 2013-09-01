@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2013 daboross
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -111,7 +111,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
                 zObject = map.get("zpos"),
                 worldObject = map.get("world");
         if (!(xObject instanceof Integer && yObject instanceof Integer && zObject instanceof Integer)) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
             return null;
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
@@ -127,7 +127,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         if (!(xObject instanceof Integer
                 && yObject instanceof Integer
                 && zObject instanceof Integer)) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
+            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
             return null;
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
