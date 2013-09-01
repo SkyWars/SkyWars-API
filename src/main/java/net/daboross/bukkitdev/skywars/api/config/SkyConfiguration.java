@@ -16,14 +16,18 @@
  */
 package net.daboross.bukkitdev.skywars.api.config;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 
 /**
  *
  * @author daboross
  */
-public interface SkyWarsConfiguration {
+public interface SkyConfiguration {
+
+    public void load();
 
     public void reload();
 
@@ -31,5 +35,23 @@ public interface SkyWarsConfiguration {
 
     public List<SkyArenaConfig> getEnabledArenas();
 
+    public ArenaOrder getArenaOrder();
+
     public String getMessagePrefix();
+
+    public static enum ArenaOrder {
+
+        RANDOM, ORDERED;
+        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>(2);
+
+        static {
+            for (ArenaOrder order : values()) {
+                BY_NAME.put(order.name().toLowerCase(), order);
+            }
+        }
+
+        public static ArenaOrder getOrder(String name) {
+            return BY_NAME.get(name.toLowerCase());
+        }
+    }
 }

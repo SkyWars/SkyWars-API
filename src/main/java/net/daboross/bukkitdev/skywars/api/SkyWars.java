@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
+import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
 import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
@@ -41,4 +42,6 @@ public interface SkyWars extends Plugin {
     public SkyIDHandler getIDHandler();
 
     public SkyAttackerStorage getAttackerStorage();
+
+    public SkyConfiguration getConfiguration();
 }

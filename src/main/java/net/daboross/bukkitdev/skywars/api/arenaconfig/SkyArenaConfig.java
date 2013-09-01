@@ -169,6 +169,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
                 if (obj instanceof Map) {
                     System.out.println("Teh list is a List<Map>");
                     SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
+                    if (loc == null) {
+                        continue;
+                    }
                     spawns.add(loc);
                 } else if (obj instanceof ConfigurationSection) {// Not sure if map or configurationsection
                     System.out.println("Teh list is a ConfigurationSection");
