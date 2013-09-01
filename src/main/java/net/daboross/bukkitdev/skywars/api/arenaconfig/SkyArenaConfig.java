@@ -142,14 +142,15 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
                 boundariesObj = map.get("boundaries"),
                 messagesObj = map.get("messages");
         List<?> spawns = spawnsObj instanceof List ? (List) spawnsObj : null;
-        for (Object obj : spawns) {
-            if (!(obj instanceof SkyPlayerLocation)) {
-                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation");
-                spawns = null;
-                break;
+        if (spawns != null) {
+            for (Object obj : spawns) {
+                if (!(obj instanceof SkyPlayerLocation)) {
+                    Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation");
+                    spawns = null;
+                    break;
+                }
             }
         }
-
         Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
         SkyBoundariesConfig boundaries = boundariesObj instanceof SkyBoundariesConfig ? (SkyBoundariesConfig) boundariesObj : null;
         SkyMessagesConfig messages = messagesObj instanceof SkyMessagesConfig ? (SkyMessagesConfig) messagesObj : null;
@@ -166,9 +167,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
             spawns = new ArrayList<SkyPlayerLocation>(spawnsObjList.size());
             for (Object obj : spawnsObjList) {
                 if (obj instanceof Map) {
+                    System.out.println("Teh list is a List<Map>");
                     SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
                     spawns.add(loc);
                 } else if (obj instanceof ConfigurationSection) {// Not sure if map or configurationsection
+                    System.out.println("Teh list is a ConfigurationSection");
                     SkyPlayerLocation loc = SkyPlayerLocation.deserialize((ConfigurationSection) obj);
                     spawns.add(loc);
                 }
