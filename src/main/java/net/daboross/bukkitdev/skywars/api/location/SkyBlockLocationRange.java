@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -129,5 +130,26 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
     @Override
     public String toString() {
         return "SkyBlockLocationRange{min=" + min + ",max=" + max + ",world=" + world + "}";
+    }
+    public String toNiceString(int indent) {
+        return indent_(indent) + "ArenaConfig{\n"
+                + indent(indent) + "min=" + min + ",\n"
+                + indent(indent) + "max=" + max + ",\n"
+                + indent(indent) + "world=" + world + "\n"
+                + indent_(indent) + "}";
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent_(int indent) {
+        return StringUtils.repeat("\t", indent);
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent(int indent) {
+        return StringUtils.repeat("\t", indent + 1);
     }
 }

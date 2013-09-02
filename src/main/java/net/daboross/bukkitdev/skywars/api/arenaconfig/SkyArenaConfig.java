@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -237,5 +238,29 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     @Override
     public String toString() {
         return "ArenaConfig{parent=" + parent + ",spawns=" + spawns + ",numPlayers=" + numPlayers + ",boundaries=" + boundaries + ",messages=" + messages + "}";
+    }
+
+    public String toNiceString(int indent) {
+        return indent_(indent) + "ArenaConfig{\n"
+                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
+                + indent(indent) + "spawns=" + spawns + ",\n"
+                + indent(indent) + "numPlayers=" + numPlayers + ",\n"
+                + boundaries == null ? "" : (indent(indent) + "boundaries=" + boundaries.toNiceString(indent + 1) + ",\n")
+                + messages == null ? "" : (indent(indent) + "messages=" + messages.toNiceString(indent + 1) + "\n")
+                + indent_(indent) + "}";
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent_(int indent) {
+        return StringUtils.repeat("\t", indent);
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent(int indent) {
+        return StringUtils.repeat("\t", indent + 1);
     }
 }

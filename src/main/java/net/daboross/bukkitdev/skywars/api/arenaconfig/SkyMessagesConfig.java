@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -142,5 +143,26 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     @Override
     public String toString() {
         return "ArenaMessages{parent=" + parent + ",messages=" + rawMessages + "}";
+    }
+
+    public String toNiceString(int indent) {
+        return indent_(indent) + "ArenaConfig{\n"
+                + indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n"
+                + indent(indent) + "messages=" + messages + "\n"
+                + indent_(indent) + "}";
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent_(int indent) {
+        return StringUtils.repeat("\t", indent);
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent(int indent) {
+        return StringUtils.repeat("\t", indent + 1);
     }
 }

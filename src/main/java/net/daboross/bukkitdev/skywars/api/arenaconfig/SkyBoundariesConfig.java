@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -152,5 +153,28 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     @Override
     public String toString() {
         return "ArenaBoundaries{parent=" + parent + ",origin=" + origin + ",building=" + building + ",clearing=" + clearing + "}";
+    }
+
+    public String toNiceString(int indent) {
+        return indent_(indent) + "ArenaConfig{\n"
+                + indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n"
+                + indent(indent) + "origin=" + origin + ",\n"
+                + indent(indent) + "building=" + building + ",\n"
+                + indent(indent) + "clearing=" + clearing + "\n"
+                + indent_(indent) + "}";
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent_(int indent) {
+        return StringUtils.repeat("\t", indent);
+    }
+
+    /**
+     * Undescriptive name for shortness
+     */
+    private String indent(int indent) {
+        return StringUtils.repeat("\t", indent + 1);
     }
 }
