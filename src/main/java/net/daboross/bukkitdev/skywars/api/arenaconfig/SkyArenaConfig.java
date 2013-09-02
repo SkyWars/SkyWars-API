@@ -246,8 +246,8 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         // More
         return indent_(indent) + "ArenaConfig{\n"
                 + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
-                + indent(indent) + "spawns=" + spawns + ",\n"
-                + indent(indent) + "numPlayers=" + numPlayers + ",\n"
+                + spawns == null ? "" : (indent(indent) + "spawns=" + spawns + ",\n")
+                + numPlayers == null ? "" : (indent(indent) + "numPlayers=" + numPlayers + ",\n")
                 + boundaries == null ? "" : (indent(indent) + "boundaries=" + boundaries.toNiceString(indent + 1) + ",\n")
                 + messages == null ? "" : (indent(indent) + "messages=" + messages.toNiceString(indent + 1) + "\n")
                 + indent_(indent) + "}";
