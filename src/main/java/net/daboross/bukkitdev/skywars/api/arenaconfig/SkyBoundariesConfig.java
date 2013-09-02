@@ -157,10 +157,10 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
 
     public String toNiceString(int indent) {
         return indent_(indent) + "ArenaConfig{\n"
-                + indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n"
-                + indent(indent) + "origin=" + origin + ",\n"
-                + indent(indent) + "building=" + building + ",\n"
-                + indent(indent) + "clearing=" + clearing + "\n"
+                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
+                + origin == null ? "" : (indent(indent) + "origin=" + origin + ",\n")
+                + building == null ? "" : (indent(indent) + "building=" + building + ",\n")
+                + clearing == null ? "" : (indent(indent) + "clearing=" + clearing + "\n")
                 + indent_(indent) + "}";
     }
 
