@@ -19,6 +19,8 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 import java.util.HashMap;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.Parentable;
+import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -30,7 +32,9 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @SerializableAs("SkyMessagesConfig")
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable {
 
+    private final Map<String, String> rawMessages = new HashMap<String, String>();
     private final Map<String, String> messages = new HashMap<String, String>();
+    private String prefix;
 
     public SkyMessagesConfig() {
     }
@@ -40,43 +44,72 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     public void copyDataFrom(SkyMessagesConfig config) {
-        this.messages.putAll(config.messages);
+        this.rawMessages.putAll(config.rawMessages);
     }
 
     public boolean definesAnything() {
-        return !messages.isEmpty();
+        return !rawMessages.isEmpty();
     }
 
-    public String getMessage(String key) {
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getMessage(String messageKey) {
+        if (prefix == null) {
+            throw new IllegalStateException("Prefix not set");
+        }
+        String message = messages.get(messageKey.toLowerCase());
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent does not define message " + messageKey);
+            } else {
+                return parent.getMessage(messageKey);
+            }
+        } else {
+            return prefix + message;
+        }
+    }
+
+    public String getRawMessage(String key) {
         if (key == null) {
             throw new IllegalArgumentException("Null key");
         }
-        String message = messages.get(key.toLowerCase());
+        String message = rawMessages.get(key.toLowerCase());
         if (message == null) {
             if (parent == null) {
                 throw new IllegalArgumentException("Ultimate parent does not define message " + key);
             } else {
-                return parent.getMessage(key);
+                return parent.getRawMessage(key);
             }
         } else {
             return message;
         }
     }
 
-    public void setMessage(String key, String message) {
+    public void setRawMessage(String key, String message) {
         if (key == null) {
             throw new IllegalArgumentException("Null key");
         }
+        key = key.toLowerCase();
         if (message == null) {
-            messages.remove(key.toLowerCase());
+            rawMessages.remove(key);
+            messages.remove(key);
         } else {
-            messages.put(key.toLowerCase(), message);
+            rawMessages.put(key, message);
+            messages.put(key, ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(message)));
         }
     }
 
     @Override
     public Map<String, Object> serialize() {
-        return new HashMap<String, Object>(messages);
+        return new HashMap<String, Object>(rawMessages);
+    }
+
+    public void serialize(ConfigurationSection section) {
+        for (Map.Entry<String, String> entry : rawMessages.entrySet()) {
+            section.set(entry.getKey(), entry.getValue());
+        }
     }
 
     public static SkyMessagesConfig deserialize(Map<String, Object> map) {
@@ -84,7 +117,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object o = entry.getValue();
             if (o != null) {
-                returnValue.setMessage(entry.getKey(), o instanceof String ? (String) o : o.toString());
+                returnValue.setRawMessage(entry.getKey(), o instanceof String ? (String) o : o.toString());
             }
         }
         return returnValue;
@@ -95,7 +128,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         for (String key : configurationSection.getKeys(true)) {
             String value = configurationSection.getString(key);
             if (value != null) {
-                returnValue.setMessage(key, value);
+                returnValue.setRawMessage(key, value);
             }
         }
         return returnValue;
@@ -103,6 +136,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public String toString() {
-        return "ArenaMessages{parent=" + parent + ",messages=" + messages + "}";
+        return "ArenaMessages{parent=" + parent + ",messages=" + rawMessages + "}";
     }
 }

@@ -96,23 +96,34 @@ public class SkyBlockLocation implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("xpos", x);
-        map.put("ypos", y);
-        map.put("zpos", z);
+        map.put("x", x);
+        map.put("y", y);
+        map.put("z", z);
         if (world != null) {
             map.put("world", world);
         }
         return map;
     }
 
+    public void serialize(ConfigurationSection section) {
+        section.set("x", x);
+        section.set("y", y);
+        section.set("z", z);
+    }
+
     public static SkyBlockLocation deserialize(Map<String, Object> map) {
-        Object xObject = map.get("xpos"),
-                yObject = map.get("ypos"),
-                zObject = map.get("zpos"),
+        Object xObject = map.get("x"),
+                yObject = map.get("y"),
+                zObject = map.get("z"),
                 worldObject = map.get("world");
         if (!(xObject instanceof Integer && yObject instanceof Integer && zObject instanceof Integer)) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
-            return null;
+            xObject = map.get("xpos");
+            yObject = map.get("ypos");
+            zObject = map.get("zpos");
+            if (!(xObject instanceof Integer && yObject instanceof Integer && zObject instanceof Integer)) {
+                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
+                return null;
+            }
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
         String worldString = worldObject == null ? null : worldObject.toString();
@@ -120,15 +131,22 @@ public class SkyBlockLocation implements ConfigurationSerializable {
     }
 
     public static SkyBlockLocation deserialize(ConfigurationSection configurationSection) {
-        Object xObject = configurationSection.get("xpos"),
-                yObject = configurationSection.get("ypos"),
-                zObject = configurationSection.get("zpos"),
-                worldObject = configurationSection.get("world");
+        Object xObject = configurationSection.get("x");
+        Object yObject = configurationSection.get("y");
+        Object zObject = configurationSection.get("z");
+        Object worldObject = configurationSection.get("world");
         if (!(xObject instanceof Integer
                 && yObject instanceof Integer
                 && zObject instanceof Integer)) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
-            return null;
+            xObject = configurationSection.get("xpos");
+            yObject = configurationSection.get("ypos");
+            zObject = configurationSection.get("zpos");
+            if (!(xObject instanceof Integer
+                    && yObject instanceof Integer
+                    && zObject instanceof Integer)) {
+                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
+                return null;
+            }
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
         String worldString = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();

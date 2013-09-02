@@ -119,6 +119,12 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return map;
     }
 
+    public void serialize(ConfigurationSection section) {
+        origin.serialize(section.createSection("origin"));
+        building.serialize(section.createSection("building"));
+        clearing.serialize(section.createSection("clearing"));
+    }
+
     public static SkyBoundariesConfig deserialize(Map<String, Object> map) {
         Object originObj = map.get("origin"),
                 buildingObj = map.get("building"),

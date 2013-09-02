@@ -101,9 +101,9 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("xpos", x);
-        map.put("ypos", y);
-        map.put("zpos", z);
+        map.put("x", x);
+        map.put("y", y);
+        map.put("z", z);
         map.put("yaw", yaw);
         map.put("pitch", pitch);
         if (world != null) {
@@ -114,14 +114,19 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
 
     public static SkyPlayerLocation deserialize(Map<String, Object> map) {
         Object worldO = map.get("world");
-        Double x = get(map.get("xpos")),
-                y = get(map.get("ypos")),
-                z = get(map.get("zpos")),
-                yaw = get(map.get("yaw")),
-                pitch = get(map.get("pitch"));
+        Double x = get(map.get("x"));
+        Double y = get(map.get("y"));
+        Double z = get(map.get("z"));
+        Double yaw = get(map.get("yaw"));
+        Double pitch = get(map.get("pitch"));
         if (x == null || y == null || z == null) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
-            return null;
+            x = get(map.get("xpos"));
+            y = get(map.get("ypos"));
+            z = get(map.get("zpos"));
+            if (x == null || y == null || z == null) {
+                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
+                return null;
+            }
         }
         String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
@@ -129,14 +134,19 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
 
     public static SkyPlayerLocation deserialize(ConfigurationSection configurationSection) {
         Object worldO = configurationSection.get("world");
-        Double x = get(configurationSection.get("xpos")),
-                y = get(configurationSection.get("ypos")),
-                z = get(configurationSection.get("zpos")),
-                yaw = get(configurationSection.get("yaw")),
-                pitch = get(configurationSection.get("pitch"));
+        Double x = get(configurationSection.get("x"));
+        Double y = get(configurationSection.get("y"));
+        Double z = get(configurationSection.get("z"));
+        Double yaw = get(configurationSection.get("yaw"));
+        Double pitch = get(configurationSection.get("pitch"));
         if (x == null || y == null || z == null) {
-            Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
-            return null;
+            x = get(configurationSection.get("xpos"));
+            y = get(configurationSection.get("ypos"));
+            z = get(configurationSection.get("zpos"));
+            if (x == null || y == null || z == null) {
+                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
+                return null;
+            }
         }
         String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);

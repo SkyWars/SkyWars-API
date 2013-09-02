@@ -20,7 +20,7 @@ package net.daboross.bukkitdev.skywars.api.config;
  *
  * @author daboross
  */
-public interface SkyMessages {
+public class SkyMessages {
 
     public static String KILLED_VOID = "death.killed-void";
     public static String SUICIDE_VOID = "death.suicide-void";
@@ -31,6 +31,4 @@ public interface SkyMessages {
     public static String SINGLE_WON = "winning.single-won";
     public static String MULTI_WON = "winning.multi-won";
     public static String NONE_WON = "winning.none-won";
-
-    public String getMessage(String key);
 }

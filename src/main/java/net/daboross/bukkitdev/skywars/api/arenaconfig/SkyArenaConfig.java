@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     private Integer numPlayers;
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
+    private File file;
 
     public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
@@ -80,6 +82,25 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
             messages.setParent(null);
             boundaries.setParent(null);
         }
+    }
+
+    /**
+     * This is never used by SkyArenaConfig itself, only by things that use
+     * getFile()
+     *
+     * @param file a value to be returned by getFile()
+     */
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    /**
+     * This is never set except for when something uses setFile()
+     *
+     * @return the value set with setFile()
+     */
+    public File getFile() {
+        return file;
     }
 
     public List<SkyPlayerLocation> getSpawns() {
@@ -136,6 +157,21 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         return map;
     }
 
+    public void serialize(ConfigurationSection section) {
+        List<Map> spawnsList = new ArrayList<Map>(spawns.size());
+        for (SkyPlayerLocation loc : spawns) {
+            spawnsList.add(loc.serialize());
+        }
+        section.set("spawns", spawnsList);
+        section.set("numPlayers", numPlayers);
+        if (boundaries.definesAnything()) {
+            boundaries.serialize(section.createSection("boundaries"));
+        }
+        if (messages.definesAnything()) {
+            messages.serialize(section.createSection("messages"));
+        }
+    }
+
     public static SkyArenaConfig deserialize(Map<String, Object> map) {
         Object spawnsObj = map.get("spawns"),
                 numPlayersObj = map.get("numPlayers"),
@@ -167,16 +203,13 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
             spawns = new ArrayList<SkyPlayerLocation>(spawnsObjList.size());
             for (Object obj : spawnsObjList) {
                 if (obj instanceof Map) {
-                    System.out.println("Teh list is a List<Map>");
                     SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
                     if (loc == null) {
                         continue;
                     }
                     spawns.add(loc);
-                } else if (obj instanceof ConfigurationSection) {// Not sure if map or configurationsection
-                    System.out.println("Teh list is a ConfigurationSection");
-                    SkyPlayerLocation loc = SkyPlayerLocation.deserialize((ConfigurationSection) obj);
-                    spawns.add(loc);
+                } else {
+                    Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyArenaConfig] Non-Map object {0} found in arena configuration spawn list. Ignoring it", obj);
                 }
             }
         }

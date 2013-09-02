@@ -71,6 +71,12 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return map;
     }
 
+    public void serialize(ConfigurationSection section) {
+        min.changeWorld(null).serialize(section.createSection("min"));
+        max.changeWorld(null).serialize(section.createSection("max"));
+        section.set("world", world);
+    }
+
     public static SkyBlockLocationRange deserialize(Map<String, Object> map) {
         Object minObject = map.get("min"), maxObject = map.get("max"),
                 worldObject = map.get("world");
