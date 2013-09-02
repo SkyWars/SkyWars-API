@@ -14,22 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.game;
+package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.List;
-import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
+import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 
 /**
  *
  * @author daboross
  */
-public interface SkyGame {
+public interface SkyArena {
 
-    public int getID();
+    public List<SkyPlayerLocation> getSpawns();
 
-    public List<String> getAlivePlayers();
+    public void setSpawns(List<SkyPlayerLocation> spawns);
 
-    public List<String> getDeadPlayers();
+    public int getNumPlayers();
 
-    public SkyArena getArena();
+    public void setNumPlayers(Integer numPlayers);
+
+    public SkyBoundaries getBoundaries();
+
+    public SkyMessages getMessages();
 }

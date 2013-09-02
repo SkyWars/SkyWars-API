@@ -62,6 +62,10 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         this.max = max;
     }
 
+    public SkyBlockLocationRange add(SkyBlockLocation loc) {
+        return new SkyBlockLocationRange(loc.add(min), loc.add(max), world);
+    }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();

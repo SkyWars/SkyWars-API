@@ -34,7 +34,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author daboross
  */
 @SerializableAs("SkyArenaConfig")
-public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable {
+public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
 
     private List<SkyPlayerLocation> spawns;
     private Integer numPlayers;
@@ -44,6 +44,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
 
     public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
+        if (numPlayers != null && numPlayers < 2) {
+            throw new IllegalArgumentException("Num players can't be smaller than 2");
+        }
         this.parent = parent;
         this.spawns = spawns;
         this.numPlayers = numPlayers;
@@ -59,6 +62,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     }
 
     public SkyArenaConfig(List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
+        if (numPlayers != null && numPlayers < 2) {
+            throw new IllegalArgumentException("Num players can't be smaller than 2");
+        }
         this.spawns = spawns;
         this.numPlayers = numPlayers;
         if (parent != null) {
@@ -103,6 +109,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         return file;
     }
 
+    @Override
     public List<SkyPlayerLocation> getSpawns() {
         if (spawns == null) {
             if (parent == null) {
@@ -115,10 +122,12 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
     }
 
+    @Override
     public void setSpawns(List<SkyPlayerLocation> spawns) {
         this.spawns = spawns;
     }
 
+    @Override
     public int getNumPlayers() {
         if (numPlayers == null) {
             if (parent == null) {
@@ -131,14 +140,20 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
     }
 
+    @Override
     public void setNumPlayers(Integer numPlayers) {
+        if (numPlayers != null && numPlayers < 2) {
+            throw new IllegalArgumentException("Num players can't be smaller than 2");
+        }
         this.numPlayers = numPlayers;
     }
 
+    @Override
     public SkyBoundariesConfig getBoundaries() {
         return boundaries;
     }
 
+    @Override
     public SkyMessagesConfig getMessages() {
         return messages;
     }

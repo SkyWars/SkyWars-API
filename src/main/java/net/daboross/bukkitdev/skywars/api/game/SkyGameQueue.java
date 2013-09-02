@@ -16,6 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
+import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
+
 /**
  *
  * @author daboross

@@ -14,22 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.game;
+package net.daboross.bukkitdev.skywars.api;
 
 import java.util.List;
-import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
+import java.util.Random;
 
 /**
  *
  * @author daboross
  */
-public interface SkyGame {
+public class Randomation {
 
-    public int getID();
+    private static final Random random = new Random();
 
-    public List<String> getAlivePlayers();
-
-    public List<String> getDeadPlayers();
-
-    public SkyArena getArena();
+    public static <T> T getRandom(List<T> list) {
+        return list.get(random.nextInt(list.size()));
+    }
 }

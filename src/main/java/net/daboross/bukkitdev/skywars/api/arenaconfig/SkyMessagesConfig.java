@@ -30,7 +30,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author daboross
  */
 @SerializableAs("SkyMessagesConfig")
-public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable {
+public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages {
 
     private final Map<String, String> rawMessages = new HashMap<String, String>();
     private final Map<String, String> messages = new HashMap<String, String>();
@@ -47,6 +47,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         this.rawMessages.putAll(config.rawMessages);
     }
 
+    @Override
     public boolean definesAnything() {
         return !rawMessages.isEmpty();
     }
@@ -55,6 +56,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         this.prefix = prefix;
     }
 
+    @Override
     public String getMessage(String messageKey) {
         if (prefix == null) {
             throw new IllegalStateException("Prefix not set");
@@ -71,6 +73,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         }
     }
 
+    @Override
     public String getRawMessage(String key) {
         if (key == null) {
             throw new IllegalArgumentException("Null key");
@@ -87,6 +90,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         }
     }
 
+    @Override
     public void setRawMessage(String key, String message) {
         if (key == null) {
             throw new IllegalArgumentException("Null key");

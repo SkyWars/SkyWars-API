@@ -34,10 +34,11 @@ public interface SkyIDHandler {
     public boolean gameRunning(int id);
 
     /**
-     * Gets the _real_ list of players in a given game.
+     * Gets the SkyGame for the given id.
      *
      * @param id The ID of the game.
-     * @return The underlying array of players in the game.
+     * @return A SkyGame running under the given id, or null if there is no
+     * currently running SkyGame with the given id.
      */
     public SkyGame getGame(int id);
 

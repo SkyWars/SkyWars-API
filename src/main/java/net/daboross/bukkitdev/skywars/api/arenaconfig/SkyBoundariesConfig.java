@@ -29,7 +29,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author daboross
  */
 @SerializableAs("SkyBoundaries")
-public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable {
+public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries {
 
     private SkyBlockLocationRange origin;
     private SkyBlockLocationRange building;
@@ -61,10 +61,12 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         this.clearing = boundaries.clearing;
     }
 
+    @Override
     public boolean definesAnything() {
         return origin != null || building != null || clearing != null;
     }
 
+    @Override
     public SkyBlockLocationRange getOrigin() {
         if (this.origin == null) {
             if (parent == null) {
@@ -76,6 +78,7 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return origin;
     }
 
+    @Override
     public SkyBlockLocationRange getBuilding() {
         if (this.origin == null) {
             if (parent == null) {
@@ -87,6 +90,7 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return building;
     }
 
+    @Override
     public SkyBlockLocationRange getClearing() {
         if (this.clearing == null) {
             if (parent == null) {
@@ -98,14 +102,17 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return clearing;
     }
 
+    @Override
     public void setOrigin(SkyBlockLocationRange origin) {
         this.origin = origin;
     }
 
+    @Override
     public void setBuilding(SkyBlockLocationRange building) {
         this.building = building;
     }
 
+    @Override
     public void setClearing(SkyBlockLocationRange clearing) {
         this.clearing = clearing;
     }
