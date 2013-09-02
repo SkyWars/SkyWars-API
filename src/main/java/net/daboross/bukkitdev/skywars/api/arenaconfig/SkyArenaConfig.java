@@ -240,30 +240,17 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         return "ArenaConfig{parent=" + parent + ",spawns=" + spawns + ",numPlayers=" + numPlayers + ",boundaries=" + boundaries + ",messages=" + messages + "}";
     }
 
-    public String toNiceString(int indent) {
-        // This line is to make it farther down.
-        // More
-        // More
-        return indent_(indent) + "ArenaConfig{\n"
-                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
-                + spawns == null ? "" : (indent(indent) + "spawns=" + spawns + ",\n")
-                + numPlayers == null ? "" : (indent(indent) + "numPlayers=" + numPlayers + ",\n")
-                + boundaries == null ? "" : (indent(indent) + "boundaries=" + boundaries.toNiceString(indent + 1) + ",\n")
-                + messages == null ? "" : (indent(indent) + "messages=" + messages.toNiceString(indent + 1) + "\n")
-                + indent_(indent) + "}";
+    public String toNiceString(int indentAmount) {
+        return getIndent(indentAmount) + "ArenaConfig{\n"
+                + parent == null ? "" : (getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
+                + spawns == null ? "" : (getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
+                + numPlayers == null ? "" : (getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")
+                + boundaries == null ? "" : (getIndent(indentAmount + 1) + "boundaries=" + boundaries.toNiceString(indentAmount + 1) + ",\n")
+                + messages == null ? "" : (getIndent(indentAmount + 1) + "messages=" + messages.toNiceString(indentAmount + 1) + "\n")
+                + getIndent(indentAmount) + "}";
     }
 
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent_(int indent) {
-        return StringUtils.repeat("\t", indent);
-    }
-
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent(int indent) {
-        return StringUtils.repeat("\t", indent + 1);
+    private String getIndent(int indentAmount) {
+        return StringUtils.repeat("\t", indentAmount);
     }
 }

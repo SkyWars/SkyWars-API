@@ -155,26 +155,16 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return "ArenaBoundaries{parent=" + parent + ",origin=" + origin + ",building=" + building + ",clearing=" + clearing + "}";
     }
 
-    public String toNiceString(int indent) {
-        return indent_(indent) + "ArenaConfig{\n"
-                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
-                + origin == null ? "" : (indent(indent) + "origin=" + origin + ",\n")
-                + building == null ? "" : (indent(indent) + "building=" + building + ",\n")
-                + clearing == null ? "" : (indent(indent) + "clearing=" + clearing + "\n")
-                + indent_(indent) + "}";
+    public String toNiceString(int indentAmount) {
+        return getIndent(indentAmount) + "ArenaConfig{\n"
+                + parent == null ? "" : (getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
+                + origin == null ? "" : (getIndent(indentAmount + 1) + "origin=" + origin.toNiceString(indentAmount + 1) + ",\n")
+                + building == null ? "" : (getIndent(indentAmount + 1) + "building=" + building.toNiceString(indentAmount + 1) + ",\n")
+                + clearing == null ? "" : (getIndent(indentAmount + 1) + "clearing=" + clearing.toNiceString(indentAmount + 1) + "\n")
+                + getIndent(indentAmount) + "}";
     }
 
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent_(int indent) {
-        return StringUtils.repeat("\t", indent);
-    }
-
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent(int indent) {
-        return StringUtils.repeat("\t", indent + 1);
+    private String getIndent(int indentAmount) {
+        return StringUtils.repeat("\t", indentAmount);
     }
 }

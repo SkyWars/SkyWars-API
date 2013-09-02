@@ -145,24 +145,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         return "ArenaMessages{parent=" + parent + ",messages=" + rawMessages + "}";
     }
 
-    public String toNiceString(int indent) {
-        return indent_(indent) + "ArenaConfig{\n"
-                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
-                + indent(indent) + "messages=" + messages + "\n"
-                + indent_(indent) + "}";
+    public String toNiceString(int indentAmount) {
+        return getIndent(indentAmount) + "ArenaConfig{\n"
+                + parent == null ? "" : (getIndent(indentAmount) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
+                + getIndent(indentAmount + 1) + "messages=" + messages + "\n"
+                + getIndent(indentAmount) + "}";
     }
 
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent_(int indent) {
-        return StringUtils.repeat("\t", indent);
-    }
-
-    /**
-     * Undescriptive name for shortness
-     */
-    private String indent(int indent) {
-        return StringUtils.repeat("\t", indent + 1);
+    private String getIndent(int indentAmount) {
+        return StringUtils.repeat("\t", indentAmount);
     }
 }
