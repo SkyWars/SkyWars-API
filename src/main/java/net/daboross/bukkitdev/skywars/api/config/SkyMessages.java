@@ -22,13 +22,14 @@ package net.daboross.bukkitdev.skywars.api.config;
  */
 public class SkyMessages {
 
-    public static String KILLED_VOID = "death.killed-void";
-    public static String SUICIDE_VOID = "death.suicide-void";
-    public static String KILLED_DAMAGED = "death.killed-damaged";
-    public static String KILLED_OTHER = "death.killed-other";
-    public static String FORFEITED_DAMAGED = "death.forfeited-damaged";
-    public static String FORFEITED = "death.forfeited";
-    public static String SINGLE_WON = "winning.single-won";
-    public static String MULTI_WON = "winning.multi-won";
-    public static String NONE_WON = "winning.none-won";
+    public static final String KILLED_VOID = "death.killed-void";
+    public static final String SUICIDE_VOID = "death.suicide-void";
+    public static final String KILLED_DAMAGED = "death.killed-damaged";
+    public static final String KILLED_OTHER = "death.killed-other";
+    public static final String FORFEITED_DAMAGED = "death.forfeited-damaged";
+    public static final String FORFEITED = "death.forfeited";
+    public static final String SINGLE_WON = "winning.single-won";
+    public static final String MULTI_WON = "winning.multi-won";
+    public static final String NONE_WON = "winning.none-won";
+    public static final String GAME_STARTING = "game.game-starting";
 }

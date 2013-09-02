@@ -162,7 +162,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("spawns", spawns);
-        map.put("numPlayers", numPlayers);
+        map.put("num-players", numPlayers);
         if (boundaries.definesAnything()) {
             map.put("boundaries", boundaries);
         }
@@ -178,7 +178,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
             spawnsList.add(loc.serialize());
         }
         section.set("spawns", spawnsList);
-        section.set("numPlayers", numPlayers);
+        section.set("num-players", numPlayers);
         if (boundaries.definesAnything()) {
             boundaries.serialize(section.createSection("boundaries"));
         }
@@ -189,7 +189,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
 
     public static SkyArenaConfig deserialize(Map<String, Object> map) {
         Object spawnsObj = map.get("spawns"),
-                numPlayersObj = map.get("numPlayers"),
+                numPlayersObj = map.get("num-players"),
                 boundariesObj = map.get("boundaries"),
                 messagesObj = map.get("messages");
         List<?> spawns = spawnsObj instanceof List ? (List) spawnsObj : null;
@@ -209,7 +209,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     }
 
     public static SkyArenaConfig deserialize(ConfigurationSection configurationSection) {
-        Object numPlayersObj = configurationSection.get("numPlayers");
+        Object numPlayersObj = configurationSection.get("num-players");
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries"),
                 messagesSection = configurationSection.getConfigurationSection("messages");
         List<?> spawnsObjList = configurationSection.getList("spawns");
