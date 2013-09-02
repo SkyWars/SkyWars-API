@@ -45,6 +45,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     public void copyDataFrom(SkyMessagesConfig config) {
         this.rawMessages.putAll(config.rawMessages);
+        this.messages.putAll(config.messages);
     }
 
     @Override
@@ -57,16 +58,16 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     @Override
-    public String getMessage(String messageKey) {
+    public String getMessage(String key) {
         if (prefix == null) {
             throw new IllegalStateException("Prefix not set");
         }
-        String message = messages.get(messageKey.toLowerCase());
+        String message = messages.get(key.toLowerCase());
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message " + messageKey);
+                throw new IllegalArgumentException("Ultimate parent does not define message " + key);
             } else {
-                return parent.getMessage(messageKey);
+                return parent.getMessage(key);
             }
         } else {
             return prefix + message;
