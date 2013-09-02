@@ -147,7 +147,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     public String toNiceString(int indent) {
         return indent_(indent) + "ArenaConfig{\n"
-                + indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n"
+                + parent == null ? "" : (indent(indent) + "parent=" + parent.toNiceString(indent + 1) + ",\n")
                 + indent(indent) + "messages=" + messages + "\n"
                 + indent_(indent) + "}";
     }
