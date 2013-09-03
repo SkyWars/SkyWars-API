@@ -237,11 +237,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
 
     @Override
     public String toString() {
-        return "ArenaConfig{parent=" + parent + ",spawns=" + spawns + ",numPlayers=" + numPlayers + ",boundaries=" + boundaries + ",messages=" + messages + "}";
+        return "SkyArenaConfig{parent=" + parent + ",spawns=" + spawns + ",numPlayers=" + numPlayers + ",boundaries=" + boundaries + ",messages=" + messages + "}";
     }
 
     public String toNiceString(int indentAmount) {
-        return getIndent(indentAmount) + "ArenaConfig{\n"
+        return "SkyArenaConfig{\n"
                 + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
                 + (spawns == null ? "" : getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
                 + (numPlayers == null ? "" : getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")

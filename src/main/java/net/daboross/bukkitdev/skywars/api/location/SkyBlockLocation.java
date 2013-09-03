@@ -174,6 +174,6 @@ public class SkyBlockLocation implements ConfigurationSerializable {
 
     @Override
     public String toString() {
-        return "SkyBlockLocation{x=" + x + ",y=" + y + ",z=" + z + ",world=" + world + "]";
+        return "SkyBlockLocation{x=" + x + ",y=" + y + ",z=" + z + (world == null ? "" : ",world=" + world) + "}";
     }
 }

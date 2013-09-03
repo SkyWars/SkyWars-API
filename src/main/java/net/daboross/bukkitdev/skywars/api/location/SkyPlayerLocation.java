@@ -186,6 +186,6 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
 
     @Override
     public String toString() {
-        return "SkyPlayerLocation{x=" + x + ",y=" + y + ",z=" + z + ",pitch=" + pitch + ",yaw=" + yaw + ",world=" + world + "}";
+        return "SkyPlayerLocation{x=" + x + ",y=" + y + ",z=" + z + ",pitch=" + pitch + ",yaw=" + yaw + (world == null ? "" : ",world=" + world) + "}";
     }
 }

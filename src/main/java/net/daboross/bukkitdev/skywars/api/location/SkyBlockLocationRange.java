@@ -133,10 +133,10 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
     }
 
     public String toNiceString(int indent) {
-        return getIndent(indent) + "ArenaConfig{\n"
+        return "SkyBlockLocationRange{\n"
                 + getIndent(indent + 1) + "min=" + min + ",\n"
                 + getIndent(indent + 1) + "max=" + max + ",\n"
-                + getIndent(indent + 1) + "world=" + world + "\n"
+                + (world == null ? "" : getIndent(indent + 1) + "world=" + world + "\n")
                 + getIndent(indent) + "}";
     }
 

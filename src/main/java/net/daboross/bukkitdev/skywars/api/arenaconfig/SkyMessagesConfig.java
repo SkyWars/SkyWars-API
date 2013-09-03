@@ -132,9 +132,8 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     public static SkyMessagesConfig deserialize(ConfigurationSection configurationSection) {
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
         for (String key : configurationSection.getKeys(true)) {
-            String value = configurationSection.getString(key);
-            if (value != null) {
-                returnValue.setRawMessage(key, value);
+            if (configurationSection.isString(key)) {
+                returnValue.setRawMessage(key, configurationSection.getString(key));
             }
         }
         return returnValue;
@@ -142,11 +141,11 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public String toString() {
-        return "ArenaMessages{parent=" + parent + ",messages=" + rawMessages + "}";
+        return "SkyMessagesConfig{parent=" + parent + ",messages=" + rawMessages + "}";
     }
 
     public String toNiceString(int indentAmount) {
-        return getIndent(indentAmount) + "ArenaConfig{\n"
+        return "SkyMessagesConfig{\n"
                 + (parent == null ? "" : getIndent(indentAmount) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
                 + getIndent(indentAmount + 1) + "messages=" + messages + "\n"
                 + getIndent(indentAmount) + "}";

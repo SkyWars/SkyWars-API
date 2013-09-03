@@ -152,11 +152,11 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
 
     @Override
     public String toString() {
-        return "ArenaBoundaries{parent=" + parent + ",origin=" + origin + ",building=" + building + ",clearing=" + clearing + "}";
+        return "SkyBoundariesConfig{parent=" + parent + ",origin=" + origin + ",building=" + building + ",clearing=" + clearing + "}";
     }
 
     public String toNiceString(int indentAmount) {
-        return getIndent(indentAmount) + "ArenaConfig{\n"
+        return  "SkyBoundariesConfig{\n"
                 + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
                 + (origin == null ? "" : getIndent(indentAmount + 1) + "origin=" + origin.toNiceString(indentAmount + 1) + ",\n")
                 + (building == null ? "" : getIndent(indentAmount + 1) + "building=" + building.toNiceString(indentAmount + 1) + ",\n")
