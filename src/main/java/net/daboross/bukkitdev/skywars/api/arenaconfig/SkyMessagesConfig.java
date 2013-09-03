@@ -55,7 +55,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     public void setPrefix(String prefix) {
-        this.prefix = prefix;
+        this.prefix = translate(prefix);
     }
 
     @Override
@@ -63,12 +63,26 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         if (prefix == null) {
             throw new IllegalStateException("Prefix not set");
         }
-        String message = messages.get(key.toLowerCase());
+        key = key.toLowerCase();
+        String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message " + key);
+                throw new IllegalArgumentException("Originally asked does not define message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString(2));
             } else {
-                return parent.getMessage(key);
+                return parent.getMessage(key, this);
+            }
+        } else {
+            return prefix + message;
+        }
+    }
+
+    private String getMessage(String key, SkyMessagesConfig originallyAsked) {
+        String message = messages.get(key);
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'. Originally asked: " + originallyAsked.toIndentedString(2));
+            } else {
+                return parent.getMessage(key, originallyAsked);
             }
         } else {
             return prefix + message;
@@ -83,9 +97,22 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key.toLowerCase());
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message " + key);
+                throw new IllegalArgumentException("Originally asked does not define raw message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString(2));
             } else {
-                return parent.getRawMessage(key);
+                return parent.getRawMessage(key, this);
+            }
+        } else {
+            return message;
+        }
+    }
+
+    private String getRawMessage(String key, SkyMessagesConfig originallyAsked) {
+        String message = rawMessages.get(key);
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + ". Originally asked: " + originallyAsked.toIndentedString(2));
+            } else {
+                return parent.getMessage(key, originallyAsked);
             }
         } else {
             return message;
@@ -103,8 +130,12 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
             messages.remove(key);
         } else {
             rawMessages.put(key, message);
-            messages.put(key, ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(message)));
+            messages.put(key, translate(message));
         }
+    }
+
+    private String translate(String original) {
+        return ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(original));
     }
 
     @Override
@@ -122,8 +153,8 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object o = entry.getValue();
-            if (o != null) {
-                returnValue.setRawMessage(entry.getKey(), o instanceof String ? (String) o : o.toString());
+            if (o instanceof String) {
+                returnValue.setRawMessage(entry.getKey(), (String) o);
             }
         }
         return returnValue;
@@ -141,12 +172,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public String toString() {
-        return "SkyMessagesConfig{parent=" + parent + ",messages=" + rawMessages + "}";
+        return "SkyMessagesConfig{parent=" + parent + ",rawMessagse=" + rawMessages + ",messages=" + messages + "}";
     }
 
-    public String toNiceString(int indentAmount) {
+    public String toIndentedString(int indentAmount) {
         return "SkyMessagesConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
+                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
+                + (prefix == null ? "" : getIndent(indentAmount + 1) + "prefix=" + prefix + ",\n")
+                + getIndent(indentAmount + 1) + "rawMessages=" + rawMessages + "\n"
                 + getIndent(indentAmount + 1) + "messages=" + messages + "\n"
                 + getIndent(indentAmount) + "}";
     }

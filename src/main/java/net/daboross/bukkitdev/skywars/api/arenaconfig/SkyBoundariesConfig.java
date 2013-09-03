@@ -155,12 +155,12 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return "SkyBoundariesConfig{parent=" + parent + ",origin=" + origin + ",building=" + building + ",clearing=" + clearing + "}";
     }
 
-    public String toNiceString(int indentAmount) {
+    public String toIndentedString(int indentAmount) {
         return  "SkyBoundariesConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
-                + (origin == null ? "" : getIndent(indentAmount + 1) + "origin=" + origin.toNiceString(indentAmount + 1) + ",\n")
-                + (building == null ? "" : getIndent(indentAmount + 1) + "building=" + building.toNiceString(indentAmount + 1) + ",\n")
-                + (clearing == null ? "" : getIndent(indentAmount + 1) + "clearing=" + clearing.toNiceString(indentAmount + 1) + "\n")
+                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
+                + (origin == null ? "" : getIndent(indentAmount + 1) + "origin=" + origin.toIndentedString(indentAmount + 1) + ",\n")
+                + (building == null ? "" : getIndent(indentAmount + 1) + "building=" + building.toIndentedString(indentAmount + 1) + ",\n")
+                + (clearing == null ? "" : getIndent(indentAmount + 1) + "clearing=" + clearing.toIndentedString(indentAmount + 1) + "\n")
                 + getIndent(indentAmount) + "}";
     }
 

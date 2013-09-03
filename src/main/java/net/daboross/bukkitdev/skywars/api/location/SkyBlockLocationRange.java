@@ -132,7 +132,7 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return "SkyBlockLocationRange{min=" + min + ",max=" + max + ",world=" + world + "}";
     }
 
-    public String toNiceString(int indent) {
+    public String toIndentedString(int indent) {
         return "SkyBlockLocationRange{\n"
                 + getIndent(indent + 1) + "min=" + min + ",\n"
                 + getIndent(indent + 1) + "max=" + max + ",\n"
