@@ -242,11 +242,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
 
     public String toNiceString(int indentAmount) {
         return getIndent(indentAmount) + "ArenaConfig{\n"
-                + parent == null ? "" : (getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
-                + spawns == null ? "" : (getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
-                + numPlayers == null ? "" : (getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")
-                + boundaries == null ? "" : (getIndent(indentAmount + 1) + "boundaries=" + boundaries.toNiceString(indentAmount + 1) + ",\n")
-                + messages == null ? "" : (getIndent(indentAmount + 1) + "messages=" + messages.toNiceString(indentAmount + 1) + "\n")
+                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toNiceString(indentAmount + 1) + ",\n")
+                + (spawns == null ? "" : getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
+                + (numPlayers == null ? "" : getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")
+                + (boundaries == null ? "" : getIndent(indentAmount + 1) + "boundaries=" + boundaries.toNiceString(indentAmount + 1) + ",\n")
+                + (messages == null ? "" : getIndent(indentAmount + 1) + "messages=" + messages.toNiceString(indentAmount + 1) + "\n")
                 + getIndent(indentAmount) + "}";
     }
 
