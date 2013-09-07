@@ -88,6 +88,10 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
+    public SkyPlayerLocation changeWorld(String newWorld) {
+        return new SkyPlayerLocation(x, y, z, yaw, pitch, newWorld);
+    }
+
     public SkyBlockLocation round() {
         return new SkyBlockLocation((int) Math.round(x), (int) Math.round(y), (int) Math.round(z), world);
     }
