@@ -16,26 +16,15 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
-import java.util.List;
-import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
-
 /**
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyArena {
+public interface SkyPlacement {
 
-    public List<SkyPlayerLocation> getSpawns();
+    public boolean definesAnything();
 
-    public void setSpawns(List<SkyPlayerLocation> spawns);
+    public int getPlacementY();
 
-    public int getNumPlayers();
-
-    public void setNumPlayers(Integer numPlayers);
-
-    public SkyBoundaries getBoundaries();
-
-    public SkyPlacement getPlacement();
-
-    public SkyMessages getMessages();
+    public int getDistanceApart();
 }

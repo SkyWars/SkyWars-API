@@ -96,7 +96,10 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return new SkyBlockLocationRange(min, max, world);
     }
 
-    public static SkyBlockLocationRange deserialize(@NonNull ConfigurationSection configurationSection) {
+    public static SkyBlockLocationRange deserialize(ConfigurationSection configurationSection) {
+        if (configurationSection == null) {
+            return null;
+        }
         Object worldObject = configurationSection.get("world");
         ConfigurationSection minSection = configurationSection.getConfigurationSection("min"),
                 maxSection = configurationSection.getConfigurationSection("max");

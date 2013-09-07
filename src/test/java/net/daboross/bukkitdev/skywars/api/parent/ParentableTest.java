@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api;
+package net.daboross.bukkitdev.skywars.api.parent;
 
+import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

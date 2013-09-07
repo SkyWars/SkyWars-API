@@ -22,7 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import net.daboross.bukkitdev.skywars.api.Parentable;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -34,6 +36,8 @@ import org.bukkit.configuration.serialization.SerializableAs;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
+@ToString(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true)
 @SerializableAs("SkyArenaConfig")
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
 
@@ -41,14 +45,14 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     private Integer numPlayers;
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
+    private final SkyPlacementConfig placement = new SkyPlacementConfig();
     private File file;
 
-    public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
+    public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
         super(parent);
         if (numPlayers != null && numPlayers < 2) {
             throw new IllegalArgumentException("Num players can't be smaller than 2");
         }
-        this.parent = parent;
         this.spawns = spawns;
         this.numPlayers = numPlayers;
         if (parent != null) {
@@ -56,13 +60,16 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
         if (boundaries != null) {
             this.boundaries.copyDataFrom(boundaries);
+        }
+        if (placement != null) {
+            this.placement.copyDataFrom(placement);
         }
         if (messages != null) {
             this.messages.copyDataFrom(messages);
         }
     }
 
-    public SkyArenaConfig(List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
+    public SkyArenaConfig(List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
         if (numPlayers != null && numPlayers < 2) {
             throw new IllegalArgumentException("Num players can't be smaller than 2");
         }
@@ -73,6 +80,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
         if (boundaries != null) {
             this.boundaries.copyDataFrom(boundaries);
+        }
+        if (placement != null) {
+            this.placement.copyDataFrom(placement);
         }
         if (messages != null) {
             this.messages.copyDataFrom(messages);
@@ -155,6 +165,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     }
 
     @Override
+    public SkyPlacementConfig getPlacement() {
+        return placement;
+    }
+
+    @Override
     public SkyMessagesConfig getMessages() {
         return messages;
     }
@@ -183,6 +198,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         if (boundaries.definesAnything()) {
             boundaries.serialize(section.createSection("boundaries"));
         }
+        if (placement.definesAnything()) {
+            placement.serialize(section.createSection("placement"));
+        }
         if (messages.definesAnything()) {
             messages.serialize(section.createSection("messages"));
         }
@@ -192,6 +210,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         Object spawnsObj = map.get("spawns"),
                 numPlayersObj = map.get("num-players"),
                 boundariesObj = map.get("boundaries"),
+                placementObj = map.get("placement"),
                 messagesObj = map.get("messages");
         List<?> spawns = spawnsObj instanceof List ? (List) spawnsObj : null;
         if (spawns != null) {
@@ -205,13 +224,15 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
         Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
         SkyBoundariesConfig boundaries = boundariesObj instanceof SkyBoundariesConfig ? (SkyBoundariesConfig) boundariesObj : null;
+        SkyPlacementConfig placement = placementObj instanceof SkyPlacementConfig ? (SkyPlacementConfig) placementObj : null;
         SkyMessagesConfig messages = messagesObj instanceof SkyMessagesConfig ? (SkyMessagesConfig) messagesObj : null;
-        return new SkyArenaConfig((List<SkyPlayerLocation>) spawns, numPlayers, boundaries, messages);
+        return new SkyArenaConfig((List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages);
     }
 
     public static SkyArenaConfig deserialize(ConfigurationSection configurationSection) {
         Object numPlayersObj = configurationSection.get("num-players");
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries"),
+                placementSection = configurationSection.getConfigurationSection("placement"),
                 messagesSection = configurationSection.getConfigurationSection("messages");
         List<?> spawnsObjList = configurationSection.getList("spawns");
         List<SkyPlayerLocation> spawns = null;
@@ -231,13 +252,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
         Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
         SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize(boundariesSection) : null;
+        SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize(placementSection) : null;
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize(messagesSection) : null;
-        return new SkyArenaConfig(spawns, numPlayers, boundaries, messages);
-    }
-
-    @Override
-    public String toString() {
-        return "SkyArenaConfig{parent=" + parent + ",spawns=" + spawns + ",numPlayers=" + numPlayers + ",boundaries=" + boundaries + ",messages=" + messages + "}";
+        return new SkyArenaConfig(spawns, numPlayers, boundaries, placement, messages);
     }
 
     public String toIndentedString(int indentAmount) {
@@ -246,6 +263,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
                 + (spawns == null ? "" : getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
                 + (numPlayers == null ? "" : getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")
                 + (boundaries == null ? "" : getIndent(indentAmount + 1) + "boundaries=" + boundaries.toIndentedString(indentAmount + 1) + ",\n")
+                + (placement == null ? "" : getIndent(indentAmount + 1) + "placement=" + placement.toIndentedString(indentAmount + 1) + "\n,")
                 + (messages == null ? "" : getIndent(indentAmount + 1) + "messages=" + messages.toIndentedString(indentAmount + 1) + "\n")
                 + getIndent(indentAmount) + "}";
     }

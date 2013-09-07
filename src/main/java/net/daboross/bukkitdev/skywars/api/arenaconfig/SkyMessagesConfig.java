@@ -16,20 +16,26 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import net.daboross.bukkitdev.skywars.api.Parentable;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
+import org.yaml.snakeyaml.events.CollectionStartEvent;
 
 /**
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
+@ToString(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true)
 @SerializableAs("SkyMessagesConfig")
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages {
 
@@ -76,13 +82,13 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         }
     }
 
-    private String getMessage(String key, SkyMessagesConfig originallyAsked) {
+    private String getMessage(String key, SkyMessagesConfig original) {
         String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'. Originally asked: " + originallyAsked.toIndentedString(2));
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'; original=" + original.toIndentedString(2));
             } else {
-                return parent.getMessage(key, originallyAsked);
+                return parent.getMessage(key, original);
             }
         } else {
             return prefix + message;
@@ -97,7 +103,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key.toLowerCase());
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Originally asked does not define raw message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString(2));
+                throw new IllegalArgumentException("Original does not define raw message '" + key + "'; original=" + this.toIndentedString(2));
             } else {
                 return parent.getRawMessage(key, this);
             }
@@ -106,13 +112,13 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         }
     }
 
-    private String getRawMessage(String key, SkyMessagesConfig originallyAsked) {
+    private String getRawMessage(String key, SkyMessagesConfig original) {
         String message = rawMessages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + ". Originally asked: " + originallyAsked.toIndentedString(2));
+                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original.toIndentedString(2));
             } else {
-                return parent.getMessage(key, originallyAsked);
+                return parent.getMessage(key, original);
             }
         } else {
             return message;
@@ -132,6 +138,10 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
             rawMessages.put(key, message);
             messages.put(key, translate(message));
         }
+    }
+
+    public Map<String, String> getInternalRawMessages() {
+        return Collections.unmodifiableMap(rawMessages);
     }
 
     private String translate(String original) {
@@ -168,11 +178,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
             }
         }
         return returnValue;
-    }
-
-    @Override
-    public String toString() {
-        return "SkyMessagesConfig{parent=" + parent + ",rawMessagse=" + rawMessages + ",messages=" + messages + "}";
     }
 
     public String toIndentedString(int indentAmount) {

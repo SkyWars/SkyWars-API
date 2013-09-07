@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.Map;
+import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -53,12 +54,12 @@ public class SkyPlayerLocationTest {
         assertEquals(original, deserialized);
     }
 
-    private SkyPlayerLocation getRandomLoc() {
-        double x = Math.random() * 20;
-        double y = Math.random() * 20;
-        double z = Math.random() * 20;
-        double yaw = Math.random() * 20;
-        double pitch = Math.random() * 20;
+    public static SkyPlayerLocation getRandomLoc() {
+        double x = (Math.random() - 0.5) * 20;
+        double y = (Math.random() - 0.5) * 20;
+        double z = (Math.random() - 0.5) * 20;
+        double yaw = (Math.random() - 0.5) * 20;
+        double pitch = (Math.random() - 0.5) * 20;
         String world = "worldTest";
         return new SkyPlayerLocation(x, y, z, yaw, pitch, world);
     }

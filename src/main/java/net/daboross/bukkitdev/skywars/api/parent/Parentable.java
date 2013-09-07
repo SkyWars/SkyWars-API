@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api;
+package net.daboross.bukkitdev.skywars.api.parent;
 
 import lombok.Getter;
 
@@ -23,7 +23,7 @@ import lombok.Getter;
  * @author Dabo Ross <http://www.daboross.net/>
  * @param <T> This class
  */
-public class Parentable<T extends Parentable<?>> {
+public class Parentable<T extends Parentable<?>>{
 
     @Getter
     protected T parent;
@@ -33,7 +33,7 @@ public class Parentable<T extends Parentable<?>> {
 
     public Parentable(T parent) {
         this.parent = parent;
-        checkParentCycle(this);
+        checkParentCycle();
     }
 
     public T getParent() {

@@ -52,7 +52,12 @@ public class SkyBlockLocationRangeTest {
         assertEquals(original, deserialized);
     }
 
-    private SkyBlockLocation getRandomPositiveLoc() {
+    public static SkyBlockLocationRange getRandom() {
+        SkyBlockLocation min = getRandomPositiveLoc();
+        return new SkyBlockLocationRange(min, min.add(getRandomPositiveLoc()), "randomWorld");
+    }
+
+    public static SkyBlockLocation getRandomPositiveLoc() {
         int x = (int) (Math.random() * 20);
         int y = (int) (Math.random() * 20);
         int z = (int) (Math.random() * 20);

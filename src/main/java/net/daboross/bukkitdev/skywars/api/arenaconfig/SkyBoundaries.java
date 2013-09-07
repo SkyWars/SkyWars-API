@@ -26,8 +26,6 @@ public interface SkyBoundaries {
 
     public boolean definesAnything();
 
-    public int getPlacementY();
-
     public SkyBlockLocationRange getOrigin();
 
     public SkyBlockLocationRange getBuilding();
