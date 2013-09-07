@@ -29,4 +29,6 @@ public interface SkyLocationStore {
     public void setLobbyPosition(SkyPlayerLocation lobbyPosition);
 
     public List<SkyBlockLocation> getPortals();
+
+    public void save();
 }
