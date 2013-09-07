@@ -121,6 +121,9 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         section.set("x", x);
         section.set("y", y);
         section.set("z", z);
+        if (world != null) {
+            section.set("world", world);
+        }
     }
 
     public static SkyBlockLocation deserialize(@NonNull Map<String, Object> map) {
