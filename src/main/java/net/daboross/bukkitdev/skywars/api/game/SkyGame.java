@@ -25,7 +25,7 @@ import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
  */
 public interface SkyGame {
 
-    public int getID();
+    public int getId();
 
     public List<String> getAlivePlayers();
 
