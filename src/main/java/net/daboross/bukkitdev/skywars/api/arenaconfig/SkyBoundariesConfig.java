@@ -156,7 +156,7 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     public String toIndentedString(int indentAmount) {
-        return  "SkyBoundariesConfig{\n"
+        return "SkyBoundariesConfig{\n"
                 + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
                 + (origin == null ? "" : getIndent(indentAmount + 1) + "origin=" + origin.toIndentedString(indentAmount + 1) + ",\n")
                 + (building == null ? "" : getIndent(indentAmount + 1) + "building=" + building.toIndentedString(indentAmount + 1) + ",\n")
