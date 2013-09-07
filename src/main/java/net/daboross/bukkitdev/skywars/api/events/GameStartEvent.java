@@ -33,11 +33,8 @@ import org.bukkit.event.HandlerList;
 public class GameStartEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
-    @Getter
     private final SkyWars plugin;
-    @Getter
     private final SkyGame newGame;
-    @Getter
     private final Player[] players;
 
     public GameStartEvent(@NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull Player[] players) {
@@ -53,5 +50,17 @@ public class GameStartEvent extends Event {
 
     public static HandlerList getHandlerList() {
         return handlerList;
+    }
+
+    public SkyWars getPlugin() {
+        return plugin;
+    }
+
+    public SkyGame getNewGame() {
+        return newGame;
+    }
+
+    public Player[] getPlayers() {
+        return players;
     }
 }
