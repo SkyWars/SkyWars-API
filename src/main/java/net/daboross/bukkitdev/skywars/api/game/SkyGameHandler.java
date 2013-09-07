@@ -23,6 +23,11 @@ package net.daboross.bukkitdev.skywars.api.game;
 public interface SkyGameHandler {
 
     /**
+     * Starts a new game with the contents of the players in the queue.
+     */
+    public void startNewGame();
+
+    /**
      * Ends a game with the given ID.
      *
      * @param id the id of the game to end.
