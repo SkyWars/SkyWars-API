@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 daboross
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
-import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
-
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
 public interface SkyGameQueue {
 

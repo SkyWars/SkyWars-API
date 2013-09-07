@@ -17,6 +17,8 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
 import org.bukkit.entity.Player;
@@ -25,34 +27,22 @@ import org.bukkit.event.HandlerList;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
 public class GameEndEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
+    @Getter
     private final SkyWars plugin;
+    @Getter
     private final SkyGame game;
-    private final List<Player> players;
+    @Getter
+    private final List<Player> alivePlayers;
 
-    public GameEndEvent(SkyWars plugin, SkyGame game, List<Player> players) {
-        if (plugin == null || game == null || players == null) {
-            throw new IllegalArgumentException();
-        }
+    public GameEndEvent(@NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players) {
         this.plugin = plugin;
         this.game = game;
-        this.players = players;
-    }
-
-    public SkyWars getPlugin() {
-        return plugin;
-    }
-
-    public List<Player> getAlivePlayers() {
-        return players;
-    }
-
-    public SkyGame getGame() {
-        return game;
+        this.alivePlayers = players;
     }
 
     @Override

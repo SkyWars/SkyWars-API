@@ -19,6 +19,9 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -30,8 +33,10 @@ import org.bukkit.entity.Entity;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
+@ToString
+@EqualsAndHashCode
 @SerializableAs("SkyLocationAccurate")
 public class SkyPlayerLocation implements ConfigurationSerializable {
 
@@ -55,19 +60,19 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         this(x, y, z, 0, 0, world);
     }
 
-    public SkyPlayerLocation(Block block) {
+    public SkyPlayerLocation(@NonNull Block block) {
         this(block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
     }
 
-    public SkyPlayerLocation(Location location) {
+    public SkyPlayerLocation(@NonNull Location location) {
         this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch(), location.getWorld().getName());
     }
 
-    public SkyPlayerLocation(Entity entity) {
+    public SkyPlayerLocation(@NonNull Entity entity) {
         this(entity.getLocation());
     }
 
-    public SkyPlayerLocation(SkyBlockLocation location) {
+    public SkyPlayerLocation(@NonNull SkyBlockLocation location) {
         this(location.x, location.y, location.z, location.world);
     }
 
@@ -75,16 +80,16 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         return new SkyPlayerLocation(this.x + x, this.y + y, this.z + z, world);
     }
 
-    public SkyPlayerLocation add(SkyBlockLocation location) {
+    public SkyPlayerLocation add(@NonNull SkyBlockLocation location) {
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
-    public SkyPlayerLocation add(SkyPlayerLocation location) {
+    public SkyPlayerLocation add(@NonNull SkyPlayerLocation location) {
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
     public SkyBlockLocation round() {
-        return new SkyBlockLocation((int) x, (int) y, (int) z, world);
+        return new SkyBlockLocation((int) Math.round(x), (int) Math.round(y), (int) Math.round(z), world);
     }
 
     public Location toLocation() {
@@ -112,7 +117,18 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         return map;
     }
 
-    public static SkyPlayerLocation deserialize(Map<String, Object> map) {
+    public void serialize(ConfigurationSection configurationSection) {
+        configurationSection.set("x", x);
+        configurationSection.set("y", y);
+        configurationSection.set("z", z);
+        configurationSection.set("yaw", yaw);
+        configurationSection.set("pitch", pitch);
+        if (world != null) {
+            configurationSection.set("world", world);
+        }
+    }
+
+    public static SkyPlayerLocation deserialize(@NonNull Map<String, Object> map) {
         Object worldO = map.get("world");
         Double x = get(map.get("x"));
         Double y = get(map.get("y"));
@@ -132,7 +148,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
     }
 
-    public static SkyPlayerLocation deserialize(ConfigurationSection configurationSection) {
+    public static SkyPlayerLocation deserialize(@NonNull ConfigurationSection configurationSection) {
         Object worldO = configurationSection.get("world");
         Double x = get(configurationSection.get("x"));
         Double y = get(configurationSection.get("y"));
@@ -163,29 +179,5 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
             return (Double) o;
         }
         return null;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof SkyBlockLocation)) {
-            return false;
-        }
-        SkyBlockLocation l = (SkyBlockLocation) obj;
-        return l.x == x && l.y == y && l.z == z && l.world.equals(world);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.z) ^ (Double.doubleToLongBits(this.z) >>> 32));
-        hash = 97 * hash + (this.world != null ? this.world.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "SkyPlayerLocation{x=" + x + ",y=" + y + ",z=" + z + ",pitch=" + pitch + ",yaw=" + yaw + (world == null ? "" : ",world=" + world) + "}";
     }
 }

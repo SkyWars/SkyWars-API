@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 daboross
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,9 @@ package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.HashMap;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -25,8 +28,10 @@ import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
+@ToString
+@EqualsAndHashCode
 @SerializableAs("SkyLocationRange")
 public class SkyBlockLocationRange implements ConfigurationSerializable {
 
@@ -44,11 +49,9 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
      * @param world world of the range.
      * @throws IllegalArgumentException if min == null || max == null || min.x >
      * max.x || min.y > max.y || min.z > max.z
+     * @throws NullPointerException if min or max is null
      */
-    public SkyBlockLocationRange(SkyBlockLocation min, SkyBlockLocation max, String world) {
-        if (min == null || max == null) {
-            throw new IllegalArgumentException("Cannot be null");
-        }
+    public SkyBlockLocationRange(@NonNull SkyBlockLocation min, @NonNull SkyBlockLocation max, String world) {
         if (min.x > max.x || min.y > max.y || min.z > max.z) {
             throw new IllegalArgumentException("min position cannot be bigger than max position in any dimension.");
         }
@@ -63,7 +66,7 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         this.max = max;
     }
 
-    public SkyBlockLocationRange add(SkyBlockLocation loc) {
+    public SkyBlockLocationRange add(@NonNull SkyBlockLocation loc) {
         return new SkyBlockLocationRange(loc.add(min), loc.add(max), world);
     }
 
@@ -76,13 +79,13 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return map;
     }
 
-    public void serialize(ConfigurationSection section) {
+    public void serialize(@NonNull ConfigurationSection section) {
         min.changeWorld(null).serialize(section.createSection("min"));
         max.changeWorld(null).serialize(section.createSection("max"));
         section.set("world", world);
     }
 
-    public static SkyBlockLocationRange deserialize(Map<String, Object> map) {
+    public static SkyBlockLocationRange deserialize(@NonNull Map<String, Object> map) {
         Object minObject = map.get("min"), maxObject = map.get("max"),
                 worldObject = map.get("world");
         if (!(minObject instanceof SkyBlockLocation && maxObject instanceof SkyBlockLocation)) {
@@ -93,7 +96,7 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return new SkyBlockLocationRange(min, max, world);
     }
 
-    public static SkyBlockLocationRange deserialize(ConfigurationSection configurationSection) {
+    public static SkyBlockLocationRange deserialize(@NonNull ConfigurationSection configurationSection) {
         Object worldObject = configurationSection.get("world");
         ConfigurationSection minSection = configurationSection.getConfigurationSection("min"),
                 maxSection = configurationSection.getConfigurationSection("max");
@@ -109,35 +112,12 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return new SkyBlockLocationRange(min, max, world);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof SkyBlockLocationRange)) {
-            return false;
-        }
-        SkyBlockLocationRange l = (SkyBlockLocationRange) obj;
-        return this.min.equals(l.min) && this.max.equals(l.max) && this.world.equals(l.world);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + (this.min != null ? this.min.hashCode() : 0);
-        hash = 13 * hash + (this.max != null ? this.max.hashCode() : 0);
-        hash = 13 * hash + (this.world != null ? this.world.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "SkyBlockLocationRange{min=" + min + ",max=" + max + ",world=" + world + "}";
-    }
-
-    public String toIndentedString(int indent) {
+    public String toIndentedString(int indentAmount) {
         return "SkyBlockLocationRange{\n"
-                + getIndent(indent + 1) + "min=" + min + ",\n"
-                + getIndent(indent + 1) + "max=" + max + ",\n"
-                + (world == null ? "" : getIndent(indent + 1) + "world=" + world + "\n")
-                + getIndent(indent) + "}";
+                + getIndent(indentAmount + 1) + "min=" + min + ",\n"
+                + getIndent(indentAmount + 1) + "max=" + max + ",\n"
+                + (world == null ? "" : getIndent(indentAmount + 1) + "world=" + world + "\n")
+                + getIndent(indentAmount) + "}";
     }
 
     private String getIndent(int indentAmount) {

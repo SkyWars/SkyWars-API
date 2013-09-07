@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 daboross
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,16 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
+import lombok.Getter;
+
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
+ * @param <T> This class
  */
 public class Parentable<T extends Parentable<?>> {
 
+    @Getter
     protected T parent;
 
     public Parentable() {
@@ -29,24 +33,40 @@ public class Parentable<T extends Parentable<?>> {
 
     public Parentable(T parent) {
         this.parent = parent;
-        checkParentCycle();
+        checkParentCycle(this);
     }
 
     public T getParent() {
         return parent;
     }
 
+    /**
+     * Sets the parent
+     *
+     * @param parent the new parent to inherit values from
+     */
     public void setParent(T parent) {
         this.parent = parent;
         checkParentCycle();
     }
 
+    /**
+     * Makes sure that there are no parent inheritance loops
+     *
+     * @throws IllegalArgumentException if there are parent inheritance loops
+     */
     public final void checkParentCycle() throws IllegalArgumentException {
         if (checkParentCycle(this)) {
             throw new IllegalArgumentException("Parent inheritance loop.");
         }
     }
 
+    /**
+     * Makes sure that there are no parent inheritance loops.
+     *
+     * @param original The original parent that checkParentCycle() was called on
+     * @return true if there are parent inheritance loops, false otherwise
+     */
     public final boolean checkParentCycle(Object original) {
         if (parent == null) {
             return false;

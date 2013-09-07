@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 daboross
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,9 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -30,8 +33,10 @@ import org.bukkit.entity.Entity;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
+@ToString
+@EqualsAndHashCode
 @SerializableAs("SkyLocation")
 public class SkyBlockLocation implements ConfigurationSerializable {
 
@@ -40,6 +45,13 @@ public class SkyBlockLocation implements ConfigurationSerializable {
     public final int z;
     public final String world;
 
+    public SkyBlockLocation() {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+        this.world = null;
+    }
+
     public SkyBlockLocation(int x, int y, int z, String world) {
         this.x = x;
         this.y = y;
@@ -47,15 +59,15 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         this.world = world;
     }
 
-    public SkyBlockLocation(Block block) {
+    public SkyBlockLocation(@NonNull Block block) {
         this(block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
     }
 
-    public SkyBlockLocation(Location location) {
+    public SkyBlockLocation(@NonNull Location location) {
         this(location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld().getName());
     }
 
-    public SkyBlockLocation(Entity entity) {
+    public SkyBlockLocation(@NonNull Entity entity) {
         this(entity.getLocation());
     }
 
@@ -63,11 +75,11 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyBlockLocation(x + modX, y + modY, z + modZ, world);
     }
 
-    public SkyBlockLocation add(SkyBlockLocation location) {
+    public SkyBlockLocation add(@NonNull SkyBlockLocation location) {
         return new SkyBlockLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
-    public SkyPlayerLocation add(SkyPlayerLocation location) {
+    public SkyPlayerLocation add(@NonNull SkyPlayerLocation location) {
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
@@ -75,7 +87,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyBlockLocation(x, y, z, newWorld);
     }
 
-    public boolean isNear(Location loc) {
+    public boolean isNear(@NonNull Location loc) {
         return world.equals(loc.getWorld().getName())
                 && x <= loc.getX() + 1 && x >= loc.getX() - 1
                 && y <= loc.getY() + 1 && y >= loc.getY() - 1
@@ -105,13 +117,13 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return map;
     }
 
-    public void serialize(ConfigurationSection section) {
+    public void serialize(@NonNull ConfigurationSection section) {
         section.set("x", x);
         section.set("y", y);
         section.set("z", z);
     }
 
-    public static SkyBlockLocation deserialize(Map<String, Object> map) {
+    public static SkyBlockLocation deserialize(@NonNull Map<String, Object> map) {
         Object xObject = map.get("x"),
                 yObject = map.get("y"),
                 zObject = map.get("z"),
@@ -130,7 +142,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyBlockLocation(x, y, z, worldString);
     }
 
-    public static SkyBlockLocation deserialize(ConfigurationSection configurationSection) {
+    public static SkyBlockLocation deserialize(@NonNull ConfigurationSection configurationSection) {
         Object xObject = configurationSection.get("x");
         Object yObject = configurationSection.get("y");
         Object zObject = configurationSection.get("z");
@@ -151,29 +163,5 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
         String worldString = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
         return new SkyBlockLocation(x, y, z, worldString);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof SkyBlockLocation)) {
-            return false;
-        }
-        SkyBlockLocation l = (SkyBlockLocation) obj;
-        return l.x == x && l.y == y && l.z == z && l.world.equals(world);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.x;
-        hash = 79 * hash + this.y;
-        hash = 79 * hash + this.z;
-        hash = 79 * hash + (this.world != null ? this.world.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "SkyBlockLocation{x=" + x + ",y=" + y + ",z=" + z + (world == null ? "" : ",world=" + world) + "}";
     }
 }

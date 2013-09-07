@@ -16,6 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -27,26 +30,21 @@ import org.bukkit.event.player.PlayerEvent;
  * <br>When a game ends whether canceled or the server is quit, this event is
  * called once for all remaining players.
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
+@EqualsAndHashCode
 public class LeaveGameEvent extends PlayerEvent {
 
     private static final HandlerList handlerList = new HandlerList();
+    @Getter
     private final SkyWars plugin;
+    @Getter
     private final int id;
 
-    public LeaveGameEvent(SkyWars plugin, int id, Player who) {
+    public LeaveGameEvent(@NonNull SkyWars plugin, int id, @NonNull Player who) {
         super(who);
         this.plugin = plugin;
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public SkyWars getPlugin() {
-        return plugin;
     }
 
     @Override

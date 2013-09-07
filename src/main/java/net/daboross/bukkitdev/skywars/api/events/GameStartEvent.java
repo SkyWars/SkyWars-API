@@ -16,6 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
 import org.bukkit.entity.Player;
@@ -24,34 +27,23 @@ import org.bukkit.event.HandlerList;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
+@EqualsAndHashCode
 public class GameStartEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
+    @Getter
     private final SkyWars plugin;
+    @Getter
     private final SkyGame newGame;
+    @Getter
     private final Player[] players;
 
-    public GameStartEvent(SkyWars plugin, SkyGame newGame, Player[] players) {
-        if (players == null || newGame == null || plugin == null) {
-            throw new IllegalArgumentException();
-        }
+    public GameStartEvent(@NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull Player[] players) {
         this.plugin = plugin;
         this.newGame = newGame;
         this.players = players;
-    }
-
-    public SkyWars getPlugin() {
-        return plugin;
-    }
-
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    public SkyGame getNewGame() {
-        return newGame;
     }
 
     @Override

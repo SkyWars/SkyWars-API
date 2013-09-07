@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 daboross
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,16 +18,17 @@ package net.daboross.bukkitdev.skywars.api;
 
 import java.util.List;
 import java.util.Random;
+import lombok.NonNull;
 
 /**
  *
- * @author daboross
+ * @author Dabo Ross <http://www.daboross.net/>
  */
 public class Randomation {
 
     private static final Random random = new Random();
 
-    public static <T> T getRandom(List<T> list) {
+    public static <T> T getRandom(@NonNull List<T> list) {
         return list.get(random.nextInt(list.size()));
     }
 }
