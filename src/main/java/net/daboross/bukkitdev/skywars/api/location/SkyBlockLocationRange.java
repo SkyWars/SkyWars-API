@@ -22,6 +22,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -68,6 +70,24 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
 
     public SkyBlockLocationRange add(@NonNull SkyBlockLocation loc) {
         return new SkyBlockLocationRange(loc.add(min), loc.add(max), world);
+    }
+
+    public boolean isWithin(Location loc) {
+        return loc.getX() <= max.x && loc.getX() >= min.x
+                && loc.getY() <= max.y && loc.getY() >= min.y
+                && loc.getZ() <= max.z && loc.getZ() >= min.z;
+    }
+
+    public boolean isWithin(Block block) {
+        return block.getX() <= max.x && block.getX() >= min.x
+                && block.getY() <= max.y && block.getY() >= min.y
+                && block.getZ() <= max.z && block.getZ() >= min.z;
+    }
+
+    public boolean isWithin(SkyBlockLocation loc) {
+        return loc.x <= max.x && loc.x >= min.x
+                && loc.y <= max.y && loc.y >= min.y
+                && loc.z <= max.z && loc.z >= min.z;
     }
 
     @Override
