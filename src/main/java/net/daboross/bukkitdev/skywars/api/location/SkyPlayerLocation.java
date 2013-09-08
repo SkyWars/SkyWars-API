@@ -113,8 +113,12 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         map.put("x", x);
         map.put("y", y);
         map.put("z", z);
-        map.put("yaw", yaw);
-        map.put("pitch", pitch);
+        if (yaw != 0) {
+            map.put("yaw", yaw);
+        }
+        if (pitch != 0) {
+            map.put("pitch", pitch);
+        }
         if (world != null) {
             map.put("world", world);
         }
@@ -125,8 +129,12 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         configurationSection.set("x", x);
         configurationSection.set("y", y);
         configurationSection.set("z", z);
-        configurationSection.set("yaw", yaw);
-        configurationSection.set("pitch", pitch);
+        if (yaw != 0) {
+            configurationSection.set("yaw", yaw);
+        }
+        if (pitch != 0) {
+            configurationSection.set("pitch", pitch);
+        }
         if (world != null) {
             configurationSection.set("world", world);
         }
