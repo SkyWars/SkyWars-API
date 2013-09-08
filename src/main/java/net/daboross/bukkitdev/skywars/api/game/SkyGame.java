@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.game;
 
 import java.util.List;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
 
 /**
  *
@@ -30,6 +31,8 @@ public interface SkyGame {
     public List<String> getAlivePlayers();
 
     public List<String> getDeadPlayers();
+
+    public SkyBlockLocation getMin();
 
     public SkyArena getArena();
 }
