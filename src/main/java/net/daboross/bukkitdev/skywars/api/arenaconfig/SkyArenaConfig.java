@@ -94,9 +94,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         super.setParent(parent);
         if (parent != null) {
             messages.setParent(parent.getMessages());
+            placement.setParent(parent.getPlacement());
             boundaries.setParent(parent.getBoundaries());
         } else {
             messages.setParent(null);
+            placement.setParent(null);
             boundaries.setParent(null);
         }
     }
