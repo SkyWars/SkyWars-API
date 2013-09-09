@@ -16,16 +16,13 @@
  */
 package net.daboross.bukkitdev.skywars.api.parent;
 
-import lombok.Getter;
-
 /**
  *
  * @author Dabo Ross <http://www.daboross.net/>
  * @param <T> This class
  */
-public class Parentable<T extends Parentable<?>>{
+public class Parentable<T extends Parentable<?>> {
 
-    @Getter
     protected T parent;
 
     public Parentable() {
@@ -56,24 +53,21 @@ public class Parentable<T extends Parentable<?>>{
      * @throws IllegalArgumentException if there are parent inheritance loops
      */
     public final void checkParentCycle() throws IllegalArgumentException {
-        if (checkParentCycle(this)) {
-            throw new IllegalArgumentException("Parent inheritance loop.");
-        }
+        checkParentCycle(this);
     }
 
     /**
      * Makes sure that there are no parent inheritance loops.
      *
      * @param original The original parent that checkParentCycle() was called on
-     * @return true if there are parent inheritance loops, false otherwise
      */
-    public final boolean checkParentCycle(Object original) {
+    public final void checkParentCycle(Object original) {
         if (parent == null) {
-            return false;
+            return;
         }
-        if (parent.equals(original)) {
-            return true;
+        if (parent == original) {
+            throw new IllegalArgumentException("Parent inheritance loop; original=" + original + "; final-parent=" + parent + ";");
         }
-        return parent.checkParentCycle(original);
+        parent.checkParentCycle(original);
     }
 }
