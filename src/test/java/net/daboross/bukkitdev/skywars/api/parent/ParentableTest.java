@@ -24,34 +24,40 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class ParentableTest {
+public class ParentableTest
+{
 
     @Test
-    public void testSetGetParent() {
+    public void testSetGetParent()
+    {
         DummyParentable dummy = new DummyParentable();
         DummyParentable parent = new DummyParentable();
-        assertEquals(null, dummy.getParent());
-        dummy.setParent(parent);
-        assertEquals(parent, dummy.getParent());
+        assertEquals( null, dummy.getParent() );
+        dummy.setParent( parent );
+        assertEquals( parent, dummy.getParent() );
     }
 
     /**
      * Test of checkParentCycle method, of class Parentable.
      */
     @Test
-    public void testCheckParentCycle() {
+    public void testCheckParentCycle()
+    {
         DummyParentable dummy = new DummyParentable();
         DummyParentable parent = new DummyParentable();
         DummyParentable parent2 = new DummyParentable();
-        dummy.setParent(parent);
-        parent.setParent(parent2);
-        try {
-            parent2.setParent(dummy);
-            fail("IllegalArgumentException not called for parent inheritance loop");
-        } catch (IllegalArgumentException unused) {
+        dummy.setParent( parent );
+        parent.setParent( parent2 );
+        try
+        {
+            parent2.setParent( dummy );
+            fail( "IllegalArgumentException not called for parent inheritance loop" );
+        } catch ( IllegalArgumentException unused )
+        {
         }
     }
 
-    public static class DummyParentable extends Parentable<DummyParentable> {
+    public static class DummyParentable extends Parentable<DummyParentable>
+    {
     }
 }

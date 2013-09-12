@@ -26,41 +26,46 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyPlayerLocationTest {
+public class SkyPlayerLocationTest
+{
 
     @Test
-    public void testEquals() {
+    public void testEquals()
+    {
         SkyPlayerLocation loc1 = getRandomLoc();
-        SkyPlayerLocation loc2 = new SkyPlayerLocation(loc1.x, loc1.y, loc1.z, loc1.yaw, loc1.pitch, loc1.world);
-        SkyPlayerLocation loc3 = loc1.changeWorld(null);
-        assertEquals(loc1, loc2);
-        assertNotEquals(loc1, loc3);
+        SkyPlayerLocation loc2 = new SkyPlayerLocation( loc1.x, loc1.y, loc1.z, loc1.yaw, loc1.pitch, loc1.world );
+        SkyPlayerLocation loc3 = loc1.changeWorld( null );
+        assertEquals( loc1, loc2 );
+        assertNotEquals( loc1, loc3 );
     }
 
     @Test
-    public void testSerializeDeserializeMap() {
+    public void testSerializeDeserializeMap()
+    {
         SkyPlayerLocation original = getRandomLoc();
         Map<String, Object> serialized = original.serialize();
-        SkyPlayerLocation deserialized = SkyPlayerLocation.deserialize(serialized);
-        assertEquals(original, deserialized);
+        SkyPlayerLocation deserialized = SkyPlayerLocation.deserialize( serialized );
+        assertEquals( original, deserialized );
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection() {
+    public void testSerializeDeserializeConfigurationSection()
+    {
         SkyPlayerLocation original = getRandomLoc();
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize(serializationMedium);
-        SkyPlayerLocation deserialized = SkyPlayerLocation.deserialize(serializationMedium);
-        assertEquals(original, deserialized);
+        original.serialize( serializationMedium );
+        SkyPlayerLocation deserialized = SkyPlayerLocation.deserialize( serializationMedium );
+        assertEquals( original, deserialized );
     }
 
-    public static SkyPlayerLocation getRandomLoc() {
-        double x = (Math.random() - 0.5) * 20;
-        double y = (Math.random() - 0.5) * 20;
-        double z = (Math.random() - 0.5) * 20;
-        double yaw = (Math.random() - 0.5) * 20;
-        double pitch = (Math.random() - 0.5) * 20;
+    public static SkyPlayerLocation getRandomLoc()
+    {
+        double x = ( Math.random() - 0.5 ) * 20;
+        double y = ( Math.random() - 0.5 ) * 20;
+        double z = ( Math.random() - 0.5 ) * 20;
+        double yaw = ( Math.random() - 0.5 ) * 20;
+        double pitch = ( Math.random() - 0.5 ) * 20;
         String world = "worldTest";
-        return new SkyPlayerLocation(x, y, z, yaw, pitch, world);
+        return new SkyPlayerLocation( x, y, z, yaw, pitch, world );
     }
 }

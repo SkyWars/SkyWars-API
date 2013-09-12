@@ -25,7 +25,8 @@ import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyGame {
+public interface SkyGame
+{
 
     public int getId();
 

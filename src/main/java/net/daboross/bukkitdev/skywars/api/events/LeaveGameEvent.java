@@ -33,32 +33,38 @@ import org.bukkit.event.player.PlayerEvent;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @EqualsAndHashCode
-public class LeaveGameEvent extends PlayerEvent {
+public class LeaveGameEvent extends PlayerEvent
+{
 
     private static final HandlerList handlerList = new HandlerList();
     private final SkyWars plugin;
     private final int id;
 
-    public LeaveGameEvent(@NonNull SkyWars plugin, int id, @NonNull Player who) {
-        super(who);
+    public LeaveGameEvent( @NonNull SkyWars plugin, int id, @NonNull Player who )
+    {
+        super( who );
         this.plugin = plugin;
         this.id = id;
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers()
+    {
         return handlerList;
     }
 
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList()
+    {
         return handlerList;
     }
 
-    public SkyWars getPlugin() {
+    public SkyWars getPlugin()
+    {
         return plugin;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 }

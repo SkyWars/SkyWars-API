@@ -24,44 +24,50 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyBlockLocationRangeTest {
+public class SkyBlockLocationRangeTest
+{
 
     @Test
-    public void testEquals() {
+    public void testEquals()
+    {
         SkyBlockLocation loc1 = getRandomPositiveLoc();
-        SkyBlockLocationRange range = new SkyBlockLocationRange(loc1, loc1.add(getRandomPositiveLoc()), "testWorld");
-        SkyBlockLocationRange range1 = new SkyBlockLocationRange(range.min, range.max, range.world);
-        assertEquals(range, range1);
+        SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
+        SkyBlockLocationRange range1 = new SkyBlockLocationRange( range.min, range.max, range.world );
+        assertEquals( range, range1 );
     }
 
     @Test
-    public void testRenameWorld() {
-        SkyBlockLocation loc1 = getRandomPositiveLoc().changeWorld("blah");
-        SkyBlockLocationRange range = new SkyBlockLocationRange(loc1, loc1.add(getRandomPositiveLoc()), "testWorld");
-        assertEquals("testWorld", range.min.world);
-        assertEquals("testWorld", range.max.world);
+    public void testRenameWorld()
+    {
+        SkyBlockLocation loc1 = getRandomPositiveLoc().changeWorld( "blah" );
+        SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
+        assertEquals( "testWorld", range.min.world );
+        assertEquals( "testWorld", range.max.world );
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection() {
+    public void testSerializeDeserializeConfigurationSection()
+    {
         SkyBlockLocation min = getRandomPositiveLoc();
-        SkyBlockLocationRange original = new SkyBlockLocationRange(min, min.add(getRandomPositiveLoc()), "whatWorld");
+        SkyBlockLocationRange original = new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "whatWorld" );
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize(serializationMedium);
-        SkyBlockLocationRange deserialized = SkyBlockLocationRange.deserialize(serializationMedium);
-        assertEquals(original, deserialized);
+        original.serialize( serializationMedium );
+        SkyBlockLocationRange deserialized = SkyBlockLocationRange.deserialize( serializationMedium );
+        assertEquals( original, deserialized );
     }
 
-    public static SkyBlockLocationRange getRandom() {
+    public static SkyBlockLocationRange getRandom()
+    {
         SkyBlockLocation min = getRandomPositiveLoc();
-        return new SkyBlockLocationRange(min, min.add(getRandomPositiveLoc()), "randomWorld");
+        return new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "randomWorld" );
     }
 
-    public static SkyBlockLocation getRandomPositiveLoc() {
-        int x = (int) (Math.random() * 20);
-        int y = (int) (Math.random() * 20);
-        int z = (int) (Math.random() * 20);
+    public static SkyBlockLocation getRandomPositiveLoc()
+    {
+        int x = (int) ( Math.random() * 20 );
+        int y = (int) ( Math.random() * 20 );
+        int z = (int) ( Math.random() * 20 );
         String world = "worldTest";
-        return new SkyBlockLocation(x, y, z, world);
+        return new SkyBlockLocation( x, y, z, world );
     }
 }

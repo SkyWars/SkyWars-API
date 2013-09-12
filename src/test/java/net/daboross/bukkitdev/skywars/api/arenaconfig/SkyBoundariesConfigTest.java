@@ -27,35 +27,40 @@ import org.junit.Test;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyBoundariesConfigTest {
+public class SkyBoundariesConfigTest
+{
 
     private Random r;
 
     @Before
-    public void setupRandom() {
+    public void setupRandom()
+    {
         r = new Random();
     }
 
     @Test
-    public void testEquals() {
-        SkyBoundariesConfig original = getRandom(r);
-        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal());
-        Assert.assertEquals(original, second);
+    public void testEquals()
+    {
+        SkyBoundariesConfig original = getRandom( r );
+        SkyBoundariesConfig second = new SkyBoundariesConfig( original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal() );
+        Assert.assertEquals( original, second );
     }
 
     @Test
-    public void testSerializeDeserialize() {
-        SkyBoundariesConfig original = getRandom(r);
+    public void testSerializeDeserialize()
+    {
+        SkyBoundariesConfig original = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize(serializationMedium);
-        SkyBoundariesConfig deserialized = SkyBoundariesConfig.deserialize(serializationMedium);
-        Assert.assertEquals(original, deserialized);
+        original.serialize( serializationMedium );
+        SkyBoundariesConfig deserialized = SkyBoundariesConfig.deserialize( serializationMedium );
+        Assert.assertEquals( original, deserialized );
     }
 
-    public static SkyBoundariesConfig getRandom(Random r) {
+    public static SkyBoundariesConfig getRandom( Random r )
+    {
         return new SkyBoundariesConfig(
                 r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(),
                 r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom());
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom() );
     }
 }

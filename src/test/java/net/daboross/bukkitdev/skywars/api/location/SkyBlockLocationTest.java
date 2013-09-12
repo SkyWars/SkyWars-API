@@ -25,39 +25,44 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyBlockLocationTest {
+public class SkyBlockLocationTest
+{
 
     @Test
-    public void testEquals() {
+    public void testEquals()
+    {
         SkyBlockLocation loc1 = getRandomLoc();
-        SkyBlockLocation loc2 = new SkyBlockLocation(loc1.x, loc1.y, loc1.z, loc1.world);
-        SkyBlockLocation loc3 = loc1.changeWorld(null);
-        assertEquals(loc1, loc2);
-        assertNotEquals(loc1, loc3);
+        SkyBlockLocation loc2 = new SkyBlockLocation( loc1.x, loc1.y, loc1.z, loc1.world );
+        SkyBlockLocation loc3 = loc1.changeWorld( null );
+        assertEquals( loc1, loc2 );
+        assertNotEquals( loc1, loc3 );
     }
 
     @Test
-    public void testSerializeDeserializeMap() {
+    public void testSerializeDeserializeMap()
+    {
         SkyBlockLocation original = getRandomLoc();
         Map<String, Object> serialized = original.serialize();
-        SkyBlockLocation deserialized = SkyBlockLocation.deserialize(serialized);
-        assertEquals(original, deserialized);
+        SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serialized );
+        assertEquals( original, deserialized );
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection() {
+    public void testSerializeDeserializeConfigurationSection()
+    {
         SkyBlockLocation original = getRandomLoc();
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize(serializationMedium);
-        SkyBlockLocation deserialized = SkyBlockLocation.deserialize(serializationMedium);
-        assertEquals(original, deserialized);
+        original.serialize( serializationMedium );
+        SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serializationMedium );
+        assertEquals( original, deserialized );
     }
 
-    private SkyBlockLocation getRandomLoc() {
-        int x = (int) (Math.random() * 20);
-        int y = (int) (Math.random() * 20);
-        int z = (int) (Math.random() * 20);
+    private SkyBlockLocation getRandomLoc()
+    {
+        int x = (int) ( Math.random() * 20 );
+        int y = (int) ( Math.random() * 20 );
+        int z = (int) ( Math.random() * 20 );
         String world = "worldTest";
-        return new SkyBlockLocation(x, y, z, world);
+        return new SkyBlockLocation( x, y, z, world );
     }
 }

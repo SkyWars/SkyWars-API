@@ -22,7 +22,8 @@ import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyBoundaries {
+public interface SkyBoundaries
+{
 
     public boolean definesAnything();
 
@@ -32,9 +33,9 @@ public interface SkyBoundaries {
 
     public SkyBlockLocationRange getClearing();
 
-    public void setOrigin(SkyBlockLocationRange origin);
+    public void setOrigin( SkyBlockLocationRange origin );
 
-    public void setBuilding(SkyBlockLocationRange building);
+    public void setBuilding( SkyBlockLocationRange building );
 
-    public void setClearing(SkyBlockLocationRange clearing);
+    public void setClearing( SkyBlockLocationRange clearing );
 }

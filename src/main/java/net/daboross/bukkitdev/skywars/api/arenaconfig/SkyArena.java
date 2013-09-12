@@ -23,15 +23,16 @@ import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyArena {
+public interface SkyArena
+{
 
     public List<SkyPlayerLocation> getSpawns();
 
-    public void setSpawns(List<SkyPlayerLocation> spawns);
+    public void setSpawns( List<SkyPlayerLocation> spawns );
 
     public int getNumPlayers();
 
-    public void setNumPlayers(Integer numPlayers);
+    public void setNumPlayers( Integer numPlayers );
 
     public SkyBoundaries getBoundaries();
 

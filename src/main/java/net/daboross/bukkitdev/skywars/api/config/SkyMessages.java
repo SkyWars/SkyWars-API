@@ -20,7 +20,8 @@ package net.daboross.bukkitdev.skywars.api.config;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyMessages {
+public class SkyMessages
+{
 
     public static final String KILLED_VOID = "death.killed-void";
     public static final String SUICIDE_VOID = "death.suicide-void";

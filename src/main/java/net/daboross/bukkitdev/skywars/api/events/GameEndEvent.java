@@ -28,37 +28,44 @@ import org.bukkit.event.HandlerList;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class GameEndEvent extends Event {
+public class GameEndEvent extends Event
+{
 
     private static final HandlerList handlerList = new HandlerList();
     private final SkyWars plugin;
     private final SkyGame game;
     private final List<Player> alivePlayers;
 
-    public GameEndEvent(@NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players) {
+    public GameEndEvent( @NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players )
+    {
         this.plugin = plugin;
         this.game = game;
         this.alivePlayers = players;
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public HandlerList getHandlers()
+    {
         return handlerList;
     }
 
-    public static HandlerList getHandlerList() {
+    public static HandlerList getHandlerList()
+    {
         return handlerList;
     }
 
-    public SkyWars getPlugin() {
+    public SkyWars getPlugin()
+    {
         return plugin;
     }
 
-    public SkyGame getGame() {
+    public SkyGame getGame()
+    {
         return game;
     }
 
-    public List<Player> getAlivePlayers() {
+    public List<Player> getAlivePlayers()
+    {
         return alivePlayers;
     }
 }

@@ -20,7 +20,8 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyCurrentGameTracker {
+public interface SkyCurrentGameTracker
+{
 
     /**
      * Gets if a player is currently in a game.
@@ -28,7 +29,7 @@ public interface SkyCurrentGameTracker {
      * @param playerName the name of the player to check.
      * @return whether or not the given player is in a game.
      */
-    public boolean isInGame(String playerName);
+    public boolean isInGame( String playerName );
 
     /**
      * Gets the ID of the game a given player is in.
@@ -36,5 +37,5 @@ public interface SkyCurrentGameTracker {
      * @param playerName the name of the player to check.
      * @return the ID of the game the given player is in, or -1 if none.
      */
-    public int getGameID(String playerName);
+    public int getGameID( String playerName );
 }

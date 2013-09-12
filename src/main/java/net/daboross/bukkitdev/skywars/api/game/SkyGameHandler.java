@@ -20,7 +20,8 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyGameHandler {
+public interface SkyGameHandler
+{
 
     /**
      * Starts a new game with the contents of the players in the queue.
@@ -35,7 +36,7 @@ public interface SkyGameHandler {
      * @throws IllegalArgumentException if there is no running game with the
      * given id.
      */
-    public void endGame(int id, boolean broadcast);
+    public void endGame( int id, boolean broadcast );
 
     /**
      * Removes a player from whatever game they are in.
@@ -45,5 +46,5 @@ public interface SkyGameHandler {
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    public void removePlayerFromGame(String playerName, boolean teleport, boolean broadcast);
+    public void removePlayerFromGame( String playerName, boolean teleport, boolean broadcast );
 }

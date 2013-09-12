@@ -30,36 +30,42 @@ import org.junit.Test;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyArenaConfigTest {
+public class SkyArenaConfigTest
+{
 
     private Random r;
 
     @Before
-    public void setup() {
+    public void setup()
+    {
         r = new Random();
     }
 
     @Test
-    public void testEquals() {
-        SkyArenaConfig config = getRandom(r);
-        SkyArenaConfig copy = new SkyArenaConfig(config.getSpawns(), config.getNumPlayers(), config.getBoundaries(), config.getPlacement(), config.getMessages());
-        Assert.assertEquals(config, copy);
+    public void testEquals()
+    {
+        SkyArenaConfig config = getRandom( r );
+        SkyArenaConfig copy = new SkyArenaConfig( config.getSpawns(), config.getNumPlayers(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
+        Assert.assertEquals( config, copy );
     }
 
     @Test
-    public void testSerializeDeserialize() {
-        SkyArenaConfig config = getRandom(r);
+    public void testSerializeDeserialize()
+    {
+        SkyArenaConfig config = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        config.serialize(serializationMedium);
-        SkyArenaConfig deserialized = SkyArenaConfig.deserialize(serializationMedium);
-        Assert.assertEquals(config, deserialized);
+        config.serialize( serializationMedium );
+        SkyArenaConfig deserialized = SkyArenaConfig.deserialize( serializationMedium );
+        Assert.assertEquals( config, deserialized );
     }
 
-    public static SkyArenaConfig getRandom(Random r) {
+    public static SkyArenaConfig getRandom( Random r )
+    {
         List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>();
-        for (int i = 0; i < r.nextInt(20); i++) {
-            spawns.add(SkyPlayerLocationTest.getRandomLoc());
+        for ( int i = 0 ; i < r.nextInt( 20 ) ; i++ )
+        {
+            spawns.add( SkyPlayerLocationTest.getRandomLoc() );
         }
-        return new SkyArenaConfig(spawns, 2 + r.nextInt(22), SkyBoundariesConfigTest.getRandom(r), SkyPlacementConfigTest.getRandom(r), null);
+        return new SkyArenaConfig( spawns, 2 + r.nextInt( 22 ), SkyBoundariesConfigTest.getRandom( r ), SkyPlacementConfigTest.getRandom( r ), null );
     }
 }

@@ -39,7 +39,8 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
 @SerializableAs("SkyArenaConfig")
-public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
+public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena
+{
 
     private List<SkyPlayerLocation> spawns;
     private Integer numPlayers;
@@ -48,58 +49,73 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     private final SkyPlacementConfig placement = new SkyPlacementConfig();
     private File file;
 
-    public SkyArenaConfig(SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
-        super(parent);
-        if (numPlayers != null && numPlayers < 2) {
-            throw new IllegalArgumentException("Num players can't be smaller than 2");
+    public SkyArenaConfig( SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
+    {
+        super( parent );
+        if ( numPlayers != null && numPlayers < 2 )
+        {
+            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
         }
         this.spawns = spawns;
         this.numPlayers = numPlayers;
-        if (parent != null) {
-            this.boundaries.setParent(parent.getBoundaries());
+        if ( parent != null )
+        {
+            this.boundaries.setParent( parent.getBoundaries() );
         }
-        if (boundaries != null) {
-            this.boundaries.copyDataFrom(boundaries);
+        if ( boundaries != null )
+        {
+            this.boundaries.copyDataFrom( boundaries );
         }
-        if (placement != null) {
-            this.placement.copyDataFrom(placement);
+        if ( placement != null )
+        {
+            this.placement.copyDataFrom( placement );
         }
-        if (messages != null) {
-            this.messages.copyDataFrom(messages);
+        if ( messages != null )
+        {
+            this.messages.copyDataFrom( messages );
         }
     }
 
-    public SkyArenaConfig(List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
-        if (numPlayers != null && numPlayers < 2) {
-            throw new IllegalArgumentException("Num players can't be smaller than 2");
+    public SkyArenaConfig( List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
+    {
+        if ( numPlayers != null && numPlayers < 2 )
+        {
+            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
         }
         this.spawns = spawns;
         this.numPlayers = numPlayers;
-        if (parent != null) {
-            this.boundaries.setParent(parent.getBoundaries());
+        if ( parent != null )
+        {
+            this.boundaries.setParent( parent.getBoundaries() );
         }
-        if (boundaries != null) {
-            this.boundaries.copyDataFrom(boundaries);
+        if ( boundaries != null )
+        {
+            this.boundaries.copyDataFrom( boundaries );
         }
-        if (placement != null) {
-            this.placement.copyDataFrom(placement);
+        if ( placement != null )
+        {
+            this.placement.copyDataFrom( placement );
         }
-        if (messages != null) {
-            this.messages.copyDataFrom(messages);
+        if ( messages != null )
+        {
+            this.messages.copyDataFrom( messages );
         }
     }
 
     @Override
-    public void setParent(SkyArenaConfig parent) {
-        super.setParent(parent);
-        if (parent != null) {
-            messages.setParent(parent.getMessages());
-            placement.setParent(parent.getPlacement());
-            boundaries.setParent(parent.getBoundaries());
-        } else {
-            messages.setParent(null);
-            placement.setParent(null);
-            boundaries.setParent(null);
+    public void setParent( SkyArenaConfig parent )
+    {
+        super.setParent( parent );
+        if ( parent != null )
+        {
+            messages.setParent( parent.getMessages() );
+            placement.setParent( parent.getPlacement() );
+            boundaries.setParent( parent.getBoundaries() );
+        } else
+        {
+            messages.setParent( null );
+            placement.setParent( null );
+            boundaries.setParent( null );
         }
     }
 
@@ -109,7 +125,8 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
      *
      * @param file a value to be returned by getFile()
      */
-    public void setFile(File file) {
+    public void setFile( File file )
+    {
         this.file = file;
     }
 
@@ -118,107 +135,136 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
      *
      * @return the value set with setFile()
      */
-    public File getFile() {
+    public File getFile()
+    {
         return file;
     }
 
     @Override
-    public List<SkyPlayerLocation> getSpawns() {
-        if (spawns == null) {
-            if (parent == null) {
-                throw new IllegalStateException("Ultimate parent spawns not found.");
-            } else {
+    public List<SkyPlayerLocation> getSpawns()
+    {
+        if ( spawns == null )
+        {
+            if ( parent == null )
+            {
+                throw new IllegalStateException( "Ultimate parent spawns not found." );
+            } else
+            {
                 return parent.getSpawns();
             }
-        } else {
+        } else
+        {
             return spawns;
         }
     }
 
     @Override
-    public void setSpawns(List<SkyPlayerLocation> spawns) {
+    public void setSpawns( List<SkyPlayerLocation> spawns )
+    {
         this.spawns = spawns;
     }
 
     @Override
-    public int getNumPlayers() {
-        if (numPlayers == null) {
-            if (parent == null) {
-                throw new IllegalStateException("Ultimate parent numPlayers not found.");
-            } else {
+    public int getNumPlayers()
+    {
+        if ( numPlayers == null )
+        {
+            if ( parent == null )
+            {
+                throw new IllegalStateException( "Ultimate parent numPlayers not found." );
+            } else
+            {
                 return parent.getNumPlayers();
             }
-        } else {
+        } else
+        {
             return numPlayers.intValue();
         }
     }
 
     @Override
-    public void setNumPlayers(Integer numPlayers) {
-        if (numPlayers != null && numPlayers < 2) {
-            throw new IllegalArgumentException("Num players can't be smaller than 2");
+    public void setNumPlayers( Integer numPlayers )
+    {
+        if ( numPlayers != null && numPlayers < 2 )
+        {
+            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
         }
         this.numPlayers = numPlayers;
     }
 
     @Override
-    public SkyBoundariesConfig getBoundaries() {
+    public SkyBoundariesConfig getBoundaries()
+    {
         return boundaries;
     }
 
     @Override
-    public SkyPlacementConfig getPlacement() {
+    public SkyPlacementConfig getPlacement()
+    {
         return placement;
     }
 
     @Override
-    public SkyMessagesConfig getMessages() {
+    public SkyMessagesConfig getMessages()
+    {
         return messages;
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public Map<String, Object> serialize()
+    {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("spawns", spawns);
-        map.put("num-players", numPlayers);
-        if (boundaries.definesAnything()) {
-            map.put("boundaries", boundaries);
+        map.put( "spawns", spawns );
+        map.put( "num-players", numPlayers );
+        if ( boundaries.definesAnything() )
+        {
+            map.put( "boundaries", boundaries );
         }
-        if (messages.definesAnything()) {
-            map.put("messages", messages);
+        if ( messages.definesAnything() )
+        {
+            map.put( "messages", messages );
         }
         return map;
     }
 
-    public void serialize(ConfigurationSection section) {
-        List<Map> spawnsList = new ArrayList<Map>(spawns.size());
-        for (SkyPlayerLocation loc : spawns) {
-            spawnsList.add(loc.serialize());
+    public void serialize( ConfigurationSection section )
+    {
+        List<Map> spawnsList = new ArrayList<Map>( spawns.size() );
+        for ( SkyPlayerLocation loc : spawns )
+        {
+            spawnsList.add( loc.serialize() );
         }
-        section.set("spawns", spawnsList);
-        section.set("num-players", numPlayers);
-        if (boundaries.definesAnything()) {
-            boundaries.serialize(section.createSection("boundaries"));
+        section.set( "spawns", spawnsList );
+        section.set( "num-players", numPlayers );
+        if ( boundaries.definesAnything() )
+        {
+            boundaries.serialize( section.createSection( "boundaries" ) );
         }
-        if (placement.definesAnything()) {
-            placement.serialize(section.createSection("placement"));
+        if ( placement.definesAnything() )
+        {
+            placement.serialize( section.createSection( "placement" ) );
         }
-        if (messages.definesAnything()) {
-            messages.serialize(section.createSection("messages"));
+        if ( messages.definesAnything() )
+        {
+            messages.serialize( section.createSection( "messages" ) );
         }
     }
 
-    public static SkyArenaConfig deserialize(Map<String, Object> map) {
-        Object spawnsObj = map.get("spawns"),
-                numPlayersObj = map.get("num-players"),
-                boundariesObj = map.get("boundaries"),
-                placementObj = map.get("placement"),
-                messagesObj = map.get("messages");
+    public static SkyArenaConfig deserialize( Map<String, Object> map )
+    {
+        Object spawnsObj = map.get( "spawns" ),
+                numPlayersObj = map.get( "num-players" ),
+                boundariesObj = map.get( "boundaries" ),
+                placementObj = map.get( "placement" ),
+                messagesObj = map.get( "messages" );
         List<?> spawns = spawnsObj instanceof List ? (List) spawnsObj : null;
-        if (spawns != null) {
-            for (Object obj : spawns) {
-                if (!(obj instanceof SkyPlayerLocation)) {
-                    Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation");
+        if ( spawns != null )
+        {
+            for ( Object obj : spawns )
+            {
+                if ( !( obj instanceof SkyPlayerLocation ) )
+                {
+                    Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation" );
                     spawns = null;
                     break;
                 }
@@ -228,49 +274,57 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         SkyBoundariesConfig boundaries = boundariesObj instanceof SkyBoundariesConfig ? (SkyBoundariesConfig) boundariesObj : null;
         SkyPlacementConfig placement = placementObj instanceof SkyPlacementConfig ? (SkyPlacementConfig) placementObj : null;
         SkyMessagesConfig messages = messagesObj instanceof SkyMessagesConfig ? (SkyMessagesConfig) messagesObj : null;
-        return new SkyArenaConfig((List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages);
+        return new SkyArenaConfig( (List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages );
     }
 
-    public static SkyArenaConfig deserialize(ConfigurationSection configurationSection) {
-        Object numPlayersObj = configurationSection.get("num-players");
-        ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries"),
-                placementSection = configurationSection.getConfigurationSection("placement"),
-                messagesSection = configurationSection.getConfigurationSection("messages");
-        List<?> spawnsObjList = configurationSection.getList("spawns");
+    public static SkyArenaConfig deserialize( ConfigurationSection configurationSection )
+    {
+        Object numPlayersObj = configurationSection.get( "num-players" );
+        ConfigurationSection boundariesSection = configurationSection.getConfigurationSection( "boundaries" ),
+                placementSection = configurationSection.getConfigurationSection( "placement" ),
+                messagesSection = configurationSection.getConfigurationSection( "messages" );
+        List<?> spawnsObjList = configurationSection.getList( "spawns" );
         List<SkyPlayerLocation> spawns = null;
-        if (spawnsObjList != null) {
-            spawns = new ArrayList<SkyPlayerLocation>(spawnsObjList.size());
-            for (Object obj : spawnsObjList) {
-                if (obj instanceof Map) {
-                    SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
-                    if (loc == null) {
+        if ( spawnsObjList != null )
+        {
+            spawns = new ArrayList<SkyPlayerLocation>( spawnsObjList.size() );
+            for ( Object obj : spawnsObjList )
+            {
+                if ( obj instanceof Map )
+                {
+                    SkyPlayerLocation loc = SkyPlayerLocation.deserialize( (Map) obj );
+                    if ( loc == null )
+                    {
                         continue;
                     }
-                    spawns.add(loc);
-                } else {
-                    Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyArenaConfig] Non-Map object {0} found in arena configuration spawn list. Ignoring it", obj);
+                    spawns.add( loc );
+                } else
+                {
+                    Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyArenaConfig] Non-Map object {0} found in arena configuration spawn list. Ignoring it", obj );
                 }
             }
         }
         Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
-        SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize(boundariesSection) : null;
-        SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize(placementSection) : null;
-        SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize(messagesSection) : null;
-        return new SkyArenaConfig(spawns, numPlayers, boundaries, placement, messages);
+        SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize( boundariesSection ) : null;
+        SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize( placementSection ) : null;
+        SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize( messagesSection ) : null;
+        return new SkyArenaConfig( spawns, numPlayers, boundaries, placement, messages );
     }
 
-    public String toIndentedString(int indentAmount) {
+    public String toIndentedString( int indentAmount )
+    {
         return "SkyArenaConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
-                + (spawns == null ? "" : getIndent(indentAmount + 1) + "spawns=" + spawns + ",\n")
-                + (numPlayers == null ? "" : getIndent(indentAmount + 1) + "numPlayers=" + numPlayers + ",\n")
-                + (boundaries == null ? "" : getIndent(indentAmount + 1) + "boundaries=" + boundaries.toIndentedString(indentAmount + 1) + ",\n")
-                + (placement == null ? "" : getIndent(indentAmount + 1) + "placement=" + placement.toIndentedString(indentAmount + 1) + "\n,")
-                + (messages == null ? "" : getIndent(indentAmount + 1) + "messages=" + messages.toIndentedString(indentAmount + 1) + "\n")
-                + getIndent(indentAmount) + "}";
+                + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
+                + ( spawns == null ? "" : getIndent( indentAmount + 1 ) + "spawns=" + spawns + ",\n" )
+                + ( numPlayers == null ? "" : getIndent( indentAmount + 1 ) + "numPlayers=" + numPlayers + ",\n" )
+                + ( boundaries == null ? "" : getIndent( indentAmount + 1 ) + "boundaries=" + boundaries.toIndentedString( indentAmount + 1 ) + ",\n" )
+                + ( placement == null ? "" : getIndent( indentAmount + 1 ) + "placement=" + placement.toIndentedString( indentAmount + 1 ) + "\n," )
+                + ( messages == null ? "" : getIndent( indentAmount + 1 ) + "messages=" + messages.toIndentedString( indentAmount + 1 ) + "\n" )
+                + getIndent( indentAmount ) + "}";
     }
 
-    private String getIndent(int indentAmount) {
-        return StringUtils.repeat("\t", indentAmount);
+    private String getIndent( int indentAmount )
+    {
+        return StringUtils.repeat( "\t", indentAmount );
     }
 }

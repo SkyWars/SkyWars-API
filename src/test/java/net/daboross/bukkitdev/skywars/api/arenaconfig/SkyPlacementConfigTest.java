@@ -26,32 +26,37 @@ import org.junit.Test;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyPlacementConfigTest {
+public class SkyPlacementConfigTest
+{
 
     private Random r;
 
     @Before
-    public void setupRandom() {
+    public void setupRandom()
+    {
         r = new Random();
     }
 
     @Test
-    public void testEquals() {
-        SkyPlacementConfig original = getRandom(r);
-        SkyPlacementConfig copy = new SkyPlacementConfig(original.getPlacementY(), original.getDistanceApart());
-        Assert.assertEquals(original, copy);
+    public void testEquals()
+    {
+        SkyPlacementConfig original = getRandom( r );
+        SkyPlacementConfig copy = new SkyPlacementConfig( original.getPlacementY(), original.getDistanceApart() );
+        Assert.assertEquals( original, copy );
     }
 
     @Test
-    public void testSerializeDeserialize() {
-        SkyPlacementConfig original = getRandom(r);
+    public void testSerializeDeserialize()
+    {
+        SkyPlacementConfig original = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize(serializationMedium);
-        SkyPlacementConfig deserialized = SkyPlacementConfig.deserialize(serializationMedium);
-        Assert.assertEquals(original, deserialized);
+        original.serialize( serializationMedium );
+        SkyPlacementConfig deserialized = SkyPlacementConfig.deserialize( serializationMedium );
+        Assert.assertEquals( original, deserialized );
     }
 
-    public static SkyPlacementConfig getRandom(Random r) {
-        return new SkyPlacementConfig(r.nextInt(200), r.nextInt(1000));
+    public static SkyPlacementConfig getRandom( Random r )
+    {
+        return new SkyPlacementConfig( r.nextInt( 200 ), r.nextInt( 1000 ) );
     }
 }

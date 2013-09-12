@@ -20,13 +20,14 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyMessages {
+public interface SkyMessages
+{
 
     public boolean definesAnything();
 
-    public String getMessage(String key);
+    public String getMessage( String key );
 
-    public String getRawMessage(String key);
+    public String getRawMessage( String key );
 
-    public void setRawMessage(String key, String message);
+    public void setRawMessage( String key, String message );
 }

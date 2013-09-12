@@ -20,7 +20,8 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyAttackerStorage {
+public interface SkyAttackerStorage
+{
 
     /**
      * Gets the person who last damaged a given player. This is reset every time
@@ -30,5 +31,5 @@ public interface SkyAttackerStorage {
      * @return the name of the last player who hit the player with the given
      * name, or null if no one has hit that player since they last left a game.
      */
-    public String getKiller(String playerName);
+    public String getKiller( String playerName );
 }

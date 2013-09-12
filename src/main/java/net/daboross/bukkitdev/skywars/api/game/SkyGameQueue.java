@@ -20,7 +20,8 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyGameQueue {
+public interface SkyGameQueue
+{
 
     /**
      * Checks if a given player is in the queue.
@@ -29,7 +30,7 @@ public interface SkyGameQueue {
      * @return true if a player with the given name is in the queue, false
      * otherwise.
      */
-    public boolean inQueue(String playerName);
+    public boolean inQueue( String playerName );
 
     /**
      * Adds a player to the queue, and starts the game if there are enough
@@ -37,14 +38,14 @@ public interface SkyGameQueue {
      *
      * @param playerName the name of the player to add.
      */
-    public void queuePlayer(String playerName);
+    public void queuePlayer( String playerName );
 
     /**
      * Removes a player from the queue.
      *
      * @param playerName the name of the player to remove.
      */
-    public void removePlayer(String playerName);
+    public void removePlayer( String playerName );
 
     /**
      * Gets a copy of the queue.

@@ -21,19 +21,23 @@ package net.daboross.bukkitdev.skywars.api.parent;
  * @author Dabo Ross <http://www.daboross.net/>
  * @param <T> This class
  */
-public class Parentable<T extends Parentable<?>> {
+public class Parentable<T extends Parentable<?>>
+{
 
     protected T parent;
 
-    public Parentable() {
+    public Parentable()
+    {
     }
 
-    public Parentable(T parent) {
+    public Parentable( T parent )
+    {
         this.parent = parent;
         checkParentCycle();
     }
 
-    public T getParent() {
+    public T getParent()
+    {
         return parent;
     }
 
@@ -42,7 +46,8 @@ public class Parentable<T extends Parentable<?>> {
      *
      * @param parent the new parent to inherit values from
      */
-    public void setParent(T parent) {
+    public void setParent( T parent )
+    {
         this.parent = parent;
         checkParentCycle();
     }
@@ -52,8 +57,9 @@ public class Parentable<T extends Parentable<?>> {
      *
      * @throws IllegalArgumentException if there are parent inheritance loops
      */
-    public final void checkParentCycle() throws IllegalArgumentException {
-        checkParentCycle(this);
+    public final void checkParentCycle() throws IllegalArgumentException
+    {
+        checkParentCycle( this );
     }
 
     /**
@@ -61,13 +67,16 @@ public class Parentable<T extends Parentable<?>> {
      *
      * @param original The original parent that checkParentCycle() was called on
      */
-    public final void checkParentCycle(Object original) {
-        if (parent == null) {
+    public final void checkParentCycle( Object original )
+    {
+        if ( parent == null )
+        {
             return;
         }
-        if (parent == original) {
-            throw new IllegalArgumentException("Parent inheritance loop; original=" + original + "; final-parent=" + parent + ";");
+        if ( parent == original )
+        {
+            throw new IllegalArgumentException( "Parent inheritance loop; original=" + original + "; final-parent=" + parent + ";" );
         }
-        parent.checkParentCycle(original);
+        parent.checkParentCycle( original );
     }
 }
