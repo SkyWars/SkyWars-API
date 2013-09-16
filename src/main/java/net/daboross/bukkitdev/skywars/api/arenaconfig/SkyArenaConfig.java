@@ -37,7 +37,10 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true, exclude =
+{
+    "arenaName"
+}, callSuper = false)
 @SerializableAs("SkyArenaConfig")
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena
 {
@@ -48,14 +51,16 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
     private final SkyPlacementConfig placement = new SkyPlacementConfig();
     private File file;
+    private String arenaName;
 
-    public SkyArenaConfig( SkyArenaConfig parent, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
+    public SkyArenaConfig( SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
     {
         super( parent );
         if ( numPlayers != null && numPlayers < 2 )
         {
             throw new IllegalArgumentException( "Num players can't be smaller than 2" );
         }
+        this.arenaName = arenaName;
         this.spawns = spawns;
         this.numPlayers = numPlayers;
         if ( parent != null )
@@ -76,12 +81,13 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
     }
 
-    public SkyArenaConfig( List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
+    public SkyArenaConfig( String arenaName, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages )
     {
         if ( numPlayers != null && numPlayers < 2 )
         {
             throw new IllegalArgumentException( "Num players can't be smaller than 2" );
         }
+        this.arenaName = arenaName;
         this.spawns = spawns;
         this.numPlayers = numPlayers;
         if ( parent != null )
@@ -210,6 +216,17 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         return messages;
     }
 
+    public void setArenaName( String arenaName )
+    {
+        this.arenaName = arenaName;
+    }
+
+    @Override
+    public String getArenaName()
+    {
+        return String.valueOf( arenaName );
+    }
+
     @Override
     public Map<String, Object> serialize()
     {
@@ -274,7 +291,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         SkyBoundariesConfig boundaries = boundariesObj instanceof SkyBoundariesConfig ? (SkyBoundariesConfig) boundariesObj : null;
         SkyPlacementConfig placement = placementObj instanceof SkyPlacementConfig ? (SkyPlacementConfig) placementObj : null;
         SkyMessagesConfig messages = messagesObj instanceof SkyMessagesConfig ? (SkyMessagesConfig) messagesObj : null;
-        return new SkyArenaConfig( (List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages );
+        return new SkyArenaConfig( null, (List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages );
     }
 
     public static SkyArenaConfig deserialize( ConfigurationSection configurationSection )
@@ -308,7 +325,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize( boundariesSection ) : null;
         SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize( placementSection ) : null;
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize( messagesSection ) : null;
-        return new SkyArenaConfig( spawns, numPlayers, boundaries, placement, messages );
+        return new SkyArenaConfig( null, spawns, numPlayers, boundaries, placement, messages );
     }
 
     public String toIndentedString( int indentAmount )

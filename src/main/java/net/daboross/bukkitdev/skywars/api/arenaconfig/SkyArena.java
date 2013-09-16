@@ -26,6 +26,8 @@ import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 public interface SkyArena
 {
 
+    public String getArenaName();
+
     public List<SkyPlayerLocation> getSpawns();
 
     public void setSpawns( List<SkyPlayerLocation> spawns );
