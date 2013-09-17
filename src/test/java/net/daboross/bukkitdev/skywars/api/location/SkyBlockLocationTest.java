@@ -25,12 +25,10 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyBlockLocationTest
-{
+public class SkyBlockLocationTest {
 
     @Test
-    public void testEquals()
-    {
+    public void testEquals() {
         SkyBlockLocation loc1 = getRandomLoc();
         SkyBlockLocation loc2 = new SkyBlockLocation( loc1.x, loc1.y, loc1.z, loc1.world );
         SkyBlockLocation loc3 = loc1.changeWorld( null );
@@ -39,8 +37,7 @@ public class SkyBlockLocationTest
     }
 
     @Test
-    public void testSerializeDeserializeMap()
-    {
+    public void testSerializeDeserializeMap() {
         SkyBlockLocation original = getRandomLoc();
         Map<String, Object> serialized = original.serialize();
         SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serialized );
@@ -48,8 +45,7 @@ public class SkyBlockLocationTest
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection()
-    {
+    public void testSerializeDeserializeConfigurationSection() {
         SkyBlockLocation original = getRandomLoc();
         YamlConfiguration serializationMedium = new YamlConfiguration();
         original.serialize( serializationMedium );
@@ -57,8 +53,7 @@ public class SkyBlockLocationTest
         assertEquals( original, deserialized );
     }
 
-    private SkyBlockLocation getRandomLoc()
-    {
+    private SkyBlockLocation getRandomLoc() {
         int x = (int) ( Math.random() * 20 );
         int y = (int) ( Math.random() * 20 );
         int z = (int) ( Math.random() * 20 );

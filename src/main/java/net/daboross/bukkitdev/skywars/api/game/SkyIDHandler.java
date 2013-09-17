@@ -22,8 +22,7 @@ import java.util.List;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyIDHandler
-{
+public interface SkyIDHandler {
 
     /**
      * Checks whether or not a game is running with the given ID.

@@ -20,8 +20,7 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyGameHandler
-{
+public interface SkyGameHandler {
 
     /**
      * Starts a new game with the contents of the players in the queue.

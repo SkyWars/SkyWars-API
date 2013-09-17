@@ -34,60 +34,49 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
 @SerializableAs("SkyBoundaries")
-public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries
-{
+public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries {
 
     private SkyBlockLocationRange origin;
     private SkyBlockLocationRange building;
     private SkyBlockLocationRange clearing;
 
-    public SkyBoundariesConfig()
-    {
+    public SkyBoundariesConfig() {
     }
 
-    public SkyBoundariesConfig( SkyBoundariesConfig parent )
-    {
+    public SkyBoundariesConfig( SkyBoundariesConfig parent ) {
         super( parent );
     }
 
-    public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing )
-    {
+    public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing ) {
         this.origin = origin;
         this.building = building;
         this.clearing = clearing;
     }
 
-    public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing, SkyBoundariesConfig parent )
-    {
+    public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing, SkyBoundariesConfig parent ) {
         super( parent );
         this.origin = origin;
         this.building = building;
         this.clearing = clearing;
     }
 
-    public void copyDataFrom( SkyBoundariesConfig boundaries )
-    {
+    public void copyDataFrom( SkyBoundariesConfig boundaries ) {
         this.origin = boundaries.origin;
         this.building = boundaries.building;
         this.clearing = boundaries.clearing;
     }
 
     @Override
-    public boolean definesAnything()
-    {
+    public boolean definesAnything() {
         return origin != null || building != null || clearing != null;
     }
 
     @Override
-    public SkyBlockLocationRange getOrigin()
-    {
-        if ( this.origin == null )
-        {
-            if ( parent == null )
-            {
+    public SkyBlockLocationRange getOrigin() {
+        if ( this.origin == null ) {
+            if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent origin boundary not found." );
-            } else
-            {
+            } else {
                 return parent.getOrigin();
             }
         }
@@ -95,15 +84,11 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     @Override
-    public SkyBlockLocationRange getBuilding()
-    {
-        if ( this.origin == null )
-        {
-            if ( parent == null )
-            {
+    public SkyBlockLocationRange getBuilding() {
+        if ( this.origin == null ) {
+            if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent building boundary not found." );
-            } else
-            {
+            } else {
                 return parent.getBuilding();
             }
         }
@@ -111,15 +96,11 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     @Override
-    public SkyBlockLocationRange getClearing()
-    {
-        if ( this.clearing == null )
-        {
-            if ( parent == null )
-            {
+    public SkyBlockLocationRange getClearing() {
+        if ( this.clearing == null ) {
+            if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent clearing boundary not found." );
-            } else
-            {
+            } else {
                 return parent.getClearing();
             }
         }
@@ -127,41 +108,34 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     @Override
-    public void setOrigin( SkyBlockLocationRange origin )
-    {
+    public void setOrigin( SkyBlockLocationRange origin ) {
         this.origin = origin;
     }
 
     @Override
-    public void setBuilding( SkyBlockLocationRange building )
-    {
+    public void setBuilding( SkyBlockLocationRange building ) {
         this.building = building;
     }
 
     @Override
-    public void setClearing( SkyBlockLocationRange clearing )
-    {
+    public void setClearing( SkyBlockLocationRange clearing ) {
         this.clearing = clearing;
     }
 
-    public SkyBlockLocationRange getOriginInternal()
-    {
+    public SkyBlockLocationRange getOriginInternal() {
         return origin;
     }
 
-    public SkyBlockLocationRange getBuildingInternal()
-    {
+    public SkyBlockLocationRange getBuildingInternal() {
         return building;
     }
 
-    public SkyBlockLocationRange getClearingInternal()
-    {
+    public SkyBlockLocationRange getClearingInternal() {
         return clearing;
     }
 
     @Override
-    public Map<String, Object> serialize()
-    {
+    public Map<String, Object> serialize() {
         HashMap<String, Object> map = new HashMap<String, Object>( 3 );
         map.put( "origin", origin );
         map.put( "building", building );
@@ -169,24 +143,19 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return map;
     }
 
-    public void serialize( ConfigurationSection section )
-    {
-        if ( origin != null )
-        {
+    public void serialize( ConfigurationSection section ) {
+        if ( origin != null ) {
             origin.serialize( section.createSection( "origin" ) );
         }
-        if ( building != null )
-        {
+        if ( building != null ) {
             building.serialize( section.createSection( "building" ) );
         }
-        if ( clearing != null )
-        {
+        if ( clearing != null ) {
             clearing.serialize( section.createSection( "clearing" ) );
         }
     }
 
-    public static SkyBoundariesConfig deserialize( Map<String, Object> map )
-    {
+    public static SkyBoundariesConfig deserialize( Map<String, Object> map ) {
         Object originObj = map.get( "origin" ),
                 buildingObj = map.get( "building" ),
                 clearingObj = map.get( "clearing" );
@@ -196,16 +165,14 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return new SkyBoundariesConfig( origin, building, clearing );
     }
 
-    public static SkyBoundariesConfig deserialize( ConfigurationSection configurationSection )
-    {
+    public static SkyBoundariesConfig deserialize( ConfigurationSection configurationSection ) {
         SkyBlockLocationRange origin = SkyBlockLocationRange.deserialize( configurationSection.getConfigurationSection( "origin" ) ),
                 building = SkyBlockLocationRange.deserialize( configurationSection.getConfigurationSection( "building" ) ),
                 clearing = SkyBlockLocationRange.deserialize( configurationSection.getConfigurationSection( "clearing" ) );
         return new SkyBoundariesConfig( origin, building, clearing );
     }
 
-    public String toIndentedString( int indentAmount )
-    {
+    public String toIndentedString( int indentAmount ) {
         return "SkyBoundariesConfig{\n"
                 + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + ( origin == null ? "" : getIndent( indentAmount + 1 ) + "origin=" + origin.toIndentedString( indentAmount + 1 ) + ",\n" )
@@ -214,8 +181,7 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
                 + getIndent( indentAmount ) + "}";
     }
 
-    private String getIndent( int indentAmount )
-    {
+    private String getIndent( int indentAmount ) {
         return StringUtils.repeat( "\t", indentAmount );
     }
 }

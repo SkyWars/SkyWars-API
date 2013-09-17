@@ -23,8 +23,7 @@ import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyArena
-{
+public interface SkyArena {
 
     public String getArenaName();
 

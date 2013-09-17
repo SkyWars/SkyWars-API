@@ -26,28 +26,24 @@ import org.junit.Test;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyPlacementConfigTest
-{
+public class SkyPlacementConfigTest {
 
     private Random r;
 
     @Before
-    public void setupRandom()
-    {
+    public void setupRandom() {
         r = new Random();
     }
 
     @Test
-    public void testEquals()
-    {
+    public void testEquals() {
         SkyPlacementConfig original = getRandom( r );
         SkyPlacementConfig copy = new SkyPlacementConfig( original.getPlacementY(), original.getDistanceApart() );
         Assert.assertEquals( original, copy );
     }
 
     @Test
-    public void testSerializeDeserialize()
-    {
+    public void testSerializeDeserialize() {
         SkyPlacementConfig original = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
         original.serialize( serializationMedium );
@@ -55,8 +51,7 @@ public class SkyPlacementConfigTest
         Assert.assertEquals( original, deserialized );
     }
 
-    public static SkyPlacementConfig getRandom( Random r )
-    {
+    public static SkyPlacementConfig getRandom( Random r ) {
         return new SkyPlacementConfig( r.nextInt( 200 ), r.nextInt( 1000 ) );
     }
 }

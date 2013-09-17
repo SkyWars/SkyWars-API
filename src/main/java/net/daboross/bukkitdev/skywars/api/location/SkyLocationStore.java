@@ -22,8 +22,7 @@ import java.util.List;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyLocationStore
-{
+public interface SkyLocationStore {
 
     public SkyPlayerLocation getLobbyPosition();
 

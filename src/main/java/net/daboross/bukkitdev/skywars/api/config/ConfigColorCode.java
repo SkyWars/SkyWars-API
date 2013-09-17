@@ -24,8 +24,7 @@ import org.bukkit.ChatColor;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public enum ConfigColorCode
-{
+public enum ConfigColorCode {
 
     REG( 'r', '3' ),
     NAME( 'n', '2' ),
@@ -36,34 +35,27 @@ public enum ConfigColorCode
     private final char shortVer;
     private final String color;
 
-    private ConfigColorCode( char shortVer, char code )
-    {
+    private ConfigColorCode( char shortVer, char code ) {
         this.shortVer = shortVer;
         this.code = code;
-        this.color = String.valueOf( new char[]
-        {
+        this.color = String.valueOf( new char[]{
             ChatColor.COLOR_CHAR, code
         } );
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return color;
     }
 
-    public static ConfigColorCode getByShortVer( char shortVer )
-    {
+    public static ConfigColorCode getByShortVer( char shortVer ) {
         return BY_SHORTVER.get( Character.toLowerCase( shortVer ) );
     }
 
-    public static String translateCodes( String input )
-    {
+    public static String translateCodes( String input ) {
         char[] array = input.toCharArray();
-        for ( int i = 0 ; i < array.length - 1 ; i++ )
-        {
-            if ( array[i] == '#' && "rRnNbBdD".indexOf( array[i + 1] ) > -1 )
-            {
+        for ( int i = 0 ; i < array.length - 1 ; i++ ) {
+            if ( array[i] == '#' && "rRnNbBdD".indexOf( array[i + 1] ) > -1 ) {
                 array[i] = ChatColor.COLOR_CHAR;
                 array[i + 1] = getByShortVer( array[i + 1] ).code;
             }
@@ -71,10 +63,8 @@ public enum ConfigColorCode
         return String.valueOf( array );
     }
 
-    static
-    {
-        for ( ConfigColorCode code : values() )
-        {
+    static {
+        for ( ConfigColorCode code : values() ) {
             BY_SHORTVER.put( code.shortVer, code );
         }
     }

@@ -29,8 +29,7 @@ import org.bukkit.plugin.Plugin;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyWars extends Plugin
-{
+public interface SkyWars extends Plugin {
 
     public SkyLocationStore getLocationStore();
 

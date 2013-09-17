@@ -20,8 +20,7 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyGameQueue
-{
+public interface SkyGameQueue {
 
     /**
      * Checks if a given player is in the queue.

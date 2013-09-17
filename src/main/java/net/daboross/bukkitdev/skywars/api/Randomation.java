@@ -24,13 +24,11 @@ import lombok.NonNull;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class Randomation
-{
+public class Randomation {
 
     private static final Random random = new Random();
 
-    public static <T> T getRandom( @NonNull List<T> list )
-    {
+    public static <T> T getRandom( @NonNull List<T> list ) {
         return list.get( random.nextInt( list.size() ) );
     }
 }

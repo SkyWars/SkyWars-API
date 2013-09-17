@@ -20,8 +20,7 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyPlacement
-{
+public interface SkyPlacement {
 
     public boolean definesAnything();
 

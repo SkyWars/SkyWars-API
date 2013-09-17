@@ -25,8 +25,7 @@ import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyConfiguration
-{
+public interface SkyConfiguration {
 
     public void load();
 
@@ -40,22 +39,18 @@ public interface SkyConfiguration
 
     public String getMessagePrefix();
 
-    public static enum ArenaOrder
-    {
+    public static enum ArenaOrder {
 
         RANDOM, ORDERED;
         private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>( 2 );
 
-        static
-        {
-            for ( ArenaOrder order : values() )
-            {
+        static {
+            for ( ArenaOrder order : values() ) {
                 BY_NAME.put( order.name().toLowerCase(), order );
             }
         }
 
-        public static ArenaOrder getOrder( String name )
-        {
+        public static ArenaOrder getOrder( String name ) {
             return BY_NAME.get( name.toLowerCase() );
         }
     }

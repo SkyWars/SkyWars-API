@@ -37,194 +37,150 @@ import org.yaml.snakeyaml.events.CollectionStartEvent;
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
 @SerializableAs("SkyMessagesConfig")
-public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages
-{
+public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages {
 
     private final Map<String, String> rawMessages = new HashMap<String, String>();
     private final Map<String, String> messages = new HashMap<String, String>();
     private String prefix;
 
-    public SkyMessagesConfig()
-    {
+    public SkyMessagesConfig() {
     }
 
-    public SkyMessagesConfig( SkyMessagesConfig parent )
-    {
+    public SkyMessagesConfig( SkyMessagesConfig parent ) {
         super( parent );
     }
 
-    public void copyDataFrom( SkyMessagesConfig config )
-    {
+    public void copyDataFrom( SkyMessagesConfig config ) {
         this.rawMessages.putAll( config.rawMessages );
         this.messages.putAll( config.messages );
     }
 
     @Override
-    public boolean definesAnything()
-    {
+    public boolean definesAnything() {
         return !rawMessages.isEmpty();
     }
 
-    public void setPrefix( String prefix )
-    {
+    public void setPrefix( String prefix ) {
         this.prefix = translate( prefix );
     }
 
     @Override
-    public String getMessage( String key )
-    {
-        if ( prefix == null )
-        {
+    public String getMessage( String key ) {
+        if ( prefix == null ) {
             throw new IllegalStateException( "Prefix not set" );
         }
         key = key.toLowerCase();
         String message = messages.get( key );
-        if ( message == null )
-        {
-            if ( parent == null )
-            {
+        if ( message == null ) {
+            if ( parent == null ) {
                 throw new IllegalArgumentException( "Originally asked does not define message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString( 2 ) );
-            } else
-            {
+            } else {
                 return parent.getMessage( key, this );
             }
-        } else
-        {
+        } else {
             return prefix + message;
         }
     }
 
-    private String getMessage( String key, SkyMessagesConfig original )
-    {
+    private String getMessage( String key, SkyMessagesConfig original ) {
         String message = messages.get( key );
-        if ( message == null )
-        {
-            if ( parent == null )
-            {
+        if ( message == null ) {
+            if ( parent == null ) {
                 throw new IllegalArgumentException( "Ultimate parent does not define message '" + key + "'; original=" + original.toIndentedString( 2 ) );
-            } else
-            {
+            } else {
                 return parent.getMessage( key, original );
             }
-        } else
-        {
+        } else {
             return prefix + message;
         }
     }
 
     @Override
-    public String getRawMessage( String key )
-    {
-        if ( key == null )
-        {
+    public String getRawMessage( String key ) {
+        if ( key == null ) {
             throw new IllegalArgumentException( "Null key" );
         }
         String message = rawMessages.get( key.toLowerCase() );
-        if ( message == null )
-        {
-            if ( parent == null )
-            {
+        if ( message == null ) {
+            if ( parent == null ) {
                 throw new IllegalArgumentException( "Original does not define raw message '" + key + "'; original=" + this.toIndentedString( 2 ) );
-            } else
-            {
+            } else {
                 return parent.getRawMessage( key, this );
             }
-        } else
-        {
+        } else {
             return message;
         }
     }
 
-    private String getRawMessage( String key, SkyMessagesConfig original )
-    {
+    private String getRawMessage( String key, SkyMessagesConfig original ) {
         String message = rawMessages.get( key );
-        if ( message == null )
-        {
-            if ( parent == null )
-            {
+        if ( message == null ) {
+            if ( parent == null ) {
                 throw new IllegalArgumentException( "Ultimate parent does not define raw message " + key + "; original=" + original.toIndentedString( 2 ) );
-            } else
-            {
+            } else {
                 return parent.getMessage( key, original );
             }
-        } else
-        {
+        } else {
             return message;
         }
     }
 
     @Override
-    public void setRawMessage( String key, String message )
-    {
-        if ( key == null )
-        {
+    public void setRawMessage( String key, String message ) {
+        if ( key == null ) {
             throw new IllegalArgumentException( "Null key" );
         }
         key = key.toLowerCase();
-        if ( message == null )
-        {
+        if ( message == null ) {
             rawMessages.remove( key );
             messages.remove( key );
-        } else
-        {
+        } else {
             rawMessages.put( key, message );
             messages.put( key, translate( message ) );
         }
     }
 
-    public Map<String, String> getInternalRawMessages()
-    {
+    public Map<String, String> getInternalRawMessages() {
         return Collections.unmodifiableMap( rawMessages );
     }
 
-    private String translate( String original )
-    {
+    private String translate( String original ) {
         return ChatColor.translateAlternateColorCodes( '&', ConfigColorCode.translateCodes( original ) );
     }
 
     @Override
-    public Map<String, Object> serialize()
-    {
+    public Map<String, Object> serialize() {
         return new HashMap<String, Object>( rawMessages );
     }
 
-    public void serialize( ConfigurationSection section )
-    {
-        for ( Map.Entry<String, String> entry : rawMessages.entrySet() )
-        {
+    public void serialize( ConfigurationSection section ) {
+        for ( Map.Entry<String, String> entry : rawMessages.entrySet() ) {
             section.set( entry.getKey(), entry.getValue() );
         }
     }
 
-    public static SkyMessagesConfig deserialize( Map<String, Object> map )
-    {
+    public static SkyMessagesConfig deserialize( Map<String, Object> map ) {
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
-        for ( Map.Entry<String, Object> entry : map.entrySet() )
-        {
+        for ( Map.Entry<String, Object> entry : map.entrySet() ) {
             Object o = entry.getValue();
-            if ( o instanceof String )
-            {
+            if ( o instanceof String ) {
                 returnValue.setRawMessage( entry.getKey(), (String) o );
             }
         }
         return returnValue;
     }
 
-    public static SkyMessagesConfig deserialize( ConfigurationSection configurationSection )
-    {
+    public static SkyMessagesConfig deserialize( ConfigurationSection configurationSection ) {
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
-        for ( String key : configurationSection.getKeys( true ) )
-        {
-            if ( configurationSection.isString( key ) )
-            {
+        for ( String key : configurationSection.getKeys( true ) ) {
+            if ( configurationSection.isString( key ) ) {
                 returnValue.setRawMessage( key, configurationSection.getString( key ) );
             }
         }
         return returnValue;
     }
 
-    public String toIndentedString( int indentAmount )
-    {
+    public String toIndentedString( int indentAmount ) {
         return "SkyMessagesConfig{\n"
                 + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + ( prefix == null ? "" : getIndent( indentAmount + 1 ) + "prefix=" + prefix + ",\n" )
@@ -233,8 +189,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
                 + getIndent( indentAmount ) + "}";
     }
 
-    private String getIndent( int indentAmount )
-    {
+    private String getIndent( int indentAmount ) {
         return StringUtils.repeat( "\t", indentAmount );
     }
 }

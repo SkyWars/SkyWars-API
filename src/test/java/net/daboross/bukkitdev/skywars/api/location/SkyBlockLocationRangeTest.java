@@ -24,12 +24,10 @@ import static org.junit.Assert.*;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public class SkyBlockLocationRangeTest
-{
+public class SkyBlockLocationRangeTest {
 
     @Test
-    public void testEquals()
-    {
+    public void testEquals() {
         SkyBlockLocation loc1 = getRandomPositiveLoc();
         SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
         SkyBlockLocationRange range1 = new SkyBlockLocationRange( range.min, range.max, range.world );
@@ -37,8 +35,7 @@ public class SkyBlockLocationRangeTest
     }
 
     @Test
-    public void testRenameWorld()
-    {
+    public void testRenameWorld() {
         SkyBlockLocation loc1 = getRandomPositiveLoc().changeWorld( "blah" );
         SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
         assertEquals( "testWorld", range.min.world );
@@ -46,8 +43,7 @@ public class SkyBlockLocationRangeTest
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection()
-    {
+    public void testSerializeDeserializeConfigurationSection() {
         SkyBlockLocation min = getRandomPositiveLoc();
         SkyBlockLocationRange original = new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "whatWorld" );
         YamlConfiguration serializationMedium = new YamlConfiguration();
@@ -56,14 +52,12 @@ public class SkyBlockLocationRangeTest
         assertEquals( original, deserialized );
     }
 
-    public static SkyBlockLocationRange getRandom()
-    {
+    public static SkyBlockLocationRange getRandom() {
         SkyBlockLocation min = getRandomPositiveLoc();
         return new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "randomWorld" );
     }
 
-    public static SkyBlockLocation getRandomPositiveLoc()
-    {
+    public static SkyBlockLocation getRandomPositiveLoc() {
         int x = (int) ( Math.random() * 20 );
         int y = (int) ( Math.random() * 20 );
         int z = (int) ( Math.random() * 20 );

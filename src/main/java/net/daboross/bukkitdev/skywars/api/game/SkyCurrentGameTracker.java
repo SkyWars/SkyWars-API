@@ -20,8 +20,7 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyCurrentGameTracker
-{
+public interface SkyCurrentGameTracker {
 
     /**
      * Gets if a player is currently in a game.

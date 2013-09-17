@@ -20,8 +20,7 @@ package net.daboross.bukkitdev.skywars.api.game;
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
-public interface SkyAttackerStorage
-{
+public interface SkyAttackerStorage {
 
     /**
      * Gets the person who last damaged a given player. This is reset every time

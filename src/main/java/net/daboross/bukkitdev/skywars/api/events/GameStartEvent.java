@@ -30,44 +30,37 @@ import org.bukkit.event.HandlerList;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @EqualsAndHashCode
-public class GameStartEvent extends Event
-{
+public class GameStartEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
     private final SkyWars plugin;
     private final SkyGame newGame;
     private final Player[] players;
 
-    public GameStartEvent( @NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull Player[] players )
-    {
+    public GameStartEvent( @NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull Player[] players ) {
         this.plugin = plugin;
         this.newGame = newGame;
         this.players = players;
     }
 
     @Override
-    public HandlerList getHandlers()
-    {
+    public HandlerList getHandlers() {
         return handlerList;
     }
 
-    public static HandlerList getHandlerList()
-    {
+    public static HandlerList getHandlerList() {
         return handlerList;
     }
 
-    public SkyWars getPlugin()
-    {
+    public SkyWars getPlugin() {
         return plugin;
     }
 
-    public SkyGame getNewGame()
-    {
+    public SkyGame getNewGame() {
         return newGame;
     }
 
-    public Player[] getPlayers()
-    {
+    public Player[] getPlayers() {
         return players;
     }
 }
