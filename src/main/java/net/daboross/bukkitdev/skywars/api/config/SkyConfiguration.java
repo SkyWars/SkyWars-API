@@ -32,9 +32,9 @@ public interface SkyConfiguration
 
     public void reload();
 
-    public void save();
-
     public List<SkyArenaConfig> getEnabledArenas();
+
+    public void addAndSaveArena( SkyArenaConfig config );
 
     public ArenaOrder getArenaOrder();
 
