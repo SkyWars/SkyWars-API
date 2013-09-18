@@ -32,7 +32,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 @SerializableAs("SkyBoundaries")
 public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries {
 

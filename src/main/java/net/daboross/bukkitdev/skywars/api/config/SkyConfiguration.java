@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.config;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 
@@ -46,12 +47,12 @@ public interface SkyConfiguration {
 
         static {
             for ( ArenaOrder order : values() ) {
-                BY_NAME.put( order.name().toLowerCase(), order );
+                BY_NAME.put( order.name().toLowerCase( Locale.ENGLISH ), order );
             }
         }
 
         public static ArenaOrder getOrder( String name ) {
-            return BY_NAME.get( name.toLowerCase() );
+            return BY_NAME.get( name.toLowerCase( Locale.ENGLISH ) );
         }
     }
 }

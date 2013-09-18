@@ -16,7 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
+import java.util.Collections;
 import java.util.List;
+import lombok.Getter;
 import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
@@ -31,14 +33,17 @@ import org.bukkit.event.HandlerList;
 public class GameEndEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
+    @Getter
     private final SkyWars plugin;
+    @Getter
     private final SkyGame game;
+    @Getter
     private final List<Player> alivePlayers;
 
     public GameEndEvent( @NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players ) {
         this.plugin = plugin;
         this.game = game;
-        this.alivePlayers = players;
+        this.alivePlayers = Collections.unmodifiableList( players );
     }
 
     @Override
@@ -48,17 +53,5 @@ public class GameEndEvent extends Event {
 
     public static HandlerList getHandlerList() {
         return handlerList;
-    }
-
-    public SkyWars getPlugin() {
-        return plugin;
-    }
-
-    public SkyGame getGame() {
-        return game;
-    }
-
-    public List<Player> getAlivePlayers() {
-        return alivePlayers;
     }
 }

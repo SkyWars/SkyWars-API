@@ -16,13 +16,16 @@
  */
 package net.daboross.bukkitdev.skywars.api.parent;
 
+import lombok.Getter;
+
 /**
  *
  * @author Dabo Ross <http://www.daboross.net/>
  * @param <T> This class
  */
-public class Parentable<T extends Parentable<?>> {
+public class Parentable<T extends Parentable<T>> {
 
+    @Getter
     protected T parent;
 
     public Parentable() {
@@ -31,10 +34,6 @@ public class Parentable<T extends Parentable<?>> {
     public Parentable( T parent ) {
         this.parent = parent;
         checkParentCycle();
-    }
-
-    public T getParent() {
-        return parent;
     }
 
     /**

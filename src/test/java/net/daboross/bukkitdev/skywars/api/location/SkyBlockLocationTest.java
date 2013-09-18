@@ -17,9 +17,11 @@
 package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.Map;
+import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -27,9 +29,16 @@ import static org.junit.Assert.*;
  */
 public class SkyBlockLocationTest {
 
+    private Random r;
+
+    @Before
+    public void setup() {
+        r = new Random();
+    }
+
     @Test
     public void testEquals() {
-        SkyBlockLocation loc1 = getRandomLoc();
+        SkyBlockLocation loc1 = getRandomLoc( r );
         SkyBlockLocation loc2 = new SkyBlockLocation( loc1.x, loc1.y, loc1.z, loc1.world );
         SkyBlockLocation loc3 = loc1.changeWorld( null );
         assertEquals( loc1, loc2 );
@@ -38,7 +47,7 @@ public class SkyBlockLocationTest {
 
     @Test
     public void testSerializeDeserializeMap() {
-        SkyBlockLocation original = getRandomLoc();
+        SkyBlockLocation original = getRandomLoc( r );
         Map<String, Object> serialized = original.serialize();
         SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serialized );
         assertEquals( original, deserialized );
@@ -46,17 +55,17 @@ public class SkyBlockLocationTest {
 
     @Test
     public void testSerializeDeserializeConfigurationSection() {
-        SkyBlockLocation original = getRandomLoc();
+        SkyBlockLocation original = getRandomLoc( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
         original.serialize( serializationMedium );
         SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serializationMedium );
         assertEquals( original, deserialized );
     }
 
-    private SkyBlockLocation getRandomLoc() {
-        int x = (int) ( Math.random() * 20 );
-        int y = (int) ( Math.random() * 20 );
-        int z = (int) ( Math.random() * 20 );
+    private SkyBlockLocation getRandomLoc( Random r ) {
+        int x = 100 - r.nextInt( 200 );
+        int y = 100 - r.nextInt( 200 );
+        int z = 100 - r.nextInt( 200 );
         String world = "worldTest";
         return new SkyBlockLocation( x, y, z, world );
     }

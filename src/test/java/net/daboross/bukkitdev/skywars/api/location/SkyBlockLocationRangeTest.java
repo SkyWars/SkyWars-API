@@ -16,9 +16,11 @@
  */
 package net.daboross.bukkitdev.skywars.api.location;
 
+import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -26,41 +28,46 @@ import static org.junit.Assert.*;
  */
 public class SkyBlockLocationRangeTest {
 
+    private Random r;
+
+    @Before
+    public void setup() {
+        r = new Random();
+    }
+
     @Test
     public void testEquals() {
-        SkyBlockLocation loc1 = getRandomPositiveLoc();
-        SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
+        SkyBlockLocationRange range = getRandom( r );
         SkyBlockLocationRange range1 = new SkyBlockLocationRange( range.min, range.max, range.world );
         assertEquals( range, range1 );
     }
 
     @Test
     public void testRenameWorld() {
-        SkyBlockLocation loc1 = getRandomPositiveLoc().changeWorld( "blah" );
-        SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc() ), "testWorld" );
+        SkyBlockLocation loc1 = getRandomPositiveLoc( r ).changeWorld( "blah" );
+        SkyBlockLocationRange range = new SkyBlockLocationRange( loc1, loc1.add( getRandomPositiveLoc( r ) ), "testWorld" );
         assertEquals( "testWorld", range.min.world );
         assertEquals( "testWorld", range.max.world );
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection() {
-        SkyBlockLocation min = getRandomPositiveLoc();
-        SkyBlockLocationRange original = new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "whatWorld" );
+    public void testSerializeDeserializeConfigurationSection( Random r ) {
+        SkyBlockLocationRange original = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
         original.serialize( serializationMedium );
         SkyBlockLocationRange deserialized = SkyBlockLocationRange.deserialize( serializationMedium );
         assertEquals( original, deserialized );
     }
 
-    public static SkyBlockLocationRange getRandom() {
-        SkyBlockLocation min = getRandomPositiveLoc();
-        return new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc() ), "randomWorld" );
+    public static SkyBlockLocationRange getRandom( Random r ) {
+        SkyBlockLocation min = getRandomPositiveLoc( r );
+        return new SkyBlockLocationRange( min, min.add( getRandomPositiveLoc( r ) ), "randomWorld" );
     }
 
-    public static SkyBlockLocation getRandomPositiveLoc() {
-        int x = (int) ( Math.random() * 20 );
-        int y = (int) ( Math.random() * 20 );
-        int z = (int) ( Math.random() * 20 );
+    public static SkyBlockLocation getRandomPositiveLoc( Random r ) {
+        int x = r.nextInt( 200 );
+        int y = r.nextInt( 200 );
+        int z = r.nextInt( 200 );
         String world = "worldTest";
         return new SkyBlockLocation( x, y, z, world );
     }

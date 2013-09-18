@@ -37,9 +37,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true, exclude = {
-    "arenaName"
-}, callSuper = false)
+@EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
 @SerializableAs("SkyArenaConfig")
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
 

@@ -54,8 +54,8 @@ public class SkyBoundariesConfigTest {
 
     public static SkyBoundariesConfig getRandom( Random r ) {
         return new SkyBoundariesConfig(
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom() );
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ),
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ),
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ) );
     }
 }

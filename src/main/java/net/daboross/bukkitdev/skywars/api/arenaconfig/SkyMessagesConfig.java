@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -28,14 +29,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.yaml.snakeyaml.events.CollectionStartEvent;
 
 /**
  *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 @SerializableAs("SkyMessagesConfig")
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages {
 
@@ -69,7 +69,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         if ( prefix == null ) {
             throw new IllegalStateException( "Prefix not set" );
         }
-        key = key.toLowerCase();
+        key = key.toLowerCase( Locale.ENGLISH );
         String message = messages.get( key );
         if ( message == null ) {
             if ( parent == null ) {
@@ -100,7 +100,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         if ( key == null ) {
             throw new IllegalArgumentException( "Null key" );
         }
-        String message = rawMessages.get( key.toLowerCase() );
+        String message = rawMessages.get( key.toLowerCase( Locale.ENGLISH ) );
         if ( message == null ) {
             if ( parent == null ) {
                 throw new IllegalArgumentException( "Original does not define raw message '" + key + "'; original=" + this.toIndentedString( 2 ) );
@@ -130,7 +130,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         if ( key == null ) {
             throw new IllegalArgumentException( "Null key" );
         }
-        key = key.toLowerCase();
+        key = key.toLowerCase( Locale.ENGLISH );
         if ( message == null ) {
             rawMessages.remove( key );
             messages.remove( key );

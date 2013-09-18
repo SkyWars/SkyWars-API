@@ -19,6 +19,7 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -38,6 +39,7 @@ import org.bukkit.entity.Entity;
 @ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocation")
+@AllArgsConstructor
 public class SkyBlockLocation implements ConfigurationSerializable {
 
     public final int x;
@@ -46,25 +48,15 @@ public class SkyBlockLocation implements ConfigurationSerializable {
     public final String world;
 
     public SkyBlockLocation() {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.world = null;
-    }
-
-    public SkyBlockLocation( int x, int y, int z, String world ) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.world = world;
+        this( 0, 0, 0, null );
     }
 
     public SkyBlockLocation( @NonNull Block block ) {
-        this( block.getX(), block.getY(), block.getZ(), block.getWorld().getName() );
+        this( block.getX(), block.getY(), block.getZ(), block.getWorld() == null ? null : block.getWorld().getName() );
     }
 
     public SkyBlockLocation( @NonNull Location location ) {
-        this( location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld().getName() );
+        this( location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld() == null ? null : location.getWorld().getName() );
     }
 
     public SkyBlockLocation( @NonNull Entity entity ) {

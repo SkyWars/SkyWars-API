@@ -27,7 +27,7 @@ import org.bukkit.configuration.ConfigurationSection;
  * @author Dabo Ross <http://www.daboross.net/>
  */
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true)
+@EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyPlacementConfig extends Parentable<SkyPlacementConfig> implements SkyPlacement {
 
     private Integer placementY;

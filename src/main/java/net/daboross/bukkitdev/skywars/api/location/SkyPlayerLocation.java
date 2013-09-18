@@ -19,6 +19,7 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -37,6 +38,7 @@ import org.bukkit.entity.Entity;
  */
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
 @SerializableAs("SkyLocationAccurate")
 public class SkyPlayerLocation implements ConfigurationSerializable {
 
@@ -47,13 +49,8 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     public final double pitch;
     public final String world;
 
-    public SkyPlayerLocation( double x, double y, double z, double yaw, double pitch, String world ) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.yaw = yaw;
-        this.pitch = pitch;
-        this.world = world;
+    public SkyPlayerLocation() {
+        this( 0, 0, 0, 0, 0, null );
     }
 
     public SkyPlayerLocation( double x, double y, double z, String world ) {
@@ -61,11 +58,11 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     public SkyPlayerLocation( @NonNull Block block ) {
-        this( block.getX(), block.getY(), block.getZ(), block.getWorld().getName() );
+        this( block.getX(), block.getY(), block.getZ(), block.getWorld() == null ? null : block.getWorld().getName() );
     }
 
     public SkyPlayerLocation( @NonNull Location location ) {
-        this( location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch(), location.getWorld().getName() );
+        this( location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch(), location.getWorld() == null ? null : location.getWorld().getName() );
     }
 
     public SkyPlayerLocation( @NonNull Entity entity ) {
@@ -158,7 +155,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
                 return null;
             }
         }
-        String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
+        String world = worldO == null ? null : worldO instanceof String ? (String) worldO : worldO.toString();
         return new SkyPlayerLocation( x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world );
     }
 
@@ -178,7 +175,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
                 return null;
             }
         }
-        String world = worldO == null ? worldO instanceof String ? (String) worldO : null : worldO.toString();
+        String world = worldO == null ? null : worldO instanceof String ? (String) worldO : worldO.toString();
         return new SkyPlayerLocation( x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world );
     }
 
