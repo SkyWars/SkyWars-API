@@ -16,7 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.apache.commons.lang.StringUtils;
@@ -28,21 +31,17 @@ import org.bukkit.configuration.ConfigurationSection;
  */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
 public class SkyPlacementConfig extends Parentable<SkyPlacementConfig> implements SkyPlacement {
 
+    @Setter
     private Integer placementY;
+    @Setter
     private Integer distanceApart;
-
-    public SkyPlacementConfig() {
-    }
 
     public SkyPlacementConfig( SkyPlacementConfig parent ) {
         super( parent );
-    }
-
-    public SkyPlacementConfig( Integer placementY, Integer distanceApart ) {
-        this.placementY = placementY;
-        this.distanceApart = distanceApart;
     }
 
     public SkyPlacementConfig( Integer placementY, Integer distanceApart, SkyPlacementConfig parent ) {
