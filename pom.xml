@@ -37,6 +37,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>repo-daboross</id>
+            <url>http://repo.daboross.net/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
@@ -57,16 +67,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>repo-daboross</id>
-            <url>http://repo.daboross.net/</url>
-        </repository>
-    </repositories>
 
     <build>
         <finalName>${project.name}</finalName>
@@ -122,6 +122,7 @@
             <url>scp://repo.daboross.net/repo/</url>
         </repository>
     </distributionManagement>
+
     <profiles>
         <profile>
             <id>release</id>
