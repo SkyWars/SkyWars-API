@@ -18,6 +18,8 @@ package net.daboross.bukkitdev.skywars.api;
 
 import java.util.Locale;
 import java.util.logging.Logger;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 
 /**
@@ -26,45 +28,24 @@ import org.bukkit.Bukkit;
  */
 public class SkyStatic {
 
+    @Setter
+    @Getter
     private static boolean debug = false;
+    @Setter
+    @Getter
     private static Logger logger = Bukkit.getLogger();
+    @Setter
+    @Getter
     private static String pluginName = "SkyWars";
-    private static String version = "Unset";
+    @Setter
+    @Getter
+    private static String version = "Unknown";
+    @Setter
+    @Getter
+    private static String gitVersion = "Unknown";
+    @Getter
+    private static final String apiVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    @Setter
+    @Getter
     private static Locale locale = Locale.ENGLISH;
-
-    public static void setDebug( boolean debug ) {
-        SkyStatic.debug = debug;
-    }
-
-    public static boolean isDebug() {
-        return debug;
-    }
-
-    public static void setLogger( Logger logger ) {
-        SkyStatic.logger = logger;
-    }
-
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    public static void setPluginName( String pluginName ) {
-        SkyStatic.pluginName = pluginName;
-    }
-
-    public static String getPluginName() {
-        return pluginName;
-    }
-
-    public static void setVersion( String version ) {
-        SkyStatic.version = version;
-    }
-
-    public static String getVersion() {
-        return version;
-    }
-
-    public static Locale getLocale() {
-        return locale;
-    }
 }
