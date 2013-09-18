@@ -34,6 +34,7 @@ import org.bukkit.event.HandlerList;
 @EqualsAndHashCode(callSuper = false)
 public class GameStartEvent extends Event {
 
+    @Getter
     private static final HandlerList handlerList = new HandlerList();
     @Getter
     private final SkyWars plugin;
@@ -50,10 +51,6 @@ public class GameStartEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return handlerList;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlerList;
     }
 }

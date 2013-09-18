@@ -16,35 +16,31 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import java.util.Collections;
-import java.util.List;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
-import net.daboross.bukkitdev.skywars.api.game.SkyGame;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 
 /**
  *
- * @author Dabo Ross <http://www.daboross.net/>
  */
-public class GameEndEvent extends Event {
+@EqualsAndHashCode(callSuper = false)
+public class PlayerRespawnAfterGameEvent extends PlayerEvent {
 
     @Getter
     private static final HandlerList handlerList = new HandlerList();
     @Getter
     private final SkyWars plugin;
     @Getter
-    private final SkyGame game;
-    @Getter
-    private final List<Player> alivePlayers;
+    private final int id;
 
-    public GameEndEvent( @NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players ) {
+    public PlayerRespawnAfterGameEvent( @NonNull SkyWars plugin, int id, @NonNull Player who ) {
+        super( who );
         this.plugin = plugin;
-        this.game = game;
-        this.alivePlayers = Collections.unmodifiableList( players );
+        this.id = id;
     }
 
     @Override

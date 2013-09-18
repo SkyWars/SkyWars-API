@@ -29,12 +29,11 @@ import org.bukkit.event.player.PlayerEvent;
  * without this event being called.
  * <br>When a game ends whether canceled or the server is quit, this event is
  * called once for all remaining players.
- *
- * @author Dabo Ross <http://www.daboross.net/>
  */
 @EqualsAndHashCode(callSuper = false)
 public class LeaveGameEvent extends PlayerEvent {
 
+    @Getter
     private static final HandlerList handlerList = new HandlerList();
     @Getter
     private final SkyWars plugin;
@@ -49,10 +48,6 @@ public class LeaveGameEvent extends PlayerEvent {
 
     @Override
     public HandlerList getHandlers() {
-        return handlerList;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlerList;
     }
 }
