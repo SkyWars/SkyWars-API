@@ -51,7 +51,7 @@ public class SkyBlockLocationRangeTest {
     }
 
     @Test
-    public void testSerializeDeserializeConfigurationSection( Random r ) {
+    public void testSerializeDeserializeConfigurationSection() {
         SkyBlockLocationRange original = getRandom( r );
         YamlConfiguration serializationMedium = new YamlConfiguration();
         original.serialize( serializationMedium );
