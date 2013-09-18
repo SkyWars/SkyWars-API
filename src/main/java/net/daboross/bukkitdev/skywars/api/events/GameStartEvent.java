@@ -16,7 +16,6 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;

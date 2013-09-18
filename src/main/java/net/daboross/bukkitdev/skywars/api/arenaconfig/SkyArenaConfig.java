@@ -25,10 +25,10 @@ import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -232,7 +232,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         if ( spawns != null ) {
             for ( Object obj : spawns ) {
                 if ( !( obj instanceof SkyPlayerLocation ) ) {
-                    Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation" );
+                    SkyStatic.getLogger().log( Level.WARNING, "[SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation" );
                     spawns = null;
                     break;
                 }
@@ -262,7 +262,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
                     }
                     spawns.add( loc );
                 } else {
-                    Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyArenaConfig] Non-Map object {0} found in arena configuration spawn list. Ignoring it", obj );
+                    SkyStatic.getLogger().log( Level.WARNING, "[SkyArenaConfig] Non-Map object {0} found in arena configuration spawn list. Ignoring it", obj );
                 }
             }
         }

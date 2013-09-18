@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
+import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -99,7 +100,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
             bukkitWorld = Bukkit.getWorld( world );
         }
         if ( bukkitWorld == null ) {
-            Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyPlayerLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{
+            SkyStatic.getLogger().log( Level.WARNING, "[SkyPlayerLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{
                 world, this
             } );
         }
@@ -151,7 +152,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
             y = get( map.get( "ypos" ) );
             z = get( map.get( "zpos" ) );
             if ( x == null || y == null || z == null ) {
-                Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles." );
+                SkyStatic.getLogger().log( Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles." );
                 return null;
             }
         }
@@ -171,7 +172,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
             y = get( configurationSection.get( "ypos" ) );
             z = get( configurationSection.get( "zpos" ) );
             if ( x == null || y == null || z == null ) {
-                Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles." );
+                SkyStatic.getLogger().log( Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles." );
                 return null;
             }
         }

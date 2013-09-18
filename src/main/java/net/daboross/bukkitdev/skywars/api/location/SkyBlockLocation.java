@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
+import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -92,9 +93,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
             bukkitWorld = Bukkit.getWorld( world );
         }
         if ( bukkitWorld == null ) {
-            Bukkit.getLogger().log( Level.WARNING, "[SkyWars] [SkyBlockLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{
-                world, this
-            } );
+            SkyStatic.getLogger().log( Level.WARNING, "[SkyBlockLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{world, this} );
         }
         return new Location( bukkitWorld, x, y, z );
     }
