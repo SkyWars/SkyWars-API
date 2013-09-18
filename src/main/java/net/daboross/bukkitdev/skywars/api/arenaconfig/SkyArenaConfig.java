@@ -205,11 +205,13 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     }
 
     public void serialize( ConfigurationSection section ) {
-        List<Map> spawnsList = new ArrayList<Map>( spawns.size() );
-        for ( SkyPlayerLocation loc : spawns ) {
-            spawnsList.add( loc.serialize() );
+        if ( spawns != null ) {
+            List<Map> spawnsList = new ArrayList<Map>( spawns.size() );
+            for ( SkyPlayerLocation loc : spawns ) {
+                spawnsList.add( loc.serialize() );
+            }
+            section.set( "spawns", spawnsList );
         }
-        section.set( "spawns", spawnsList );
         section.set( "num-players", numPlayers );
         if ( boundaries.definesAnything() ) {
             boundaries.serialize( section.createSection( "boundaries" ) );

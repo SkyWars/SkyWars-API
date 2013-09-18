@@ -57,9 +57,12 @@ public class SkyArenaConfigTest {
     }
 
     public static SkyArenaConfig getRandom( Random r ) {
-        List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>();
-        for ( int i = 0 ; i < r.nextInt( 20 ) ; i++ ) {
-            spawns.add( SkyPlayerLocationTest.getRandomLoc() );
+        List<SkyPlayerLocation> spawns = null;
+        if ( r.nextBoolean() ) {
+            spawns = new ArrayList<SkyPlayerLocation>();
+            for ( int i = 0 ; i < r.nextInt( 20 ) ; i++ ) {
+                spawns.add( SkyPlayerLocationTest.getRandomLoc() );
+            }
         }
         return new SkyArenaConfig( r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt( 22 ), SkyBoundariesConfigTest.getRandom( r ), SkyPlacementConfigTest.getRandom( r ), null );
     }
