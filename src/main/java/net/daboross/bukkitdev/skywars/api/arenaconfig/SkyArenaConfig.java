@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
@@ -39,6 +40,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
 @SerializableAs("SkyArenaConfig")
+@NoArgsConstructor
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
 
     private List<SkyPlayerLocation> spawns;

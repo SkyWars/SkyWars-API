@@ -161,4 +161,12 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         String worldString = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
         return new SkyBlockLocation( x, y, z, worldString );
     }
+
+    public static SkyBlockLocation min( SkyBlockLocation loc1, SkyBlockLocation loc2 ) {
+        return new SkyBlockLocation( Math.min( loc1.x, loc2.x ), Math.min( loc1.y, loc2.y ), Math.min( loc1.z, loc2.z ), loc1.world );
+    }
+
+    public static SkyBlockLocation max( SkyBlockLocation loc1, SkyBlockLocation loc2 ) {
+        return new SkyBlockLocation( Math.max( loc1.x, loc2.x ), Math.max( loc1.y, loc2.y ), Math.max( loc1.z, loc2.z ), loc1.world );
+    }
 }

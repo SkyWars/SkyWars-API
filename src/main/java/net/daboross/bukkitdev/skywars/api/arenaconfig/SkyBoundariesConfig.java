@@ -19,6 +19,7 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
@@ -36,9 +37,12 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @SerializableAs("SkyBoundaries")
 public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries {
 
-    private SkyBlockLocationRange origin;
-    private SkyBlockLocationRange building;
-    private SkyBlockLocationRange clearing;
+    @Getter
+    private SkyBlockLocationRange originRaw;
+    @Getter
+    private SkyBlockLocationRange buildingRaw;
+    @Getter
+    private SkyBlockLocationRange clearingRaw;
 
     public SkyBoundariesConfig() {
     }
@@ -48,110 +52,110 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing ) {
-        this.origin = origin;
-        this.building = building;
-        this.clearing = clearing;
+        this.originRaw = origin;
+        this.buildingRaw = building;
+        this.clearingRaw = clearing;
     }
 
     public SkyBoundariesConfig( SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing, SkyBoundariesConfig parent ) {
         super( parent );
-        this.origin = origin;
-        this.building = building;
-        this.clearing = clearing;
+        this.originRaw = origin;
+        this.buildingRaw = building;
+        this.clearingRaw = clearing;
     }
 
     public void copyDataFrom( SkyBoundariesConfig boundaries ) {
-        this.origin = boundaries.origin;
-        this.building = boundaries.building;
-        this.clearing = boundaries.clearing;
+        this.originRaw = boundaries.originRaw;
+        this.buildingRaw = boundaries.buildingRaw;
+        this.clearingRaw = boundaries.clearingRaw;
     }
 
     @Override
     public boolean definesAnything() {
-        return origin != null || building != null || clearing != null;
+        return originRaw != null || buildingRaw != null || clearingRaw != null;
     }
 
     @Override
     public SkyBlockLocationRange getOrigin() {
-        if ( this.origin == null ) {
+        if ( this.originRaw == null ) {
             if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent origin boundary not found." );
             } else {
                 return parent.getOrigin();
             }
         }
-        return origin;
+        return originRaw;
     }
 
     @Override
     public SkyBlockLocationRange getBuilding() {
-        if ( this.origin == null ) {
+        if ( this.originRaw == null ) {
             if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent building boundary not found." );
             } else {
                 return parent.getBuilding();
             }
         }
-        return building;
+        return buildingRaw;
     }
 
     @Override
     public SkyBlockLocationRange getClearing() {
-        if ( this.clearing == null ) {
+        if ( this.clearingRaw == null ) {
             if ( parent == null ) {
                 throw new IllegalStateException( "Ultimate parent clearing boundary not found." );
             } else {
                 return parent.getClearing();
             }
         }
-        return clearing;
+        return clearingRaw;
     }
 
     @Override
     public void setOrigin( SkyBlockLocationRange origin ) {
-        this.origin = origin;
+        this.originRaw = origin;
     }
 
     @Override
     public void setBuilding( SkyBlockLocationRange building ) {
-        this.building = building;
+        this.buildingRaw = building;
     }
 
     @Override
     public void setClearing( SkyBlockLocationRange clearing ) {
-        this.clearing = clearing;
+        this.clearingRaw = clearing;
     }
 
     public SkyBlockLocationRange getOriginInternal() {
-        return origin;
+        return originRaw;
     }
 
     public SkyBlockLocationRange getBuildingInternal() {
-        return building;
+        return buildingRaw;
     }
 
     public SkyBlockLocationRange getClearingInternal() {
-        return clearing;
+        return clearingRaw;
     }
 
     @Override
     public Map<String, Object> serialize() {
         HashMap<String, Object> map = new HashMap<String, Object>( 3 );
-        map.put( "origin", origin );
-        map.put( "building", building );
-        map.put( "clearing", clearing );
+        map.put( "origin", originRaw );
+        map.put( "building", buildingRaw );
+        map.put( "clearing", clearingRaw );
         return map;
     }
 
     public void serialize( ConfigurationSection section ) {
-        if ( origin != null ) {
-            origin.serialize( section.createSection( "origin" ) );
+        if ( originRaw != null ) {
+            originRaw.serialize( section.createSection( "origin" ) );
         }
-        if ( building != null ) {
-            building.serialize( section.createSection( "building" ) );
+        if ( buildingRaw != null ) {
+            buildingRaw.serialize( section.createSection( "building" ) );
         }
-        if ( clearing != null ) {
-            clearing.serialize( section.createSection( "clearing" ) );
+        if ( clearingRaw != null ) {
+            clearingRaw.serialize( section.createSection( "clearing" ) );
         }
     }
 
@@ -175,9 +179,9 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     public String toIndentedString( int indentAmount ) {
         return "SkyBoundariesConfig{\n"
                 + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
-                + ( origin == null ? "" : getIndent( indentAmount + 1 ) + "origin=" + origin.toIndentedString( indentAmount + 1 ) + ",\n" )
-                + ( building == null ? "" : getIndent( indentAmount + 1 ) + "building=" + building.toIndentedString( indentAmount + 1 ) + ",\n" )
-                + ( clearing == null ? "" : getIndent( indentAmount + 1 ) + "clearing=" + clearing.toIndentedString( indentAmount + 1 ) + ",\n" )
+                + ( originRaw == null ? "" : getIndent( indentAmount + 1 ) + "origin=" + originRaw.toIndentedString( indentAmount + 1 ) + ",\n" )
+                + ( buildingRaw == null ? "" : getIndent( indentAmount + 1 ) + "building=" + buildingRaw.toIndentedString( indentAmount + 1 ) + ",\n" )
+                + ( clearingRaw == null ? "" : getIndent( indentAmount + 1 ) + "clearing=" + clearingRaw.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + getIndent( indentAmount ) + "}";
     }
 

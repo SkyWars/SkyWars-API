@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.config;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +40,8 @@ public interface SkyConfiguration {
     public ArenaOrder getArenaOrder();
 
     public String getMessagePrefix();
+
+    public File getArenaFolder();
 
     public static enum ArenaOrder {
 
