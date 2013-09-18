@@ -40,11 +40,8 @@ public class SkyStatic {
     @Setter
     @Getter
     private static String version = "Unknown";
-    @Setter
     @Getter
-    private static String gitVersion = "Unknown";
-    @Getter
-    private static final String apiVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    private static String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
     @Setter
     @Getter
     private static Locale locale = Locale.ENGLISH;
