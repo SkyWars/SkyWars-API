@@ -43,7 +43,7 @@ public class SkyArenaConfigTest {
     public void testEquals() {
         SkyArenaConfig config = getRandom( r );
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig( null, config.getSpawns(), config.getNumPlayers(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
+        SkyArenaConfig copy = new SkyArenaConfig( null, config.getRawSpawns(), config.getRawNumPlayers(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
         Assert.assertEquals( config, copy );
     }
 
