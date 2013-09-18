@@ -38,6 +38,20 @@ public interface SkyGameHandler {
     public void endGame( int id, boolean broadcast );
 
     /**
+     * Removes a player from whatever game they are in. <br>Deprecated in favor
+     * or SkyGameHandler#removePlayerFromGame(String,boolean,boolean,boolean)
+     *
+     * @param playerName the name of the player to remove
+     * @param teleport whether or not to teleport the player to the lobby
+     * @param broadcast whether or not to broadcast the leaving message
+     * @throws IllegalArgumentException if the player is not in a game.
+     * @deprecated in favor or
+     * SkyGameHandler#removePlayerFromGame(String,boolean,boolean,boolean)
+     */
+    @Deprecated
+    public void removePlayerFromGame( String playerName, boolean teleport, boolean broadcast );
+
+    /**
      * Removes a player from whatever game they are in.
      *
      * @param playerName the name of the player to remove
@@ -45,5 +59,5 @@ public interface SkyGameHandler {
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    public void removePlayerFromGame( String playerName, boolean teleport, boolean broadcast );
+    public void removePlayerFromGame( String playerName, boolean teleport, boolean broadcast, boolean resetHealth );
 }

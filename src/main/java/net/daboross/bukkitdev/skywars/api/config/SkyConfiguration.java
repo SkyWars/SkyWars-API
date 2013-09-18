@@ -29,8 +29,6 @@ import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
  */
 public interface SkyConfiguration {
 
-    public void load();
-
     public void reload();
 
     public List<SkyArenaConfig> getEnabledArenas();
