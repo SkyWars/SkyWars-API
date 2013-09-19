@@ -24,23 +24,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-/**
- *
- */
 @EqualsAndHashCode(callSuper = false)
-public class PlayerRespawnAfterGameEvent extends PlayerEvent {
+public class RespawnAfterLeaveGameEvent extends PlayerEvent {
 
     @Getter
     private static final HandlerList handlerList = new HandlerList();
     @Getter
     private final SkyWars plugin;
-    @Getter
-    private final int id;
 
-    public PlayerRespawnAfterGameEvent( @NonNull SkyWars plugin, int id, @NonNull Player who ) {
+    public RespawnAfterLeaveGameEvent( @NonNull SkyWars plugin, @NonNull Player who ) {
         super( who );
         this.plugin = plugin;
-        this.id = id;
     }
 
     @Override
