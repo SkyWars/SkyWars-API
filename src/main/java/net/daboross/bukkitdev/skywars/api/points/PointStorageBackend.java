@@ -16,6 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.points;
 
+import java.io.IOException;
+
 public interface PointStorageBackend {
 
     public void addScore( String player, int diff );
@@ -23,4 +25,6 @@ public interface PointStorageBackend {
     public void setScore( String player, int score );
 
     public int getScore( String player );
+
+    public void save() throws IOException;
 }
