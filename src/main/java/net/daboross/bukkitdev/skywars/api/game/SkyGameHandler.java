@@ -16,10 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
+import org.bukkit.entity.Player;
+
 public interface SkyGameHandler {
 
     /**
@@ -48,10 +46,28 @@ public interface SkyGameHandler {
     public void removePlayerFromGame( String playerName, boolean respawn, boolean broadcast );
 
     /**
+     * Removes a player from whatever game they are in.
+     *
+     * @param player the player to remove
+     * @param respawn whether or not to call a PlayerRespawnAfterLeaveGameEvent
+     * @param broadcast whether or not to broadcast the leaving message
+     * @throws IllegalArgumentException if the player is not in a game.
+     */
+    public void removePlayerFromGame( Player player, boolean respawn, boolean broadcast );
+
+    /**
      * Respawns a player. This should only be called if the removePlayerFromGame
      * method was called with respawn=false.
      *
      * @param playerName the name of the player to respawn
      */
     public void respawnPlayer( String playerName );
+
+    /**
+     * Respawns a player. This should only be called if the removePlayerFromGame
+     * method was called with respawn=false.
+     *
+     * @param player the player to respawn
+     */
+    public void respawnPlayer( Player player );
 }
