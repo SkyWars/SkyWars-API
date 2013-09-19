@@ -17,7 +17,6 @@
 package net.daboross.bukkitdev.skywars.api.config;
 
 import java.io.File;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,7 @@ public interface SkyConfiguration {
 
     public List<SkyArenaConfig> getEnabledArenas();
 
-    public void addAndSaveArena( SkyArenaConfig config );
+    public void saveArena( SkyArenaConfig config );
 
     public ArenaOrder getArenaOrder();
 
