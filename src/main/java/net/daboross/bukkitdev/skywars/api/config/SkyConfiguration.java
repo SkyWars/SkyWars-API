@@ -17,11 +17,14 @@
 package net.daboross.bukkitdev.skywars.api.config;
 
 import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
+import org.bukkit.configuration.InvalidConfigurationException;
 
 /**
  *
@@ -29,7 +32,7 @@ import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
  */
 public interface SkyConfiguration {
 
-    public void reload();
+    public void reload() throws IOException, InvalidConfigurationException;
 
     public List<SkyArenaConfig> getEnabledArenas();
 
@@ -40,6 +43,8 @@ public interface SkyConfiguration {
     public String getMessagePrefix();
 
     public File getArenaFolder();
+
+    public boolean isInventorySaveEnabled();
 
     public static enum ArenaOrder {
 
