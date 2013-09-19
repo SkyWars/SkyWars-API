@@ -16,7 +16,6 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +35,7 @@ public class PlayerKillPlayerEvent extends Event {
     @Getter
     private final int gameId;
     @Getter
-    private final Player killer;
+    private final String killerName;
     @Getter
     private final Player killed;
 

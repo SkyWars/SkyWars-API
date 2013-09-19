@@ -33,17 +33,29 @@ public interface SkyConfiguration {
 
     public void reload() throws IOException, InvalidConfigurationException;
 
-    public List<SkyArenaConfig> getEnabledArenas();
-
-    public void saveArena( SkyArenaConfig config );
+    public File getArenaFolder();
 
     public ArenaOrder getArenaOrder();
 
     public String getMessagePrefix();
 
-    public File getArenaFolder();
-
     public boolean isInventorySaveEnabled();
+
+    public boolean isEnablePoints();
+
+    public int getDeathPointDiff();
+
+    public int getWinPointDiff();
+
+    public int getKillPointDiff();
+
+    public boolean isPrefixChat();
+
+    public String getChatPrefix();
+
+    public List<SkyArenaConfig> getEnabledArenas();
+
+    public void saveArena( SkyArenaConfig config );
 
     public static enum ArenaOrder {
 
