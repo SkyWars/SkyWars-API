@@ -46,4 +46,12 @@ public interface SkyGameHandler {
      * @throws IllegalArgumentException if the player is not in a game.
      */
     public void removePlayerFromGame( String playerName, boolean respawn, boolean broadcast );
+
+    /**
+     * Respawns a player. This should only be called if the removePlayerFromGame
+     * method was called with respawn=false.
+     *
+     * @param playerName the name of the player to respawn
+     */
+    public void respawnPlayer( String playerName );
 }
