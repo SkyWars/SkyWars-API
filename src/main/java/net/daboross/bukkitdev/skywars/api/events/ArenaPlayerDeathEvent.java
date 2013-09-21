@@ -25,7 +25,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 @RequiredArgsConstructor
-public class PlayerKillPlayerEvent extends Event {
+public class ArenaPlayerDeathEvent extends Event {
 
     @Getter
     private static final HandlerList handlerList = new HandlerList();
@@ -34,8 +34,6 @@ public class PlayerKillPlayerEvent extends Event {
     private final SkyWars plugin;
     @Getter
     private final int gameId;
-    @Getter
-    private final String killerName;
     @Getter
     private final Player killed;
 
