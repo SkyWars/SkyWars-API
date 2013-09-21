@@ -16,22 +16,16 @@
  */
 package net.daboross.bukkitdev.skywars.api.points;
 
-import java.io.IOException;
-import net.daboross.bukkitdev.skywars.api.SkyWars;
+import lombok.Getter;
+import lombok.Setter;
 
-public abstract class PointStorageBackend {
+public abstract class SkyPoints {
 
-    protected final SkyWars skywars;
+    @Setter
+    @Getter
+    private static Class<? extends PointStorageBackend> backend;
 
-    public PointStorageBackend( SkyWars skywars ) {
-        this.skywars = skywars;
-    }
+    public abstract void addScore( String name, int diff );
 
-    public abstract void addScore( String player, int diff );
-
-    public abstract void setScore( String player, int score );
-
-    public abstract int getScore( String player );
-
-    public abstract void save() throws IOException;
+    public abstract int getScore( String name );
 }

@@ -23,6 +23,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyAttackerStorage;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
+import net.daboross.bukkitdev.skywars.api.points.SkyPoints;
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -44,4 +45,6 @@ public interface SkyWars extends Plugin {
     public SkyAttackerStorage getAttackerStorage();
 
     public SkyConfiguration getConfiguration();
+
+    public SkyPoints getPoints();
 }
