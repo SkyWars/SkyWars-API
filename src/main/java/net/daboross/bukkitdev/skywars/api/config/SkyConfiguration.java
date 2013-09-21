@@ -49,10 +49,6 @@ public interface SkyConfiguration {
 
     public int getKillPointDiff();
 
-    public boolean isPrefixChat();
-
-    public String getChatPrefix();
-
     public List<SkyArenaConfig> getEnabledArenas();
 
     public void saveArena( SkyArenaConfig config );
