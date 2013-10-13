@@ -31,7 +31,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
  */
 public interface SkyConfiguration {
 
-    public void reload() throws IOException, InvalidConfigurationException;
+    public void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;
 
     public File getArenaFolder();
 
