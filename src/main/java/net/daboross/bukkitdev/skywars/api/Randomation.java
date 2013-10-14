@@ -28,7 +28,7 @@ public class Randomation {
 
     private static final Random random = new Random();
 
-    public static <T> T getRandom( @NonNull List<T> list ) {
-        return list.get( random.nextInt( list.size() ) );
+    public static <T> T getRandom(@NonNull List<T> list) {
+        return list.get(random.nextInt(list.size()));
     }
 }

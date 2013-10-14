@@ -43,10 +43,10 @@ public class GameStartEvent extends Event {
     @Getter
     private final List<Player> players;
 
-    public GameStartEvent( @NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull List<Player> players ) {
+    public GameStartEvent(@NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull List<Player> players) {
         this.plugin = plugin;
         this.newGame = newGame;
-        this.players = Collections.unmodifiableList( players );
+        this.players = Collections.unmodifiableList(players);
     }
 
     @Override

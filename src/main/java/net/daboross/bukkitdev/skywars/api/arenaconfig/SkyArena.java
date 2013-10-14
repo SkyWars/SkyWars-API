@@ -31,11 +31,11 @@ public interface SkyArena {
 
     public List<SkyPlayerLocation> getSpawns();
 
-    public void setSpawns( List<SkyPlayerLocation> spawns );
+    public void setSpawns(List<SkyPlayerLocation> spawns);
 
     public int getNumTeams();
 
-    public void setNumTeams( Integer numTeams );
+    public void setNumTeams(Integer numTeams);
 
     public Integer getRawNumTeams();
 
@@ -43,14 +43,14 @@ public interface SkyArena {
     public int getNumPlayers();
 
     @Deprecated
-    public void setNumPlayers( Integer numPlayers );
+    public void setNumPlayers(Integer numPlayers);
 
     @Deprecated
     public Integer getRawNumPlayers();
 
     public int getTeamSize();
 
-    public void setTeamSize( Integer teamSize );
+    public void setTeamSize(Integer teamSize);
 
     public Integer getRawTeamSize();
 

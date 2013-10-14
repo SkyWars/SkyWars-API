@@ -46,13 +46,13 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     public SkyMessagesConfig() {
     }
 
-    public SkyMessagesConfig( SkyMessagesConfig parent ) {
-        super( parent );
+    public SkyMessagesConfig(SkyMessagesConfig parent) {
+        super(parent);
     }
 
-    public void copyDataFrom( SkyMessagesConfig config ) {
-        this.rawMessages.putAll( config.rawMessages );
-        this.messages.putAll( config.messages );
+    public void copyDataFrom(SkyMessagesConfig config) {
+        this.rawMessages.putAll(config.rawMessages);
+        this.messages.putAll(config.messages);
     }
 
     @Override
@@ -60,35 +60,35 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         return !rawMessages.isEmpty();
     }
 
-    public void setPrefix( String prefix ) {
-        this.prefix = translate( prefix );
+    public void setPrefix(String prefix) {
+        this.prefix = translate(prefix);
     }
 
     @Override
-    public String getMessage( String key ) {
-        if ( prefix == null ) {
-            throw new IllegalStateException( "Prefix not set" );
+    public String getMessage(String key) {
+        if (prefix == null) {
+            throw new IllegalStateException("Prefix not set");
         }
-        key = key.toLowerCase( Locale.ENGLISH );
-        String message = messages.get( key );
-        if ( message == null ) {
-            if ( parent == null ) {
-                throw new IllegalArgumentException( "Originally asked does not define message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString( 2 ) );
+        key = key.toLowerCase(Locale.ENGLISH);
+        String message = messages.get(key);
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Originally asked does not define message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString(2));
             } else {
-                return parent.getMessage( key, this );
+                return parent.getMessage(key, this);
             }
         } else {
             return prefix + message;
         }
     }
 
-    private String getMessage( String key, SkyMessagesConfig original ) {
-        String message = messages.get( key );
-        if ( message == null ) {
-            if ( parent == null ) {
-                throw new IllegalArgumentException( "Ultimate parent does not define message '" + key + "'; original=" + original.toIndentedString( 2 ) );
+    private String getMessage(String key, SkyMessagesConfig original) {
+        String message = messages.get(key);
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'; original=" + original.toIndentedString(2));
             } else {
-                return parent.getMessage( key, original );
+                return parent.getMessage(key, original);
             }
         } else {
             return prefix + message;
@@ -96,29 +96,29 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     @Override
-    public String getRawMessage( String key ) {
-        if ( key == null ) {
-            throw new IllegalArgumentException( "Null key" );
+    public String getRawMessage(String key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Null key");
         }
-        String message = rawMessages.get( key.toLowerCase( Locale.ENGLISH ) );
-        if ( message == null ) {
-            if ( parent == null ) {
-                throw new IllegalArgumentException( "Original does not define raw message '" + key + "'; original=" + this.toIndentedString( 2 ) );
+        String message = rawMessages.get(key.toLowerCase(Locale.ENGLISH));
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Original does not define raw message '" + key + "'; original=" + this.toIndentedString(2));
             } else {
-                return parent.getRawMessage( key, this );
+                return parent.getRawMessage(key, this);
             }
         } else {
             return message;
         }
     }
 
-    private String getRawMessage( String key, SkyMessagesConfig original ) {
-        String message = rawMessages.get( key );
-        if ( message == null ) {
-            if ( parent == null ) {
-                throw new IllegalArgumentException( "Ultimate parent does not define raw message " + key + "; original=" + original.toIndentedString( 2 ) );
+    private String getRawMessage(String key, SkyMessagesConfig original) {
+        String message = rawMessages.get(key);
+        if (message == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original.toIndentedString(2));
             } else {
-                return parent.getMessage( key, original );
+                return parent.getMessage(key, original);
             }
         } else {
             return message;
@@ -126,70 +126,70 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     @Override
-    public void setRawMessage( String key, String message ) {
-        if ( key == null ) {
-            throw new IllegalArgumentException( "Null key" );
+    public void setRawMessage(String key, String message) {
+        if (key == null) {
+            throw new IllegalArgumentException("Null key");
         }
-        key = key.toLowerCase( Locale.ENGLISH );
-        if ( message == null ) {
-            rawMessages.remove( key );
-            messages.remove( key );
+        key = key.toLowerCase(Locale.ENGLISH);
+        if (message == null) {
+            rawMessages.remove(key);
+            messages.remove(key);
         } else {
-            rawMessages.put( key, message );
-            messages.put( key, translate( message ) );
+            rawMessages.put(key, message);
+            messages.put(key, translate(message));
         }
     }
 
     public Map<String, String> getInternalRawMessages() {
-        return Collections.unmodifiableMap( rawMessages );
+        return Collections.unmodifiableMap(rawMessages);
     }
 
-    private String translate( String original ) {
-        return ChatColor.translateAlternateColorCodes( '&', ConfigColorCode.translateCodes( original ) );
+    private String translate(String original) {
+        return ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(original));
     }
 
     @Override
     public Map<String, Object> serialize() {
-        return new HashMap<String, Object>( rawMessages );
+        return new HashMap<String, Object>(rawMessages);
     }
 
-    public void serialize( ConfigurationSection section ) {
-        for ( Map.Entry<String, String> entry : rawMessages.entrySet() ) {
-            section.set( entry.getKey(), entry.getValue() );
+    public void serialize(ConfigurationSection section) {
+        for (Map.Entry<String, String> entry : rawMessages.entrySet()) {
+            section.set(entry.getKey(), entry.getValue());
         }
     }
 
-    public static SkyMessagesConfig deserialize( Map<String, Object> map ) {
+    public static SkyMessagesConfig deserialize(Map<String, Object> map) {
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
-        for ( Map.Entry<String, Object> entry : map.entrySet() ) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object o = entry.getValue();
-            if ( o instanceof String ) {
-                returnValue.setRawMessage( entry.getKey(), (String) o );
+            if (o instanceof String) {
+                returnValue.setRawMessage(entry.getKey(), (String) o);
             }
         }
         return returnValue;
     }
 
-    public static SkyMessagesConfig deserialize( ConfigurationSection configurationSection ) {
+    public static SkyMessagesConfig deserialize(ConfigurationSection configurationSection) {
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
-        for ( String key : configurationSection.getKeys( true ) ) {
-            if ( configurationSection.isString( key ) ) {
-                returnValue.setRawMessage( key, configurationSection.getString( key ) );
+        for (String key : configurationSection.getKeys(true)) {
+            if (configurationSection.isString(key)) {
+                returnValue.setRawMessage(key, configurationSection.getString(key));
             }
         }
         return returnValue;
     }
 
-    public String toIndentedString( int indentAmount ) {
+    public String toIndentedString(int indentAmount) {
         return "SkyMessagesConfig{\n"
-                + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
-                + ( prefix == null ? "" : getIndent( indentAmount + 1 ) + "prefix=" + prefix + ",\n" )
-                + getIndent( indentAmount + 1 ) + "rawMessages=" + rawMessages + "\n"
-                + getIndent( indentAmount + 1 ) + "messages=" + messages + "\n"
-                + getIndent( indentAmount ) + "}";
+                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
+                + (prefix == null ? "" : getIndent(indentAmount + 1) + "prefix=" + prefix + ",\n")
+                + getIndent(indentAmount + 1) + "rawMessages=" + rawMessages + "\n"
+                + getIndent(indentAmount + 1) + "messages=" + messages + "\n"
+                + getIndent(indentAmount) + "}";
     }
 
-    private String getIndent( int indentAmount ) {
-        return StringUtils.repeat( "\t", indentAmount );
+    private String getIndent(int indentAmount) {
+        return StringUtils.repeat("\t", indentAmount);
     }
 }

@@ -21,15 +21,15 @@ public class SkyConfigurationException extends Exception {
     public SkyConfigurationException() {
     }
 
-    public SkyConfigurationException( String message ) {
-        super( message );
+    public SkyConfigurationException(String message) {
+        super(message);
     }
 
-    public SkyConfigurationException( Throwable cause ) {
-        super( cause );
+    public SkyConfigurationException(Throwable cause) {
+        super(cause);
     }
 
-    public SkyConfigurationException( String message, Throwable cause ) {
-        super( message, cause );
+    public SkyConfigurationException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

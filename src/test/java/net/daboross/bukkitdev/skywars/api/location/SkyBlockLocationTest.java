@@ -38,35 +38,35 @@ public class SkyBlockLocationTest {
 
     @Test
     public void testEquals() {
-        SkyBlockLocation loc1 = getRandomLoc( r );
-        SkyBlockLocation loc2 = new SkyBlockLocation( loc1.x, loc1.y, loc1.z, loc1.world );
-        SkyBlockLocation loc3 = loc1.changeWorld( null );
-        assertEquals( loc1, loc2 );
-        assertNotEquals( loc1, loc3 );
+        SkyBlockLocation loc1 = getRandomLoc(r);
+        SkyBlockLocation loc2 = new SkyBlockLocation(loc1.x, loc1.y, loc1.z, loc1.world);
+        SkyBlockLocation loc3 = loc1.changeWorld(null);
+        assertEquals(loc1, loc2);
+        assertNotEquals(loc1, loc3);
     }
 
     @Test
     public void testSerializeDeserializeMap() {
-        SkyBlockLocation original = getRandomLoc( r );
+        SkyBlockLocation original = getRandomLoc(r);
         Map<String, Object> serialized = original.serialize();
-        SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serialized );
-        assertEquals( original, deserialized );
+        SkyBlockLocation deserialized = SkyBlockLocation.deserialize(serialized);
+        assertEquals(original, deserialized);
     }
 
     @Test
     public void testSerializeDeserializeConfigurationSection() {
-        SkyBlockLocation original = getRandomLoc( r );
+        SkyBlockLocation original = getRandomLoc(r);
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize( serializationMedium );
-        SkyBlockLocation deserialized = SkyBlockLocation.deserialize( serializationMedium );
-        assertEquals( original, deserialized );
+        original.serialize(serializationMedium);
+        SkyBlockLocation deserialized = SkyBlockLocation.deserialize(serializationMedium);
+        assertEquals(original, deserialized);
     }
 
-    private SkyBlockLocation getRandomLoc( Random r ) {
-        int x = 100 - r.nextInt( 200 );
-        int y = 100 - r.nextInt( 200 );
-        int z = 100 - r.nextInt( 200 );
+    private SkyBlockLocation getRandomLoc(Random r) {
+        int x = 100 - r.nextInt(200);
+        int y = 100 - r.nextInt(200);
+        int z = 100 - r.nextInt(200);
         String world = "worldTest";
-        return new SkyBlockLocation( x, y, z, world );
+        return new SkyBlockLocation(x, y, z, world);
     }
 }

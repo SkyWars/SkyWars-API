@@ -25,7 +25,7 @@ public abstract class SkyPoints {
     @Getter
     private static Class<? extends PointStorageBackend> backend;
 
-    public abstract void addScore( String name, int diff );
+    public abstract void addScore(String name, int diff);
 
-    public abstract int getScore( String name );
+    public abstract int getScore(String name);
 }

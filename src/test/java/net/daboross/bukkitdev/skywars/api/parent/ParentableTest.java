@@ -30,9 +30,9 @@ public class ParentableTest {
     public void testSetGetParent() {
         DummyParentable dummy = new DummyParentable();
         DummyParentable parent = new DummyParentable();
-        assertEquals( null, dummy.getParent() );
-        dummy.setParent( parent );
-        assertEquals( parent, dummy.getParent() );
+        assertEquals(null, dummy.getParent());
+        dummy.setParent(parent);
+        assertEquals(parent, dummy.getParent());
     }
 
     /**
@@ -43,12 +43,12 @@ public class ParentableTest {
         DummyParentable dummy = new DummyParentable();
         DummyParentable parent = new DummyParentable();
         DummyParentable parent2 = new DummyParentable();
-        dummy.setParent( parent );
-        parent.setParent( parent2 );
+        dummy.setParent(parent);
+        parent.setParent(parent2);
         try {
-            parent2.setParent( dummy );
-            fail( "IllegalArgumentException not called for parent inheritance loop" );
-        } catch ( IllegalArgumentException unused ) {
+            parent2.setParent(dummy);
+            fail("IllegalArgumentException not called for parent inheritance loop");
+        } catch (IllegalArgumentException unused) {
         }
     }
 

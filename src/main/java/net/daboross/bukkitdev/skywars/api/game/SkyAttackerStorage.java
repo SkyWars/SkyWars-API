@@ -30,5 +30,5 @@ public interface SkyAttackerStorage {
      * @return the name of the last player who hit the player with the given
      * name, or null if no one has hit that player since they last left a game.
      */
-    public String getKiller( String playerName );
+    public String getKiller(String playerName);
 }

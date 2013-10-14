@@ -41,29 +41,29 @@ public class SkyArenaConfigTest {
 
     @Test
     public void testEquals() {
-        SkyArenaConfig config = getRandom( r );
+        SkyArenaConfig config = getRandom(r);
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig( null, config.getRawSpawns(), config.getRawNumTeams(), config.getRawTeamSize(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
-        Assert.assertEquals( config, copy );
+        SkyArenaConfig copy = new SkyArenaConfig(null, config.getRawSpawns(), config.getRawNumTeams(), config.getRawTeamSize(), config.getBoundaries(), config.getPlacement(), config.getMessages());
+        Assert.assertEquals(config, copy);
     }
 
     @Test
     public void testSerializeDeserialize() {
-        SkyArenaConfig config = getRandom( r );
+        SkyArenaConfig config = getRandom(r);
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        config.serialize( serializationMedium );
-        SkyArenaConfig deserialized = SkyArenaConfig.deserialize( serializationMedium );
-        Assert.assertEquals( config, deserialized );
+        config.serialize(serializationMedium);
+        SkyArenaConfig deserialized = SkyArenaConfig.deserialize(serializationMedium);
+        Assert.assertEquals(config, deserialized);
     }
 
-    public static SkyArenaConfig getRandom( Random r ) {
+    public static SkyArenaConfig getRandom(Random r) {
         List<SkyPlayerLocation> spawns = null;
-        if ( r.nextBoolean() ) {
+        if (r.nextBoolean()) {
             spawns = new ArrayList<SkyPlayerLocation>();
-            for ( int i = 0 ; i < r.nextInt( 20 ) ; i++ ) {
-                spawns.add( SkyPlayerLocationTest.getRandomLoc() );
+            for (int i = 0; i < r.nextInt(20); i++) {
+                spawns.add(SkyPlayerLocationTest.getRandomLoc());
             }
         }
-        return new SkyArenaConfig( r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt( 22 ), 1 + r.nextInt( 33 ), SkyBoundariesConfigTest.getRandom( r ), SkyPlacementConfigTest.getRandom( r ), null );
+        return new SkyArenaConfig(r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt(22), 1 + r.nextInt(33), SkyBoundariesConfigTest.getRandom(r), SkyPlacementConfigTest.getRandom(r), null);
     }
 }

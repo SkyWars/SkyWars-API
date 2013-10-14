@@ -51,21 +51,21 @@ public interface SkyConfiguration {
 
     public List<SkyArenaConfig> getEnabledArenas();
 
-    public void saveArena( SkyArenaConfig config );
+    public void saveArena(SkyArenaConfig config);
 
     public static enum ArenaOrder {
 
         RANDOM, ORDERED;
-        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>( 2 );
+        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>(2);
 
         static {
-            for ( ArenaOrder order : values() ) {
-                BY_NAME.put( order.name().toLowerCase( Locale.ENGLISH ), order );
+            for (ArenaOrder order : values()) {
+                BY_NAME.put(order.name().toLowerCase(Locale.ENGLISH), order);
             }
         }
 
-        public static ArenaOrder getOrder( String name ) {
-            return BY_NAME.get( name.toLowerCase( Locale.ENGLISH ) );
+        public static ArenaOrder getOrder(String name) {
+            return BY_NAME.get(name.toLowerCase(Locale.ENGLISH));
         }
     }
 }

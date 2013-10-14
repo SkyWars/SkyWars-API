@@ -38,24 +38,24 @@ public class SkyBoundariesConfigTest {
 
     @Test
     public void testEquals() {
-        SkyBoundariesConfig original = getRandom( r );
-        SkyBoundariesConfig second = new SkyBoundariesConfig( original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal() );
-        Assert.assertEquals( original, second );
+        SkyBoundariesConfig original = getRandom(r);
+        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal());
+        Assert.assertEquals(original, second);
     }
 
     @Test
     public void testSerializeDeserialize() {
-        SkyBoundariesConfig original = getRandom( r );
+        SkyBoundariesConfig original = getRandom(r);
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize( serializationMedium );
-        SkyBoundariesConfig deserialized = SkyBoundariesConfig.deserialize( serializationMedium );
-        Assert.assertEquals( original, deserialized );
+        original.serialize(serializationMedium);
+        SkyBoundariesConfig deserialized = SkyBoundariesConfig.deserialize(serializationMedium);
+        Assert.assertEquals(original, deserialized);
     }
 
-    public static SkyBoundariesConfig getRandom( Random r ) {
+    public static SkyBoundariesConfig getRandom(Random r) {
         return new SkyBoundariesConfig(
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom( r ) );
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
+                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r));
     }
 }

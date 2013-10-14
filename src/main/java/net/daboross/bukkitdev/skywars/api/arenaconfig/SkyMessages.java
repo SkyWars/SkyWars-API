@@ -24,9 +24,9 @@ public interface SkyMessages {
 
     public boolean definesAnything();
 
-    public String getMessage( String key );
+    public String getMessage(String key);
 
-    public String getRawMessage( String key );
+    public String getRawMessage(String key);
 
-    public void setRawMessage( String key, String message );
+    public void setRawMessage(String key, String message);
 }

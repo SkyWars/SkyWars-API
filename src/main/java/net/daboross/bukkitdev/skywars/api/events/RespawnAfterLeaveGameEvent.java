@@ -32,8 +32,8 @@ public class RespawnAfterLeaveGameEvent extends PlayerEvent {
     @Getter
     private final SkyWars plugin;
 
-    public RespawnAfterLeaveGameEvent( @NonNull SkyWars plugin, @NonNull Player who ) {
-        super( who );
+    public RespawnAfterLeaveGameEvent(@NonNull SkyWars plugin, @NonNull Player who) {
+        super(who);
         this.plugin = plugin;
     }
 

@@ -41,10 +41,10 @@ public class GameEndEvent extends Event {
     @Getter
     private final List<Player> alivePlayers;
 
-    public GameEndEvent( @NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players ) {
+    public GameEndEvent(@NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players) {
         this.plugin = plugin;
         this.game = game;
-        this.alivePlayers = Collections.unmodifiableList( players );
+        this.alivePlayers = Collections.unmodifiableList(players);
     }
 
     @Override

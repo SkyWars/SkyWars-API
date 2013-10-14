@@ -53,38 +53,38 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
      * max.x || min.y > max.y || min.z > max.z
      * @throws NullPointerException if min or max is null
      */
-    public SkyBlockLocationRange( @NonNull SkyBlockLocation min, @NonNull SkyBlockLocation max, String world ) {
-        if ( min.x > max.x || min.y > max.y || min.z > max.z ) {
-            throw new IllegalArgumentException( "min position cannot be bigger than max position in any dimension." );
+    public SkyBlockLocationRange(@NonNull SkyBlockLocation min, @NonNull SkyBlockLocation max, String world) {
+        if (min.x > max.x || min.y > max.y || min.z > max.z) {
+            throw new IllegalArgumentException("min position cannot be bigger than max position in any dimension.");
         }
-        if ( min.world == null ? world != null : !min.world.equals( world ) ) {
-            min = min.changeWorld( world );
+        if (min.world == null ? world != null : !min.world.equals(world)) {
+            min = min.changeWorld(world);
         }
-        if ( max.world == null ? world != null : !max.world.equals( world ) ) {
-            max = max.changeWorld( world );
+        if (max.world == null ? world != null : !max.world.equals(world)) {
+            max = max.changeWorld(world);
         }
         this.world = min.world;
         this.min = min;
         this.max = max;
     }
 
-    public SkyBlockLocationRange add( @NonNull SkyBlockLocation loc ) {
-        return new SkyBlockLocationRange( loc.add( min ), loc.add( max ), world );
+    public SkyBlockLocationRange add(@NonNull SkyBlockLocation loc) {
+        return new SkyBlockLocationRange(loc.add(min), loc.add(max), world);
     }
 
-    public boolean isWithin( Location loc ) {
+    public boolean isWithin(Location loc) {
         return loc.getX() <= max.x && loc.getX() >= min.x
                 && loc.getY() <= max.y && loc.getY() >= min.y
                 && loc.getZ() <= max.z && loc.getZ() >= min.z;
     }
 
-    public boolean isWithin( Block block ) {
+    public boolean isWithin(Block block) {
         return block.getX() <= max.x && block.getX() >= min.x
                 && block.getY() <= max.y && block.getY() >= min.y
                 && block.getZ() <= max.z && block.getZ() >= min.z;
     }
 
-    public boolean isWithin( SkyBlockLocation loc ) {
+    public boolean isWithin(SkyBlockLocation loc) {
         return loc.x <= max.x && loc.x >= min.x
                 && loc.y <= max.y && loc.y >= min.y
                 && loc.z <= max.z && loc.z >= min.z;
@@ -93,57 +93,57 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put( "min", min.changeWorld( null ) );
-        map.put( "max", max.changeWorld( null ) );
-        map.put( "world", world );
+        map.put("min", min.changeWorld(null));
+        map.put("max", max.changeWorld(null));
+        map.put("world", world);
         return map;
     }
 
-    public void serialize( @NonNull ConfigurationSection section ) {
-        min.changeWorld( null ).serialize( section.createSection( "min" ) );
-        max.changeWorld( null ).serialize( section.createSection( "max" ) );
-        section.set( "world", world );
+    public void serialize(@NonNull ConfigurationSection section) {
+        min.changeWorld(null).serialize(section.createSection("min"));
+        max.changeWorld(null).serialize(section.createSection("max"));
+        section.set("world", world);
     }
 
-    public static SkyBlockLocationRange deserialize( @NonNull Map<String, Object> map ) {
-        Object minObject = map.get( "min" ), maxObject = map.get( "max" ),
-                worldObject = map.get( "world" );
-        if ( !( minObject instanceof SkyBlockLocation && maxObject instanceof SkyBlockLocation ) ) {
+    public static SkyBlockLocationRange deserialize(@NonNull Map<String, Object> map) {
+        Object minObject = map.get("min"), maxObject = map.get("max"),
+                worldObject = map.get("world");
+        if (!(minObject instanceof SkyBlockLocation && maxObject instanceof SkyBlockLocation)) {
             return null;
         }
         SkyBlockLocation min = (SkyBlockLocation) minObject, max = (SkyBlockLocation) maxObject;
         String world = worldObject == null ? null : worldObject.toString();
-        return new SkyBlockLocationRange( min, max, world );
+        return new SkyBlockLocationRange(min, max, world);
     }
 
-    public static SkyBlockLocationRange deserialize( ConfigurationSection configurationSection ) {
-        if ( configurationSection == null ) {
+    public static SkyBlockLocationRange deserialize(ConfigurationSection configurationSection) {
+        if (configurationSection == null) {
             return null;
         }
-        Object worldObject = configurationSection.get( "world" );
-        ConfigurationSection minSection = configurationSection.getConfigurationSection( "min" ),
-                maxSection = configurationSection.getConfigurationSection( "max" );
-        if ( minSection == null || maxSection == null ) {
+        Object worldObject = configurationSection.get("world");
+        ConfigurationSection minSection = configurationSection.getConfigurationSection("min"),
+                maxSection = configurationSection.getConfigurationSection("max");
+        if (minSection == null || maxSection == null) {
             return null;
         }
-        SkyBlockLocation min = SkyBlockLocation.deserialize( minSection );
-        SkyBlockLocation max = SkyBlockLocation.deserialize( maxSection );
-        if ( min == null || max == null ) {
+        SkyBlockLocation min = SkyBlockLocation.deserialize(minSection);
+        SkyBlockLocation max = SkyBlockLocation.deserialize(maxSection);
+        if (min == null || max == null) {
             return null;
         }
         String world = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
-        return new SkyBlockLocationRange( min, max, world );
+        return new SkyBlockLocationRange(min, max, world);
     }
 
-    public String toIndentedString( int indentAmount ) {
+    public String toIndentedString(int indentAmount) {
         return "SkyBlockLocationRange{\n"
-                + getIndent( indentAmount + 1 ) + "min=" + min + ",\n"
-                + getIndent( indentAmount + 1 ) + "max=" + max + ",\n"
-                + ( world == null ? "" : getIndent( indentAmount + 1 ) + "world=" + world + "\n" )
-                + getIndent( indentAmount ) + "}";
+                + getIndent(indentAmount + 1) + "min=" + min + ",\n"
+                + getIndent(indentAmount + 1) + "max=" + max + ",\n"
+                + (world == null ? "" : getIndent(indentAmount + 1) + "world=" + world + "\n")
+                + getIndent(indentAmount) + "}";
     }
 
-    private String getIndent( int indentAmount ) {
-        return StringUtils.repeat( "\t", indentAmount );
+    private String getIndent(int indentAmount) {
+        return StringUtils.repeat("\t", indentAmount);
     }
 }

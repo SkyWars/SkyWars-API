@@ -23,15 +23,15 @@ public abstract class PointStorageBackend {
 
     protected final SkyWars skywars;
 
-    public PointStorageBackend( SkyWars skywars ) {
+    public PointStorageBackend(SkyWars skywars) {
         this.skywars = skywars;
     }
 
-    public abstract void addScore( String player, int diff );
+    public abstract void addScore(String player, int diff);
 
-    public abstract void setScore( String player, int score );
+    public abstract void setScore(String player, int score);
 
-    public abstract int getScore( String player );
+    public abstract int getScore(String player);
 
     public abstract void save() throws IOException;
 }

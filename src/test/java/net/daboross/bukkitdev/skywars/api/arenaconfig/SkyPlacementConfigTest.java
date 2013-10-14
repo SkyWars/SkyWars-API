@@ -37,21 +37,21 @@ public class SkyPlacementConfigTest {
 
     @Test
     public void testEquals() {
-        SkyPlacementConfig original = getRandom( r );
-        SkyPlacementConfig copy = new SkyPlacementConfig( original.getPlacementY(), original.getDistanceApart() );
-        Assert.assertEquals( original, copy );
+        SkyPlacementConfig original = getRandom(r);
+        SkyPlacementConfig copy = new SkyPlacementConfig(original.getPlacementY(), original.getDistanceApart());
+        Assert.assertEquals(original, copy);
     }
 
     @Test
     public void testSerializeDeserialize() {
-        SkyPlacementConfig original = getRandom( r );
+        SkyPlacementConfig original = getRandom(r);
         YamlConfiguration serializationMedium = new YamlConfiguration();
-        original.serialize( serializationMedium );
-        SkyPlacementConfig deserialized = SkyPlacementConfig.deserialize( serializationMedium );
-        Assert.assertEquals( original, deserialized );
+        original.serialize(serializationMedium);
+        SkyPlacementConfig deserialized = SkyPlacementConfig.deserialize(serializationMedium);
+        Assert.assertEquals(original, deserialized);
     }
 
-    public static SkyPlacementConfig getRandom( Random r ) {
-        return new SkyPlacementConfig( r.nextInt( 200 ), r.nextInt( 1000 ) );
+    public static SkyPlacementConfig getRandom(Random r) {
+        return new SkyPlacementConfig(r.nextInt(200), r.nextInt(1000));
     }
 }

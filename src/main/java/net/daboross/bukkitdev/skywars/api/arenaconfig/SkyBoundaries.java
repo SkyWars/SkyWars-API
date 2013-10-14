@@ -32,9 +32,9 @@ public interface SkyBoundaries {
 
     public SkyBlockLocationRange getClearing();
 
-    public void setOrigin( SkyBlockLocationRange origin );
+    public void setOrigin(SkyBlockLocationRange origin);
 
-    public void setBuilding( SkyBlockLocationRange building );
+    public void setBuilding(SkyBlockLocationRange building);
 
-    public void setClearing( SkyBlockLocationRange clearing );
+    public void setClearing(SkyBlockLocationRange clearing);
 }

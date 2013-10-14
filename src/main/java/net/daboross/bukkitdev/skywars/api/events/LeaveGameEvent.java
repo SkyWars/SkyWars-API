@@ -40,8 +40,8 @@ public class LeaveGameEvent extends PlayerEvent {
     @Getter
     private final int id;
 
-    public LeaveGameEvent( @NonNull SkyWars plugin, int id, @NonNull Player who ) {
-        super( who );
+    public LeaveGameEvent(@NonNull SkyWars plugin, int id, @NonNull Player who) {
+        super(who);
         this.plugin = plugin;
         this.id = id;
     }

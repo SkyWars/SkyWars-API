@@ -33,7 +33,7 @@ public interface SkyGameHandler {
      * @throws IllegalArgumentException if there is no running game with the
      * given id.
      */
-    public void endGame( int id, boolean broadcast );
+    public void endGame(int id, boolean broadcast);
 
     /**
      * Removes a player from whatever game they are in.
@@ -43,7 +43,7 @@ public interface SkyGameHandler {
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    public void removePlayerFromGame( String playerName, boolean respawn, boolean broadcast );
+    public void removePlayerFromGame(String playerName, boolean respawn, boolean broadcast);
 
     /**
      * Removes a player from whatever game they are in.
@@ -53,7 +53,7 @@ public interface SkyGameHandler {
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    public void removePlayerFromGame( Player player, boolean respawn, boolean broadcast );
+    public void removePlayerFromGame(Player player, boolean respawn, boolean broadcast);
 
     /**
      * Respawns a player. This should only be called if the removePlayerFromGame
@@ -61,7 +61,7 @@ public interface SkyGameHandler {
      *
      * @param playerName the name of the player to respawn
      */
-    public void respawnPlayer( String playerName );
+    public void respawnPlayer(String playerName);
 
     /**
      * Respawns a player. This should only be called if the removePlayerFromGame
@@ -69,5 +69,5 @@ public interface SkyGameHandler {
      *
      * @param player the player to respawn
      */
-    public void respawnPlayer( Player player );
+    public void respawnPlayer(Player player);
 }
