@@ -49,7 +49,11 @@ public interface SkyConfiguration {
 
     public int getKillPointDiff();
 
+    public int getArenaDistanceApart();
+
     public List<SkyArenaConfig> getEnabledArenas();
+
+    public SkyArenaConfig getParentArena();
 
     public void saveArena(SkyArenaConfig config);
 

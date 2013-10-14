@@ -54,9 +54,13 @@ public interface SkyArena {
 
     public Integer getRawTeamSize();
 
-    public SkyBoundaries getBoundaries();
+    public int getPlacementY();
 
-    public SkyPlacement getPlacement();
+    public void setPlacementY(Integer placementY);
+
+    public Integer getRawPlacementY();
+
+    public SkyBoundaries getBoundaries();
 
     public SkyMessages getMessages();
 }

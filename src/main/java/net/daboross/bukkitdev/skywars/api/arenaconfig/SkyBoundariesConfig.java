@@ -16,8 +16,6 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
-import java.util.HashMap;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -25,8 +23,6 @@ import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
@@ -34,8 +30,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
-@SerializableAs("SkyBoundaries")
-public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements ConfigurationSerializable, SkyBoundaries {
+public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements SkyBoundaries {
 
     @Getter
     private SkyBlockLocationRange originRaw;
@@ -138,15 +133,6 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         return clearingRaw;
     }
 
-    @Override
-    public Map<String, Object> serialize() {
-        HashMap<String, Object> map = new HashMap<String, Object>(3);
-        map.put("origin", originRaw);
-        map.put("building", buildingRaw);
-        map.put("clearing", clearingRaw);
-        return map;
-    }
-
     public void serialize(ConfigurationSection section) {
         if (originRaw != null) {
             originRaw.serialize(section.createSection("origin"));
@@ -157,16 +143,6 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
         if (clearingRaw != null) {
             clearingRaw.serialize(section.createSection("clearing"));
         }
-    }
-
-    public static SkyBoundariesConfig deserialize(Map<String, Object> map) {
-        Object originObj = map.get("origin"),
-                buildingObj = map.get("building"),
-                clearingObj = map.get("clearing");
-        SkyBlockLocationRange origin = originObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) originObj : null,
-                building = buildingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) buildingObj : null,
-                clearing = clearingObj instanceof SkyBlockLocationRange ? (SkyBlockLocationRange) clearingObj : null;
-        return new SkyBoundariesConfig(origin, building, clearing);
     }
 
     public static SkyBoundariesConfig deserialize(ConfigurationSection configurationSection) {

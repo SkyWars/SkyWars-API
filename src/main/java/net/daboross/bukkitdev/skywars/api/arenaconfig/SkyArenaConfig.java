@@ -47,9 +47,12 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     private Integer rawNumTeams;
     @Getter
     private Integer rawTeamSize;
+    @Getter
+    private Integer rawPlacementY;
+    @Getter
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
+    @Getter
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
-    private final SkyPlacementConfig placement = new SkyPlacementConfig();
     @Setter
     @Getter
     private File file;
@@ -57,7 +60,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     @Getter
     private String arenaName = "null";
 
-    public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
+    public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
         if (numTeams != null && numTeams < 2) {
             throw new IllegalArgumentException("Num teams can't be smaller than 2");
@@ -65,43 +68,27 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         if (teamSize != null && teamSize < 1) {
             throw new IllegalArgumentException("Team size can't be smaller than 1");
         }
+        if (placementY != null && placementY < 0) {
+            throw new IllegalArgumentException("Placement y cannot be smaller than 0.");
+        }
         this.arenaName = arenaName;
         this.rawSpawns = spawns;
         this.rawNumTeams = numTeams;
         this.rawTeamSize = teamSize;
+        this.rawPlacementY = placementY;
         if (parent != null) {
             this.boundaries.setParent(parent.getBoundaries());
         }
         if (boundaries != null) {
             this.boundaries.copyDataFrom(boundaries);
-        }
-        if (placement != null) {
-            this.placement.copyDataFrom(placement);
         }
         if (messages != null) {
             this.messages.copyDataFrom(messages);
         }
     }
 
-    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages) {
-        if (numTeams != null && numTeams < 2) {
-            throw new IllegalArgumentException("Num teams can't be smaller than 2");
-        }
-        this.arenaName = arenaName;
-        this.rawSpawns = spawns;
-        this.rawNumTeams = numTeams;
-        if (parent != null) {
-            this.boundaries.setParent(parent.getBoundaries());
-        }
-        if (boundaries != null) {
-            this.boundaries.copyDataFrom(boundaries);
-        }
-        if (placement != null) {
-            this.placement.copyDataFrom(placement);
-        }
-        if (messages != null) {
-            this.messages.copyDataFrom(messages);
-        }
+    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
+        this(null, arenaName, spawns, numTeams, teamSize, placementY, boundaries, messages);
     }
 
     @Override
@@ -109,11 +96,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         super.setParent(parent);
         if (parent != null) {
             messages.setParent(parent.getMessages());
-            placement.setParent(parent.getPlacement());
             boundaries.setParent(parent.getBoundaries());
         } else {
             messages.setParent(null);
-            placement.setParent(null);
             boundaries.setParent(null);
         }
     }
@@ -193,7 +178,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
                 return parent.getTeamSize();
             }
         } else {
-            return rawTeamSize.intValue();
+            return rawTeamSize;
         }
     }
 
@@ -205,18 +190,24 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     }
 
     @Override
-    public SkyBoundariesConfig getBoundaries() {
-        return boundaries;
+    public int getPlacementY() {
+        if (rawPlacementY == null) {
+            if (parent == null) {
+                throw new IllegalArgumentException("Ultimate parent placementY not found.");
+            } else {
+                return parent.getPlacementY();
+            }
+        } else {
+            return rawPlacementY;
+        }
     }
 
     @Override
-    public SkyPlacementConfig getPlacement() {
-        return placement;
-    }
-
-    @Override
-    public SkyMessagesConfig getMessages() {
-        return messages;
+    public void setPlacementY(Integer placementY) {
+        if (placementY != null && placementY < 0) {
+            throw new IllegalArgumentException("Placement y cannot be smaller than 0.");
+        }
+        rawPlacementY = placementY;
     }
 
     public void serialize(ConfigurationSection section) {
@@ -230,12 +221,11 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         }
         section.set("num-teams", rawNumTeams);
         section.set("team-size", rawTeamSize);
+
         if (boundaries.definesAnything()) {
             boundaries.serialize(section.createSection("boundaries"));
         }
-        if (placement.definesAnything()) {
-            placement.serialize(section.createSection("placement"));
-        }
+        section.set("placement-y", rawPlacementY);
         if (messages.definesAnything()) {
             messages.serialize(section.createSection("messages"));
         }
@@ -266,10 +256,10 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         }
         Integer numPlayers = configurationSection.isInt("num-teams") ? configurationSection.getInt("num-teams") : null;
         Integer teamSize = configurationSection.isInt("team-size") ? configurationSection.getInt("team-size") : null;
+        Integer placementY = configurationSection.isInt("placement-y") ? configurationSection.getInt("placement-y") : null;
         SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize(boundariesSection) : null;
-        SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize(placementSection) : null;
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize(messagesSection) : null;
-        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, boundaries, placement, messages);
+        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, messages);
     }
 
     public String toIndentedString(int indentAmount) {
@@ -279,7 +269,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
                 + (rawNumTeams == null ? "" : getIndent(indentAmount + 1) + "numTeams=" + rawNumTeams + ",\n")
                 + (rawTeamSize == null ? "" : getIndent(indentAmount + 1) + "teamSize=" + rawTeamSize + ",\n")
                 + (boundaries == null ? "" : getIndent(indentAmount + 1) + "boundaries=" + boundaries.toIndentedString(indentAmount + 1) + ",\n")
-                + (placement == null ? "" : getIndent(indentAmount + 1) + "placement=" + placement.toIndentedString(indentAmount + 1) + ",\n")
+                + (rawPlacementY == null ? "" : getIndent(indentAmount + 1) + "placementY=" + rawPlacementY + ",\n")
                 + (messages == null ? "" : getIndent(indentAmount + 1) + "messages=" + messages.toIndentedString(indentAmount + 1) + ",\n")
                 + getIndent(indentAmount) + "}";
     }

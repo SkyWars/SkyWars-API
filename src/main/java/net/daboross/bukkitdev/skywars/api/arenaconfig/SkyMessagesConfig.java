@@ -27,8 +27,6 @@ import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
@@ -36,8 +34,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
  */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
-@SerializableAs("SkyMessagesConfig")
-public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements ConfigurationSerializable, SkyMessages {
+public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements SkyMessages {
 
     private final Map<String, String> rawMessages = new HashMap<String, String>();
     private final Map<String, String> messages = new HashMap<String, String>();
@@ -148,26 +145,10 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         return ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(original));
     }
 
-    @Override
-    public Map<String, Object> serialize() {
-        return new HashMap<String, Object>(rawMessages);
-    }
-
     public void serialize(ConfigurationSection section) {
         for (Map.Entry<String, String> entry : rawMessages.entrySet()) {
             section.set(entry.getKey(), entry.getValue());
         }
-    }
-
-    public static SkyMessagesConfig deserialize(Map<String, Object> map) {
-        SkyMessagesConfig returnValue = new SkyMessagesConfig();
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            Object o = entry.getValue();
-            if (o instanceof String) {
-                returnValue.setRawMessage(entry.getKey(), (String) o);
-            }
-        }
-        return returnValue;
     }
 
     public static SkyMessagesConfig deserialize(ConfigurationSection configurationSection) {
