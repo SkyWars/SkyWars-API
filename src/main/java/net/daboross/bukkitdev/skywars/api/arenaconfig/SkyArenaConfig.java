@@ -18,7 +18,6 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -32,8 +31,6 @@ import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
 
 /**
  *
@@ -41,14 +38,15 @@ import org.bukkit.configuration.serialization.SerializableAs;
  */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
-@SerializableAs("SkyArenaConfig")
 @NoArgsConstructor
-public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements ConfigurationSerializable, SkyArena {
+public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
 
     @Getter
     private List<SkyPlayerLocation> rawSpawns;
     @Getter
-    private Integer rawNumPlayers;
+    private Integer rawNumTeams;
+    @Getter
+    private Integer rawTeamSize;
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
     private final SkyPlacementConfig placement = new SkyPlacementConfig();
@@ -59,14 +57,18 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     @Getter
     private String arenaName = "null";
 
-    public SkyArenaConfig( SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages ) {
+    public SkyArenaConfig( SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages ) {
         super( parent );
-        if ( numPlayers != null && numPlayers < 2 ) {
-            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
+        if ( numTeams != null && numTeams < 2 ) {
+            throw new IllegalArgumentException( "Num teams can't be smaller than 2" );
+        }
+        if ( teamSize != null && teamSize < 1 ) {
+            throw new IllegalArgumentException( "Team size can't be smaller than 1" );
         }
         this.arenaName = arenaName;
         this.rawSpawns = spawns;
-        this.rawNumPlayers = numPlayers;
+        this.rawNumTeams = numTeams;
+        this.rawTeamSize = teamSize;
         if ( parent != null ) {
             this.boundaries.setParent( parent.getBoundaries() );
         }
@@ -81,13 +83,13 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
     }
 
-    public SkyArenaConfig( String arenaName, List<SkyPlayerLocation> spawns, Integer numPlayers, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages ) {
-        if ( numPlayers != null && numPlayers < 2 ) {
-            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
+    public SkyArenaConfig( String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, SkyBoundariesConfig boundaries, SkyPlacementConfig placement, SkyMessagesConfig messages ) {
+        if ( numTeams != null && numTeams < 2 ) {
+            throw new IllegalArgumentException( "Num teams can't be smaller than 2" );
         }
         this.arenaName = arenaName;
         this.rawSpawns = spawns;
-        this.rawNumPlayers = numPlayers;
+        this.rawNumTeams = numTeams;
         if ( parent != null ) {
             this.boundaries.setParent( parent.getBoundaries() );
         }
@@ -135,24 +137,71 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
     }
 
     @Override
-    public int getNumPlayers() {
-        if ( rawNumPlayers == null ) {
+    public int getNumTeams() {
+        if ( rawNumTeams == null ) {
             if ( parent == null ) {
-                throw new IllegalStateException( "Ultimate parent numPlayers not found." );
+                throw new IllegalStateException( "Ultimate parent numTeams not found." );
             } else {
-                return parent.getNumPlayers();
+                return parent.getNumTeams();
             }
         } else {
-            return rawNumPlayers.intValue();
+            return rawNumTeams.intValue();
         }
     }
 
     @Override
-    public void setNumPlayers( Integer numPlayers ) {
-        if ( numPlayers != null && numPlayers < 2 ) {
-            throw new IllegalArgumentException( "Num players can't be smaller than 2" );
+    public void setNumTeams( Integer numTeams ) {
+        if ( numTeams != null && numTeams < 2 ) {
+            throw new IllegalArgumentException( "Num teams can't be smaller than 2" );
         }
-        this.rawNumPlayers = numPlayers;
+        this.rawNumTeams = numTeams;
+    }
+
+    @Deprecated
+    @Override
+    public int getNumPlayers() {
+        return getNumTeams() * getTeamSize();
+    }
+
+    @Deprecated
+    @Override
+    public void setNumPlayers( Integer numPlayers ) {
+        if ( numPlayers == null ) {
+            rawNumTeams = null;
+        } else {
+            if ( rawTeamSize == null ) {
+                rawTeamSize = 1;
+            } else if ( numPlayers % rawTeamSize != 0 ) {
+                throw new IllegalArgumentException( "numPlayers must be divisible by teamSize, which is " + rawTeamSize );
+            }
+            rawNumTeams = numPlayers / rawTeamSize;
+        }
+    }
+
+    @Deprecated
+    @Override
+    public Integer getRawNumPlayers() {
+        return null;
+    }
+
+    @Override
+    public int getTeamSize() {
+        if ( rawTeamSize == null ) {
+            if ( parent == null ) {
+                throw new IllegalStateException( "Ultimate parent numPlayers not found." );
+            } else {
+                return parent.getTeamSize();
+            }
+        } else {
+            return rawTeamSize.intValue();
+        }
+    }
+
+    @Override
+    public void setTeamSize( Integer teamSize ) {
+        if ( teamSize != null && teamSize < 1 ) {
+            throw new IllegalArgumentException( "Team size can't be smaller than 1" );
+        }
     }
 
     @Override
@@ -170,21 +219,8 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         return messages;
     }
 
-    @Override
-    public Map<String, Object> serialize() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put( "spawns", rawSpawns );
-        map.put( "num-players", rawNumPlayers );
-        if ( boundaries.definesAnything() ) {
-            map.put( "boundaries", boundaries );
-        }
-        if ( messages.definesAnything() ) {
-            map.put( "messages", messages );
-        }
-        return map;
-    }
-
     public void serialize( ConfigurationSection section ) {
+        section.set( "config-version", 1 );
         if ( rawSpawns != null ) {
             List<Map> spawnsList = new ArrayList<Map>( rawSpawns.size() );
             for ( SkyPlayerLocation loc : rawSpawns ) {
@@ -192,7 +228,8 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
             }
             section.set( "spawns", spawnsList );
         }
-        section.set( "num-players", rawNumPlayers );
+        section.set( "num-teams", rawNumTeams );
+        section.set( "team-size", rawTeamSize );
         if ( boundaries.definesAnything() ) {
             boundaries.serialize( section.createSection( "boundaries" ) );
         }
@@ -204,31 +241,10 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
         }
     }
 
-    public static SkyArenaConfig deserialize( Map<String, Object> map ) {
-        Object spawnsObj = map.get( "spawns" ),
-                numPlayersObj = map.get( "num-players" ),
-                boundariesObj = map.get( "boundaries" ),
-                placementObj = map.get( "placement" ),
-                messagesObj = map.get( "messages" );
-        List<?> spawns = spawnsObj instanceof List ? (List) spawnsObj : null;
-        if ( spawns != null ) {
-            for ( Object obj : spawns ) {
-                if ( !( obj instanceof SkyPlayerLocation ) ) {
-                    SkyStatic.getLogger().log( Level.WARNING, "[SkyArenaConfig] Silently ignoring whole spawn list because one item in list is not a SkyPlayerLocation" );
-                    spawns = null;
-                    break;
-                }
-            }
-        }
-        Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
-        SkyBoundariesConfig boundaries = boundariesObj instanceof SkyBoundariesConfig ? (SkyBoundariesConfig) boundariesObj : null;
-        SkyPlacementConfig placement = placementObj instanceof SkyPlacementConfig ? (SkyPlacementConfig) placementObj : null;
-        SkyMessagesConfig messages = messagesObj instanceof SkyMessagesConfig ? (SkyMessagesConfig) messagesObj : null;
-        return new SkyArenaConfig( null, (List<SkyPlayerLocation>) spawns, numPlayers, boundaries, placement, messages );
-    }
-
     public static SkyArenaConfig deserialize( ConfigurationSection configurationSection ) {
-        Object numPlayersObj = configurationSection.get( "num-players" );
+        if ( configurationSection.getInt( "config-version" ) != 1 ) {
+            throw new IllegalArgumentException( "Config version not 1" );
+        }
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection( "boundaries" ),
                 placementSection = configurationSection.getConfigurationSection( "placement" ),
                 messagesSection = configurationSection.getConfigurationSection( "messages" );
@@ -248,21 +264,23 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements Config
                 }
             }
         }
-        Integer numPlayers = numPlayersObj instanceof Integer ? (Integer) numPlayersObj : null;
+        Integer numPlayers = configurationSection.isInt( "num-teams" ) ? configurationSection.getInt( "num-teams" ) : null;
+        Integer teamSize = configurationSection.isInt( "team-size" ) ? configurationSection.getInt( "team-size" ) : null;
         SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize( boundariesSection ) : null;
         SkyPlacementConfig placement = placementSection != null ? SkyPlacementConfig.deserialize( placementSection ) : null;
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize( messagesSection ) : null;
-        return new SkyArenaConfig( null, spawns, numPlayers, boundaries, placement, messages );
+        return new SkyArenaConfig( null, spawns, numPlayers, teamSize, boundaries, placement, messages );
     }
 
     public String toIndentedString( int indentAmount ) {
         return "SkyArenaConfig{\n"
                 + ( parent == null ? "" : getIndent( indentAmount + 1 ) + "parent=" + parent.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + ( rawSpawns == null ? "" : getIndent( indentAmount + 1 ) + "spawns=" + rawSpawns + ",\n" )
-                + ( rawNumPlayers == null ? "" : getIndent( indentAmount + 1 ) + "numPlayers=" + rawNumPlayers + ",\n" )
+                + ( rawNumTeams == null ? "" : getIndent( indentAmount + 1 ) + "numTeams=" + rawNumTeams + ",\n" )
+                + ( rawTeamSize == null ? "" : getIndent( indentAmount + 1 ) + "teamSize=" + rawTeamSize + ",\n" )
                 + ( boundaries == null ? "" : getIndent( indentAmount + 1 ) + "boundaries=" + boundaries.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + ( placement == null ? "" : getIndent( indentAmount + 1 ) + "placement=" + placement.toIndentedString( indentAmount + 1 ) + ",\n" )
-                + ( messages == null ? "" : getIndent( indentAmount + 1 ) + "messages=" + messages.toIndentedString( indentAmount + 1 ) + "\n" )
+                + ( messages == null ? "" : getIndent( indentAmount + 1 ) + "messages=" + messages.toIndentedString( indentAmount + 1 ) + ",\n" )
                 + getIndent( indentAmount ) + "}";
     }
 

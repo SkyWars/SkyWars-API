@@ -43,7 +43,7 @@ public class SkyArenaConfigTest {
     public void testEquals() {
         SkyArenaConfig config = getRandom( r );
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig( null, config.getRawSpawns(), config.getRawNumPlayers(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
+        SkyArenaConfig copy = new SkyArenaConfig( null, config.getRawSpawns(), config.getRawNumTeams(), config.getRawTeamSize(), config.getBoundaries(), config.getPlacement(), config.getMessages() );
         Assert.assertEquals( config, copy );
     }
 
@@ -64,6 +64,6 @@ public class SkyArenaConfigTest {
                 spawns.add( SkyPlayerLocationTest.getRandomLoc() );
             }
         }
-        return new SkyArenaConfig( r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt( 22 ), SkyBoundariesConfigTest.getRandom( r ), SkyPlacementConfigTest.getRandom( r ), null );
+        return new SkyArenaConfig( r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt( 22 ), 1 + r.nextInt( 33 ), SkyBoundariesConfigTest.getRandom( r ), SkyPlacementConfigTest.getRandom( r ), null );
     }
 }
