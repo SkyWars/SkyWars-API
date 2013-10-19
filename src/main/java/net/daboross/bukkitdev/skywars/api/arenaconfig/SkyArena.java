@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.List;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
+import org.bukkit.configuration.ConfigurationSection;
 
 /**
  *
@@ -63,4 +64,6 @@ public interface SkyArena {
     public SkyBoundaries getBoundaries();
 
     public SkyMessages getMessages();
+
+    public void serialize(ConfigurationSection configuration);
 }

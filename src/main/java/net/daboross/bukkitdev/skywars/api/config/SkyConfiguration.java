@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
  *
@@ -56,6 +57,8 @@ public interface SkyConfiguration {
     public SkyArenaConfig getParentArena();
 
     public void saveArena(SkyArenaConfig config);
+
+    public YamlConfiguration getRawConfig();
 
     public static enum ArenaOrder {
 
