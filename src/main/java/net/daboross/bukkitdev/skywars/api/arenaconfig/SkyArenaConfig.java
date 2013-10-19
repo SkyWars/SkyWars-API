@@ -236,7 +236,6 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
             throw new IllegalArgumentException("Config version not 1");
         }
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries"),
-                placementSection = configurationSection.getConfigurationSection("placement"),
                 messagesSection = configurationSection.getConfigurationSection("messages");
         List<?> spawnsObjList = configurationSection.getList("spawns");
         List<SkyPlayerLocation> spawns = null;
