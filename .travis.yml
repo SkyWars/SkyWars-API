@@ -1,11 +1,6 @@
 language: java
-env:
- - secure: "SZTdJkWTjP9sPAkakxs283Dg9h732/PF4dJVvYAwEB5sL6fqOVej77/zt92GkQ+cVWyopfsWxw9pHVEcQq6kEXYSGl3IdwJWsOA3v1YTDFwoRenSWjrGpkWt9AdN3gfQOJ/TXPvZAZYUk0c1wDV56qQYv0P+jMnMCJNISrCPa3g="
-before_install:
- - ./.travis-before.sh
-install:
- - mvn --fail-never clean package
-script:
- - mvn clean package
-after_success:
- - if [[ "${TRAVIS_SECURE_ENV_VARS}" ]]; then cat "${HOME}/.ssh/known_hosts"; mvn deploy; fi
+env: secure: "SZTdJkWTjP9sPAkakxs283Dg9h732/PF4dJVvYAwEB5sL6fqOVej77/zt92GkQ+cVWyopfsWxw9pHVEcQq6kEXYSGl3IdwJWsOA3v1YTDFwoRenSWjrGpkWt9AdN3gfQOJ/TXPvZAZYUk0c1wDV56qQYv0P+jMnMCJNISrCPa3g="
+before_install: bash .travis-before.sh
+install: mvn --fail-never clean package
+script: mvn clean package
+after_success: bash -c 'if [[ "${TRAVIS_SECURE_ENV_VARS}" ]]; then cat "${HOME}/.ssh/known_hosts"; mvn deploy; fi'
