@@ -9,6 +9,7 @@ before_install:
   mkdir -p "${HOME}/.m2/"
   echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml";
   mkdir -p "${HOME}/.ssh";
+  chmod 700 "${HOME}/.ssh";
   echo "${KNOWN_HOST_SSH}" > "${HOME}/.ssh/known_hosts";
   fi
 install:
@@ -16,4 +17,4 @@ install:
 script:
  - mvn clean package
 after_success:
- - if [[ "${TRAVIS_SECURE_ENV_VARS}" ]]; then mvn deploy; fi
+ - if [[ "${TRAVIS_SECURE_ENV_VARS}" ]]; then cat "${HOME}/.ssh/known_hosts"; mvn deploy; fi
