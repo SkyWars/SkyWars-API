@@ -1,6 +1,6 @@
 env: 
  - secure: VzhVIvy9k/YHU0Pt7h83GRquIbyEu32aYpBKTV5BCPvkckwxSUF/f2Bc0fyZ6gwm/cGWh0Si67dHxxqLsox6Hmzd5SbmFUyWajypEldufXMiWCkvAjsfwNgQ2Af2lzXQcFCDcvLXlkStRsi5YVe2JHaBuciACLsSAGoZNjVx1ec=
-after_success: bash -c 'if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then mvn deploy; fi'
+after_success: bash .travis-after
 install: mvn --fail-never clean package
 language: java
 script: mvn clean package

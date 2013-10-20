@@ -7,5 +7,4 @@ if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
     export MVN_SETTINGS_XML='<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"><servers><server><id>repo-daboross-net</id><username>'"${REPO_USER}"'</username><password>'"${REPO_PASSWORD}"'</password></server></servers></settings>'
     mkdir -p "${HOME}/.m2/"
     echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml"
-    echo "Login is ${REPO_USER}"
 fi
