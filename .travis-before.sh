@@ -9,5 +9,4 @@ if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
     echo "${KNOWN_HOST_SSH}" >> "${HOME}/.ssh/known_hosts"
 else
     echo "No secure env vars, skipping setup."
-    echo "BTW, TRAVIS_SECURE_ENV_VARS = ${TRAVIS_SECURE_ENV_VARS}"
 fi
