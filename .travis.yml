@@ -10,7 +10,11 @@ before_install:
   echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml";
   mkdir -p "${HOME}/.ssh";
   chmod 700 "${HOME}/.ssh";
-  echo "${KNOWN_HOST_SSH}" > "${HOME}/.ssh/known_hosts";
+  echo "${KNOWN_HOST_SSH}" >> "${HOME}/.ssh/known_hosts";
+  echo "---- known_hosts"
+  cat "${HOME}/.shh/known_hosts"
+  echo "---- settings.xml"
+  cat "${HOME}/.m2/settings.xml"
   fi
 install:
  - mvn --fail-never clean package
