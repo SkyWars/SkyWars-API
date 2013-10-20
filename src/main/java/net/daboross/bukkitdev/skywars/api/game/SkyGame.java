@@ -38,4 +38,12 @@ public interface SkyGame {
     public SkyBlockLocationRange getBuildingBoundaries();
 
     public SkyArena getArena();
+
+    public boolean areTeamsEnabled();
+
+    public int getTeamNumber(String player);
+
+    public List<String> getAlivePlayersInTeam(int teamNumber);
+
+    public List<String> getAllPlayersInTeam(int teamNumber);
 }

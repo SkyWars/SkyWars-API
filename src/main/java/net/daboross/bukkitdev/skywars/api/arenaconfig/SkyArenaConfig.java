@@ -27,6 +27,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
+import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
+import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.apache.commons.lang.StringUtils;
@@ -142,7 +144,6 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         this.rawNumTeams = numTeams;
     }
 
-    @Deprecated
     @Override
     public int getNumPlayers() {
         return getNumTeams() * getTeamSize();
@@ -193,7 +194,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     public int getPlacementY() {
         if (rawPlacementY == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent placementY not found.");
+                throw new IllegalStateException("Ultimate parent placementY not found.");
             } else {
                 return parent.getPlacementY();
             }
@@ -205,11 +206,35 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     @Override
     public void setPlacementY(Integer placementY) {
         if (placementY != null && placementY < 0) {
-            throw new IllegalArgumentException("Placement y cannot be smaller than 0.");
+            throw new IllegalStateException("Placement y cannot be smaller than 0.");
         }
         rawPlacementY = placementY;
     }
 
+    public void confirmAllValuesExist() throws SkyConfigurationException {
+        if (rawSpawns == null) {
+            throw new SkyConfigurationException("'spawns' not defined for arena config " + file.getAbsolutePath());
+        }
+        if (rawSpawns.isEmpty()) {
+            throw new SkyConfigurationException("No spawns defined in 'spawns' for arena config " + file.getAbsolutePath());
+        }
+        if (rawNumTeams == null) {
+            throw new SkyConfigurationException("'num-teams' not defined for arena config " + file.getAbsolutePath());
+        }
+        if (rawTeamSize == null) {
+            throw new SkyConfigurationException("'team-size' not defined for arena config " + file.getAbsolutePath());
+        }
+        if (rawPlacementY == null) {
+            throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.getAbsolutePath());
+        }
+        for (String messageKey : SkyMessageKeys.ALL_MESSAGES) {
+            if (messages.getRawMessage(messageKey) == null) {
+                throw new SkyConfigurationException("'messages." + messageKey + "' not defined for arena config " + file.getAbsolutePath());
+            }
+        }
+    }
+
+    @Override
     public void serialize(ConfigurationSection section) {
         section.set("config-version", 1);
         if (rawSpawns != null) {
@@ -276,4 +301,5 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     private String getIndent(int indentAmount) {
         return StringUtils.repeat("\t", indentAmount);
     }
+
 }

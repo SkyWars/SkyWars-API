@@ -40,7 +40,6 @@ public interface SkyArena {
 
     public Integer getRawNumTeams();
 
-    @Deprecated
     public int getNumPlayers();
 
     @Deprecated
