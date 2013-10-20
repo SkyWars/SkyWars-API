@@ -4,7 +4,8 @@ export KNOWN_HOST_SSH='|1|fB8yiUfYaFlCT/72k0ZzY2+kAS8=|/Xhu4524YIDrv6zl1sm4bhK4D
 mkdir -p "${HOME}/.ssh"
 echo "${KNOWN_HOST_SSH}" >> "${HOME}/.ssh/known_hosts"
 if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
-    export MVN_SETTINGS_XML='<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"><servers><server><id>repo-daboross-net</id><username>'"${REPO_USERNAME}"'</username><password>'"${REPO_PASSWORD}"'</password></server></servers></settings>'
+    export MVN_SETTINGS_XML='<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"><servers><server><id>repo-daboross-net</id><username>'"${REPO_USER}"'</username><password>'"${REPO_PASSWORD}"'</password></server></servers></settings>'
     mkdir -p "${HOME}/.m2/"
     echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml"
+    echo "Login is ${REPO_USER}"
 fi
