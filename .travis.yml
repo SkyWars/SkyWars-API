@@ -5,4 +5,4 @@ after_success: bash -c 'if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then mvn
 install: mvn --fail-never clean package
 language: java
 script: mvn clean package
-before_install: bash .travis-before.sh
+before_install: bash .travis-before
