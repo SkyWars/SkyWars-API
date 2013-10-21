@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -55,6 +56,12 @@ public interface SkyConfiguration {
     public void saveArena(SkyArenaConfig config);
 
     public YamlConfiguration getRawConfig();
+
+    public boolean isCommandWhitelistEnabled();
+
+    public boolean isCommandWhitelistABlacklist();
+
+    public Pattern getCommandWhitelistCommandRegex();
 
     public static enum ArenaOrder {
 
