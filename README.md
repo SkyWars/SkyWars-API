@@ -1,3 +1,5 @@
+SkyWars-API - [![Build Status](https://travis-ci.org/daboross/SkyWars-API.png?branch=master)](https://travis-ci.org/daboross/SkyWars-API)
+---
 ### Features
 * Automatically create new arenas every time enough people join the queue.
 * Have *as many arenas* going at the same time as you want!
