@@ -28,10 +28,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 @ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocationRange")

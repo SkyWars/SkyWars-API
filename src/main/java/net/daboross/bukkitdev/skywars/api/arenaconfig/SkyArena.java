@@ -20,10 +20,6 @@ import java.util.List;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.bukkit.configuration.ConfigurationSection;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public interface SkyArena {
 
     public SkyArena getParent();

@@ -33,10 +33,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 @ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocation")

@@ -28,10 +28,6 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements SkyMessages {
@@ -165,8 +161,8 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         return "SkyMessagesConfig{\n"
                 + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
                 + (prefix == null ? "" : getIndent(indentAmount + 1) + "prefix=" + prefix + ",\n")
-                + getIndent(indentAmount + 1) + "rawMessages=" + rawMessages + "\n"
-                + getIndent(indentAmount + 1) + "messages=" + messages + "\n"
+                + getIndent(indentAmount + 1) + "rawMessages=" + rawMessages + ",\n"
+                + getIndent(indentAmount + 1) + "messages=" + messages + ",\n"
                 + getIndent(indentAmount) + "}";
     }
 

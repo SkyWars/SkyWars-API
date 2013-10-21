@@ -20,10 +20,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class SkyMessageKeys {
 
     public static final String KILLED_VOID = "death.killed-void";

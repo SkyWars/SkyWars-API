@@ -24,10 +24,6 @@ import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements SkyBoundaries {

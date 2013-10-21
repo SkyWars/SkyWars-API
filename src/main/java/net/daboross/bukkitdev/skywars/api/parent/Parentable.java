@@ -20,7 +20,6 @@ import lombok.Getter;
 
 /**
  *
- * @author Dabo Ross <http://www.daboross.net/>
  * @param <T> This class
  */
 public class Parentable<T extends Parentable<T>> {

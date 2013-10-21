@@ -18,10 +18,6 @@ package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.List;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public interface SkyLocationStore {
 
     public SkyPlayerLocation getLobbyPosition();

@@ -27,8 +27,9 @@ import org.bukkit.event.player.PlayerEvent;
 /**
  * Event called when a player leaves a game. No player will ever leave a game
  * without this event being called.
- * <br>When a game ends whether canceled or the server is quit, this event is
- * called once for all remaining players.
+ * <br>
+ * When a game ends whether canceled or the server is quit, this event is called
+ * once for all remaining players.
  */
 @EqualsAndHashCode(callSuper = false)
 public class LeaveGameEvent extends PlayerEvent {

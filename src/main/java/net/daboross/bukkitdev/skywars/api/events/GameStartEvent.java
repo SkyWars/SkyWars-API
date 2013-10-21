@@ -27,10 +27,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 @EqualsAndHashCode(callSuper = false)
 public class GameStartEvent extends Event {
 

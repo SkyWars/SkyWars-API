@@ -20,10 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.ChatColor;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public enum ConfigColorCode {
 
     REG('r', '3'),

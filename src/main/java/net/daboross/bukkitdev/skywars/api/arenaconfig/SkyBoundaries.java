@@ -18,10 +18,6 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public interface SkyBoundaries {
 
     public boolean definesAnything();

@@ -22,10 +22,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class SkyStatic {
 
     @Setter
@@ -33,6 +29,7 @@ public class SkyStatic {
     private static boolean debug = false;
     @Setter
     @Getter
+    @SuppressWarnings("NonConstantLogger")
     private static Logger logger = Bukkit.getLogger();
     @Setter
     @Getter
@@ -41,7 +38,7 @@ public class SkyStatic {
     @Getter
     private static String version = "Unknown";
     @Getter
-    private static String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
     @Setter
     @Getter
     private static Locale locale = Locale.ENGLISH;

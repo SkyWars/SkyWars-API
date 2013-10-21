@@ -26,10 +26,6 @@ import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public interface SkyConfiguration {
 
     public void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;

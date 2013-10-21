@@ -18,25 +18,21 @@ package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@RequiredArgsConstructor
+@Data
 public class ArenaPlayerKillPlayerEvent extends Event {
 
     @Getter
     private static final HandlerList handlerList = new HandlerList();
     @NonNull
-    @Getter
     private final SkyWars plugin;
-    @Getter
     private final int gameId;
-    @Getter
     private final String killerName;
-    @Getter
     private final Player killed;
 
     @Override

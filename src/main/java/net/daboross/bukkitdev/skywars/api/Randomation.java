@@ -20,10 +20,6 @@ import java.util.List;
 import java.util.Random;
 import lombok.NonNull;
 
-/**
- *
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class Randomation {
 
     private static final Random random = new Random();
