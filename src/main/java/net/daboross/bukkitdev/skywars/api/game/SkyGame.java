@@ -46,4 +46,6 @@ public interface SkyGame {
     public List<String> getAlivePlayersInTeam(int teamNumber);
 
     public List<String> getAllPlayersInTeam(int teamNumber);
+
+    public int getNumTeams();
 }
