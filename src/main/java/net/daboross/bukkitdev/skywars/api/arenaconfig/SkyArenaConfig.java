@@ -61,13 +61,13 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
         if (numTeams != null && numTeams < 2) {
-            throw new IllegalArgumentException("Num teams can't be smaller than 2");
+            throw new IllegalArgumentException("num-teams can't be smaller than 2");
         }
         if (teamSize != null && teamSize < 1) {
-            throw new IllegalArgumentException("Team size can't be smaller than 1");
+            throw new IllegalArgumentException("team-size can't be smaller than 1");
         }
         if (placementY != null && placementY < 0) {
-            throw new IllegalArgumentException("Placement y cannot be smaller than 0.");
+            throw new IllegalArgumentException("placement-y cannot be smaller than 0.");
         }
         this.arenaName = arenaName;
         this.rawSpawns = spawns;
@@ -170,7 +170,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     public int getTeamSize() {
         if (rawTeamSize == null) {
             if (parent == null) {
-                throw new IllegalStateException("Ultimate parent numPlayers not found.");
+                throw new IllegalStateException("Ultimate parent teamSize not found.");
             } else {
                 return parent.getTeamSize();
             }
@@ -236,7 +236,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         if (rawSpawns != null) {
             List<Map> spawnsList = new ArrayList<Map>(rawSpawns.size());
             for (SkyPlayerLocation loc : rawSpawns) {
-                spawnsList.add(loc.serialize());
+                spawnsList.add(loc.changeWorld(null).serialize());
             }
             section.set("spawns", spawnsList);
         }
