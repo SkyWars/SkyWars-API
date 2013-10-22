@@ -17,7 +17,6 @@
 package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.Map;
-import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Test;
 import static org.junit.Assert.*;
