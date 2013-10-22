@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api;
 
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,4 +43,14 @@ public class SkyStatic {
     @Setter
     @Getter
     private static Locale locale = Locale.ENGLISH;
+
+    public static void debug(String message) {
+        if (debug) {
+            if (logger.equals(Bukkit.getLogger())) {
+                logger.log(Level.INFO, "[SkyWars] {0}", message);
+            } else {
+                logger.log(Level.INFO, message);
+            }
+        }
+    }
 }
