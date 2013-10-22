@@ -70,7 +70,10 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
             throw new IllegalArgumentException("placement-y cannot be smaller than 0.");
         }
         this.arenaName = arenaName;
-        this.rawSpawns = spawns;
+        this.rawSpawns = new ArrayList<SkyPlayerLocation>(spawns.size());
+        for (SkyPlayerLocation l : spawns) {
+            rawSpawns.add(l.changeWorld(null));
+        }
         this.rawNumTeams = numTeams;
         this.rawTeamSize = teamSize;
         this.rawPlacementY = placementY;
