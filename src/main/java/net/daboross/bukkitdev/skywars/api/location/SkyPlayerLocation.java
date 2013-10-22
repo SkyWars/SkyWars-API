@@ -91,7 +91,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     public SkyPlayerLocation changeWorld(String newWorld) {
-        return new SkyPlayerLocation(x, y, z, yaw, pitch, newWorld);
+        return (newWorld == null ? world == null : newWorld.equals(world)) ? this : new SkyPlayerLocation(x, y, z, yaw, pitch, newWorld);
     }
 
     public SkyBlockLocation round() {
