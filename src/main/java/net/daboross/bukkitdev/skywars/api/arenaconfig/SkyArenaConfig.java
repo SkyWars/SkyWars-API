@@ -288,21 +288,4 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize(messagesSection) : null;
         return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, messages);
     }
-
-    public String toIndentedString(int indentAmount) {
-        return "SkyArenaConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
-                + (rawSpawns == null ? "" : getIndent(indentAmount + 1) + "spawns=" + rawSpawns + ",\n")
-                + (rawNumTeams == null ? "" : getIndent(indentAmount + 1) + "numTeams=" + rawNumTeams + ",\n")
-                + (rawTeamSize == null ? "" : getIndent(indentAmount + 1) + "teamSize=" + rawTeamSize + ",\n")
-                + (boundaries == null ? "" : getIndent(indentAmount + 1) + "boundaries=" + boundaries.toIndentedString(indentAmount + 1) + ",\n")
-                + (rawPlacementY == null ? "" : getIndent(indentAmount + 1) + "placementY=" + rawPlacementY + ",\n")
-                + (messages == null ? "" : getIndent(indentAmount + 1) + "messages=" + messages.toIndentedString(indentAmount + 1) + ",\n")
-                + getIndent(indentAmount) + "}";
-    }
-
-    private String getIndent(int indentAmount) {
-        return StringUtils.repeat("\t", indentAmount);
-    }
-
 }

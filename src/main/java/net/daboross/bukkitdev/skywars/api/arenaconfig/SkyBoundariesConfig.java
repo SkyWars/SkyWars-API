@@ -147,17 +147,4 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
                 clearing = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("clearing"));
         return new SkyBoundariesConfig(origin, building, clearing);
     }
-
-    public String toIndentedString(int indentAmount) {
-        return "SkyBoundariesConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
-                + (originRaw == null ? "" : getIndent(indentAmount + 1) + "origin=" + originRaw.toIndentedString(indentAmount + 1) + ",\n")
-                + (buildingRaw == null ? "" : getIndent(indentAmount + 1) + "building=" + buildingRaw.toIndentedString(indentAmount + 1) + ",\n")
-                + (clearingRaw == null ? "" : getIndent(indentAmount + 1) + "clearing=" + clearingRaw.toIndentedString(indentAmount + 1) + ",\n")
-                + getIndent(indentAmount) + "}";
-    }
-
-    private String getIndent(int indentAmount) {
-        return StringUtils.repeat("\t", indentAmount);
-    }
 }

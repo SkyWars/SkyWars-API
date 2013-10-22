@@ -24,7 +24,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -66,7 +65,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Originally asked does not define message '" + key + "' and has no parent. Originally asked: " + this.toIndentedString(2));
+                throw new IllegalArgumentException("Originally asked does not define message '" + key + "' and has no parent; original=" + this);
             } else {
                 return parent.getMessage(key, this);
             }
@@ -79,7 +78,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'; original=" + original.toIndentedString(2));
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'; original=" + original);
             } else {
                 return parent.getMessage(key, original);
             }
@@ -96,7 +95,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key.toLowerCase(Locale.ENGLISH));
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Original does not define raw message '" + key + "'; original=" + this.toIndentedString(2));
+                throw new IllegalArgumentException("Original does not define raw message '" + key + "'; original=" + this);
             } else {
                 return parent.getRawMessage(key, this);
             }
@@ -109,7 +108,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original.toIndentedString(2));
+                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original);
             } else {
                 return parent.getMessage(key, original);
             }
@@ -155,18 +154,5 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
             }
         }
         return returnValue;
-    }
-
-    public String toIndentedString(int indentAmount) {
-        return "SkyMessagesConfig{\n"
-                + (parent == null ? "" : getIndent(indentAmount + 1) + "parent=" + parent.toIndentedString(indentAmount + 1) + ",\n")
-                + (prefix == null ? "" : getIndent(indentAmount + 1) + "prefix=" + prefix + ",\n")
-                + getIndent(indentAmount + 1) + "rawMessages=" + rawMessages + ",\n"
-                + getIndent(indentAmount + 1) + "messages=" + messages + ",\n"
-                + getIndent(indentAmount) + "}";
-    }
-
-    private String getIndent(int indentAmount) {
-        return StringUtils.repeat("\t", indentAmount);
     }
 }

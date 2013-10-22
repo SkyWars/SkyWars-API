@@ -130,16 +130,4 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         String world = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
         return new SkyBlockLocationRange(min, max, world);
     }
-
-    public String toIndentedString(int indentAmount) {
-        return "SkyBlockLocationRange{\n"
-                + getIndent(indentAmount + 1) + "min=" + min + ",\n"
-                + getIndent(indentAmount + 1) + "max=" + max + ",\n"
-                + (world == null ? "" : getIndent(indentAmount + 1) + "world=" + world + "\n")
-                + getIndent(indentAmount) + "}";
-    }
-
-    private String getIndent(int indentAmount) {
-        return StringUtils.repeat("\t", indentAmount);
-    }
 }
