@@ -55,8 +55,6 @@ public interface SkyConfiguration {
 
     public void saveArena(SkyArenaConfig config);
 
-    public YamlConfiguration getRawConfig();
-
     public boolean isCommandWhitelistEnabled();
 
     public boolean isCommandWhitelistABlacklist();
