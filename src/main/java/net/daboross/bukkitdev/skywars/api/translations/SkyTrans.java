@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.translations;
 
 import lombok.NonNull;
 import lombok.Setter;
+import org.bukkit.ChatColor;
 
 /**
  * Static access to SkyTranslations. Short name for convenience
@@ -29,7 +30,7 @@ public class SkyTrans {
 
     public static String get(@NonNull TransKey key) {
         if (instance == null) {
-            return key.defaultValue;
+            return ChatColor.translateAlternateColorCodes('&', key.defaultValue);
         } else {
             return instance.get(key);
         }
