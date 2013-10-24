@@ -28,11 +28,17 @@ public class SkyTrans {
     @Setter
     private static SkyTranslations instance;
 
-    public static String get(@NonNull TransKey key) {
+    public static String get(@NonNull TransKey key, Object... args) {
+        String message;
         if (instance == null) {
-            return ChatColor.translateAlternateColorCodes('&', key.defaultValue);
+            message = ChatColor.translateAlternateColorCodes('&', key.defaultValue);
         } else {
-            return instance.get(key);
+            message = instance.get(key);
+        }
+        if (args.length == 0) {
+            return message;
+        } else {
+            return String.format(message, args);
         }
     }
 }
