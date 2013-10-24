@@ -31,8 +31,10 @@ public class SkyTrans {
         if (instance == null) {
             return "translation-not-found[" + key.key + "]";
         }
-        if (args.length == 0) {
+        if (key.args == 0) {
             return instance.get(key);
+        } else if (key.args < args.length) {
+            throw new IllegalArgumentException("Not enough args for key " + key.key);
         } else {
             return String.format(instance.get(key), args);
         }
