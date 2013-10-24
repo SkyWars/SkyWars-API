@@ -70,7 +70,10 @@ public enum TransKey {
     MAIN_CMD_DESCRIPTION("top-commands.main.description", "Main command for SkyWars"),
     // MESSAGES
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", "&4Too many parameters"),
-    QUEUE_DEATH("messages.removed-from-queue-because-death", "&3You were removed from the queue because you died."),;
+    QUEUE_DEATH("messages.removed-from-queue-because-death", "&3You were removed from the queue because you died."),
+    NO_CLUE_COMMAND("messages.no-clue-what-command", "&4SkyWars has no clue what &c%s&4 is."),
+    NOT_FULLY_ENABLED("messages.not-fully-enabled", "&4Not fully enabled.");
+
     public final String key;
     public final String defaultValue;
 }
