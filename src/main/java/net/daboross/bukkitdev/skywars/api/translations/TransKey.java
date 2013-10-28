@@ -34,9 +34,11 @@ public enum TransKey {
     // commands.setlobby
     CMD_SETLOBBY_DESCRIPTION("commands.setlobby.description", 0),
     CMD_SETLOBBY_CONFIRMATION("commands.setlobby.confirmation", 0),
+    CMD_SETLOBBY_IN_GAME("commands.setlobby.in-game", 0),
     // commands.setportal
     CMD_SETPORTAL_DESCRIPTION("commands.setportal.description", 0),
     CMD_SETPORTAL_CONFIRMATION("commands.setportal.confirmation", 0),
+    CMD_SETPORTAL_IN_GAME("commands.setportal.in-game", 0),
     // commands.delportal
     CMD_DELPORTAL_DESCRIPTION("commands.delportal.description", 0),
     CMD_DELPORTAL_CONFIRMATION("commands.delportal.confirmation", 1),
