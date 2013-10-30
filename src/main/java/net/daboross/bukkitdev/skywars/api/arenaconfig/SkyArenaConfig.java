@@ -229,11 +229,6 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         if (rawPlacementY == null) {
             throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.getAbsolutePath());
         }
-        for (String messageKey : SkyMessageKeys.ALL_MESSAGES) {
-            if (messages.getRawMessage(messageKey) == null) {
-                throw new SkyConfigurationException("'messages." + messageKey + "' not defined for arena config " + file.getAbsolutePath());
-            }
-        }
     }
 
     @Override

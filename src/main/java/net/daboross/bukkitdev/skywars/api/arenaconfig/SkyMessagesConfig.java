@@ -68,22 +68,9 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Originally asked does not define message '" + key + "' and has no parent; original=" + this);
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
             } else {
-                return parent.getMessage(key, this);
-            }
-        } else {
-            return prefix + message;
-        }
-    }
-
-    private String getMessage(String key, SkyMessagesConfig original) {
-        String message = messages.get(key);
-        if (message == null) {
-            if (parent == null) {
-                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'; original=" + original);
-            } else {
-                return parent.getMessage(key, original);
+                return parent.getMessage(key);
             }
         } else {
             return prefix + message;
@@ -98,19 +85,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key.toLowerCase(Locale.ENGLISH));
         if (message == null) {
             if (parent == null) {
-                throw new IllegalArgumentException("Original does not define raw message '" + key + "'; original=" + this);
-            } else {
-                return parent.getRawMessage(key, this);
-            }
-        } else {
-            return message;
-        }
-    }
-
-    private String getRawMessage(String key, SkyMessagesConfig original) {
-        String message = rawMessages.get(key);
-        if (message == null) {
-            if (parent == null) {
                 TransKey transKey = SkyMessageKeys.DEFAULT_KEYS.get(key);
                 if (transKey != null) {
                     Object[] args = new String[transKey.args];
@@ -119,9 +93,9 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
                     }
                     return SkyTrans.get(transKey, args);
                 }
-                throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original);
+                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
             } else {
-                return parent.getMessage(key, original);
+                return parent.getRawMessage(key);
             }
         } else {
             return message;
