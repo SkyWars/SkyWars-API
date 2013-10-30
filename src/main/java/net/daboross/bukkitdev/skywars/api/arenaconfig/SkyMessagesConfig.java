@@ -74,7 +74,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
                     for (int i = 0; i < args.length; i++) {
                         args[i] = "%s";
                     }
-                    return SkyTrans.get(transKey, args);
+                    return prefix + SkyTrans.get(transKey, args);
                 }
                 throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
             } else {
@@ -130,7 +130,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     private String translate(String original) {
-        return ChatColor.translateAlternateColorCodes('&', ConfigColorCode.translateCodes(original));
+        return ChatColor.translateAlternateColorCodes('&', original);
     }
 
     public void serialize(ConfigurationSection section) {
@@ -143,7 +143,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         SkyMessagesConfig returnValue = new SkyMessagesConfig();
         for (String key : configurationSection.getKeys(true)) {
             if (configurationSection.isString(key)) {
-                returnValue.setRawMessage(key, configurationSection.getString(key));
+                returnValue.setRawMessage(key, ConfigColorCode.translateCodes(configurationSection.getString(key)));
             }
         }
         return returnValue;
