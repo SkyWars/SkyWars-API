@@ -18,7 +18,10 @@ package net.daboross.bukkitdev.skywars.api.config;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 
 public class SkyMessageKeys {
 
@@ -33,6 +36,21 @@ public class SkyMessageKeys {
     public static final String NONE_WON = "winning.none-won";
     public static final String GAME_STARTING = "game.game-starting";
     public static final List<String> ALL_MESSAGES = Collections.unmodifiableList(Arrays.asList(
-            KILLED_VOID, SUICIDE_VOID, KILLED_DAMAGED, KILLED_OTHER, FORFEITED_DAMAGED, FORFEITED, SINGLE_WON, MULTI_WON, NONE_WON, GAME_STARTING
-    ));
+            KILLED_VOID, SUICIDE_VOID, KILLED_DAMAGED, KILLED_OTHER, FORFEITED_DAMAGED, FORFEITED, SINGLE_WON, MULTI_WON, NONE_WON, GAME_STARTING));
+    public static final Map<String, TransKey> DEFAULT_KEYS;
+
+    static {
+        Map<String, TransKey> tempKeys = new HashMap<String, TransKey>(TransKey.values().length);
+        tempKeys.put(KILLED_VOID, TransKey.GAME_DEATH_KILLED_VOID);
+        tempKeys.put(SUICIDE_VOID, TransKey.GAME_DEATH_SUICIDE_VOID);
+        tempKeys.put(KILLED_DAMAGED, TransKey.GAME_DEATH_KILLED_DAMAGED);
+        tempKeys.put(KILLED_OTHER, TransKey.GAME_DEATH_KILLED_OTHER);
+        tempKeys.put(FORFEITED_DAMAGED, TransKey.GAME_DEATH_FORFEITED_DAMAGED);
+        tempKeys.put(FORFEITED, TransKey.GAME_DEATH_FORFEITED);
+        tempKeys.put(SINGLE_WON, TransKey.GAME_WINNING_SINGLE_WON);
+        tempKeys.put(MULTI_WON, TransKey.GAME_WINNING_MULTI_WON);
+        tempKeys.put(NONE_WON, TransKey.GAME_WINNING_NONE_WON);
+        tempKeys.put(GAME_STARTING, TransKey.GAME_STARTING_GAMESTARTING);
+        DEFAULT_KEYS = Collections.unmodifiableMap(tempKeys);
+    }
 }

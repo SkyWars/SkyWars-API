@@ -24,6 +24,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
+import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
+import net.daboross.bukkitdev.skywars.api.translations.SkyTrans;
+import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -108,6 +111,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key);
         if (message == null) {
             if (parent == null) {
+                TransKey transKey = SkyMessageKeys.DEFAULT_KEYS.get(key);
+                if (transKey != null) {
+                    Object[] args = new String[transKey.args];
+                    for (int i = 0; i < args.length; i++) {
+                        args[i] = "%s";
+                    }
+                    return SkyTrans.get(transKey, args);
+                }
                 throw new IllegalArgumentException("Ultimate parent does not define raw message " + key + "; original=" + original);
             } else {
                 return parent.getMessage(key, original);
