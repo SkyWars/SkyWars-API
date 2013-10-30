@@ -37,11 +37,11 @@ public class SkyMessageKeys {
 
     static {
         Map<String, TransKey> tempKeys = new HashMap<String, TransKey>(TransKey.values().length);
-        tempKeys.put(KILLED_VOID, TransKey.GAME_DEATH_KILLED_VOID);
-        tempKeys.put(SUICIDE_VOID, TransKey.GAME_DEATH_SUICIDE_VOID);
-        tempKeys.put(KILLED_DAMAGED, TransKey.GAME_DEATH_KILLED_DAMAGED);
-        tempKeys.put(KILLED_OTHER, TransKey.GAME_DEATH_KILLED_OTHER);
-        tempKeys.put(FORFEITED_DAMAGED, TransKey.GAME_DEATH_FORFEITED_DAMAGED);
+        tempKeys.put(KILLED_VOID, TransKey.GAME_DEATH_KILLED_BY_PLAYER_AND_VOID);
+        tempKeys.put(SUICIDE_VOID, TransKey.GAME_DEATH_KILLED_BY_VOID);
+        tempKeys.put(KILLED_DAMAGED, TransKey.GAME_DEATH_KILLED_BY_PLAYER);
+        tempKeys.put(KILLED_OTHER, TransKey.GAME_DEATH_KILLED_BY_ENVIRONMENT);
+        tempKeys.put(FORFEITED_DAMAGED, TransKey.GAME_DEATH_FORFEITED_WHILE_ATTACKED);
         tempKeys.put(FORFEITED, TransKey.GAME_DEATH_FORFEITED);
         tempKeys.put(SINGLE_WON, TransKey.GAME_WINNING_SINGLE_WON);
         tempKeys.put(MULTI_WON, TransKey.GAME_WINNING_MULTI_WON);
