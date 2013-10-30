@@ -68,6 +68,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = messages.get(key);
         if (message == null) {
             if (parent == null) {
+                TransKey transKey = SkyMessageKeys.DEFAULT_KEYS.get(key);
+                if (transKey != null) {
+                    Object[] args = new String[transKey.args];
+                    for (int i = 0; i < args.length; i++) {
+                        args[i] = "%s";
+                    }
+                    return SkyTrans.get(transKey, args);
+                }
                 throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
             } else {
                 return parent.getMessage(key);
