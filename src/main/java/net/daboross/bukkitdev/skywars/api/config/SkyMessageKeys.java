@@ -16,10 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.config;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 
@@ -35,8 +33,6 @@ public class SkyMessageKeys {
     public static final String MULTI_WON = "winning.multi-won";
     public static final String NONE_WON = "winning.none-won";
     public static final String GAME_STARTING = "game.game-starting";
-    public static final List<String> ALL_MESSAGES = Collections.unmodifiableList(Arrays.asList(
-            KILLED_VOID, SUICIDE_VOID, KILLED_DAMAGED, KILLED_OTHER, FORFEITED_DAMAGED, FORFEITED, SINGLE_WON, MULTI_WON, NONE_WON, GAME_STARTING));
     public static final Map<String, TransKey> DEFAULT_KEYS;
 
     static {
