@@ -52,7 +52,7 @@ public enum ConfigColorCode {
         char[] array = input.toCharArray();
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i] == '#' && "rRnNbBdD".indexOf(array[i + 1]) > -1) {
-                array[i] = ChatColor.COLOR_CHAR;
+                array[i] = '&';
                 array[i + 1] = getByShortVer(array[i + 1]).code;
             }
         }
