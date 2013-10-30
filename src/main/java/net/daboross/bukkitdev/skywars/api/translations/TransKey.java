@@ -98,11 +98,11 @@ public enum TransKey {
     NO_CLUE_COMMAND("messages.no-clue-what-command", 1),
     NOT_FULLY_ENABLED("messages.not-fully-enabled", 0),
     // game.death
-    GAME_DEATH_KILLED_VOID("game.death.killed-by-player-and-void", 2),
-    GAME_DEATH_SUICIDE_VOID("game.death.killed-by-void", 1),
-    GAME_DEATH_KILLED_DAMAGED("game.death.killed-by-player", 2),
-    GAME_DEATH_KILLED_OTHER("game.death.killed-by-environment", 1),
-    GAME_DEATH_FORFEITED_DAMAGED("game.death.forfeited-while-attacked", 2),
+    GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
+    GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
+    GAME_DEATH_KILLED_BY_PLAYER("game.death.killed-by-player", 2),
+    GAME_DEATH_KILLED_BY_ENVIRONMENT("game.death.killed-by-environment", 1),
+    GAME_DEATH_FORFEITED_WHILE_ATTACKED("game.death.forfeited-while-attacked", 2),
     GAME_DEATH_FORFEITED("game.death.forfeited", 2),
     // game.winning
     GAME_WINNING_SINGLE_WON("game.winning.single-won", 1),
