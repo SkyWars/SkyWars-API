@@ -3,7 +3,7 @@
 
     <groupId>net.daboross.bukkitdev</groupId>
     <artifactId>skywars-api</artifactId>
-    <version>1.3.2</version>
+    <version>1.3.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SkyWars-API</name>
@@ -30,7 +30,7 @@
         <url>https://github.com/SkyWars/SkyWars-API.git</url>
         <connection>scm:git:https://github.com/SkyWars/SkyWars-API.git</connection>
         <developerConnection>scm:git:git@github.com:SkyWars/SkyWars-API.git</developerConnection>
-        <tag>skywars-api-1.3.2</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
