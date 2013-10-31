@@ -48,4 +48,6 @@ public interface SkyGameQueue {
      * @return a copy of the current queue.
      */
     public String[] getCopy();
+
+    public int getNumPlayersInQueue();
 }
