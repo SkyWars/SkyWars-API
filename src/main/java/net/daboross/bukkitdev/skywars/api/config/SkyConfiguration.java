@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public interface SkyConfiguration {
 
@@ -46,6 +45,12 @@ public interface SkyConfiguration {
     public int getWinPointDiff();
 
     public int getKillPointDiff();
+
+    public boolean isEconomyEnabled();
+
+    public int getEconomyWinReward();
+
+    public int getEconomyKillReward();
 
     public int getArenaDistanceApart();
 
