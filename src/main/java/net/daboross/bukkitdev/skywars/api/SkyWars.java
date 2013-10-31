@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api;
 
 import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
+import net.daboross.bukkitdev.skywars.api.economy.SkyEconomyAbstraction;
 import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
@@ -44,6 +45,8 @@ public interface SkyWars extends Plugin {
     public SkyConfiguration getConfiguration();
 
     public SkyPoints getPoints();
+
+    public SkyEconomyAbstraction getEconomyHook();
 
     public SkyTranslations getTranslations();
 
