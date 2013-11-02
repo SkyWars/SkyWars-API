@@ -16,7 +16,6 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Getter;
@@ -40,9 +39,6 @@ public class SkyStatic {
     private static String version = "Unknown";
     @Getter
     private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
-    @Setter
-    @Getter
-    private static Locale locale = Locale.ENGLISH;
 
     public static void debug(String message) {
         if (debug) {
