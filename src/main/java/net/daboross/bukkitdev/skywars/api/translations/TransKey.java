@@ -104,6 +104,9 @@ public enum TransKey {
     QUEUE_DEATH("messages.removed-from-queue-because-death", 0),
     NO_CLUE_COMMAND("messages.no-clue-what-command", 1),
     NOT_FULLY_ENABLED("messages.not-fully-enabled", 0),
+    // messages.economy-reward
+    ECO_REWARD_WIN("messages.economy-reward.win", 1),
+    ECO_REWARD_KILL("messages.economy-reward.kill", 2),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
