@@ -16,9 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Data;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
