@@ -19,4 +19,6 @@ package net.daboross.bukkitdev.skywars.api.economy;
 public interface SkyEconomyAbstraction {
 
     public void addReward(String player, double reward);
+
+    public String getCurrenctSymbol(double amount);
 }
