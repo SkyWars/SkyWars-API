@@ -27,6 +27,13 @@ public class SkyTrans {
     @Setter
     private static SkyTranslations instance;
 
+    /**
+     * Gets the translation for the given key and the given arguments.
+     *
+     * @param key The key to search for a translation of.
+     * @param args The arguments to apply to the translation.
+     * @return The final message to be given in game.
+     */
     public static String get(@NonNull TransKey key, Object... args) {
         if (instance == null) {
             return "translation-not-found[" + key.key + "]";

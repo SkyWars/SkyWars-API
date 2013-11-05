@@ -24,6 +24,14 @@ public class Randomation {
 
     private static final Random random = new Random();
 
+    /**
+     * Gets a random item in a given list.
+     *
+     * @param <T> The type of the item and list.
+     * @param list The list to get the items from.
+     * @throws NullPointerException If list is null.
+     * @return A random item from this list.
+     */
     public static <T> T getRandom(@NonNull List<T> list) {
         return list.get(random.nextInt(list.size()));
     }

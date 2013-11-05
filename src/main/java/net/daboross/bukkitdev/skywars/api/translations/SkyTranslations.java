@@ -18,5 +18,11 @@ package net.daboross.bukkitdev.skywars.api.translations;
 
 public interface SkyTranslations {
 
+    /**
+     * Gets the translation for the given key
+     *
+     * @param key The translation key for the given message.
+     * @return The translation associated with the given key.
+     */
     public String get(TransKey key);
 }
