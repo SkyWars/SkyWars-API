@@ -124,6 +124,13 @@ public interface SkyConfiguration {
     public int getEconomyKillReward();
 
     /**
+     * Gets whether or not to give in-game messages about economy rewards.
+     *
+     * @return Whether or not to message for economy rewards.
+     */
+    public boolean areEconomyRewardMessagesEnabled();
+
+    /**
      * Gets the distance between arenas when created. This distance is from one
      * arena's minimum corner to the next arena's minimum corner.
      *
