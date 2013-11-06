@@ -20,20 +20,21 @@ import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
+import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public class SkyKitConfig implements SkyKit {
 
-    private final List<SkyKitItemConfig> inventoryContents;
-    private final List<SkyKitItemConfig> armorContents;
+    private final List<SkyKitItem> inventoryContents;
+    private final List<SkyKitItem> armorContents;
     @Getter
     private final int cost;
     @Getter
     private final String permission;
 
-    private SkyKitConfig(List<SkyKitItemConfig> inventoryContents, List<SkyKitItemConfig> armorContents, int cost, String permissionNode) {
+    public SkyKitConfig(List<SkyKitItem> inventoryContents, List<SkyKitItem> armorContents, int cost, String permissionNode) {
         this.inventoryContents = inventoryContents;
         if (armorContents.size() != 4) {
             throw new IllegalArgumentException("Armor contents size not 4");
@@ -50,12 +51,12 @@ public class SkyKitConfig implements SkyKit {
     }
 
     @Override
-    public List<SkyKitItemConfig> getArmorContents() {
+    public List<SkyKitItem> getArmorContents() {
         return Collections.unmodifiableList(armorContents);
     }
 
     @Override
-    public List<SkyKitItemConfig> getInventoryContents() {
+    public List<SkyKitItem> getInventoryContents() {
         return Collections.unmodifiableList(inventoryContents);
     }
 }

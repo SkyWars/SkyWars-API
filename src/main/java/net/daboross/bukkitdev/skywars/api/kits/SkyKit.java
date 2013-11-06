@@ -21,9 +21,9 @@ import org.bukkit.entity.Player;
 
 public interface SkyKit {
 
-    public List<? extends SkyKitItem> getArmorContents();
+    public List<SkyKitItem> getArmorContents();
 
-    public List<? extends SkyKitItem> getInventoryContents();
+    public List<SkyKitItem> getInventoryContents();
 
     public String getPermission();
 
