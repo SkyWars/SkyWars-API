@@ -17,11 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.kits;
 
 import java.util.Set;
-import net.daboross.bukkitdev.skywars.api.kits.impl.SkyKitConfig;
 
 public interface SkyKits {
 
     public Set<String> getKitNames();
 
-    public SkyKitConfig getKit(String name);
+    public SkyKit getKit(String name);
 }
