@@ -23,6 +23,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
+import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
 import net.daboross.bukkitdev.skywars.api.points.SkyPoints;
 import net.daboross.bukkitdev.skywars.api.translations.SkyTranslations;
@@ -138,4 +139,12 @@ public interface SkyWars extends Plugin {
      * successfully, false otherwise.
      */
     public boolean reloadTranslations();
+
+    /**
+     * Gets the kit configuration for this plugin. This configuration is loaded
+     * from the kits.yml file.
+     *
+     * @return The SkyKits, or null if this plugin is not yet enabled.
+     */
+    public SkyKits getKits();
 }
