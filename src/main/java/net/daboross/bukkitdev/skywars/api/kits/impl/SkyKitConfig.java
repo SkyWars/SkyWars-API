@@ -19,12 +19,14 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 import java.util.Collections;
 import java.util.List;
 import lombok.Getter;
+import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+@ToString
 public class SkyKitConfig implements SkyKit {
 
     private final List<SkyKitItem> inventoryContents;
