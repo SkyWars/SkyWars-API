@@ -110,6 +110,7 @@ public enum TransKey {
     // messages.kits
     KITS_KIT_LIST("messages.kits.kit-list", 1),
     KITS_KIT_LIST_COMMA("messages.kits.kit-list-comma", 0),
+    KITS_KIT_LIST_COST_ITEM("messages.kits.kit-list-item-cost", 2),
     KITS_CHOOSE_A_KIT("messages.kits.choose-a-kit", 0),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
