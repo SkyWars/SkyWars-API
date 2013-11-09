@@ -107,6 +107,10 @@ public enum TransKey {
     // messages.economy-reward
     ECO_REWARD_WIN("messages.economy-reward.win", 1),
     ECO_REWARD_KILL("messages.economy-reward.kill", 2),
+    // messages.kits
+    KITS_KIT_LIST("messages.kits.kit-list", 1),
+    KITS_KIT_LIST_COMMA("messages.kits.kit-list-comma", 0),
+    KITS_CHOOSE_A_KIT("messages.kits.choose-a-kit", 0),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
