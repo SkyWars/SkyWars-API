@@ -101,6 +101,13 @@ public interface SkyConfiguration {
     public int getKillPointDiff();
 
     /**
+     * Gets the interval that points are to be saved on. This is in seconds.
+     *
+     * @return The points save interval.
+     */
+    public long getPointsSaveInterval();
+
+    /**
      * Gets whether or not to enable economy rewards.
      *
      * @return Whether or not to reward people with economy currency.
