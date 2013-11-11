@@ -16,6 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
+import org.bukkit.entity.Player;
+
 public interface SkyGameQueue {
 
     /**
@@ -31,9 +33,24 @@ public interface SkyGameQueue {
      * Adds a player to the queue, and starts the game if there are enough
      * people in the queue.
      *
+     * @param player the player to add.
+     */
+    public void queuePlayer(Player player);
+
+    /**
+     * Adds a player to the queue, and starts the game if there are enough
+     * people in the queue.
+     *
      * @param playerName the name of the player to add.
      */
     public void queuePlayer(String playerName);
+
+    /**
+     * Removes a player from the queue.
+     *
+     * @param player the player to remove.
+     */
+    public void removePlayer(Player player);
 
     /**
      * Removes a player from the queue.
