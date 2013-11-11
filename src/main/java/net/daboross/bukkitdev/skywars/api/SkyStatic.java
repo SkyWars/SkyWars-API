@@ -49,4 +49,14 @@ public class SkyStatic {
             }
         }
     }
+
+    public static void debug(String message, Object... args) {
+        if (debug) {
+            if (logger.equals(Bukkit.getLogger())) {
+                logger.log(Level.INFO, "[SkyWars] {0}", String.format(message, args));
+            } else {
+                logger.log(Level.INFO, message);
+            }
+        }
+    }
 }

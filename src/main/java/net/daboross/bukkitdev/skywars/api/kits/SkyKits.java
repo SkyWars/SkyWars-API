@@ -16,11 +16,18 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import org.bukkit.entity.Player;
 
 public interface SkyKits {
 
     public Set<String> getKitNames();
 
+    public Collection<SkyKit> getAllKits();
+
     public SkyKit getKit(String name);
+
+    public List<SkyKit> getAvailableKits(Player p);
 }

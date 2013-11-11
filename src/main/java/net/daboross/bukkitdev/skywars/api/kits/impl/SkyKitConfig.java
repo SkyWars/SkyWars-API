@@ -35,13 +35,16 @@ public class SkyKitConfig implements SkyKit {
     private final int cost;
     @Getter
     private final String permission;
+    @Getter
+    private final String name;
 
-    public SkyKitConfig(List<SkyKitItem> inventoryContents, List<SkyKitItem> armorContents, int cost, String permissionNode) {
+    public SkyKitConfig(List<SkyKitItem> inventoryContents, List<SkyKitItem> armorContents, String name, int cost, String permissionNode) {
         this.inventoryContents = inventoryContents;
         if (armorContents.size() != 4) {
             throw new IllegalArgumentException("Armor contents size not 4");
         }
         this.armorContents = armorContents;
+        this.name = name;
         this.cost = cost;
         this.permission = permissionNode;
     }

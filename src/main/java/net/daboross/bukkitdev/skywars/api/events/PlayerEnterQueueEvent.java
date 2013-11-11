@@ -14,22 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.kits;
+package net.daboross.bukkitdev.skywars.api.events;
 
-import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 
-public interface SkyKit {
+@EqualsAndHashCode(callSuper = false)
+public class PlayerEnterQueueEvent extends PlayerEvent {
 
-    public List<SkyKitItem> getArmorContents();
+    @Getter
+    private static final HandlerList handlerList = new HandlerList();
+    @Getter
+    private final SkyWars plugin;
 
-    public List<SkyKitItem> getInventoryContents();
+    public PlayerEnterQueueEvent(@NonNull SkyWars plugin, @NonNull Player who) {
+        super(who);
+        this.plugin = plugin;
+    }
 
-    public String getPermission();
-
-    public int getCost();
-
-    public String getName();
-
-    public void applyTo(Player p);
+    @Override
+    public HandlerList getHandlers() {
+        return handlerList;
+    }
 }
