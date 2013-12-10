@@ -13,6 +13,4 @@ if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" && "`grep SNAPSHOT pom.xml`" ]]; the
     echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml"
 
     mvn deploy;
-	CAUSE="SkyWars-API+travis-ci+build+${TRAVIS_BUILD_NUMBER}.+-+-+-+-+-+-+Project+URL:+https://travis-ci.org/${TRAVIS_REPO_SLUG}.+-+-+-+-+-+-+Commit:++${TRAVIS_COMMIT}."
-    curl "http://ci.aemservers.net/job/Skywars/build?token=${AEM_TOKEN}&cause=${CAUSE}" &> /dev/null
 fi
