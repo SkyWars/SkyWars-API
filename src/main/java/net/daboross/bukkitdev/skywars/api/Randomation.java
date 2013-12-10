@@ -27,10 +27,10 @@ public class Randomation {
     /**
      * Gets a random item in a given list.
      *
-     * @param <T> The type of the item and list.
+     * @param <T>  The type of the item and list.
      * @param list The list to get the items from.
-     * @throws NullPointerException If list is null.
      * @return A random item from this list.
+     * @throws NullPointerException If list is null.
      */
     public static <T> T getRandom(@NonNull List<T> list) {
         return list.get(random.nextInt(list.size()));

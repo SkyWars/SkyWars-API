@@ -105,7 +105,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         }
         if (bukkitWorld == null) {
             SkyStatic.getLogger().log(Level.WARNING, "[SkyPlayerLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{
-                world, this
+                    world, this
             });
         }
         return new Location(bukkitWorld, x, y, z);

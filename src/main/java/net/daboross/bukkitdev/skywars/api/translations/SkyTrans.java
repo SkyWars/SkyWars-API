@@ -30,7 +30,7 @@ public class SkyTrans {
     /**
      * Gets the translation for the given key and the given arguments.
      *
-     * @param key The key to search for a translation of.
+     * @param key  The key to search for a translation of.
      * @param args The arguments to apply to the translation.
      * @return The final message to be given in game.
      */

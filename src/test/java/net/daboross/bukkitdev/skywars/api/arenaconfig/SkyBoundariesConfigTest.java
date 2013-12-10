@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 public class SkyBoundariesConfigTest {

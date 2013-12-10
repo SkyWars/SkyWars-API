@@ -34,9 +34,7 @@ public enum ConfigColorCode {
     private ConfigColorCode(char shortVer, char code) {
         this.shortVer = shortVer;
         this.code = code;
-        this.color = String.valueOf(new char[]{
-            ChatColor.COLOR_CHAR, code
-        });
+        this.color = String.valueOf(new char[]{ChatColor.COLOR_CHAR, code});
     }
 
     @Override

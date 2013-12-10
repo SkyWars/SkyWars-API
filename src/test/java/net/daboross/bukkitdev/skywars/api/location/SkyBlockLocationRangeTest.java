@@ -18,12 +18,11 @@ package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.Random;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
 /**
- *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 public class SkyBlockLocationRangeTest {

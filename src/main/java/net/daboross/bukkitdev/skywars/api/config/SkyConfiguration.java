@@ -32,12 +32,12 @@ public interface SkyConfiguration {
      * Reloads the current configuration from file. This method failing may
      * leave SkyWars in an unstable state.
      *
-     * @throws IOException If an IOException is thrown by any of the underlying
-     * configurations.
+     * @throws IOException                   If an IOException is thrown by any of the underlying
+     *                                       configurations.
      * @throws InvalidConfigurationException If the configuration file is
-     * invalid YAML.
-     * @throws SkyConfigurationException If a configuration value is not of the
-     * correct type, or if there are other errors in the configuration.
+     *                                       invalid YAML.
+     * @throws SkyConfigurationException     If a configuration value is not of the
+     *                                       correct type, or if there are other errors in the configuration.
      */
     public void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;
 

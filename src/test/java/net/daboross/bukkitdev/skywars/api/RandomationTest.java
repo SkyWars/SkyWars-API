@@ -23,7 +23,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 public class RandomationTest {
@@ -37,7 +36,7 @@ public class RandomationTest {
     @Test
     public void testGetRandom() {
         List<Integer> list = new ArrayList<Integer>();
-        list.addAll(Arrays.asList(1, 0, 02, 320, 43, 21, 123));
+        list.addAll(Arrays.asList(1, 0, 2, 320, 43, 21, 123));
         for (int i = 0; i < 10; i++) {
             assertEquals(true, list.contains(Randomation.getRandom(list)));
         }

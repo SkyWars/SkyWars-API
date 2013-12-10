@@ -28,10 +28,10 @@ public interface SkyGameHandler {
     /**
      * Ends a game with the given ID.
      *
-     * @param id the id of the game to end.
+     * @param id        the id of the game to end.
      * @param broadcast whether or not to broadcast the winner(s) of the game
      * @throws IllegalArgumentException if there is no running game with the
-     * given id.
+     *                                  given id.
      */
     public void endGame(int id, boolean broadcast);
 
@@ -39,8 +39,8 @@ public interface SkyGameHandler {
      * Removes a player from whatever game they are in.
      *
      * @param playerName the name of the player to remove
-     * @param respawn whether or not to call a PlayerRespawnAfterLeaveGameEvent
-     * @param broadcast whether or not to broadcast the leaving message
+     * @param respawn    whether or not to call a PlayerRespawnAfterLeaveGameEvent
+     * @param broadcast  whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
     public void removePlayerFromGame(String playerName, boolean respawn, boolean broadcast);
@@ -48,8 +48,8 @@ public interface SkyGameHandler {
     /**
      * Removes a player from whatever game they are in.
      *
-     * @param player the player to remove
-     * @param respawn whether or not to call a PlayerRespawnAfterLeaveGameEvent
+     * @param player    the player to remove
+     * @param respawn   whether or not to call a PlayerRespawnAfterLeaveGameEvent
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */

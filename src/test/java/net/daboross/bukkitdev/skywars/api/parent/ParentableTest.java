@@ -16,12 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api.parent;
 
-import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Dabo Ross <http://www.daboross.net/>
  */
 public class ParentableTest {

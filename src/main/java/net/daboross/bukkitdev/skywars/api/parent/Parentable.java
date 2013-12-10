@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.parent;
 import lombok.Getter;
 
 /**
- *
  * @param <T> This class
  */
 public class Parentable<T extends Parentable<T>> {
