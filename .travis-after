@@ -12,5 +12,5 @@ if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" && "`grep SNAPSHOT pom.xml`" ]]; the
     mkdir -p "${HOME}/.m2/"
     echo "${MVN_SETTINGS_XML}" > "${HOME}/.m2/settings.xml"
 
-    mvn deploy;
+    mvn deploy
 fi
