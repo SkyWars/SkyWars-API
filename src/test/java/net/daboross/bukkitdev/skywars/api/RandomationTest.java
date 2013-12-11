@@ -22,13 +22,7 @@ import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class RandomationTest {
-
-    public RandomationTest() {
-    }
 
     /**
      * Test of getRandom method, of class Randomation.
