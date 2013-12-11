@@ -75,6 +75,9 @@ public enum TransKey {
     // commands.forcestart
     CMD_FORCESTART_DESCRIPTION("commands.forcestart.description", 0),
     CMD_FORCESTART_NOT_ENOUGH("commands.forcestart.not-enough-players", 0),
+    // commands.kit
+    CMD_KIT_DESCRIPTION("commands.kit.description", 0),
+    CMD_KIT_LIST("commands.kit.list", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
