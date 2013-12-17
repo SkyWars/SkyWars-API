@@ -16,7 +16,6 @@
  */
 package net.daboross.bukkitdev.skywars.api.translations;
 
-import java.util.List;
 import lombok.NonNull;
 import lombok.Setter;
 
