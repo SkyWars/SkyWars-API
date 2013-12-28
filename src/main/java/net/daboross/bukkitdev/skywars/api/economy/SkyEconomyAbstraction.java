@@ -20,9 +20,13 @@ public interface SkyEconomyAbstraction {
 
     public void addReward(String player, double reward);
 
+    public String getCurrencySymbolWord(double amount);
+
     public String getCurrencySymbol(double amount);
 
     public boolean canAfford(String player, double amount);
 
     public boolean charge(String player, double amount);
+
+    public double getAmount(String player);
 }
