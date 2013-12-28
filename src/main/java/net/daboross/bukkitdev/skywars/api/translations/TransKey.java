@@ -79,7 +79,7 @@ public enum TransKey {
     CMD_KIT_DESCRIPTION("commands.kit.description", 0),
     CMD_KIT_NO_KITS_AVAILABLE("cmd.kits.no-kits-available", 0),
     CMD_KIT_UNAVAILABLE_KITS("cmd.kits.unavailable-kits", 0),
-    CMD_KIT_UNKNOWN_KIT("cmd.kits.unknown-kit", 0),
+    CMD_KIT_UNKNOWN_KIT("cmd.kits.unknown-kit", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
@@ -105,6 +105,7 @@ public enum TransKey {
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
     // generic-command-message
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", 0),
+    NOT_ENOUGH_PARAMS("generic-command-message.not-enough-parameters", 0),
     // messages
     QUEUE_DEATH("messages.removed-from-queue-because-death", 0),
     NO_CLUE_COMMAND("messages.no-clue-what-command", 1),
