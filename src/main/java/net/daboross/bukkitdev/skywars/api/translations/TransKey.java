@@ -77,9 +77,10 @@ public enum TransKey {
     CMD_FORCESTART_NOT_ENOUGH("commands.forcestart.not-enough-players", 0),
     // commands.kit
     CMD_KIT_DESCRIPTION("commands.kit.description", 0),
-    CMD_KIT_NO_KITS_AVAILABLE("cmd.kits.no-kits-available", 0),
-    CMD_KIT_UNAVAILABLE_KITS("cmd.kits.unavailable-kits", 0),
-    CMD_KIT_UNKNOWN_KIT("cmd.kits.unknown-kit", 1),
+    CMD_KIT_NO_KITS_AVAILABLE("commands.kit.no-kits-available", 0),
+    CMD_KIT_UNAVAILABLE_KITS("commands.kit.unavailable-kits", 0),
+    CMD_KIT_UNKNOWN_KIT("commands.kit.unknown-kit", 1),
+    CMD_KIT_NOT_ENOUGH_MONEY("commands.kit.not-enough-money", 3),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
