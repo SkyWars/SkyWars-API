@@ -30,4 +30,6 @@ public interface SkyKits {
     public SkyKit getKit(String name);
 
     public List<SkyKit> getAvailableKits(Player p);
+
+    public List<SkyKit> getUnavailableKits(Player p);
 }
