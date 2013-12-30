@@ -27,10 +27,9 @@ public class SkyStatic {
     @Setter
     @Getter
     private static boolean debug = false;
-    @Setter
+    private static Logger defaultLogger = Bukkit.getLogger();
     @Getter
-    @SuppressWarnings("NonConstantLogger")
-    private static Logger logger = Bukkit.getLogger();
+    private static Logger logger = defaultLogger;
     @Setter
     @Getter
     private static String pluginName = "SkyWars";
@@ -40,9 +39,13 @@ public class SkyStatic {
     @Getter
     private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
 
+    public static void setLogger(final Logger logger) {
+        SkyStatic.logger = logger == null ? defaultLogger : logger;
+    }
+
     public static void debug(String message) {
         if (debug) {
-            if (logger.equals(Bukkit.getLogger())) {
+            if (logger.equals(defaultLogger)) {
                 logger.log(Level.INFO, "[SkyWars] {0}", message);
             } else {
                 logger.log(Level.INFO, message);
@@ -52,7 +55,7 @@ public class SkyStatic {
 
     public static void debug(String message, Object... args) {
         if (debug) {
-            if (logger.equals(Bukkit.getLogger())) {
+            if (logger.equals(defaultLogger)) {
                 logger.log(Level.INFO, "[SkyWars] {0}", String.format(message, args));
             } else {
                 logger.log(Level.INFO, message);
