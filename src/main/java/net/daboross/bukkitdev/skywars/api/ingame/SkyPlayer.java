@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.ingame;
 
+import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import org.bukkit.entity.Player;
 
 public interface SkyPlayer {
@@ -27,4 +28,8 @@ public interface SkyPlayer {
     public int getGameId();
 
     public SkyPlayerState getState();
+
+    public SkyKit getSelectedKit();
+
+    public void setSelectedKit(SkyKit kit);
 }
