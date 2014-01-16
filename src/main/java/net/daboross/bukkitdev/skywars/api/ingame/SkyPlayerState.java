@@ -17,5 +17,5 @@
 package net.daboross.bukkitdev.skywars.api.ingame;
 
 public enum SkyPlayerState {
-    IN_QUEUE, WAITING_IN_GAME, IN_RUNNING_GAME;
+    IN_QUEUE, WAITING_IN_GAME, IN_RUNNING_GAME
 }

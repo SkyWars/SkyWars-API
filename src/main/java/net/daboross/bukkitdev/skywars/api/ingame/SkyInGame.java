@@ -16,7 +16,11 @@
  */
 package net.daboross.bukkitdev.skywars.api.ingame;
 
+import org.bukkit.entity.Player;
+
 public interface SkyInGame {
+
+    public SkyPlayer getPlayer(Player player);
 
     public SkyPlayer getPlayer(String name);
 
