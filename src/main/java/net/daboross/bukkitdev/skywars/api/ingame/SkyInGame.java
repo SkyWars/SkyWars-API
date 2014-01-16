@@ -14,9 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.game;
+package net.daboross.bukkitdev.skywars.api.ingame;
 
-public enum SkyPlayerState {
-    IN_QUEUE, WAITING_IN_GAME, IN_RUNNING_GAME;
+public interface SkyInGame {
 
+    public SkyPlayer getPlayer(String name);
+
+    /**
+     * Gets whether SkyInGame has stored info on a player.
+     * SkyInGame stores info on players that are either in the queue or in game.
+     *
+     * @param name The name of the player to check, case insensitive
+     * @return Whether the player is in either the queue or the game.
+     */
+    public boolean isInGame(String name);
 }

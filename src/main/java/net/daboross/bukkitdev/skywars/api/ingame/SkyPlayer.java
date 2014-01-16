@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.game;
+package net.daboross.bukkitdev.skywars.api.ingame;
 
 import org.bukkit.entity.Player;
 
@@ -27,8 +27,4 @@ public interface SkyPlayer {
     public int getGameId();
 
     public SkyPlayerState getState();
-
-    public void setGameId(int gameId);
-
-    public void setInGame(boolean inGame);
 }

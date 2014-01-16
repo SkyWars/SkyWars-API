@@ -23,7 +23,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
-import net.daboross.bukkitdev.skywars.api.game.SkyInGame;
+import net.daboross.bukkitdev.skywars.api.ingame.SkyInGame;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
 import net.daboross.bukkitdev.skywars.api.points.SkyPoints;
