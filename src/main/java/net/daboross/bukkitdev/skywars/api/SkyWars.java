@@ -23,6 +23,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
+import net.daboross.bukkitdev.skywars.api.game.SkyInGame;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
 import net.daboross.bukkitdev.skywars.api.points.SkyPoints;
@@ -48,6 +49,15 @@ public interface SkyWars extends Plugin {
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
      */
     public SkyGameQueue getGameQueue();
+
+    /**
+     * Gets the SkyInGame for this plugin. This will store all player info for people in queue & game.
+     * <p/>
+     * This method will never return null if this plugin is enabled.
+     *
+     * @return The SkyGameQueue, or null if this plugin is not yet enabled.
+     */
+    public SkyInGame getInGame();
 
     /**
      * Gets the SkyCurrentGameTrackter for this plugin.
