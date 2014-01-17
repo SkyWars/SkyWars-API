@@ -188,11 +188,8 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         if (o == null) {
             return null;
         }
-        if (o instanceof Integer) {
-            return Double.valueOf(((Integer) o).doubleValue());
-        }
-        if (o instanceof Double) {
-            return (Double) o;
+        if (o instanceof Number) {
+            return ((Number) o).doubleValue();
         }
         return null;
     }
