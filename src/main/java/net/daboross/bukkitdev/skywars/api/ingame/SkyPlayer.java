@@ -32,4 +32,8 @@ public interface SkyPlayer {
     public SkyKit getSelectedKit();
 
     public void setSelectedKit(SkyKit kit);
+
+    public SkySavedInventory getSavedInventory();
+
+    public void setSavedInventory(SkySavedInventory inventory);
 }

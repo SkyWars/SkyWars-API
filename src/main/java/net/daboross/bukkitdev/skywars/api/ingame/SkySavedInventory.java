@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.ingame;
 
-public enum SkyPlayerState {
-    IN_QUEUE, WAITING_IN_GAME, NOT_IN_GAME, IN_RUNNING_GAME, WAITING_FOR_RESPAWN
+import org.bukkit.entity.Player;
+
+public interface SkySavedInventory {
+
+    public void apply(Player p);
 }

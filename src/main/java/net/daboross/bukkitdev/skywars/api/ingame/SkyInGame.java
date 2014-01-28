@@ -20,16 +20,28 @@ import org.bukkit.entity.Player;
 
 public interface SkyInGame {
 
+    /**
+     * Gets info on the given player.
+     *
+     * @param player the player to get info on
+     * @return the information stored on the player, or null if no information is stored.
+     */
     public SkyPlayer getPlayer(Player player);
 
+    /**
+     * Gets info on the given player, or null if there is no information on the player.
+     *
+     * @param name the name of the player to check, case insensitive
+     * @return the information stored on the player, or null if no information is stored.
+     */
     public SkyPlayer getPlayer(String name);
 
     /**
-     * Gets whether SkyInGame has stored info on a player.
-     * SkyInGame stores info on players that are either in the queue or in game.
+     * Gets info stored on a player, or starts storing info if there is no information on the player.
      *
-     * @param name The name of the player to check, case insensitive
-     * @return Whether the player is in either the queue or the game.
+     * @param player the player to get info on
+     * @return the information stored on the player
      */
-    public boolean isInGame(String name);
+    public SkyPlayer getPlayerForce(Player player);
+
 }
