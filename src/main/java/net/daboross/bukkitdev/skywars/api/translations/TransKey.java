@@ -81,6 +81,13 @@ public enum TransKey {
     CMD_KIT_UNAVAILABLE_KITS("commands.kit.unavailable-kits", 0),
     CMD_KIT_UNKNOWN_KIT("commands.kit.unknown-kit", 1),
     CMD_KIT_NOT_ENOUGH_MONEY("commands.kit.not-enough-money", 3),
+    CMD_KIT_CHOSE_KIT("commands.kit.chose-kit", 1),
+    CMD_KIT_CHOSE_KIT_WITH_COST("commands.kit.chose-kit-with-cost", 2),
+    CMD_KIT_HOW_TO_REMOVE("commands.kit.how-to-remove", 0),
+    CMD_KIT_REMOVED_KIT("commands.kit.removed-kit", 1),
+    CMD_KIT_NO_KIT_REMOVED("commands.kit.no-kit-removed", 0),
+    CMD_KIT_CURRENT_KIT("commands.kit.current-kit", 1),
+    CMD_KIT_CURRENT_KIT_WITH_COST("commands.kit.current-kit-with-cost", 2),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
