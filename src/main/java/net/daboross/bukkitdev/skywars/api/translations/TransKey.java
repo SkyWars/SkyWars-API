@@ -126,6 +126,9 @@ public enum TransKey {
     KITS_KIT_LIST_COMMA("messages.kits.kit-list-comma", 0),
     KITS_KIT_LIST_COST_ITEM("messages.kits.kit-list-item-cost", 2),
     KITS_CHOOSE_A_KIT("messages.kits.choose-a-kit", 0),
+    KITS_APPLIED_KIT("messages.kits.applied-kit", 1),
+    KITS_APPLIED_KIT_WITH_COST("messages.kits.applied-kit-with-cost", 2),
+    KITS_NOT_ENOUGH_MONEY("messages.kits.not-enough-money", 1),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
