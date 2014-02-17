@@ -43,5 +43,4 @@ public interface SkyInGame {
      * @return the information stored on the player
      */
     public SkyPlayer getPlayerForce(Player player);
-
 }
