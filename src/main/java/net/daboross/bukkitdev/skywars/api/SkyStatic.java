@@ -58,7 +58,7 @@ public class SkyStatic {
             if (logger.equals(defaultLogger)) {
                 logger.log(Level.INFO, "[SkyWars] {0}", String.format(message, args));
             } else {
-                logger.log(Level.INFO, message);
+                logger.log(Level.INFO, String.format(message, args));
             }
         }
     }

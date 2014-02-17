@@ -51,8 +51,23 @@ public class SkyKitConfig implements SkyKit {
 
     @Override
     public void applyTo(Player p) {
-        PlayerInventory i = p.getInventory();
-        i.setArmorContents(armorContents.toArray(new ItemStack[4]));
+        PlayerInventory inv = p.getInventory();
+        ItemStack[] armor = new ItemStack[4];
+        for (int i = 0; i < 4; i++) {
+            SkyKitItem skyKitItem = armorContents.get(i);
+            if (skyKitItem != null) {
+                armor[i] = skyKitItem.toItem();
+            }
+        }
+        inv.setArmorContents(armor);
+        ItemStack[] contents = new ItemStack[inventoryContents.size()];
+        for (int i = 0; i < contents.length; i++) {
+            SkyKitItem skyKitItem = inventoryContents.get(i);
+            if (skyKitItem != null) {
+                contents[i] = skyKitItem.toItem();
+            }
+        }
+        inv.setContents(contents);
     }
 
     @Override
