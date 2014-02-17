@@ -78,7 +78,7 @@ public enum TransKey {
     // commands.kit
     CMD_KIT_DESCRIPTION("commands.kit.description", 0),
     CMD_KIT_NO_KITS_AVAILABLE("commands.kit.no-kits-available", 0),
-    CMD_KIT_UNAVAILABLE_KITS("commands.kit.unavailable-kits", 0),
+    CMD_KIT_UNAVAILABLE_KITS("commands.kit.unavailable-kits", 1),
     CMD_KIT_UNKNOWN_KIT("commands.kit.unknown-kit", 1),
     CMD_KIT_NOT_ENOUGH_MONEY("commands.kit.not-enough-money", 3),
     CMD_KIT_CHOSE_KIT("commands.kit.chose-kit", 1),
