@@ -190,21 +190,21 @@ public interface SkyConfiguration {
      */
     public Pattern getCommandWhitelistCommandRegex();
 
-    /**
-     * Gets whether or not death messages should only be broadcasted to people
-     * in the arena.
-     *
-     * @return whether or not per arena death messages are enabled.
-     */
-    public boolean arePerArenaDeathMessagesEnabled();
+//    /**
+//     * Gets whether or not death messages should only be broadcasted to people
+//     * in the arena.
+//     *
+//     * @return whether or not per arena death messages are enabled.
+//     */
+//    public boolean arePerArenaDeathMessagesEnabled();
 
-    /**
-     * Gets whether or not win messages should only be broadcasted to people in
-     * the arena.
-     *
-     * @return whether or not per arena win messages are enabled.
-     */
-    public boolean arePerArenaWinMessagesEnabled();
+//    /**
+//     * Gets whether or not win messages should only be broadcasted to people in
+//     * the arena.
+//     *
+//     * @return whether or not per arena win messages are enabled.
+//     */
+//    public boolean arePerArenaWinMessagesEnabled();
 
     /**
      * An Enum to record the order that arenas are chosen.
