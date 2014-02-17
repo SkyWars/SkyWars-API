@@ -23,9 +23,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class SkyBlockLocationTest {
 
     private Random r;
