@@ -190,6 +190,7 @@ public interface SkyConfiguration {
      */
     public Pattern getCommandWhitelistCommandRegex();
 
+    public String getLocale();
 //    /**
 //     * Gets whether or not death messages should only be broadcasted to people
 //     * in the arena.
