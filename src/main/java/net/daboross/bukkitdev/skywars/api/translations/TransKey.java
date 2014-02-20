@@ -131,6 +131,8 @@ public enum TransKey {
     KITS_NOT_ENOUGH_MONEY("messages.kits.not-enough-money", 1),
     // messages.in-game
     GENERIC_IN_GAME("messages.in-game", 0),
+    // disable report
+    REPORT_DISABLED("messages.report-disabled", 0),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
