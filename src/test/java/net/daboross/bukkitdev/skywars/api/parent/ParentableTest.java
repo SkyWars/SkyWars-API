@@ -47,7 +47,7 @@ public class ParentableTest {
         }
     }
 
-    public static class DummyParentable extends Parentable<DummyParentable> {
+    private static class DummyParentable extends Parentable<DummyParentable> {
 
     }
 }

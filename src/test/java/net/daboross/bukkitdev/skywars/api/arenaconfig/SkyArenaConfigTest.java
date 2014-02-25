@@ -22,13 +22,10 @@ import java.util.Random;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- * @author Dabo Ross <http://www.daboross.net/>
- */
 public class SkyArenaConfigTest {
 
     private Random r;
@@ -43,7 +40,7 @@ public class SkyArenaConfigTest {
         SkyArenaConfig config = getRandom(r);
         // It shouldn't take into account the arena name, so 'null' is passed.
         SkyArenaConfig copy = new SkyArenaConfig(null, config.getRawSpawns(), config.getRawNumTeams(), config.getRawTeamSize(), config.getRawPlacementY(), config.getBoundaries(), config.getMessages());
-        Assert.assertEquals(config, copy);
+        assertEquals(config, copy);
     }
 
     @Test
@@ -52,7 +49,20 @@ public class SkyArenaConfigTest {
         YamlConfiguration serializationMedium = new YamlConfiguration();
         config.serialize(serializationMedium);
         SkyArenaConfig deserialized = SkyArenaConfig.deserialize(serializationMedium);
-        Assert.assertEquals(config, deserialized);
+        assertEquals(config, deserialized);
+    }
+
+    @Test
+    public void ensureConfigVersionCheck() {
+        SkyArenaConfig config = getRandom(r);
+        YamlConfiguration serializationMedium = new YamlConfiguration();
+        config.serialize(serializationMedium);
+        serializationMedium.set("config-version", serializationMedium.getInt("config-version") + 1);
+        try {
+            SkyArenaConfig.deserialize(serializationMedium);
+            fail("Deserialization on future config version doesn't throw IllegalArgumentException.");
+        } catch (IllegalArgumentException unused) {
+        }
     }
 
     public static SkyArenaConfig getRandom(Random r) {

@@ -16,15 +16,20 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ArenaPlayerKillPlayerEvent extends Event {
 
     @Getter

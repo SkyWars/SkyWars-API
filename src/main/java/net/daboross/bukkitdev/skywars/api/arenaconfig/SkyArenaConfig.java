@@ -133,7 +133,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
                 return parent.getNumTeams();
             }
         } else {
-            return rawNumTeams.intValue();
+            return rawNumTeams;
         }
     }
 
