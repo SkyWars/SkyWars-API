@@ -17,13 +17,15 @@
 package net.daboross.bukkitdev.skywars.api.points;
 
 import java.io.IOException;
-import lombok.RequiredArgsConstructor;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 
-@RequiredArgsConstructor
 public abstract class PointStorageBackend {
 
     protected final SkyWars skywars;
+
+    protected PointStorageBackend(final SkyWars skywars) {
+        this.skywars = skywars;
+    }
 
     public abstract void addScore(String player, int diff);
 
