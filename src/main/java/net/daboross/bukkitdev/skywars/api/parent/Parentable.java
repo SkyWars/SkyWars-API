@@ -16,30 +16,17 @@
  */
 package net.daboross.bukkitdev.skywars.api.parent;
 
-import lombok.Getter;
-
 /**
  * @param <T> This class
  */
 public class Parentable<T extends Parentable<T>> {
 
-    @Getter
     protected T parent;
 
     public Parentable() {
     }
 
     public Parentable(T parent) {
-        this.parent = parent;
-        checkParentCycle();
-    }
-
-    /**
-     * Sets the parent
-     *
-     * @param parent the new parent to inherit values from
-     */
-    public void setParent(T parent) {
         this.parent = parent;
         checkParentCycle();
     }
@@ -63,8 +50,22 @@ public class Parentable<T extends Parentable<T>> {
             return;
         }
         if (parent == original) {
-            throw new IllegalArgumentException("Parent inheritance loop; original=" + original + "; final-parent=" + parent + ";");
+            throw new IllegalArgumentException("Parent inheritance loop!");
         }
         parent.checkParentCycle(original);
+    }
+
+    public T getParent() {
+        return parent;
+    }
+
+    /**
+     * Sets the parent
+     *
+     * @param parent the new parent to inherit values from
+     */
+    public void setParent(T parent) {
+        this.parent = parent;
+        checkParentCycle();
     }
 }

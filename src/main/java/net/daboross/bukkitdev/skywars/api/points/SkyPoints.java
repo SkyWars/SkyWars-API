@@ -16,14 +16,17 @@
  */
 package net.daboross.bukkitdev.skywars.api.points;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public abstract class SkyPoints {
 
-    @Setter
-    @Getter
     private static Class<? extends PointStorageBackend> backend;
+
+    public static Class<? extends PointStorageBackend> getBackend() {
+        return backend;
+    }
+
+    public static void setBackend(final Class<? extends PointStorageBackend> backend) {
+        SkyPoints.backend = backend;
+    }
 
     public abstract void addScore(String name, int diff);
 

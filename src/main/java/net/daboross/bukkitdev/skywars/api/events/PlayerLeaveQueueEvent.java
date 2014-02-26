@@ -18,7 +18,6 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.bukkit.entity.Player;
@@ -28,14 +27,20 @@ import org.bukkit.event.player.PlayerEvent;
 @EqualsAndHashCode(callSuper = false)
 public class PlayerLeaveQueueEvent extends PlayerEvent {
 
-    @Getter
     private static final HandlerList handlerList = new HandlerList();
-    @Getter
     private final SkyWars plugin;
 
     public PlayerLeaveQueueEvent(@NonNull SkyWars plugin, @NonNull Player who) {
         super(who);
         this.plugin = plugin;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlerList;
+    }
+
+    public SkyWars getPlugin() {
+        return plugin;
     }
 
     @Override

@@ -22,9 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
@@ -37,23 +35,13 @@ import org.bukkit.configuration.ConfigurationSection;
 @NoArgsConstructor
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
 
-    @Getter
     private List<SkyPlayerLocation> rawSpawns;
-    @Getter
     private Integer rawNumTeams;
-    @Getter
     private Integer rawTeamSize;
-    @Getter
     private Integer rawPlacementY;
-    @Getter
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
-    @Getter
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
-    @Setter
-    @Getter
     private File file;
-    @Setter
-    @Getter
     private String arenaName = "null";
 
     public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
@@ -280,5 +268,51 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         SkyBoundariesConfig boundaries = boundariesSection != null ? SkyBoundariesConfig.deserialize(boundariesSection) : null;
         SkyMessagesConfig messages = messagesSection != null ? SkyMessagesConfig.deserialize(messagesSection) : null;
         return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, messages);
+    }
+
+    public void setFile(final File file) {
+        this.file = file;
+    }
+
+    public void setArenaName(final String arenaName) {
+        this.arenaName = arenaName;
+    }
+
+    @Override
+    public String getArenaName() {
+        return arenaName;
+    }
+
+    public List<SkyPlayerLocation> getRawSpawns() {
+        return rawSpawns;
+    }
+
+    @Override
+    public Integer getRawNumTeams() {
+        return rawNumTeams;
+    }
+
+    @Override
+    public Integer getRawTeamSize() {
+        return rawTeamSize;
+    }
+
+    @Override
+    public Integer getRawPlacementY() {
+        return rawPlacementY;
+    }
+
+    @Override
+    public SkyBoundariesConfig getBoundaries() {
+        return boundaries;
+    }
+
+    @Override
+    public SkyMessagesConfig getMessages() {
+        return messages;
+    }
+
+    public File getFile() {
+        return file;
     }
 }

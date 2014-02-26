@@ -18,30 +18,16 @@ package net.daboross.bukkitdev.skywars.api;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 
 public class SkyStatic {
 
-    @Setter
-    @Getter
+    private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
     private static boolean debug = false;
     private static Logger defaultLogger = Bukkit.getLogger();
-    @Getter
     private static Logger logger = defaultLogger;
-    @Setter
-    @Getter
     private static String pluginName = "SkyWars";
-    @Setter
-    @Getter
     private static String version = "Unknown";
-    @Getter
-    private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
-
-    public static void setLogger(final Logger logger) {
-        SkyStatic.logger = logger == null ? defaultLogger : logger;
-    }
 
     public static void debug(String message) {
         if (debug) {
@@ -61,5 +47,37 @@ public class SkyStatic {
                 logger.log(Level.INFO, String.format(message, args));
             }
         }
+    }
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static void setLogger(final Logger logger) {
+        SkyStatic.logger = logger == null ? defaultLogger : logger;
+    }
+
+    public static String getPluginName() {
+        return pluginName;
+    }
+
+    public static void setPluginName(final String pluginName) {
+        SkyStatic.pluginName = pluginName;
+    }
+
+    public static String getVersion() {
+        return version;
+    }
+
+    public static void setVersion(final String version) {
+        SkyStatic.version = version;
+    }
+
+    public static String getImplementationVersion() {
+        return implementationVersion;
+    }
+
+    public static void setDebug(final boolean debug) {
+        SkyStatic.debug = debug;
     }
 }

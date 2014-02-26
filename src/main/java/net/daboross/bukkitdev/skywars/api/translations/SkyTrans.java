@@ -17,14 +17,12 @@
 package net.daboross.bukkitdev.skywars.api.translations;
 
 import lombok.NonNull;
-import lombok.Setter;
 
 /**
  * Static access to SkyTranslations. Short name for convenience
  */
 public class SkyTrans {
 
-    @Setter
     private static SkyTranslations instance;
 
     /**
@@ -45,5 +43,9 @@ public class SkyTrans {
         } else {
             return String.format(instance.get(key), args);
         }
+    }
+
+    public static void setInstance(final SkyTranslations instance) {
+        SkyTrans.instance = instance;
     }
 }
