@@ -16,7 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api.translations;
 
+import java.util.IllegalFormatException;
+import java.util.logging.Level;
 import lombok.NonNull;
+import net.daboross.bukkitdev.skywars.api.SkyStatic;
 
 /**
  * Static access to SkyTranslations. Short name for convenience
@@ -41,7 +44,13 @@ public class SkyTrans {
         } else if (key.args < args.length) {
             throw new IllegalArgumentException("Not enough args for key " + key.key);
         } else {
-            return String.format(instance.get(key), args);
+            String format = instance.get(key);
+            try {
+                return String.format(format, args);
+            } catch (IllegalFormatException ex) {
+                SkyStatic.getLogger().log(Level.SEVERE, "Translation format error. Key is '" + key.key + ", format string is '" + format + "', stacktrace:", ex);
+                return String.format("invalid-message-format[%s][%s]", key.key, format);
+            }
         }
     }
 
