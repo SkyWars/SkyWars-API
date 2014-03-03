@@ -307,6 +307,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyArenaConfig)) return false;

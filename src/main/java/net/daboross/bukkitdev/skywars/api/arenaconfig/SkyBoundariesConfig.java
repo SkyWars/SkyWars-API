@@ -149,6 +149,7 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyBoundariesConfig)) return false;

@@ -241,6 +241,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyPlayerLocation)) return false;

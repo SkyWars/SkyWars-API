@@ -70,6 +70,7 @@ public class LeaveGameEvent extends PlayerEvent {
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LeaveGameEvent)) return false;

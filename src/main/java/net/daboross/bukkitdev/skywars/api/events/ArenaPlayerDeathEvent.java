@@ -68,6 +68,7 @@ public class ArenaPlayerDeathEvent extends Event {
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof ArenaPlayerDeathEvent)) return false;

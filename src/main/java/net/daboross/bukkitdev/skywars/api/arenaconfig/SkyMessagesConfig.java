@@ -155,6 +155,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     }
 
     @Override
+    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyMessagesConfig)) return false;
