@@ -16,14 +16,12 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@EqualsAndHashCode(callSuper = true)
 public class ArenaPlayerDeathEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
@@ -32,6 +30,7 @@ public class ArenaPlayerDeathEvent extends Event {
     private final Player killed;
 
     public ArenaPlayerDeathEvent(final SkyWars plugin, final int gameId, final Player killed) {
+        Validate.notNull(plugin, "Plugin cannot be null");
         Validate.notNull(killed, "Killed cannot be null");
         this.plugin = plugin;
         this.gameId = gameId;
@@ -66,5 +65,27 @@ public class ArenaPlayerDeathEvent extends Event {
                 ", gameId=" + gameId +
                 ", killed=" + killed +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArenaPlayerDeathEvent)) return false;
+
+        ArenaPlayerDeathEvent event = (ArenaPlayerDeathEvent) o;
+
+        if (gameId != event.gameId) return false;
+        if (!killed.equals(event.killed)) return false;
+        if (!plugin.equals(event.plugin)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = plugin.hashCode();
+        result = 31 * result + gameId;
+        result = 31 * result + killed.hashCode();
+        return result;
     }
 }

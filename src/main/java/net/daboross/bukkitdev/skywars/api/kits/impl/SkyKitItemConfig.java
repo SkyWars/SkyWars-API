@@ -17,13 +17,12 @@
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-@EqualsAndHashCode
 public class SkyKitItemConfig implements SkyKitItem {
 
     private final Material material;
@@ -31,12 +30,14 @@ public class SkyKitItemConfig implements SkyKitItem {
     private final Map<Enchantment, Integer> enchantments;
 
     public SkyKitItemConfig(Material material) {
+        Validate.notNull(material, "Material cannot be null");
         this.material = material;
         this.amount = 1;
         this.enchantments = null;
     }
 
     public SkyKitItemConfig(Material material, int amount) {
+        Validate.notNull(material, "Material cannot be null");
         this.material = material;
         if (amount > material.getMaxStackSize()) {
             throw new IllegalArgumentException("Material " + material + " can't have a stack size of " + amount + ". It is too high.");
@@ -48,6 +49,7 @@ public class SkyKitItemConfig implements SkyKitItem {
     }
 
     public SkyKitItemConfig(Material material, int amount, Map<Enchantment, Integer> enchantments) {
+        Validate.notNull(material, "Material cannot be null");
         this.material = material;
         if (amount > material.getMaxStackSize()) {
             throw new IllegalArgumentException("Material " + material + " can't have a stack size of " + amount + ". It is too high.");
@@ -74,5 +76,28 @@ public class SkyKitItemConfig implements SkyKitItem {
                 ", amount=" + amount +
                 ", enchantments=" + enchantments +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyKitItemConfig)) return false;
+
+        SkyKitItemConfig config = (SkyKitItemConfig) o;
+
+        if (amount != config.amount) return false;
+        if (enchantments != null ? !enchantments.equals(config.enchantments) : config.enchantments != null)
+            return false;
+        if (material != config.material) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = material.hashCode();
+        result = 31 * result + amount;
+        result = 31 * result + (enchantments != null ? enchantments.hashCode() : 0);
+        return result;
     }
 }

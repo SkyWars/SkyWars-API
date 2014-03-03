@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
 import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
@@ -29,7 +28,6 @@ import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
-@EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements SkyMessages {
 
     private final Map<String, String> rawMessages = new HashMap<String, String>();
@@ -154,5 +152,27 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
                 ", messages=" + messages +
                 ", prefix='" + prefix + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyMessagesConfig)) return false;
+
+        SkyMessagesConfig config = (SkyMessagesConfig) o;
+
+        if (!messages.equals(config.messages)) return false;
+        if (prefix != null ? !prefix.equals(config.prefix) : config.prefix != null) return false;
+        if (!rawMessages.equals(config.rawMessages)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rawMessages.hashCode();
+        result = 31 * result + messages.hashCode();
+        result = 31 * result + (prefix != null ? prefix.hashCode() : 0);
+        return result;
     }
 }

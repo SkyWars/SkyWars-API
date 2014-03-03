@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -31,7 +30,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
 
-@EqualsAndHashCode
 @SerializableAs("SkyLocation")
 public class SkyBlockLocation implements ConfigurationSerializable {
 
@@ -195,5 +193,29 @@ public class SkyBlockLocation implements ConfigurationSerializable {
                 ", z=" + z +
                 ", world='" + world + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyBlockLocation)) return false;
+
+        SkyBlockLocation location = (SkyBlockLocation) o;
+
+        if (x != location.x) return false;
+        if (y != location.y) return false;
+        if (z != location.z) return false;
+        if (world != null ? !world.equals(location.world) : location.world != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        result = 31 * result + z;
+        result = 31 * result + (world != null ? world.hashCode() : 0);
+        return result;
     }
 }

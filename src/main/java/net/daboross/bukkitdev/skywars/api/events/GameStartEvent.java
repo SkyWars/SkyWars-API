@@ -18,7 +18,6 @@ package net.daboross.bukkitdev.skywars.api.events;
 
 import java.util.Collections;
 import java.util.List;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
 import org.apache.commons.lang.Validate;
@@ -26,7 +25,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@EqualsAndHashCode(callSuper = false)
 public class GameStartEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
@@ -35,6 +33,7 @@ public class GameStartEvent extends Event {
     private final List<Player> players;
 
     public GameStartEvent(SkyWars plugin, SkyGame newGame, List<Player> players) {
+        Validate.notNull(plugin, "Plugin cannot be null");
         Validate.notNull(newGame, "Game cannot be null");
         Validate.noNullElements(players, "No players can be null");
         this.plugin = plugin;
@@ -70,5 +69,27 @@ public class GameStartEvent extends Event {
                 ", newGame=" + newGame +
                 ", players=" + players +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameStartEvent)) return false;
+
+        GameStartEvent event = (GameStartEvent) o;
+
+        if (!newGame.equals(event.newGame)) return false;
+        if (!players.equals(event.players)) return false;
+        if (!plugin.equals(event.plugin)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = plugin.hashCode();
+        result = 31 * result + newGame.hashCode();
+        result = 31 * result + players.hashCode();
+        return result;
     }
 }

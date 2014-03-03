@@ -16,14 +16,12 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-@EqualsAndHashCode(callSuper = true)
 public class RespawnAfterLeaveGameEvent extends PlayerEvent {
 
     private static final HandlerList handlerList = new HandlerList();
@@ -54,5 +52,25 @@ public class RespawnAfterLeaveGameEvent extends PlayerEvent {
                 "plugin=" + plugin +
                 ", player=" + player +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RespawnAfterLeaveGameEvent)) return false;
+
+        RespawnAfterLeaveGameEvent event = (RespawnAfterLeaveGameEvent) o;
+
+        if (!player.equals(event.player)) return false;
+        if (!plugin.equals(event.plugin)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = plugin.hashCode();
+        result = 31 * result + player.hashCode();
+        return result;
     }
 }

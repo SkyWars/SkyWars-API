@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -31,7 +30,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
 
-@EqualsAndHashCode
 @SerializableAs("SkyLocationAccurate")
 public class SkyPlayerLocation implements ConfigurationSerializable {
 
@@ -240,5 +238,40 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
                 ", pitch=" + pitch +
                 ", world='" + world + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyPlayerLocation)) return false;
+
+        SkyPlayerLocation location = (SkyPlayerLocation) o;
+
+        if (Double.compare(location.pitch, pitch) != 0) return false;
+        if (Double.compare(location.x, x) != 0) return false;
+        if (Double.compare(location.y, y) != 0) return false;
+        if (Double.compare(location.yaw, yaw) != 0) return false;
+        if (Double.compare(location.z, z) != 0) return false;
+        if (world != null ? !world.equals(location.world) : location.world != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(x);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(y);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(z);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(yaw);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(pitch);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (world != null ? world.hashCode() : 0);
+        return result;
     }
 }

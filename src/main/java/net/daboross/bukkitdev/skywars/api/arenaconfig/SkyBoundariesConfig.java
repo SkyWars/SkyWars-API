@@ -16,12 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.bukkit.configuration.ConfigurationSection;
 
-@EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements SkyBoundaries {
 
     private SkyBlockLocationRange originRaw;
@@ -148,5 +146,27 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
                 ", buildingRaw=" + buildingRaw +
                 ", clearingRaw=" + clearingRaw +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyBoundariesConfig)) return false;
+
+        SkyBoundariesConfig config = (SkyBoundariesConfig) o;
+
+        if (buildingRaw != null ? !buildingRaw.equals(config.buildingRaw) : config.buildingRaw != null) return false;
+        if (clearingRaw != null ? !clearingRaw.equals(config.clearingRaw) : config.clearingRaw != null) return false;
+        if (originRaw != null ? !originRaw.equals(config.originRaw) : config.originRaw != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = originRaw != null ? originRaw.hashCode() : 0;
+        result = 31 * result + (buildingRaw != null ? buildingRaw.hashCode() : 0);
+        result = 31 * result + (clearingRaw != null ? clearingRaw.hashCode() : 0);
+        return result;
     }
 }

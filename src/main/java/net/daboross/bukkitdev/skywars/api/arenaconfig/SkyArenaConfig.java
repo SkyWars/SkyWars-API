@@ -21,14 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import lombok.EqualsAndHashCode;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.bukkit.configuration.ConfigurationSection;
 
-@EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
 
     private List<SkyPlayerLocation> rawSpawns;
@@ -306,5 +304,34 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
                 ", file=" + file +
                 ", arenaName='" + arenaName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyArenaConfig)) return false;
+
+        SkyArenaConfig config = (SkyArenaConfig) o;
+
+        if (!boundaries.equals(config.boundaries)) return false;
+        if (!messages.equals(config.messages)) return false;
+        if (rawNumTeams != null ? !rawNumTeams.equals(config.rawNumTeams) : config.rawNumTeams != null) return false;
+        if (rawPlacementY != null ? !rawPlacementY.equals(config.rawPlacementY) : config.rawPlacementY != null)
+            return false;
+        if (rawSpawns != null ? !rawSpawns.equals(config.rawSpawns) : config.rawSpawns != null) return false;
+        if (rawTeamSize != null ? !rawTeamSize.equals(config.rawTeamSize) : config.rawTeamSize != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rawSpawns != null ? rawSpawns.hashCode() : 0;
+        result = 31 * result + (rawNumTeams != null ? rawNumTeams.hashCode() : 0);
+        result = 31 * result + (rawTeamSize != null ? rawTeamSize.hashCode() : 0);
+        result = 31 * result + (rawPlacementY != null ? rawPlacementY.hashCode() : 0);
+        result = 31 * result + boundaries.hashCode();
+        result = 31 * result + messages.hashCode();
+        return result;
     }
 }
