@@ -16,13 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api.translations;
 
-import lombok.AllArgsConstructor;
-
 /**
  * Translation keys for SkyWars. This enumeration should contain one key for
  * every individual message in game.
  */
-@AllArgsConstructor
 public enum TransKey {
 
     // commands.join
@@ -151,4 +148,9 @@ public enum TransKey {
     public static final int VERSION = 1;
     public final String key;
     public final int args;
+
+    private TransKey(final String key, final int args) {
+        this.key = key;
+        this.args = args;
+    }
 }

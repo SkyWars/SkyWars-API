@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -36,13 +35,19 @@ import org.bukkit.entity.Entity;
 @ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocation")
-@AllArgsConstructor
 public class SkyBlockLocation implements ConfigurationSerializable {
 
     public final int x;
     public final int y;
     public final int z;
     public final String world;
+
+    public SkyBlockLocation(int x, int y, int z, String world) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.world = world;
+    }
 
     public SkyBlockLocation() {
         this(0, 0, 0, null);
