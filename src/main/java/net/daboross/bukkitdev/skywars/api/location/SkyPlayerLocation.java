@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -61,39 +61,68 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         this(x, y, z, 0, 0, world);
     }
 
-    public SkyPlayerLocation(@NonNull Block block) {
-        this(block.getX(), block.getY(), block.getZ(), block.getWorld() == null ? null : block.getWorld().getName());
+    public SkyPlayerLocation(Block block) {
+        Validate.notNull(block, "Block cannot be null");
+        this.x = block.getX();
+        this.y = block.getY();
+        this.z = block.getZ();
+        this.pitch = 0;
+        this.yaw = 0;
+        this.world = block.getWorld() == null ? null : block.getWorld().getName();
     }
 
-    public SkyPlayerLocation(@NonNull Location location) {
-        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch(), location.getWorld() == null ? null : location.getWorld().getName());
+    public SkyPlayerLocation(Location location) {
+        Validate.notNull(location, "Location cannot be null");
+        this.x = location.getX();
+        this.y = location.getY();
+        this.z = location.getZ();
+        this.yaw = location.getYaw();
+        this.pitch = location.getPitch();
+        this.world = location.getWorld() == null ? null : location.getWorld().getName();
     }
 
-    public SkyPlayerLocation(@NonNull Entity entity) {
-        this(entity.getLocation());
+    public SkyPlayerLocation(Entity entity) {
+        Validate.notNull(entity, "Entity cannot be null");
+        Location location = entity.getLocation();
+        this.x = location.getX();
+        this.y = location.getY();
+        this.z = location.getZ();
+        this.yaw = location.getYaw();
+        this.pitch = location.getPitch();
+        this.world = location.getWorld() == null ? null : location.getWorld().getName();
     }
 
-    public SkyPlayerLocation(@NonNull SkyBlockLocation location) {
-        this(location.x, location.y, location.z, location.world);
+    public SkyPlayerLocation(SkyBlockLocation location) {
+        Validate.notNull(location, "Location cannot be null");
+        this.x = location.x;
+        this.y = location.y;
+        this.z = location.z;
+        this.yaw = 0;
+        this.pitch = 0;
+        this.world = location.world;
     }
 
     public SkyPlayerLocation add(double x, double y, double z) {
         return new SkyPlayerLocation(this.x + x, this.y + y, this.z + z, world);
     }
 
-    public SkyPlayerLocation add(@NonNull SkyBlockLocation location) {
+    public SkyPlayerLocation add(SkyBlockLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
-    public SkyPlayerLocation add(@NonNull SkyPlayerLocation location) {
+    public SkyPlayerLocation add(SkyPlayerLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
-    public SkyPlayerLocation subtract(@NonNull SkyPlayerLocation location) {
+    public SkyPlayerLocation subtract(SkyPlayerLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyPlayerLocation(this.x - location.x, this.y - location.y, this.z - location.z, world);
     }
 
-    public SkyPlayerLocation subtract(@NonNull SkyBlockLocation location) {
+    public SkyPlayerLocation subtract(SkyBlockLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyPlayerLocation(this.x - location.x, this.y - location.y, this.z - location.z, world);
     }
 
@@ -151,7 +180,8 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         }
     }
 
-    public static SkyPlayerLocation deserialize(@NonNull Map<String, Object> map) {
+    public static SkyPlayerLocation deserialize(Map<String, Object> map) {
+        Validate.notNull(map, "Map cannot be null");
         Object worldO = map.get("world");
         Double x = get(map.get("x"));
         Double y = get(map.get("y"));
@@ -171,7 +201,8 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
     }
 
-    public static SkyPlayerLocation deserialize(@NonNull ConfigurationSection configurationSection) {
+    public static SkyPlayerLocation deserialize(ConfigurationSection configurationSection) {
+        Validate.notNull(configurationSection, "Configuration cannot be null");
         Object worldO = configurationSection.get("world");
         Double x = get(configurationSection.get("x"));
         Double y = get(configurationSection.get("y"));

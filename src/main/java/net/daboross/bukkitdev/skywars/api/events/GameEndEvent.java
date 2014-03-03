@@ -18,9 +18,9 @@ package net.daboross.bukkitdev.skywars.api.events;
 
 import java.util.Collections;
 import java.util.List;
-import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -32,7 +32,9 @@ public class GameEndEvent extends Event {
     private final SkyGame game;
     private final List<Player> alivePlayers;
 
-    public GameEndEvent(@NonNull SkyWars plugin, @NonNull SkyGame game, @NonNull List<Player> players) {
+    public GameEndEvent(SkyWars plugin, SkyGame game, List<Player> players) {
+        Validate.notNull(game, "Game cannot be null");
+        Validate.noNullElements(players, "No players can be null");
         this.plugin = plugin;
         this.game = game;
         this.alivePlayers = Collections.unmodifiableList(players);

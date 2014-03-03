@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.bukkit.Material;
@@ -24,6 +25,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 @ToString
+@EqualsAndHashCode
 public class SkyKitItemConfig implements SkyKitItem {
 
     private final Material material;

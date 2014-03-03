@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
@@ -32,7 +31,6 @@ import org.bukkit.configuration.ConfigurationSection;
 
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
-@NoArgsConstructor
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
 
     private List<SkyPlayerLocation> rawSpawns;
@@ -43,6 +41,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
     private File file;
     private String arenaName = "null";
+
+    public SkyArenaConfig() {
+    }
 
     public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);

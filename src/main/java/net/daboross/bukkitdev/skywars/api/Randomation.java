@@ -18,7 +18,7 @@ package net.daboross.bukkitdev.skywars.api;
 
 import java.util.List;
 import java.util.Random;
-import lombok.NonNull;
+import org.apache.commons.lang.Validate;
 
 public class Randomation {
 
@@ -32,7 +32,8 @@ public class Randomation {
      * @return A random item from this list.
      * @throws NullPointerException If list is null.
      */
-    public static <T> T getRandom(@NonNull List<T> list) {
+    public static <T> T getRandom(List<T> list) {
+        Validate.notNull(list, "List cannot be null");
         return list.get(random.nextInt(list.size()));
     }
 }

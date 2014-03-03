@@ -19,8 +19,8 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.ToString;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -48,10 +48,10 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
      *                                  max.x || min.y > max.y || min.z > max.z
      * @throws NullPointerException     if min or max is null
      */
-    public SkyBlockLocationRange(@NonNull SkyBlockLocation min, @NonNull SkyBlockLocation max, String world) {
-        if (min.x > max.x || min.y > max.y || min.z > max.z) {
-            throw new IllegalArgumentException("min position cannot be bigger than max position in any dimension.");
-        }
+    public SkyBlockLocationRange(SkyBlockLocation min, SkyBlockLocation max, String world) {
+        Validate.notNull(min, "Min cannot be null");
+        Validate.notNull(max, "Max cannot be null");
+        Validate.isTrue(min.x > max.x || min.y > max.y || min.z > max.z, "Min position cannot be bigger than max position in any dimension");
         if (min.world == null ? world != null : !min.world.equals(world)) {
             min = min.changeWorld(world);
         }
@@ -63,7 +63,8 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         this.max = max;
     }
 
-    public SkyBlockLocationRange add(@NonNull SkyBlockLocation loc) {
+    public SkyBlockLocationRange add(SkyBlockLocation loc) {
+        Validate.notNull(loc, "Location cannot be null");
         return new SkyBlockLocationRange(loc.add(min), loc.add(max), world);
     }
 
@@ -94,13 +95,15 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         return map;
     }
 
-    public void serialize(@NonNull ConfigurationSection section) {
+    public void serialize(ConfigurationSection section) {
+        Validate.notNull(section, "ConfigurationSection cannot be null");
         min.changeWorld(null).serialize(section.createSection("min"));
         max.changeWorld(null).serialize(section.createSection("max"));
         section.set("world", world);
     }
 
-    public static SkyBlockLocationRange deserialize(@NonNull Map<String, Object> map) {
+    public static SkyBlockLocationRange deserialize(Map<String, Object> map) {
+        Validate.notNull(map, "Map cannot be null");
         Object minObject = map.get("min"), maxObject = map.get("max"),
                 worldObject = map.get("world");
         if (!(minObject instanceof SkyBlockLocation && maxObject instanceof SkyBlockLocation)) {

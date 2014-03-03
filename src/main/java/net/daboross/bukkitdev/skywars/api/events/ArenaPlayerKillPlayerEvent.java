@@ -16,24 +16,27 @@
  */
 package net.daboross.bukkitdev.skywars.api.events;
 
-import lombok.NonNull;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@ToString
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class ArenaPlayerKillPlayerEvent extends Event {
 
     private static final HandlerList handlerList = new HandlerList();
-    @NonNull
     private final SkyWars plugin;
     private final int gameId;
     private final String killerName;
     private final Player killed;
 
     public ArenaPlayerKillPlayerEvent(final SkyWars plugin, final int gameId, final String killerName, final Player killed) {
+        Validate.notNull(killerName, "KillerName cannot be null");
+        Validate.notNull(killed, "Killed cannot be null");
         this.plugin = plugin;
         this.gameId = gameId;
         this.killerName = killerName;

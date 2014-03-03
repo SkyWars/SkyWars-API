@@ -18,8 +18,8 @@ package net.daboross.bukkitdev.skywars.api.translations;
 
 import java.util.IllegalFormatException;
 import java.util.logging.Level;
-import lombok.NonNull;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
+import org.apache.commons.lang.Validate;
 
 /**
  * Static access to SkyTranslations. Short name for convenience
@@ -35,7 +35,8 @@ public class SkyTrans {
      * @param args The arguments to apply to the translation.
      * @return The final message to be given in game.
      */
-    public static String get(@NonNull TransKey key, Object... args) {
+    public static String get(TransKey key, Object... args) {
+        Validate.notNull(key, "Key cannot be null");
         if (instance == null) {
             return "translation-not-found[" + key.key + "]";
         }

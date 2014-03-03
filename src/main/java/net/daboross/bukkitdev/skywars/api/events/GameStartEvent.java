@@ -19,13 +19,15 @@ package net.daboross.bukkitdev.skywars.api.events;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+@ToString
 @EqualsAndHashCode(callSuper = false)
 public class GameStartEvent extends Event {
 
@@ -34,7 +36,9 @@ public class GameStartEvent extends Event {
     private final SkyGame newGame;
     private final List<Player> players;
 
-    public GameStartEvent(@NonNull SkyWars plugin, @NonNull SkyGame newGame, @NonNull List<Player> players) {
+    public GameStartEvent(SkyWars plugin, SkyGame newGame, List<Player> players) {
+        Validate.notNull(newGame, "Game cannot be null");
+        Validate.noNullElements(players, "No players can be null");
         this.plugin = plugin;
         this.newGame = newGame;
         this.players = Collections.unmodifiableList(players);

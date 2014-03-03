@@ -23,30 +23,38 @@ import org.bukkit.Bukkit;
 public class SkyStatic {
 
     private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    private static final Logger defaultLogger = Bukkit.getLogger();
     private static boolean debug = false;
-    private static Logger defaultLogger = Bukkit.getLogger();
     private static Logger logger = defaultLogger;
     private static String pluginName = "SkyWars";
     private static String version = "Unknown";
 
     public static void debug(String message) {
         if (debug) {
-            if (logger.equals(defaultLogger)) {
-                logger.log(Level.INFO, "[SkyWars] {0}", message);
-            } else {
-                logger.log(Level.INFO, message);
-            }
+            logger.log(Level.INFO, message);
         }
     }
 
     public static void debug(String message, Object... args) {
         if (debug) {
-            if (logger.equals(defaultLogger)) {
-                logger.log(Level.INFO, "[SkyWars] {0}", String.format(message, args));
-            } else {
-                logger.log(Level.INFO, String.format(message, args));
-            }
+            logger.log(Level.INFO, String.format(message, args));
         }
+    }
+
+    public static void log(String message) {
+        logger.log(Level.INFO, message);
+    }
+
+    public static void log(String message, Object... args) {
+        logger.log(Level.INFO, String.format(message, args));
+    }
+
+    public static void log(Level level, String message) {
+        logger.log(level, message);
+    }
+
+    public static void log(Level level, String message, Object... args) {
+        logger.log(level, message, args);
     }
 
     public static Logger getLogger() {

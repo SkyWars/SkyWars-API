@@ -17,20 +17,23 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-@EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class PlayerEnterQueueEvent extends PlayerEvent {
 
     private static final HandlerList handlerList = new HandlerList();
     private final SkyWars plugin;
 
-    public PlayerEnterQueueEvent(@NonNull SkyWars plugin, @NonNull Player who) {
+    public PlayerEnterQueueEvent(SkyWars plugin, Player who) {
         super(who);
+        Validate.notNull(who, "Player cannot be null");
         this.plugin = plugin;
     }
 

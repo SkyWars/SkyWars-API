@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -53,27 +53,42 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         this(0, 0, 0, null);
     }
 
-    public SkyBlockLocation(@NonNull Block block) {
-        this(block.getX(), block.getY(), block.getZ(), block.getWorld() == null ? null : block.getWorld().getName());
+    public SkyBlockLocation(Block block) {
+        Validate.notNull(block, "Block cannot be null");
+        this.x = block.getX();
+        this.y = block.getY();
+        this.z = block.getZ();
+        this.world = block.getWorld() == null ? null : block.getWorld().getName();
     }
 
-    public SkyBlockLocation(@NonNull Location location) {
-        this(location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld() == null ? null : location.getWorld().getName());
+    public SkyBlockLocation(Location location) {
+        Validate.notNull(location, "Location cannot be null");
+        this.x = location.getBlockX();
+        this.y = location.getBlockY();
+        this.z = location.getBlockZ();
+        this.world = location.getWorld() == null ? null : location.getWorld().getName();
     }
 
-    public SkyBlockLocation(@NonNull Entity entity) {
-        this(entity.getLocation());
+    public SkyBlockLocation(Entity entity) {
+        Validate.notNull(entity, "Entity cannot be null");
+        Location location = entity.getLocation();
+        this.x = location.getBlockX();
+        this.y = location.getBlockY();
+        this.z = location.getBlockZ();
+        this.world = location.getWorld() == null ? null : location.getWorld().getName();
     }
 
     public SkyBlockLocation add(int modX, int modY, int modZ) {
         return new SkyBlockLocation(x + modX, y + modY, z + modZ, world);
     }
 
-    public SkyBlockLocation add(@NonNull SkyBlockLocation location) {
+    public SkyBlockLocation add(SkyBlockLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyBlockLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
-    public SkyPlayerLocation add(@NonNull SkyPlayerLocation location) {
+    public SkyPlayerLocation add(SkyPlayerLocation location) {
+        Validate.notNull(location, "Location cannot be null");
         return new SkyPlayerLocation(this.x + location.x, this.y + location.y, this.z + location.z, world);
     }
 
@@ -81,7 +96,8 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyBlockLocation(x, y, z, newWorld);
     }
 
-    public boolean isNear(@NonNull Location loc) {
+    public boolean isNear(Location loc) {
+        Validate.notNull(loc, "Location cannot be null");
         return world.equals(loc.getWorld().getName())
                 && x <= loc.getX() + 1 && x >= loc.getX() - 1
                 && y <= loc.getY() + 1 && y >= loc.getY() - 1
@@ -94,7 +110,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
             bukkitWorld = Bukkit.getWorld(world);
         }
         if (bukkitWorld == null) {
-            SkyStatic.getLogger().log(Level.WARNING, "[SkyBlockLocation] World ''{0}'' not found when {1}.toLocation() called", new Object[]{world, this});
+            SkyStatic.log(Level.WARNING, "[SkyBlockLocation] World ''{0}'' not found when using toLocation", world);
         }
         return new Location(bukkitWorld, x, y, z);
     }
@@ -111,7 +127,8 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return map;
     }
 
-    public void serialize(@NonNull ConfigurationSection section) {
+    public void serialize(ConfigurationSection section) {
+        Validate.notNull(section, "ConfigurationSection cannot be null");
         section.set("x", x);
         section.set("y", y);
         section.set("z", z);
@@ -120,7 +137,8 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         }
     }
 
-    public static SkyBlockLocation deserialize(@NonNull Map<String, Object> map) {
+    public static SkyBlockLocation deserialize(Map<String, Object> map) {
+        Validate.notNull(map, "Map cannot be null");
         Object xObject = map.get("x"),
                 yObject = map.get("y"),
                 zObject = map.get("z"),
@@ -130,7 +148,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
             yObject = map.get("ypos");
             zObject = map.get("zpos");
             if (!(xObject instanceof Integer && yObject instanceof Integer && zObject instanceof Integer)) {
-                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
+                SkyStatic.log(Level.WARNING, "[SkyBlockLocation] Silently failing deserialization due to x, y or z not existing on map or not being integers.");
                 return null;
             }
         }
@@ -139,7 +157,8 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new SkyBlockLocation(x, y, z, worldString);
     }
 
-    public static SkyBlockLocation deserialize(@NonNull ConfigurationSection configurationSection) {
+    public static SkyBlockLocation deserialize(ConfigurationSection configurationSection) {
+        Validate.notNull(configurationSection, "ConfigurationSection cannot be null");
         Object xObject = configurationSection.get("x");
         Object yObject = configurationSection.get("y");
         Object zObject = configurationSection.get("z");
@@ -153,7 +172,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
             if (!(xObject instanceof Integer
                     && yObject instanceof Integer
                     && zObject instanceof Integer)) {
-                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
+                SkyStatic.log(Level.WARNING, "[SkyWars] [SkyBlockLocation] Silently failing deserialization from configurationSection due to x, y or z not existing on map or not being integers.");
                 return null;
             }
         }
