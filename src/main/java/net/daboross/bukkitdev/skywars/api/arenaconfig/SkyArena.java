@@ -38,12 +38,6 @@ public interface SkyArena {
 
     public int getNumPlayers();
 
-    @Deprecated
-    public void setNumPlayers(Integer numPlayers);
-
-    @Deprecated
-    public Integer getRawNumPlayers();
-
     public int getTeamSize();
 
     public void setTeamSize(Integer teamSize);

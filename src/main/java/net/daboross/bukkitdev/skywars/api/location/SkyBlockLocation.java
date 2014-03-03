@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -32,7 +31,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
 
-@ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocation")
 public class SkyBlockLocation implements ConfigurationSerializable {
@@ -187,5 +185,15 @@ public class SkyBlockLocation implements ConfigurationSerializable {
 
     public static SkyBlockLocation max(SkyBlockLocation loc1, SkyBlockLocation loc2) {
         return new SkyBlockLocation(Math.max(loc1.x, loc2.x), Math.max(loc1.y, loc2.y), Math.max(loc1.z, loc2.z), loc1.world);
+    }
+
+    @Override
+    public String toString() {
+        return "SkyBlockLocation{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", world='" + world + '\'' +
+                '}';
     }
 }

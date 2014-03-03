@@ -18,14 +18,12 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class PlayerLeaveQueueEvent extends PlayerEvent {
 
@@ -49,5 +47,13 @@ public class PlayerLeaveQueueEvent extends PlayerEvent {
     @Override
     public HandlerList getHandlers() {
         return handlerList;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerLeaveQueueEvent{" +
+                "plugin=" + plugin +
+                ", player=" + player +
+                '}';
     }
 }

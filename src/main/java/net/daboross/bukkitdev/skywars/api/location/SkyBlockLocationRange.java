@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.location;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -27,7 +26,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-@ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocationRange")
 public class SkyBlockLocationRange implements ConfigurationSerializable {
@@ -131,5 +129,14 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
         }
         String world = worldObject instanceof String ? (String) worldObject : worldObject == null ? null : worldObject.toString();
         return new SkyBlockLocationRange(min, max, world);
+    }
+
+    @Override
+    public String toString() {
+        return "SkyBlockLocationRange{" +
+                "min=" + min +
+                ", max=" + max +
+                ", world='" + world + '\'' +
+                '}';
     }
 }

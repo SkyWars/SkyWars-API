@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -32,7 +31,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Entity;
 
-@ToString
 @EqualsAndHashCode
 @SerializableAs("SkyLocationAccurate")
 public class SkyPlayerLocation implements ConfigurationSerializable {
@@ -230,5 +228,17 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
             return ((Number) o).doubleValue();
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "SkyPlayerLocation{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", yaw=" + yaw +
+                ", pitch=" + pitch +
+                ", world='" + world + '\'' +
+                '}';
     }
 }

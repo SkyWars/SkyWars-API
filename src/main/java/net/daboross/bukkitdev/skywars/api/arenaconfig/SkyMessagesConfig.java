@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
 import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
@@ -30,7 +29,6 @@ import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
-@ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements SkyMessages {
 
@@ -147,5 +145,14 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
             }
         }
         return returnValue;
+    }
+
+    @Override
+    public String toString() {
+        return "SkyMessagesConfig{" +
+                "rawMessages=" + rawMessages +
+                ", messages=" + messages +
+                ", prefix='" + prefix + '\'' +
+                '}';
     }
 }

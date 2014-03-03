@@ -17,12 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.bukkit.configuration.ConfigurationSection;
 
-@ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, callSuper = false)
 public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements SkyBoundaries {
 
@@ -141,5 +139,14 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
                 building = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("building")),
                 clearing = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("clearing"));
         return new SkyBoundariesConfig(origin, building, clearing);
+    }
+
+    @Override
+    public String toString() {
+        return "SkyBoundariesConfig{" +
+                "originRaw=" + originRaw +
+                ", buildingRaw=" + buildingRaw +
+                ", clearingRaw=" + clearingRaw +
+                '}';
     }
 }

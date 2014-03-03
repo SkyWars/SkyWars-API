@@ -17,7 +17,6 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
@@ -31,7 +30,6 @@ import org.bukkit.event.player.PlayerEvent;
  * When a game ends whether canceled or the server is quit, this event is called
  * once for all remaining players.
  */
-@ToString
 @EqualsAndHashCode(callSuper = true)
 public class LeaveGameEvent extends PlayerEvent {
 
@@ -61,5 +59,14 @@ public class LeaveGameEvent extends PlayerEvent {
     @Override
     public HandlerList getHandlers() {
         return handlerList;
+    }
+
+    @Override
+    public String toString() {
+        return "LeaveGameEvent{" +
+                "plugin=" + plugin +
+                ", id=" + id +
+                ", player=" + player +
+                '}';
     }
 }

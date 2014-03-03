@@ -17,14 +17,12 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class ArenaPlayerDeathEvent extends Event {
 
@@ -59,5 +57,14 @@ public class ArenaPlayerDeathEvent extends Event {
 
     public Player getKilled() {
         return killed;
+    }
+
+    @Override
+    public String toString() {
+        return "ArenaPlayerDeathEvent{" +
+                "plugin=" + plugin +
+                ", gameId=" + gameId +
+                ", killed=" + killed +
+                '}';
     }
 }

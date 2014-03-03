@@ -18,13 +18,11 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 
 import java.util.Map;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-@ToString
 @EqualsAndHashCode
 public class SkyKitItemConfig implements SkyKitItem {
 
@@ -67,5 +65,14 @@ public class SkyKitItemConfig implements SkyKitItem {
             itemStack.addEnchantments(enchantments);
         }
         return itemStack;
+    }
+
+    @Override
+    public String toString() {
+        return "SkyKitItemConfig{" +
+                "material=" + material +
+                ", amount=" + amount +
+                ", enchantments=" + enchantments +
+                '}';
     }
 }

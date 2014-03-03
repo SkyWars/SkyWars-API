@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.events;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.daboross.bukkitdev.skywars.api.game.SkyGame;
 import org.apache.commons.lang.Validate;
@@ -27,7 +26,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-@ToString
 @EqualsAndHashCode(callSuper = false)
 public class GameStartEvent extends Event {
 
@@ -63,5 +61,14 @@ public class GameStartEvent extends Event {
     @Override
     public HandlerList getHandlers() {
         return handlerList;
+    }
+
+    @Override
+    public String toString() {
+        return "GameStartEvent{" +
+                "plugin=" + plugin +
+                ", newGame=" + newGame +
+                ", players=" + players +
+                '}';
     }
 }

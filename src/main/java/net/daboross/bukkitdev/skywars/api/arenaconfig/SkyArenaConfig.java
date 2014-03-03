@@ -22,14 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import org.bukkit.configuration.ConfigurationSection;
 
-@ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true, exclude = {"arenaName", "file"}, callSuper = false)
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
 
@@ -137,27 +135,6 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     @Override
     public int getNumPlayers() {
         return getNumTeams() * getTeamSize();
-    }
-
-    @Deprecated
-    @Override
-    public void setNumPlayers(Integer numPlayers) {
-        if (numPlayers == null) {
-            rawNumTeams = null;
-        } else {
-            if (rawTeamSize == null) {
-                rawTeamSize = 1;
-            } else if (numPlayers % rawTeamSize != 0) {
-                throw new IllegalArgumentException("numPlayers must be divisible by teamSize, which is " + rawTeamSize);
-            }
-            rawNumTeams = numPlayers / rawTeamSize;
-        }
-    }
-
-    @Deprecated
-    @Override
-    public Integer getRawNumPlayers() {
-        return null;
     }
 
     @Override
@@ -315,5 +292,19 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     public File getFile() {
         return file;
+    }
+
+    @Override
+    public String toString() {
+        return "SkyArenaConfig{" +
+                "rawSpawns=" + rawSpawns +
+                ", rawNumTeams=" + rawNumTeams +
+                ", rawTeamSize=" + rawTeamSize +
+                ", rawPlacementY=" + rawPlacementY +
+                ", boundaries=" + boundaries +
+                ", messages=" + messages +
+                ", file=" + file +
+                ", arenaName='" + arenaName + '\'' +
+                '}';
     }
 }
