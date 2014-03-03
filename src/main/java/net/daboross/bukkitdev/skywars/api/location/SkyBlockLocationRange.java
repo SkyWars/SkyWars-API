@@ -51,7 +51,7 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
     public SkyBlockLocationRange(SkyBlockLocation min, SkyBlockLocation max, String world) {
         Validate.notNull(min, "Min cannot be null");
         Validate.notNull(max, "Max cannot be null");
-        Validate.isTrue(min.x > max.x || min.y > max.y || min.z > max.z, "Min position cannot be bigger than max position in any dimension");
+        Validate.isTrue(min.x <= max.x && min.y <= max.y && min.z <= max.z, "Min position cannot be bigger than max position in any dimension");
         if (min.world == null ? world != null : !min.world.equals(world)) {
             min = min.changeWorld(world);
         }
