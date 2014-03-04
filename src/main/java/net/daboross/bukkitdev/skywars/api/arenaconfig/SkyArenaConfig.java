@@ -25,6 +25,7 @@ import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
+import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyArena {
@@ -43,15 +44,9 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
-        if (numTeams != null && numTeams < 2) {
-            throw new IllegalArgumentException("num-teams can't be smaller than 2");
-        }
-        if (teamSize != null && teamSize < 1) {
-            throw new IllegalArgumentException("team-size can't be smaller than 1");
-        }
-        if (placementY != null && placementY < 0) {
-            throw new IllegalArgumentException("placement-y cannot be smaller than 0.");
-        }
+        Validate.isTrue(numTeams == null || numTeams >= 2, "num-teams can't be smaller than 2");
+        Validate.isTrue(teamSize == null || teamSize >= 1, "Team size can't be smaller than 1");
+        Validate.isTrue(placementY == null || placementY >= 0, "placement-y can't be smaller than 0");
         this.arenaName = arenaName;
         if (spawns == null) {
             rawSpawns = null;
@@ -124,9 +119,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     @Override
     public void setNumTeams(Integer numTeams) {
-        if (numTeams != null && numTeams < 2) {
-            throw new IllegalArgumentException("Num teams can't be smaller than 2");
-        }
+        Validate.isTrue(numTeams == null || numTeams >= 2, "num-teams can't be smaller than 2");
         this.rawNumTeams = numTeams;
     }
 
@@ -150,9 +143,8 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     @Override
     public void setTeamSize(Integer teamSize) {
-        if (teamSize != null && teamSize < 1) {
-            throw new IllegalArgumentException("Team size can't be smaller than 1");
-        }
+        Validate.isTrue(teamSize == null || teamSize >= 1, "Team size can't be smaller than 1");
+        this.rawTeamSize = teamSize;
     }
 
     @Override
@@ -217,9 +209,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     }
 
     public static SkyArenaConfig deserialize(ConfigurationSection configurationSection) {
-        if (configurationSection.getInt("config-version") != 1) {
-            throw new IllegalArgumentException("Config version not 1");
-        }
+        Validate.isTrue(configurationSection.getInt("config-version") == 1, "Configuration version must be 1");
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries"),
                 messagesSection = configurationSection.getConfigurationSection("messages");
         List<?> spawnsObjList = configurationSection.getList("spawns");

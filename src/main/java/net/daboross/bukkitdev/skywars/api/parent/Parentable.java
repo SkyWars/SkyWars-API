@@ -16,6 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.parent;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * @param <T> This class
  */
@@ -49,9 +51,7 @@ public class Parentable<T extends Parentable<T>> {
         if (parent == null) {
             return;
         }
-        if (parent == original) {
-            throw new IllegalArgumentException("Parent inheritance loop!");
-        }
+        Validate.isTrue(parent != original, "Parent inheritance loop!");
         parent.checkParentCycle(original);
     }
 

@@ -25,6 +25,7 @@ import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
 import net.daboross.bukkitdev.skywars.api.translations.SkyTrans;
 import net.daboross.bukkitdev.skywars.api.translations.TransKey;
+import org.apache.commons.lang.Validate;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -83,9 +84,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public String getRawMessage(String key) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null key");
-        }
+        Validate.notNull(key, "Key cannot be null");
         String message = rawMessages.get(key.toLowerCase(Locale.ENGLISH));
         if (message == null) {
             if (parent == null) {
@@ -108,9 +107,7 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public void setRawMessage(String key, String message) {
-        if (key == null) {
-            throw new IllegalArgumentException("Null key");
-        }
+        Validate.notNull(key, "Key cannot be null");
         key = key.toLowerCase(Locale.ENGLISH);
         if (message == null) {
             rawMessages.remove(key);
