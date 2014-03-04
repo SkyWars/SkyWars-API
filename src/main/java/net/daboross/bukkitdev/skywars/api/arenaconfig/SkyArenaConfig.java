@@ -44,7 +44,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     public SkyArenaConfig(SkyArenaConfig parent, String arenaName, List<SkyPlayerLocation> spawns, Integer numTeams, Integer teamSize, Integer placementY, SkyBoundariesConfig boundaries, SkyMessagesConfig messages) {
         super(parent);
-        Validate.isTrue(numTeams == null || numTeams >= 2, "num-teams can't be smaller than 2");
+        Validate.isTrue(numTeams == null || numTeams >= 2, "Num teams can't be smaller than 2");
         Validate.isTrue(teamSize == null || teamSize >= 1, "Team size can't be smaller than 1");
         Validate.isTrue(placementY == null || placementY >= 0, "placement-y can't be smaller than 0");
         this.arenaName = arenaName;
