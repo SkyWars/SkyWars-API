@@ -110,7 +110,7 @@ public interface SkyWars extends Plugin {
      * <p/>
      * This method will return null if points is not enabled, that is if
      * {@link #getConfiguration() this.getConfiguration()}.
-     * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnablePoints() isEnablePoints()}
+     * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore() isEnableScore()}
      * returns false.
      *
      * @return The SkyPoints, or null if this plugin is not yet enabled or

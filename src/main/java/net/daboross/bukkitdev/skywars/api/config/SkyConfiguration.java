@@ -74,14 +74,14 @@ public interface SkyConfiguration {
      *
      * @return Whether or not to enable points.
      */
-    public boolean isEnablePoints();
+    public boolean isEnableScore();
 
     /**
      * Gets the amount of points to add a player's score when they die.
      *
      * @return The amount of points to add to a player's score when they die.
      */
-    public int getDeathPointDiff();
+    public int getDeathScoreDiff();
 
     /**
      * Gets the amount of points to add to a player's score when they win.
@@ -89,7 +89,7 @@ public interface SkyConfiguration {
      * @return The amount of points to add to a player's score when they win a
      * game.
      */
-    public int getWinPointDiff();
+    public int getWinScoreDiff();
 
     /**
      * Gets the amount of points to add to a player's score when they kill
@@ -98,7 +98,19 @@ public interface SkyConfiguration {
      * @return The amount of points to add to a player's score when they kill a
      * player inside a game.
      */
-    public int getKillPointDiff();
+    public int getKillScoreDiff();
+
+    public boolean isScoreUseSql();
+
+    public String getScoreSqlHost();
+
+    public int getScoreSqlPort();
+
+    public String getScoreSqlDatabase();
+
+    public String getScoreSqlUsername();
+
+    public String getScoreSqlPassword();
 
     /**
      * Gets the interval that points are to be saved on. This is in seconds.
