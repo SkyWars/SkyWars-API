@@ -70,32 +70,32 @@ public interface SkyConfiguration {
     public boolean isInventorySaveEnabled();
 
     /**
-     * Gets whether or not to enable point storage.
+     * Gets whether or not to enable score storage.
      *
-     * @return Whether or not to enable points.
+     * @return Whether or not to enable score.
      */
     public boolean isEnableScore();
 
     /**
-     * Gets the amount of points to add a player's score when they die.
+     * Gets the amount of score to add a player's score when they die.
      *
-     * @return The amount of points to add to a player's score when they die.
+     * @return The amount of score to add to a player's score when they die.
      */
     public int getDeathScoreDiff();
 
     /**
-     * Gets the amount of points to add to a player's score when they win.
+     * Gets the amount of score to add to a player's score when they win.
      *
-     * @return The amount of points to add to a player's score when they win a
+     * @return The amount of score to add to a player's score when they win a
      * game.
      */
     public int getWinScoreDiff();
 
     /**
-     * Gets the amount of points to add to a player's score when they kill
+     * Gets the amount of score to add to a player's score when they kill
      * someone.
      *
-     * @return The amount of points to add to a player's score when they kill a
+     * @return The amount of score to add to a player's score when they kill a
      * player inside a game.
      */
     public int getKillScoreDiff();
@@ -113,11 +113,11 @@ public interface SkyConfiguration {
     public String getScoreSqlPassword();
 
     /**
-     * Gets the interval that points are to be saved on. This is in seconds.
+     * Gets the interval that score is to be saved on. This is in seconds.
      *
-     * @return The points save interval.
+     * @return The score save interval.
      */
-    public long getPointsSaveInterval();
+    public long getScoreSaveInterval();
 
     /**
      * Gets whether or not to enable economy rewards.

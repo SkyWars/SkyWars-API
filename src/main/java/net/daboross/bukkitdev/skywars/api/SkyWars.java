@@ -26,7 +26,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
 import net.daboross.bukkitdev.skywars.api.ingame.SkyInGame;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
-import net.daboross.bukkitdev.skywars.api.points.SkyPoints;
+import net.daboross.bukkitdev.skywars.api.score.SkyScore;
 import net.daboross.bukkitdev.skywars.api.translations.SkyTranslations;
 import org.bukkit.plugin.Plugin;
 
@@ -106,17 +106,17 @@ public interface SkyWars extends Plugin {
     public SkyConfiguration getConfiguration();
 
     /**
-     * Gets the SkyPoints for this plugin.
+     * Gets the SkyScore for this plugin.
      * <p/>
-     * This method will return null if points is not enabled, that is if
+     * This method will return null if score is not enabled, that is if
      * {@link #getConfiguration() this.getConfiguration()}.
      * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore() isEnableScore()}
      * returns false.
      *
-     * @return The SkyPoints, or null if this plugin is not yet enabled or
-     * points are disabled.
+     * @return The SkyScore, or null if this plugin is not yet enabled or
+     * score is disabled.
      */
-    public SkyPoints getPoints();
+    public SkyScore getScore();
 
     /**
      * Gets the SkyEconomyAbstraction for this plugin.
