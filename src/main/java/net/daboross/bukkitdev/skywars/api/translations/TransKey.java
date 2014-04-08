@@ -85,6 +85,7 @@ public enum TransKey {
     CMD_KIT_NO_KIT_REMOVED("commands.kit.no-kit-removed", 0),
     CMD_KIT_CURRENT_KIT("commands.kit.current-kit", 1),
     CMD_KIT_CURRENT_KIT_WITH_COST("commands.kit.current-kit-with-cost", 2),
+    CMD_KIT_NO_ACCESS("commands.kit.no-access", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
