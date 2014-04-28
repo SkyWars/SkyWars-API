@@ -17,7 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.score;
 
 import java.io.IOException;
+import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public abstract class ScoreStorageBackend {
 
@@ -27,15 +30,15 @@ public abstract class ScoreStorageBackend {
         this.skywars = skywars;
     }
 
-    public abstract void addScore(String playerName, int diff);
+    public abstract void addScore(UUID playerUuid, int diff);
 
-    public abstract void setScore(String playerName, int score);
+    public abstract void setScore(UUID playerUuid, int score);
 
-    public abstract void getScore(String playerName, ScoreCallback callback);
+    public abstract void getScore(UUID playerUuid, ScoreCallback callback);
 
     public abstract void save() throws IOException;
 
-    public abstract int getCachedOnlineScore(final String playerName);
+    public abstract int getCachedOnlineScore(UUID playerUuid);
 
-    public abstract void loadCachedScore(final String playerName);
+    public abstract void loadCachedScore(Player player);
 }

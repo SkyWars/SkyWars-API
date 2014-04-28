@@ -16,6 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.score;
 
+import java.util.UUID;
+import org.bukkit.entity.Player;
+
 public abstract class SkyScore {
 
     private static Class<? extends ScoreStorageBackend> backend;
@@ -29,11 +32,11 @@ public abstract class SkyScore {
         SkyScore.backend = backend;
     }
 
-    public abstract void addScore(String name, int diff);
+    public abstract void addScore(UUID playerUuid, int diff);
 
-    public abstract void getScore(String name, ScoreCallback callback);
+    public abstract void getScore(UUID playerUuid, ScoreCallback callback);
 
-    public abstract int getCachedOnlineScore(String name);
+    public abstract int getCachedOnlineScore(UUID playerUuid);
 
-    public abstract void loadCachedScore(String name);
+    public abstract void loadCachedScore(Player player);
 }
