@@ -14,11 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.ingame;
+package net.daboross.bukkitdev.skywars.api.storage;
 
-import org.bukkit.entity.Player;
+import net.daboross.bukkitdev.skywars.api.players.SkyPlayer;
+import net.daboross.bukkitdev.skywars.api.players.SkyPlayerState;
 
-public interface SkySavedInventory {
+public interface SkyInternalPlayer extends SkyPlayer {
 
-    public void apply(Player p);
+    public void setState(SkyPlayerState state);
+
+    public void setGameId(int id);
+
+    public void loggedOut();
 }

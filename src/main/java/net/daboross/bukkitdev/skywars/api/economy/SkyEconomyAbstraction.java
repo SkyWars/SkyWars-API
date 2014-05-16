@@ -16,17 +16,28 @@
  */
 package net.daboross.bukkitdev.skywars.api.economy;
 
-public interface SkyEconomyAbstraction {
+import java.util.UUID;
+import org.bukkit.OfflinePlayer;
 
-    public void addReward(String player, double reward);
+public interface SkyEconomyAbstraction {
 
     public String getCurrencySymbolWord(double amount);
 
     public String getCurrencySymbol(double amount);
 
-    public boolean canAfford(String player, double amount);
+    public void addReward(OfflinePlayer player, double reward);
 
-    public boolean charge(String player, double amount);
+    public void addReward(UUID playerUuid, double reward);
 
-    public double getAmount(String player);
+    public boolean canAfford(OfflinePlayer player, double amount);
+
+    public boolean canAfford(UUID playerUuid, double amount);
+
+    public boolean charge(OfflinePlayer player, double amount);
+
+    public boolean charge(UUID playerUuid, double amount);
+
+    public double getAmount(OfflinePlayer player);
+
+    public double getAmount(UUID playerUuid);
 }

@@ -23,10 +23,10 @@ import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
-import net.daboross.bukkitdev.skywars.api.ingame.SkyInGame;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
-import net.daboross.bukkitdev.skywars.api.score.SkyScore;
+import net.daboross.bukkitdev.skywars.api.players.SkyPlayers;
+import net.daboross.bukkitdev.skywars.api.storage.SkyStorage;
 import net.daboross.bukkitdev.skywars.api.translations.SkyTranslations;
 import org.bukkit.plugin.Plugin;
 
@@ -51,13 +51,13 @@ public interface SkyWars extends Plugin {
     public SkyGameQueue getGameQueue();
 
     /**
-     * Gets the SkyInGame for this plugin. This will store all player info for people in queue & game.
+     * Gets the SkyPlayers for this plugin. This will store all player info for people in queue & game.
      * <p/>
      * This method will never return null if this plugin is enabled.
      *
-     * @return The SkyGameQueue, or null if this plugin is not yet enabled.
+     * @return The SkyPlayers, or null if this plugin is not yet enabled.
      */
-    public SkyInGame getInGame();
+    public SkyPlayers getPlayers();
 
     /**
      * Gets the SkyCurrentGameTrackter for this plugin.
@@ -91,8 +91,7 @@ public interface SkyWars extends Plugin {
      * <p/>
      * This method will never return null if this plugin is enabled.
      *
-     * @return The SkyAttackerStorage, or null if this plugin is not yet
-     * enabled.
+     * @return The SkyAttackerStorage, or null if this plugin is not yet enabled.
      */
     public SkyAttackerStorage getAttackerStorage();
 
@@ -108,51 +107,43 @@ public interface SkyWars extends Plugin {
     /**
      * Gets the SkyScore for this plugin.
      * <p/>
-     * This method will return null if score is not enabled, that is if
-     * {@link #getConfiguration() this.getConfiguration()}.
-     * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore() isEnableScore()}
-     * returns false.
+     * This method will return null if score is not enabled, that is if {@link #getConfiguration()
+     * this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore()
+     * isEnableScore()} returns false.
      *
-     * @return The SkyScore, or null if this plugin is not yet enabled or
-     * score is disabled.
+     * @return The SkyScore, or null if this plugin is not yet enabled or score is disabled.
      */
-    public SkyScore getScore();
+    public SkyStorage getScore();
 
     /**
      * Gets the SkyEconomyAbstraction for this plugin.
      * <p/>
-     * This method will return null if economy is not enabled, that is if
-     * {@link #getConfiguration() this.getConfiguration()}.
-     * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEconomyEnabled() isEconomyEnabled()}
-     * returns false.
+     * This method will return null if economy is not enabled, that is if {@link #getConfiguration()
+     * this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEconomyEnabled()
+     * isEconomyEnabled()} returns false.
      *
-     * @return The SkyEconomyAbstraction, or null if this plugin is not yet
-     * enabled or economy is disabled.
+     * @return The SkyEconomyAbstraction, or null if this plugin is not yet enabled or economy is disabled.
      */
     public SkyEconomyAbstraction getEconomyHook();
 
     /**
-     * Gets the SkyTranslations for this plugin. Use of the
-     * {@link net.daboross.bukkitdev.skywars.api.translations.SkyTrans SkyTrans}
-     * over SkyTranslations is prefered.
+     * Gets the SkyTranslations for this plugin. Use of the {@link net.daboross.bukkitdev.skywars.api.translations.SkyTrans
+     * SkyTrans} over SkyTranslations is prefered.
      *
      * @return The SkyTranslations, or null if this plugin is not yet enabled.
      */
     public SkyTranslations getTranslations();
 
     /**
-     * Reloads the translations configuration. Note that this does not reload
-     * content that is saved separately from the translations on load, such as
-     * command descriptions.
+     * Reloads the translations configuration. Note that this does not reload content that is saved separately from the
+     * translations on load, such as command descriptions.
      *
-     * @return True if the new translations configuration was loaded
-     * successfully, false otherwise.
+     * @return True if the new translations configuration was loaded successfully, false otherwise.
      */
     public boolean reloadTranslations();
 
     /**
-     * Gets the kit configuration for this plugin. This configuration is loaded
-     * from the kits.yml file.
+     * Gets the kit configuration for this plugin. This configuration is loaded from the kits.yml file.
      *
      * @return The SkyKits, or null if this plugin is not yet enabled.
      */

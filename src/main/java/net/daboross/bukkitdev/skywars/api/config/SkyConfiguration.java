@@ -29,15 +29,12 @@ import org.bukkit.configuration.InvalidConfigurationException;
 public interface SkyConfiguration {
 
     /**
-     * Reloads the current configuration from file. This method failing may
-     * leave SkyWars in an unstable state.
+     * Reloads the current configuration from file. This method failing may leave SkyWars in an unstable state.
      *
-     * @throws IOException                   If an IOException is thrown by any of the underlying
-     *                                       configurations.
-     * @throws InvalidConfigurationException If the configuration file is
-     *                                       invalid YAML.
-     * @throws SkyConfigurationException     If a configuration value is not of the
-     *                                       correct type, or if there are other errors in the configuration.
+     * @throws IOException                   If an IOException is thrown by any of the underlying configurations.
+     * @throws InvalidConfigurationException If the configuration file is invalid YAML.
+     * @throws SkyConfigurationException     If a configuration value is not of the correct type, or if there are other
+     *                                       errors in the configuration.
      */
     public void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;
 
@@ -86,17 +83,14 @@ public interface SkyConfiguration {
     /**
      * Gets the amount of score to add to a player's score when they win.
      *
-     * @return The amount of score to add to a player's score when they win a
-     * game.
+     * @return The amount of score to add to a player's score when they win a game.
      */
     public int getWinScoreDiff();
 
     /**
-     * Gets the amount of score to add to a player's score when they kill
-     * someone.
+     * Gets the amount of score to add to a player's score when they kill someone.
      *
-     * @return The amount of score to add to a player's score when they kill a
-     * player inside a game.
+     * @return The amount of score to add to a player's score when they kill a player inside a game.
      */
     public int getKillScoreDiff();
 
@@ -127,16 +121,14 @@ public interface SkyConfiguration {
     public boolean isEconomyEnabled();
 
     /**
-     * Gets the amount of currency to add to someone's economy account when they
-     * win a game.
+     * Gets the amount of currency to add to someone's economy account when they win a game.
      *
      * @return The win reward.
      */
     public int getEconomyWinReward();
 
     /**
-     * Gets the amount of currency to add to someone's economy account when they
-     * kill someone in a game.
+     * Gets the amount of currency to add to someone's economy account when they kill someone in a game.
      *
      * @return The kill reward.
      */
@@ -150,8 +142,8 @@ public interface SkyConfiguration {
     public boolean areEconomyRewardMessagesEnabled();
 
     /**
-     * Gets the distance between arenas when created. This distance is from one
-     * arena's minimum corner to the next arena's minimum corner.
+     * Gets the distance between arenas when created. This distance is from one arena's minimum corner to the next
+     * arena's minimum corner.
      *
      * @return The distance between created arenas.
      */
@@ -160,8 +152,7 @@ public interface SkyConfiguration {
     /**
      * Gets all enabled arenas.
      *
-     * @return A list of SkyArenaConfigs that the next arena will be chosen
-     * from.
+     * @return A list of SkyArenaConfigs that the next arena will be chosen from.
      */
     public List<SkyArenaConfig> getEnabledArenas();
 
@@ -182,8 +173,7 @@ public interface SkyConfiguration {
     /**
      * Gets whether or not command whitelist is enabled.
      *
-     * @return Whether or not in-game commands will be whitelisted /
-     * blacklisted.
+     * @return Whether or not in-game commands will be whitelisted / blacklisted.
      */
     public boolean isCommandWhitelistEnabled();
 
@@ -195,8 +185,7 @@ public interface SkyConfiguration {
     public boolean isCommandWhitelistABlacklist();
 
     /**
-     * Gets a command regex that will match all commands in the command
-     * whitelist.
+     * Gets a command regex that will match all commands in the command whitelist.
      *
      * @return The command regex.
      */
@@ -239,8 +228,7 @@ public interface SkyConfiguration {
          * Gets an arena order by name.
          *
          * @param name The name of the ArenaOrder, case insensitive.
-         * @return The ArenaOrder identified by the given name, or null if not
-         * found.
+         * @return The ArenaOrder identified by the given name, or null if not found.
          */
         public static ArenaOrder getOrder(String name) {
             return BY_NAME.get(name.toLowerCase(Locale.ENGLISH));

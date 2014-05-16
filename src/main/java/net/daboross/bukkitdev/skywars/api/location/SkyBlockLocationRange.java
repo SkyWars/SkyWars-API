@@ -35,13 +35,13 @@ public class SkyBlockLocationRange implements ConfigurationSerializable {
     /**
      * Creates a SkyBlockLocationRange.
      *
-     * @param min   minimum position. min.world is expected to be equal to world,
-     *              and will be changed if not world already.
-     * @param max   maximum position. max.world is expected to be equal to world,
-     *              and will be changed if not world already.
+     * @param min   minimum position. min.world is expected to be equal to world, and will be changed if not world
+     *              already.
+     * @param max   maximum position. max.world is expected to be equal to world, and will be changed if not world
+     *              already.
      * @param world world of the range.
-     * @throws IllegalArgumentException if min == null || max == null || min.x >
-     *                                  max.x || min.y > max.y || min.z > max.z
+     * @throws IllegalArgumentException if min == null || max == null || min.x > max.x || min.y > max.y || min.z >
+     *                                  max.z
      * @throws NullPointerException     if min or max is null
      */
     public SkyBlockLocationRange(SkyBlockLocation min, SkyBlockLocation max, String world) {

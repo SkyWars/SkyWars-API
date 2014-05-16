@@ -14,29 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.score;
+package net.daboross.bukkitdev.skywars.api.storage;
 
 import java.util.UUID;
 import org.bukkit.entity.Player;
 
-public abstract class SkyScore {
+public abstract class SkyStorage {
 
-    private static Class<? extends ScoreStorageBackend> backend;
+    private static Class<? extends SkyStorageBackend> backend;
 
-    public static Class<? extends ScoreStorageBackend> getBackend() {
+    public static Class<? extends SkyStorageBackend> getBackend() {
         return backend;
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public static void setBackend(final Class<? extends ScoreStorageBackend> backend) {
-        SkyScore.backend = backend;
+    public static void setBackend(final Class<? extends SkyStorageBackend> backend) {
+        SkyStorage.backend = backend;
     }
 
-    public abstract void addScore(UUID playerUuid, int diff);
+    public abstract void addScore(UUID uuid, int diff);
 
-    public abstract void getScore(UUID playerUuid, ScoreCallback callback);
+    public abstract void getScore(UUID uuid, ScoreCallback callback);
 
-    public abstract int getCachedOnlineScore(UUID playerUuid);
+    public abstract void setScore(UUID uuid, int score);
 
-    public abstract void loadCachedScore(Player player);
+    public abstract SkyInternalPlayer loadPlayer(Player player);
+
+    public abstract void dataChanged();
 }

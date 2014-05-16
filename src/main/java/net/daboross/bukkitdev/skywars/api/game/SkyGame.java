@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.game;
 
 import java.util.List;
+import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
@@ -25,9 +26,9 @@ public interface SkyGame {
 
     public int getId();
 
-    public List<String> getAlivePlayers();
+    public List<UUID> getAlivePlayers();
 
-    public List<String> getDeadPlayers();
+    public List<UUID> getDeadPlayers();
 
     public SkyBlockLocation getMin();
 
@@ -37,11 +38,11 @@ public interface SkyGame {
 
     public boolean areTeamsEnabled();
 
-    public int getTeamNumber(String player);
+    public int getTeamNumber(UUID playerUuid);
 
-    public List<String> getAlivePlayersInTeam(int teamNumber);
+    public List<UUID> getAlivePlayersInTeam(int teamNumber);
 
-    public List<String> getAllPlayersInTeam(int teamNumber);
+    public List<UUID> getAllPlayersInTeam(int teamNumber);
 
     public int getNumTeams();
 }

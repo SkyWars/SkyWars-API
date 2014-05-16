@@ -14,33 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.ingame;
+package net.daboross.bukkitdev.skywars.api.players;
 
+import java.util.UUID;
 import org.bukkit.entity.Player;
 
-public interface SkyInGame {
+public interface SkyPlayers {
+
+    /**
+     * Tells whether or not storage (score for now, more to be added) is enabled. If it isn't SkyPlayer's
+     * get/set/addScore methods will error.
+     *
+     * @return Whether or not storage is enabled.
+     */
+    public boolean storageEnabled();
 
     /**
      * Gets info on the given player.
      *
      * @param player the player to get info on
-     * @return the information stored on the player, or null if no information is stored.
+     * @return the information stored on the player, or null if the player is offline.
      */
     public SkyPlayer getPlayer(Player player);
 
     /**
-     * Gets info on the given player, or null if there is no information on the player.
+     * Gets info on the given player.
      *
-     * @param name the name of the player to check, case insensitive
-     * @return the information stored on the player, or null if no information is stored.
+     * @param uuid the name of the player to check, case insensitive
+     * @return the information stored on the player, or null if the player is offline.
      */
-    public SkyPlayer getPlayer(String name);
+    public SkyPlayer getPlayer(UUID uuid);
 
     /**
-     * Gets info stored on a player, or starts storing info if there is no information on the player.
-     *
-     * @param player the player to get info on
-     * @return the information stored on the player
+     * Loads the given player from storage.
      */
-    public SkyPlayer getPlayerForce(Player player);
+    public void loadPlayer(Player player);
+
+    /**
+     * Unloads the given player from memory.
+     */
+    public void unloadPlayer(UUID uuid);
 }

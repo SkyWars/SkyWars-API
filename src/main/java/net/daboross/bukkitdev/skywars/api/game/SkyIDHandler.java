@@ -24,8 +24,7 @@ public interface SkyIDHandler {
      * Checks whether or not a game is running with the given ID.
      *
      * @param id The ID to check.
-     * @return true if there is a game running with the given id, false
-     * otherwise.
+     * @return true if there is a game running with the given id, false otherwise.
      */
     public boolean gameRunning(int id);
 
@@ -33,8 +32,7 @@ public interface SkyIDHandler {
      * Gets the SkyGame for the given id.
      *
      * @param id The ID of the game.
-     * @return A SkyGame running under the given id, or null if there is no
-     * currently running SkyGame with the given id.
+     * @return A SkyGame running under the given id, or null if there is no currently running SkyGame with the given id.
      */
     public SkyGame getGame(int id);
 
