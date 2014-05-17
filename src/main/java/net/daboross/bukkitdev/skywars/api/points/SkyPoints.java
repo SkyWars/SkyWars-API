@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,9 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.score;
+package net.daboross.bukkitdev.skywars.api.points;
 
-public interface ScoreCallback {
+public abstract class SkyPoints {
 
-    public void scoreGetCallback(int score);
+    private static Class<? extends PointStorageBackend> backend;
+
+    public static Class<? extends PointStorageBackend> getBackend() {
+        return backend;
+    }
+
+    public static void setBackend(final Class<? extends PointStorageBackend> backend) {
+        SkyPoints.backend = backend;
+    }
+
+    public abstract void addScore(String name, int diff);
+
+    public abstract int getScore(String name);
 }

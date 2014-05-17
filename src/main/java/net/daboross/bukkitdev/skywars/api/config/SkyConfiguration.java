@@ -70,54 +70,42 @@ public interface SkyConfiguration {
     public boolean isInventorySaveEnabled();
 
     /**
-     * Gets whether or not to enable score storage.
+     * Gets whether or not to enable point storage.
      *
-     * @return Whether or not to enable score.
+     * @return Whether or not to enable points.
      */
-    public boolean isEnableScore();
+    public boolean isEnablePoints();
 
     /**
-     * Gets the amount of score to add a player's score when they die.
+     * Gets the amount of points to add a player's score when they die.
      *
-     * @return The amount of score to add to a player's score when they die.
+     * @return The amount of points to add to a player's score when they die.
      */
-    public int getDeathScoreDiff();
+    public int getDeathPointDiff();
 
     /**
-     * Gets the amount of score to add to a player's score when they win.
+     * Gets the amount of points to add to a player's score when they win.
      *
-     * @return The amount of score to add to a player's score when they win a
+     * @return The amount of points to add to a player's score when they win a
      * game.
      */
-    public int getWinScoreDiff();
+    public int getWinPointDiff();
 
     /**
-     * Gets the amount of score to add to a player's score when they kill
+     * Gets the amount of points to add to a player's score when they kill
      * someone.
      *
-     * @return The amount of score to add to a player's score when they kill a
+     * @return The amount of points to add to a player's score when they kill a
      * player inside a game.
      */
-    public int getKillScoreDiff();
-
-    public boolean isScoreUseSql();
-
-    public String getScoreSqlHost();
-
-    public int getScoreSqlPort();
-
-    public String getScoreSqlDatabase();
-
-    public String getScoreSqlUsername();
-
-    public String getScoreSqlPassword();
+    public int getKillPointDiff();
 
     /**
-     * Gets the interval that score is to be saved on. This is in seconds.
+     * Gets the interval that points are to be saved on. This is in seconds.
      *
-     * @return The score save interval.
+     * @return The points save interval.
      */
-    public long getScoreSaveInterval();
+    public long getPointsSaveInterval();
 
     /**
      * Gets whether or not to enable economy rewards.
