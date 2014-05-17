@@ -14,24 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.points;
+package net.daboross.bukkitdev.skywars.api.score;
 
 import java.io.IOException;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 
-public abstract class PointStorageBackend {
+public abstract class ScoreStorageBackend {
 
     protected final SkyWars skywars;
 
-    protected PointStorageBackend(final SkyWars skywars) {
+    protected ScoreStorageBackend(final SkyWars skywars) {
         this.skywars = skywars;
     }
 
-    public abstract void addScore(String player, int diff);
+    public abstract void addScore(String playerName, int diff);
 
-    public abstract void setScore(String player, int score);
+    public abstract void setScore(String playerName, int score);
 
-    public abstract int getScore(String player);
+    public abstract void getScore(String playerName, ScoreCallback callback);
 
     public abstract void save() throws IOException;
+
+    public abstract int getCachedOnlineScore(final String playerName);
+
+    public abstract void loadCachedScore(final String playerName);
 }
