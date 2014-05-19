@@ -146,7 +146,7 @@ public enum TransKey {
     // game.starting
     GAME_STARTING_GAMESTARTING("game.starting.game-starting", 1),
     GAME_STARTING_GAMESTARTING_COMMA("game.starting.game-starting-comma", 0),;
-    public static final int VERSION = 1;
+    public static final int VERSION = 4;
     public final String key;
     public final int args;
 
