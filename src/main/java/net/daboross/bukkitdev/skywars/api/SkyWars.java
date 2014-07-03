@@ -34,7 +34,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyLocationStore for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if this plugin is enabled.
      *
      * @return The SkyLocationStore, or null if this plugin is not yet enabled.
@@ -43,7 +43,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyGameQueue for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if this plugin is enabled.
      *
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
@@ -51,8 +51,8 @@ public interface SkyWars extends Plugin {
     public SkyGameQueue getGameQueue();
 
     /**
-     * Gets the SkyInGame for this plugin. This will store all player info for people in queue & game.
-     * <p/>
+     * Gets the SkyInGame for this plugin. This will store all player info for people in queue &amp; game.
+     * <br>
      * This method will never return null if this plugin is enabled.
      *
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
@@ -61,7 +61,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyCurrentGameTrackter for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if the plugin is enabled.
      *
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
@@ -70,7 +70,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyGameHandler for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if the plugin is enabled.
      *
      * @return The SkyGameHandler, or null if this plugin is not yet enabled.
@@ -79,7 +79,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyGameHandler for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if the plugin is enabled.
      *
      * @return The SkyGameHandler, or null if this plugin is not yet enabled.
@@ -88,7 +88,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyAttackerStorage for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if this plugin is enabled.
      *
      * @return The SkyAttackerStorage, or null if this plugin is not yet
@@ -98,7 +98,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyConfiguration for this plugin.
-     * <p/>
+     * <br>
      * This method will never return null if this plugin is enabled.
      *
      * @return The SkyConfiguration, or null if this plugin is not yet enabled.
@@ -107,7 +107,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyPoints for this plugin.
-     * <p/>
+     * <br>
      * This method will return null if points is not enabled, that is if
      * {@link #getConfiguration() this.getConfiguration()}.
      * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnablePoints() isEnablePoints()}
@@ -120,7 +120,7 @@ public interface SkyWars extends Plugin {
 
     /**
      * Gets the SkyEconomyAbstraction for this plugin.
-     * <p/>
+     * <br>
      * This method will return null if economy is not enabled, that is if
      * {@link #getConfiguration() this.getConfiguration()}.
      * {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEconomyEnabled() isEconomyEnabled()}
