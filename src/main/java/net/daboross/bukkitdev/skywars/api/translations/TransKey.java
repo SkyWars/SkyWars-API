@@ -126,6 +126,7 @@ public enum TransKey {
     KITS_APPLIED_KIT("messages.kits.applied-kit", 1),
     KITS_APPLIED_KIT_WITH_COST("messages.kits.applied-kit-with-cost", 2),
     KITS_NOT_ENOUGH_MONEY("messages.kits.not-enough-money", 1),
+    KITS_NO_PERMISSION("messages.kits.no-permission", 1),
     // messages.in-game
     GENERIC_IN_GAME("messages.in-game", 0),
     // disable report
