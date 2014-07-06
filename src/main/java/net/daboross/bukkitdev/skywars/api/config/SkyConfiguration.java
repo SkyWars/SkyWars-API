@@ -191,8 +191,18 @@ public interface SkyConfiguration {
      */
     public Pattern getCommandWhitelistCommandRegex();
 
+    /**
+     * Gets the chosen locale that should be used for picking translation strings.
+     *
+     * @return The chosen locale.
+     */
     public String getLocale();
 
+    /**
+     * Gets whether or not the user has disabled reporting.
+     *
+     * @return True if the user has disabled /sw report, false otherwise.
+     */
     public boolean isDisableReport();
 //    /**
 //     * Gets whether or not death messages should only be broadcasted to people
