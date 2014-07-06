@@ -16,7 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     private Integer rawPlacementY;
     private final SkyBoundariesConfig boundaries = new SkyBoundariesConfig();
     private final SkyMessagesConfig messages = new SkyMessagesConfig();
-    private File file;
+    private Path file;
     private String arenaName = "null";
 
     public SkyArenaConfig() {
@@ -170,19 +170,19 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     public void confirmAllValuesExist() throws SkyConfigurationException {
         if (rawSpawns == null) {
-            throw new SkyConfigurationException("'spawns' not defined for arena config " + file.getAbsolutePath());
+            throw new SkyConfigurationException("'spawns' not defined for arena config " + file.toAbsolutePath().toString());
         }
         if (rawSpawns.isEmpty()) {
-            throw new SkyConfigurationException("No spawns defined in 'spawns' for arena config " + file.getAbsolutePath());
+            throw new SkyConfigurationException("No spawns defined in 'spawns' for arena config " + file.toAbsolutePath().toString());
         }
         if (rawNumTeams == null) {
-            throw new SkyConfigurationException("'num-teams' not defined for arena config " + file.getAbsolutePath());
+            throw new SkyConfigurationException("'num-teams' not defined for arena config " + file.toAbsolutePath().toString());
         }
         if (rawTeamSize == null) {
-            throw new SkyConfigurationException("'team-size' not defined for arena config " + file.getAbsolutePath());
+            throw new SkyConfigurationException("'team-size' not defined for arena config " + file.toAbsolutePath().toString());
         }
         if (rawPlacementY == null) {
-            throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.getAbsolutePath());
+            throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.toAbsolutePath().toString());
         }
     }
 
@@ -236,7 +236,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, messages);
     }
 
-    public void setFile(final File file) {
+    public void setFile(final Path file) {
         this.file = file;
     }
 
@@ -278,7 +278,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
         return messages;
     }
 
-    public File getFile() {
+    public Path getFile() {
         return file;
     }
 

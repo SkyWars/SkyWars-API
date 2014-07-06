@@ -16,8 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api.config;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -43,7 +43,7 @@ public interface SkyConfiguration {
      *
      * @return The folder where arena files are stored.
      */
-    public File getArenaFolder();
+    public Path getArenaFolder();
 
     /**
      * Gets the order which arenas should be put out.
