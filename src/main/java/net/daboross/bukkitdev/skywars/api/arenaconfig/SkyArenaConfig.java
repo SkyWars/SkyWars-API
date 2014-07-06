@@ -170,19 +170,19 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
 
     public void confirmAllValuesExist() throws SkyConfigurationException {
         if (rawSpawns == null) {
-            throw new SkyConfigurationException("'spawns' not defined for arena config " + file.toAbsolutePath().toString());
+            throw new SkyConfigurationException("'spawns' not defined for arena config " + file.toAbsolutePath());
         }
         if (rawSpawns.isEmpty()) {
-            throw new SkyConfigurationException("No spawns defined in 'spawns' for arena config " + file.toAbsolutePath().toString());
+            throw new SkyConfigurationException("No spawns defined in 'spawns' for arena config " + file.toAbsolutePath());
         }
         if (rawNumTeams == null) {
-            throw new SkyConfigurationException("'num-teams' not defined for arena config " + file.toAbsolutePath().toString());
+            throw new SkyConfigurationException("'num-teams' not defined for arena config " + file.toAbsolutePath());
         }
         if (rawTeamSize == null) {
-            throw new SkyConfigurationException("'team-size' not defined for arena config " + file.toAbsolutePath().toString());
+            throw new SkyConfigurationException("'team-size' not defined for arena config " + file.toAbsolutePath());
         }
         if (rawPlacementY == null) {
-            throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.toAbsolutePath().toString());
+            throw new SkyConfigurationException("'placement-y' not defined for arena config " + file.toAbsolutePath());
         }
     }
 
