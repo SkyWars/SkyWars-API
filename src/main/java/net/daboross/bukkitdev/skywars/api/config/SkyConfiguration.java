@@ -221,6 +221,27 @@ public interface SkyConfiguration {
 //    public boolean arePerArenaWinMessagesEnabled();
 
     /**
+     * Whether or not to attempt to hook with Multiverse Core.
+     *
+     * @return False if the user has disabled the Multiverse Core hook, true otherwise.
+     */
+    public boolean isMultiverseCoreHookEnabled();
+
+    /**
+     * Whether or not to attempt to hook with Multiverse Inventories.
+     *
+     * @return False if the user has disabled the Multiverse Inventories hook, true otherwise.
+     */
+    public boolean isMultiverseInventoriesHookEnabled();
+
+    /**
+     * Whether or not to attempt to hook with WorldEdit.
+     *
+     * @return False if the user has disabled the WorldEdit hook, true otherwise.
+     */
+    public boolean isWorldeditHookEnabled();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     public static enum ArenaOrder {
