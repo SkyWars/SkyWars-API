@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
+import java.util.UUID;
 import org.bukkit.entity.Player;
 
 public interface SkyGameQueue {
@@ -23,27 +24,24 @@ public interface SkyGameQueue {
     /**
      * Checks if a given player is in the queue.
      *
-     * @param playerName the name of the player to check.
-     * @return true if a player with the given name is in the queue, false
-     * otherwise.
+     * @param playerUuid the uuid of the player to check.
+     * @return true if a player with the given name is in the queue, false otherwise.
      */
-    public boolean inQueue(String playerName);
+    public boolean inQueue(UUID playerUuid);
 
     /**
-     * Adds a player to the queue, and starts the game if there are enough
-     * people in the queue.
+     * Adds a player to the queue, and starts the game if there are enough people in the queue.
      *
      * @param player the player to add.
      */
     public void queuePlayer(Player player);
 
     /**
-     * Adds a player to the queue, and starts the game if there are enough
-     * people in the queue.
+     * Adds a player to the queue, and starts the game if there are enough people in the queue.
      *
-     * @param playerName the name of the player to add.
+     * @param playerUuid the uuid of the player to add.
      */
-    public void queuePlayer(String playerName);
+    public void queuePlayer(UUID playerUuid);
 
     /**
      * Removes a player from the queue.
@@ -55,16 +53,16 @@ public interface SkyGameQueue {
     /**
      * Removes a player from the queue.
      *
-     * @param playerName the name of the player to remove.
+     * @param playerUuid the name of the player to remove.
      */
-    public void removePlayer(String playerName);
+    public void removePlayer(UUID playerUuid);
 
     /**
      * Gets a copy of the queue.
      *
      * @return a copy of the current queue.
      */
-    public String[] getCopy();
+    public UUID[] getCopy();
 
     public int getNumPlayersInQueue();
 }

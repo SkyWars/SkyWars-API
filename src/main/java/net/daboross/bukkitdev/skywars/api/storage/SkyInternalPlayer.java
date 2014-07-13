@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,24 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.points;
+package net.daboross.bukkitdev.skywars.api.storage;
 
-import java.io.IOException;
-import net.daboross.bukkitdev.skywars.api.SkyWars;
+import net.daboross.bukkitdev.skywars.api.players.SkyPlayer;
+import net.daboross.bukkitdev.skywars.api.players.SkyPlayerState;
 
-public abstract class PointStorageBackend {
+public interface SkyInternalPlayer extends SkyPlayer {
 
-    protected final SkyWars skywars;
+    public void setState(SkyPlayerState state);
 
-    protected PointStorageBackend(final SkyWars skywars) {
-        this.skywars = skywars;
-    }
+    public void setGameId(int id);
 
-    public abstract void addScore(String player, int diff);
-
-    public abstract void setScore(String player, int score);
-
-    public abstract int getScore(String player);
-
-    public abstract void save() throws IOException;
+    public void loggedOut();
 }

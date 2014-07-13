@@ -17,8 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.translations;
 
 /**
- * Translation keys for SkyWars. This enumeration should contain one key for
- * every individual message in game.
+ * Translation keys for SkyWars. This enumeration should contain one key for every individual message in game.
  */
 public enum TransKey {
 

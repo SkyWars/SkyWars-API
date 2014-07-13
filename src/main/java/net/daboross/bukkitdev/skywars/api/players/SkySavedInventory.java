@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,24 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.game;
+package net.daboross.bukkitdev.skywars.api.players;
 
-import java.util.UUID;
+import org.bukkit.entity.Player;
 
-public interface SkyCurrentGameTracker {
+public interface SkySavedInventory {
 
-    /**
-     * Gets if a player is currently in a game.
-     *
-     * @param uuid@return whether or not the given player is in a game.
-     */
-    public boolean isInGame(UUID uuid);
-
-    /**
-     * Gets the ID of the game a given player is in.
-     *
-     * @param playerUuid the uuid of the player to check.
-     * @return the ID of the game the given player is in, or -1 if none.
-     */
-    public int getGameId(UUID playerUuid);
+    public void apply(Player p);
 }

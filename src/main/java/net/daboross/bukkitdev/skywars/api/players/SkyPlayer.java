@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2014 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,11 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.ingame;
+package net.daboross.bukkitdev.skywars.api.players;
 
+import java.util.UUID;
+import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import org.bukkit.entity.Player;
 
-public interface SkySavedInventory {
+public interface SkyPlayer {
 
-    public void apply(Player p);
+    public String getName();
+
+    public UUID getUuid();
+
+    public Player getPlayer();
+
+    public int getGameId();
+
+    public SkyPlayerState getState();
+
+    public SkyKit getSelectedKit();
+
+    public void setSelectedKit(SkyKit kit);
+
+    public SkySavedInventory getSavedInventory();
+
+    public void setSavedInventory(SkySavedInventory inventory);
+
+    public int getScore();
+
+    public void setScore(int score);
+
+    public void addScore(int diff);
 }
