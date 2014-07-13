@@ -28,7 +28,6 @@ public class SkyStatic {
     private static Logger logger = defaultLogger;
     private static String pluginName = "SkyWars";
     private static String version = "Unknown";
-    private static boolean supportsUuids;
 
     public static void debug(String message) {
         if (debug) {
@@ -90,15 +89,4 @@ public class SkyStatic {
         SkyStatic.debug = debug;
     }
 
-    public static boolean doesBukkitSupportUuids() {
-        return supportsUuids;
-    }
-
-    public static void initializeSupportsUuids() {
-        String packageName = Bukkit.getServer().getClass().getPackage().getName();
-        // Get full package string of CraftServer.
-        // org.bukkit.craftbukkit.versionstring (or for pre-refactor, just org.bukkit.craftbukkit
-        String version = packageName.substring(packageName.lastIndexOf('.') + 1);
-        System.out.println(version);
-    }
 }

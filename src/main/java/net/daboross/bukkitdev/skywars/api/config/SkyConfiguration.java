@@ -242,6 +242,13 @@ public interface SkyConfiguration {
     public boolean isWorldeditHookEnabled();
 
     /**
+     * Whether or not to skip checking for uuid support.
+     *
+     * @return True if the user has disabled the uuid check, false otherwise.
+     */
+    public boolean isSkipUuidCheck();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     public static enum ArenaOrder {
