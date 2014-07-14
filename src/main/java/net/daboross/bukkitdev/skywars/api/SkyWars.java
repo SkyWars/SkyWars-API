@@ -51,7 +51,7 @@ public interface SkyWars extends Plugin {
     public SkyGameQueue getGameQueue();
 
     /**
-     * Gets the SkyPlayers for this plugin. This will store all player info for people in queue & game.
+     * Gets the SkyPlayers for this plugin. This will store all player info for people in queue &amp; game.
      * <br>
      * This method will never return null if this plugin is enabled.
      *
