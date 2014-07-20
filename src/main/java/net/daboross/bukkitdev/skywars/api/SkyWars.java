@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
+import java.nio.file.Path;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
 import net.daboross.bukkitdev.skywars.api.economy.SkyEconomyAbstraction;
 import net.daboross.bukkitdev.skywars.api.game.SkyAttackerStorage;
@@ -148,4 +149,18 @@ public interface SkyWars extends Plugin {
      * @return The SkyKits, or null if this plugin is not yet enabled.
      */
     public SkyKits getKits();
+
+    /**
+     * Gets the folder arena configurations are stored in.
+     *
+     * @return The arena folder
+     */
+    public Path getArenaPath();
+
+    /**
+     * Gets the base data folder for SkyWars, as a path.
+     *
+     * @return The data folder
+     */
+    public Path getDataPath();
 }
