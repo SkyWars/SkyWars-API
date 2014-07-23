@@ -1,5 +1,5 @@
 SkyWars-API
----
+-----------
 
 This is the API project for SkyWars. See [SkyWars](https://github.com/SkyWars/SkyWars) for the main project repository.
 
