@@ -16,6 +16,8 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
 import net.daboross.bukkitdev.skywars.api.economy.SkyEconomyAbstraction;
@@ -163,4 +165,13 @@ public interface SkyWars extends Plugin {
      * @return The data folder
      */
     public Path getDataPath();
+
+    /**
+     * Acts exactly like getResource(), except for throwing a FileNotSoundException when not found
+     *
+     * @param filename Filename to get from internal jar
+     * @return InputStream for file
+     * @throws java.io.FileNotFoundException If the file doesn't exist in the jar
+     */
+    public InputStream getResourceAsStream(final String filename) throws FileNotFoundException;
 }
