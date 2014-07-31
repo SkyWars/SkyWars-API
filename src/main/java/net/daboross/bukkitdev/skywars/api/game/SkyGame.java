@@ -40,9 +40,22 @@ public interface SkyGame {
 
     public int getTeamNumber(UUID playerUuid);
 
-    public List<UUID> getAlivePlayersInTeam(int teamNumber);
+    public List<UUID> getAlivePlayersInTeam(int teamId);
 
-    public List<UUID> getAllPlayersInTeam(int teamNumber);
+    public List<UUID> getAllPlayersInTeam(int teamId);
 
     public int getNumTeams();
+
+    public SkyGameTeam getTeam(int teamId);
+
+    public interface SkyGameTeam {
+
+        public String getName();
+
+        public int getId();
+
+        public List<UUID> getPlayers();
+
+        public List<UUID> getAlive();
+    }
 }
