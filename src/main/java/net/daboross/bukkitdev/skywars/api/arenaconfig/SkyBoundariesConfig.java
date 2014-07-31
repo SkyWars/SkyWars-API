@@ -59,13 +59,6 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
 
     @Override
     public SkyBlockLocationRange getOrigin() {
-        if (this.originRaw == null) {
-            if (parent == null) {
-                throw new IllegalStateException("Ultimate parent origin boundary not found.");
-            } else {
-                return parent.getOrigin();
-            }
-        }
         return originRaw;
     }
 
