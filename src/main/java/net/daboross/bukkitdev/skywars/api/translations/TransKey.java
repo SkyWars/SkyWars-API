@@ -145,7 +145,10 @@ public enum TransKey {
     GAME_WINNING_NONE_WON("game.winning.none-won", 0),
     // game.starting
     GAME_STARTING_GAMESTARTING("game.starting.game-starting", 1),
-    GAME_STARTING_GAMESTARTING_COMMA("game.starting.game-starting-comma", 0),;
+    GAME_STARTING_GAMESTARTING_COMMA("game.starting.game-starting-comma", 0),
+    GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
+    GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
+    GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
     public static final int VERSION = 4;
     public final String key;
     public final int args;
