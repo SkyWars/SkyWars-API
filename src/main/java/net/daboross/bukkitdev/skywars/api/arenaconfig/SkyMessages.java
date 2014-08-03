@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+@Deprecated
 public interface SkyMessages {
 
     public boolean definesAnything();

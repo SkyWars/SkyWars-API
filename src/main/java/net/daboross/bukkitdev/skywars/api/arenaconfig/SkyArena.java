@@ -52,6 +52,7 @@ public interface SkyArena {
 
     public SkyBoundaries getBoundaries();
 
+    @Deprecated
     public SkyMessages getMessages();
 
     public void serialize(ConfigurationSection configuration);
