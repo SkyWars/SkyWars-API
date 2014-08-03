@@ -88,5 +88,4 @@ public class SkyStatic {
     public static void setDebug(final boolean debug) {
         SkyStatic.debug = debug;
     }
-
 }
