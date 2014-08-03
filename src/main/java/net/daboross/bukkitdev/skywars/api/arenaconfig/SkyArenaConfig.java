@@ -274,6 +274,7 @@ public class SkyArenaConfig extends Parentable<SkyArenaConfig> implements SkyAre
     }
 
     @Override
+    @Deprecated
     public SkyMessagesConfig getMessages() {
         return messages;
     }

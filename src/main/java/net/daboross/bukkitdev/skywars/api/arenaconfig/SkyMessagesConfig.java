@@ -21,19 +21,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.config.ConfigColorCode;
-import net.daboross.bukkitdev.skywars.api.config.SkyMessageKeys;
 import net.daboross.bukkitdev.skywars.api.parent.Parentable;
-import net.daboross.bukkitdev.skywars.api.translations.SkyTrans;
-import net.daboross.bukkitdev.skywars.api.translations.TransKey;
 import org.apache.commons.lang.Validate;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
+@Deprecated
 public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements SkyMessages {
 
     private final Map<String, String> rawMessages = new HashMap<String, String>();
-    private final Map<String, String> messages = new HashMap<String, String>();
-    private String prefix;
 
     public SkyMessagesConfig() {
     }
@@ -44,7 +39,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     public void copyDataFrom(SkyMessagesConfig config) {
         this.rawMessages.putAll(config.rawMessages);
-        this.messages.putAll(config.messages);
     }
 
     @Override
@@ -52,34 +46,9 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         return !rawMessages.isEmpty();
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = translate(prefix);
-    }
-
     @Override
     public String getMessage(String key) {
-        if (prefix == null) {
-            throw new IllegalStateException("Prefix not set");
-        }
-        key = key.toLowerCase(Locale.ENGLISH);
-        String message = messages.get(key);
-        if (message == null) {
-            if (parent == null) {
-                TransKey transKey = SkyMessageKeys.DEFAULT_KEYS.get(key);
-                if (transKey != null) {
-                    Object[] args = new String[transKey.args];
-                    for (int i = 0; i < args.length; i++) {
-                        args[i] = "%s";
-                    }
-                    return prefix + SkyTrans.get(transKey, args);
-                }
-                throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
-            } else {
-                return parent.getMessage(key);
-            }
-        } else {
-            return prefix + message;
-        }
+        throw new UnsupportedOperationException("Per-arena messages have been removed.");
     }
 
     @Override
@@ -88,14 +57,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         String message = rawMessages.get(key.toLowerCase(Locale.ENGLISH));
         if (message == null) {
             if (parent == null) {
-                TransKey transKey = SkyMessageKeys.DEFAULT_KEYS.get(key);
-                if (transKey != null) {
-                    Object[] args = new String[transKey.args];
-                    for (int i = 0; i < args.length; i++) {
-                        args[i] = "%s";
-                    }
-                    return SkyTrans.get(transKey, args);
-                }
                 throw new IllegalArgumentException("Ultimate parent does not define message '" + key + "'");
             } else {
                 return parent.getRawMessage(key);
@@ -111,19 +72,13 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
         key = key.toLowerCase(Locale.ENGLISH);
         if (message == null) {
             rawMessages.remove(key);
-            messages.remove(key);
         } else {
             rawMessages.put(key, message);
-            messages.put(key, translate(message));
         }
     }
 
     public Map<String, String> getInternalRawMessages() {
         return Collections.unmodifiableMap(rawMessages);
-    }
-
-    private String translate(String original) {
-        return ChatColor.translateAlternateColorCodes('&', original);
     }
 
     public void serialize(ConfigurationSection section) {
@@ -146,21 +101,16 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
     public String toString() {
         return "SkyMessagesConfig{" +
                 "rawMessages=" + rawMessages +
-                ", messages=" + messages +
-                ", prefix='" + prefix + '\'' +
                 '}';
     }
 
     @Override
-    @SuppressWarnings("RedundantIfStatement")
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyMessagesConfig)) return false;
 
         SkyMessagesConfig config = (SkyMessagesConfig) o;
 
-        if (!messages.equals(config.messages)) return false;
-        if (prefix != null ? !prefix.equals(config.prefix) : config.prefix != null) return false;
         if (!rawMessages.equals(config.rawMessages)) return false;
 
         return true;
@@ -168,9 +118,6 @@ public class SkyMessagesConfig extends Parentable<SkyMessagesConfig> implements 
 
     @Override
     public int hashCode() {
-        int result = rawMessages.hashCode();
-        result = 31 * result + messages.hashCode();
-        result = 31 * result + (prefix != null ? prefix.hashCode() : 0);
-        return result;
+        return rawMessages.hashCode();
     }
 }
