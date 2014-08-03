@@ -132,19 +132,19 @@ public enum TransKey {
     // disable report
     REPORT_DISABLED("messages.report-disabled", 0),
     // game.death
-    GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2),
-    GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1),
-    GAME_DEATH_KILLED_BY_PLAYER("game.death.killed-by-player", 2),
-    GAME_DEATH_KILLED_BY_ENVIRONMENT("game.death.killed-by-environment", 1),
-    GAME_DEATH_FORFEITED_WHILE_ATTACKED("game.death.forfeited-while-attacked", 2),
-    GAME_DEATH_FORFEITED("game.death.forfeited", 2),
+    GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2, true),
+    GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1, true),
+    GAME_DEATH_KILLED_BY_PLAYER("game.death.killed-by-player", 2, true),
+    GAME_DEATH_KILLED_BY_ENVIRONMENT("game.death.killed-by-environment", 1, true),
+    GAME_DEATH_FORFEITED_WHILE_ATTACKED("game.death.forfeited-while-attacked", 2, true),
+    GAME_DEATH_FORFEITED("game.death.forfeited", 2, true),
     // game.winning
-    GAME_WINNING_SINGLE_WON("game.winning.single-won", 1),
-    GAME_WINNING_MULTI_WON("game.winning.multi-won", 1),
+    GAME_WINNING_SINGLE_WON("game.winning.single-won", 1, true),
+    GAME_WINNING_MULTI_WON("game.winning.multi-won", 1, true),
     GAME_WINNING_MULTI_WON_COMMA("game.winning.multi-won-comma", 0),
-    GAME_WINNING_NONE_WON("game.winning.none-won", 0),
+    GAME_WINNING_NONE_WON("game.winning.none-won", 0, true),
     // game.starting
-    GAME_STARTING_GAMESTARTING("game.starting.game-starting", 1),
+    GAME_STARTING_GAMESTARTING("game.starting.game-starting", 1, true),
     GAME_STARTING_GAMESTARTING_COMMA("game.starting.game-starting-comma", 0),
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
@@ -152,9 +152,15 @@ public enum TransKey {
     public static final int VERSION = 4;
     public final String key;
     public final int args;
+    public final boolean includePrefix;
 
     private TransKey(final String key, final int args) {
+        this(key, args, false);
+    }
+
+    private TransKey(final String key, final int args, final boolean includePrefix) {
         this.key = key;
         this.args = args;
+        this.includePrefix = includePrefix;
     }
 }
