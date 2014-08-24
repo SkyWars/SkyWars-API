@@ -115,7 +115,7 @@
     </issueManagement>
     <ciManagement>
         <system>teamcity</system>
-        <url>http://dabo.guru/ci-p/SkyWarsParent_SkyWarsApi</url>
+        <url>http://ci.dabo.guru/p/SkyWarsParent_SkyWarsApi</url>
     </ciManagement>
     <distributionManagement>
         <repository>
