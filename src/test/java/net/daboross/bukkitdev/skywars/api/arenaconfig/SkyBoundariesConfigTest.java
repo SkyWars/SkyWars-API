@@ -23,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Test generation of clearing/boundaries
 public class SkyBoundariesConfigTest {
 
     private Random r;
@@ -35,7 +36,7 @@ public class SkyBoundariesConfigTest {
     @Test
     public void testEquals() {
         SkyBoundariesConfig original = getRandom(r);
-        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal());
+        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOrigin());
         Assert.assertEquals(original, second);
     }
 
@@ -50,8 +51,6 @@ public class SkyBoundariesConfigTest {
 
     public static SkyBoundariesConfig getRandom(Random r) {
         return new SkyBoundariesConfig(
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
                 r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r));
     }
 }
