@@ -25,6 +25,4 @@ public interface SkyBoundaries {
     public SkyBlockLocationRange getBuilding();
 
     public SkyBlockLocationRange getClearing();
-
-    public void setOrigin(SkyBlockLocationRange origin);
 }

@@ -17,7 +17,9 @@
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.Random;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRangeTest;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
@@ -60,6 +62,9 @@ public class SkyBoundariesConfigTest {
     }
 
     public static SkyBoundariesConfig getRandom(Random r) {
-        return new SkyBoundariesConfig(SkyBlockLocationRangeTest.getRandom(r));
+        SkyBoundariesConfig config = new SkyBoundariesConfig(SkyBlockLocationRangeTest.getRandom(r));
+        config.getBuilding().max.add(SkyBlockLocationRangeTest.getRandomPositiveLoc(r));
+        config.getClearing().max.add(SkyBlockLocationRangeTest.getRandomPositiveLoc(r));
+        return config;
     }
 }
