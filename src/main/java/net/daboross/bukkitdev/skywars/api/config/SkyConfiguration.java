@@ -156,7 +156,6 @@ public interface SkyConfiguration {
      */
     public List<SkyArenaConfig> getEnabledArenas();
 
-
     /**
      * Save the given arena to file.
      *

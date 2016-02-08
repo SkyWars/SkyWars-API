@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import net.daboross.bukkitdev.skywars.api.config.SkyConfigurationException;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
@@ -40,7 +39,6 @@ public class SkyArenaConfig implements SkyArena {
         Validate.isTrue(teamSize >= 1, "Team size can't be smaller than 1");
         Validate.isTrue(placementY >= 0, "placement-y can't be smaller than 0");
         Validate.notNull(boundaries);
-        Validate.notNull(arenaName);
         Validate.notNull(spawns);
         Validate.isTrue(spawns.size() >= numTeams, "Number of spawns needs to be at least as big as numTeams");
         this.arenaName = arenaName;

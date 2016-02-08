@@ -22,6 +22,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 // TODO: Test generation of clearing/boundaries
 public class SkyBoundariesConfigTest {
@@ -49,8 +50,16 @@ public class SkyBoundariesConfigTest {
         Assert.assertEquals(original, deserialized);
     }
 
+    @Test
+    public void testBoundriesRejectsNullRange() {
+        try {
+            new SkyBoundariesConfig(null);
+            fail("SkyBoundriesConfig accepts null range");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
     public static SkyBoundariesConfig getRandom(Random r) {
-        return new SkyBoundariesConfig(
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r));
+        return new SkyBoundariesConfig(SkyBlockLocationRangeTest.getRandom(r));
     }
 }

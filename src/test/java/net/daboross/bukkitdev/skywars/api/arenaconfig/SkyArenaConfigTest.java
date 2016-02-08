@@ -66,13 +66,11 @@ public class SkyArenaConfigTest {
     }
 
     public static SkyArenaConfig getRandom(Random r) {
-        List<SkyPlayerLocation> spawns = null;
-        if (r.nextBoolean()) {
-            spawns = new ArrayList<SkyPlayerLocation>();
-            for (int i = 0; i < r.nextInt(20); i++) {
-                spawns.add(SkyPlayerLocationTest.getRandomLoc());
-            }
+        int numTeams = 2 + r.nextInt(22);
+        List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>();
+        for (int i = 0; i < Math.max(numTeams, r.nextInt(20)); i++) {
+            spawns.add(SkyPlayerLocationTest.getRandomLoc());
         }
-        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, 2 + r.nextInt(22), 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r));
+        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r));
     }
 }
