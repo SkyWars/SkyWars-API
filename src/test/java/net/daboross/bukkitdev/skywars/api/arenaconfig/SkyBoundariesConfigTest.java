@@ -17,12 +17,16 @@
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.Random;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRangeTest;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
+// TODO: Test generation of clearing/boundaries
 public class SkyBoundariesConfigTest {
 
     private Random r;
@@ -35,7 +39,7 @@ public class SkyBoundariesConfigTest {
     @Test
     public void testEquals() {
         SkyBoundariesConfig original = getRandom(r);
-        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOriginInternal(), original.getBuildingInternal(), original.getClearingInternal());
+        SkyBoundariesConfig second = new SkyBoundariesConfig(original.getOrigin());
         Assert.assertEquals(original, second);
     }
 
@@ -48,10 +52,19 @@ public class SkyBoundariesConfigTest {
         Assert.assertEquals(original, deserialized);
     }
 
+    @Test
+    public void testBoundriesRejectsNullRange() {
+        try {
+            new SkyBoundariesConfig(null);
+            fail("SkyBoundriesConfig accepts null range");
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
     public static SkyBoundariesConfig getRandom(Random r) {
-        return new SkyBoundariesConfig(
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r),
-                r.nextBoolean() ? null : SkyBlockLocationRangeTest.getRandom(r));
+        SkyBoundariesConfig config = new SkyBoundariesConfig(SkyBlockLocationRangeTest.getRandom(r));
+        config.getBuilding().max.add(SkyBlockLocationRangeTest.getRandomPositiveLoc(r));
+        config.getClearing().max.add(SkyBlockLocationRangeTest.getRandomPositiveLoc(r));
+        return config;
     }
 }

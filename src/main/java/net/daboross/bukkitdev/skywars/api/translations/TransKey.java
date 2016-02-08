@@ -105,6 +105,7 @@ public enum TransKey {
     SWS_SAVE_DESCRIPTION("setup-commands.save.description", 0),
     SWS_SAVE_SAVING("setup-commands.save.saving", 0),
     SWS_SAVE_SAVED("setup-commands.save.saved", 0),
+    SWS_SAVE_FAILED("setup-commands.save.failed", 0),
     // top-commands
     MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
