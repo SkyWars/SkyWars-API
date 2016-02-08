@@ -20,17 +20,9 @@ import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 
 public interface SkyBoundaries {
 
-    public boolean definesAnything();
-
     public SkyBlockLocationRange getOrigin();
 
     public SkyBlockLocationRange getBuilding();
 
     public SkyBlockLocationRange getClearing();
-
-    public void setOrigin(SkyBlockLocationRange origin);
-
-    public void setBuilding(SkyBlockLocationRange building);
-
-    public void setClearing(SkyBlockLocationRange clearing);
 }

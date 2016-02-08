@@ -22,8 +22,6 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public interface SkyArena {
 
-    public SkyArena getParent();
-
     public String getArenaName();
 
     public List<SkyPlayerLocation> getSpawns();
@@ -32,28 +30,19 @@ public interface SkyArena {
 
     public int getNumTeams();
 
-    public void setNumTeams(Integer numTeams);
-
-    public Integer getRawNumTeams();
+    public void setNumTeams(int numTeams);
 
     public int getNumPlayers();
 
     public int getTeamSize();
 
-    public void setTeamSize(Integer teamSize);
-
-    public Integer getRawTeamSize();
+    public void setTeamSize(int teamSize);
 
     public int getPlacementY();
 
-    public void setPlacementY(Integer placementY);
-
-    public Integer getRawPlacementY();
+    public void setPlacementY(int placementY);
 
     public SkyBoundaries getBoundaries();
-
-    @Deprecated
-    public SkyMessages getMessages();
 
     public void serialize(ConfigurationSection configuration);
 }

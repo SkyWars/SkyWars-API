@@ -39,7 +39,7 @@ public class SkyArenaConfigTest {
     public void testEquals() {
         SkyArenaConfig config = getRandom(r);
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig(null, config.getRawSpawns(), config.getRawNumTeams(), config.getRawTeamSize(), config.getRawPlacementY(), config.getBoundaries(), config.getMessages());
+        SkyArenaConfig copy = new SkyArenaConfig(null, config.getSpawns(), config.getNumTeams(), config.getTeamSize(), config.getPlacementY(), config.getBoundaries());
         assertEquals(config, copy);
     }
 
@@ -61,18 +61,16 @@ public class SkyArenaConfigTest {
         try {
             SkyArenaConfig.deserialize(serializationMedium);
             fail("Deserialization on future config version doesn't throw IllegalArgumentException.");
-        } catch (IllegalArgumentException unused) {
+        } catch (IllegalArgumentException ignored) {
         }
     }
 
     public static SkyArenaConfig getRandom(Random r) {
-        List<SkyPlayerLocation> spawns = null;
-        if (r.nextBoolean()) {
-            spawns = new ArrayList<SkyPlayerLocation>();
-            for (int i = 0; i < r.nextInt(20); i++) {
-                spawns.add(SkyPlayerLocationTest.getRandomLoc());
-            }
+        int numTeams = 2 + r.nextInt(22);
+        List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>();
+        for (int i = 0; i < Math.max(numTeams, r.nextInt(20)); i++) {
+            spawns.add(SkyPlayerLocationTest.getRandomLoc());
         }
-        return new SkyArenaConfig(r.nextBoolean() ? "okspawn" : "notokrandomname", spawns, 2 + r.nextInt(22), 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r), null);
+        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r));
     }
 }

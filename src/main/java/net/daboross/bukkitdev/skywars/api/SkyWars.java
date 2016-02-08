@@ -167,7 +167,7 @@ public interface SkyWars extends Plugin {
     public Path getDataPath();
 
     /**
-     * Acts exactly like getResource(), except for throwing a FileNotSoundException when not found
+     * Acts exactly like getResource(), except for throwing a FileNotFoundException when not found
      *
      * @param filename Filename to get from internal jar
      * @return InputStream for file

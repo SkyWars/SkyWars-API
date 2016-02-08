@@ -157,13 +157,6 @@ public interface SkyConfiguration {
     public List<SkyArenaConfig> getEnabledArenas();
 
     /**
-     * Gets the parent arena. This arena will have all values defined.
-     *
-     * @return The arena that all other arenas will inherit values from.
-     */
-    public SkyArenaConfig getParentArena();
-
-    /**
      * Save the given arena to file.
      *
      * @param config The arena to save to file.

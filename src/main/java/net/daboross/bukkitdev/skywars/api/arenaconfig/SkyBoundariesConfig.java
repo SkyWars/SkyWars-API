@@ -16,128 +16,81 @@
  */
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
-import net.daboross.bukkitdev.skywars.api.parent.Parentable;
+import org.apache.commons.lang.Validate;
 import org.bukkit.configuration.ConfigurationSection;
 
-public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> implements SkyBoundaries {
+public class SkyBoundariesConfig implements SkyBoundaries {
 
-    private SkyBlockLocationRange originRaw;
-    private SkyBlockLocationRange buildingRaw;
-    private SkyBlockLocationRange clearingRaw;
+    private SkyBlockLocationRange origin;
+    private SkyBlockLocationRange building;
+    private SkyBlockLocationRange clearing;
 
-    public SkyBoundariesConfig() {
-    }
-
-    public SkyBoundariesConfig(SkyBoundariesConfig parent) {
-        super(parent);
+    public SkyBoundariesConfig(SkyBlockLocationRange origin) {
+        Validate.notNull(origin);
+        this.origin = origin;
+        SkyBlockLocation buildingMin = new SkyBlockLocation(-2, -20, -2, null);
+        SkyBlockLocation buildingMax = new SkyBlockLocation(
+                origin.max.x - origin.min.x + 2,
+                origin.max.y - origin.min.y + 2,
+                origin.max.z - origin.min.z + 2, null);
+        SkyBlockLocation clearingMin = buildingMin.add(-1, -1, -1);
+        SkyBlockLocation clearingMax = buildingMax.add(1, 1, 1);
+        this.building = new SkyBlockLocationRange(buildingMin, buildingMax, null);
+        this.clearing = new SkyBlockLocationRange(clearingMin, clearingMax, null);
     }
 
     public SkyBoundariesConfig(SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing) {
-        this.originRaw = origin;
-        this.buildingRaw = building;
-        this.clearingRaw = clearing;
-    }
-
-    public SkyBoundariesConfig(SkyBlockLocationRange origin, SkyBlockLocationRange building, SkyBlockLocationRange clearing, SkyBoundariesConfig parent) {
-        super(parent);
-        this.originRaw = origin;
-        this.buildingRaw = building;
-        this.clearingRaw = clearing;
-    }
-
-    public void copyDataFrom(SkyBoundariesConfig boundaries) {
-        this.originRaw = boundaries.originRaw;
-        this.buildingRaw = boundaries.buildingRaw;
-        this.clearingRaw = boundaries.clearingRaw;
-    }
-
-    @Override
-    public boolean definesAnything() {
-        return originRaw != null || buildingRaw != null || clearingRaw != null;
+        this.origin = origin;
+        this.building = building;
+        this.clearing = clearing;
     }
 
     @Override
     public SkyBlockLocationRange getOrigin() {
-        return originRaw;
+        return origin;
     }
 
     @Override
     public SkyBlockLocationRange getBuilding() {
-        if (this.originRaw == null) {
-            if (parent == null) {
-                throw new IllegalStateException("Ultimate parent building boundary not found.");
-            } else {
-                return parent.getBuilding();
-            }
-        }
-        return buildingRaw;
+        return building;
     }
 
     @Override
     public SkyBlockLocationRange getClearing() {
-        if (this.clearingRaw == null) {
-            if (parent == null) {
-                throw new IllegalStateException("Ultimate parent clearing boundary not found.");
-            } else {
-                return parent.getClearing();
-            }
-        }
-        return clearingRaw;
-    }
-
-    @Override
-    public void setOrigin(SkyBlockLocationRange origin) {
-        this.originRaw = origin;
-    }
-
-    @Override
-    public void setBuilding(SkyBlockLocationRange building) {
-        this.buildingRaw = building;
-    }
-
-    @Override
-    public void setClearing(SkyBlockLocationRange clearing) {
-        this.clearingRaw = clearing;
-    }
-
-    public SkyBlockLocationRange getOriginInternal() {
-        return originRaw;
-    }
-
-    public SkyBlockLocationRange getBuildingInternal() {
-        return buildingRaw;
-    }
-
-    public SkyBlockLocationRange getClearingInternal() {
-        return clearingRaw;
+        return clearing;
     }
 
     public void serialize(ConfigurationSection section) {
-        if (originRaw != null) {
-            originRaw.serialize(section.createSection("origin"));
+        if (origin != null) {
+            origin.serialize(section.createSection("origin"));
         }
-        if (buildingRaw != null) {
-            buildingRaw.serialize(section.createSection("building"));
+        if (building != null) {
+            building.serialize(section.createSection("building"));
         }
-        if (clearingRaw != null) {
-            clearingRaw.serialize(section.createSection("clearing"));
+        if (clearing != null) {
+            clearing.serialize(section.createSection("clearing"));
         }
     }
 
     public static SkyBoundariesConfig deserialize(ConfigurationSection configurationSection) {
-        SkyBlockLocationRange origin = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("origin")),
-                building = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("building")),
-                clearing = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("clearing"));
-        return new SkyBoundariesConfig(origin, building, clearing);
+        SkyBlockLocationRange origin = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("origin"));
+        SkyBlockLocationRange building = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("building"));
+        SkyBlockLocationRange clearing = SkyBlockLocationRange.deserialize(configurationSection.getConfigurationSection("clearing"));
+        if (origin != null && building == null && clearing == null) {
+            return new SkyBoundariesConfig(origin);
+        } else if ((building != null && clearing != null) || origin != null) {
+            return new SkyBoundariesConfig(origin, building, clearing);
+        } else {
+            throw new IllegalArgumentException("Invalid Boundries Configuration: either specify origin, or both building and clearing");
+        }
     }
 
     @Override
     public String toString() {
         return "SkyBoundariesConfig{" +
-                "originRaw=" + originRaw +
-                ", buildingRaw=" + buildingRaw +
-                ", clearingRaw=" + clearingRaw +
+                "originRaw=" + origin +
                 '}';
     }
 
@@ -149,18 +102,16 @@ public class SkyBoundariesConfig extends Parentable<SkyBoundariesConfig> impleme
 
         SkyBoundariesConfig config = (SkyBoundariesConfig) o;
 
-        if (buildingRaw != null ? !buildingRaw.equals(config.buildingRaw) : config.buildingRaw != null) return false;
-        if (clearingRaw != null ? !clearingRaw.equals(config.clearingRaw) : config.clearingRaw != null) return false;
-        if (originRaw != null ? !originRaw.equals(config.originRaw) : config.originRaw != null) return false;
-
-        return true;
+        if (origin != null ? !origin.equals(config.origin) : config.origin != null) return false;
+        if (building != null ? !building.equals(config.building) : config.building != null) return false;
+        return clearing != null ? clearing.equals(config.clearing) : config.clearing == null;
     }
 
     @Override
     public int hashCode() {
-        int result = originRaw != null ? originRaw.hashCode() : 0;
-        result = 31 * result + (buildingRaw != null ? buildingRaw.hashCode() : 0);
-        result = 31 * result + (clearingRaw != null ? clearingRaw.hashCode() : 0);
+        int result = origin != null ? origin.hashCode() : 0;
+        result = 31 * result + (building != null ? building.hashCode() : 0);
+        result = 31 * result + (clearing != null ? clearing.hashCode() : 0);
         return result;
     }
 }
