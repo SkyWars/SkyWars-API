@@ -256,6 +256,13 @@ public interface SkyConfiguration {
     public boolean isSkipUuidCheck();
 
     /**
+     * Whether or not a few options which should only be enabled when developing are enabled.
+     *
+     * @return True if developer options should be enabled, false otherwise.
+     */
+    public boolean areDeveloperOptionsEnabled();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     public static enum ArenaOrder {
