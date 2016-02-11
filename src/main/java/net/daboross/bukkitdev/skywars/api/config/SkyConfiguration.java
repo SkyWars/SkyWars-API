@@ -67,6 +67,20 @@ public interface SkyConfiguration {
     public boolean isInventorySaveEnabled();
 
     /**
+     * Gets whether experience saving will be enabled.
+     *
+     * @return Whether or not to enable inventory saving.
+     */
+    public boolean isExperienceSaveEnabled();
+
+    /**
+     * Gets whether position, gamemode, health (and hunger) saving will be enabled.
+     *
+     * @return Whether or not to enable PGH saving.
+     */
+    public boolean isPghSaveEnabled();
+
+    /**
      * Gets whether or not to enable score storage.
      *
      * @return Whether or not to enable score.

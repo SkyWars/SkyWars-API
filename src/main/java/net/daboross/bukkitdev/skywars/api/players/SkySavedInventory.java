@@ -20,5 +20,5 @@ import org.bukkit.entity.Player;
 
 public interface SkySavedInventory {
 
-    public void apply(Player p);
+    public void apply(Player p, boolean restoreExperience, boolean restorePgh);
 }
