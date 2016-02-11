@@ -22,7 +22,8 @@ import org.bukkit.Bukkit;
 
 public class SkyStatic {
 
-    private static final String implementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    private static final String classImplementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
+    private static final String implementationVersion = classImplementationVersion == null ? "" : classImplementationVersion;
     private static final Logger defaultLogger = Bukkit.getLogger();
     private static boolean debug = false;
     private static Logger logger = defaultLogger;
