@@ -46,6 +46,8 @@ public interface SkyGame {
 
     public int getNumTeams();
 
+    public int getAliveTeams();
+
     public SkyGameTeam getTeam(int teamId);
 
     public interface SkyGameTeam {

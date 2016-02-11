@@ -52,8 +52,12 @@ public enum TransKey {
     CMD_STATUS_DESCRIPTION("commands.status.description", 0),
     CMD_STATUS_HEADER("commands.status.header", 0),
     CMD_STATUS_IN_QUEUE("commands.status.in-queue", 1),
-    CMD_STATUS_QUEUE_COMMA("commands.status.queue-comma", 0),
+    CMD_STATUS_COMMA("commands.status.queue-comma", 0),
     CMD_STATUS_ARENA_HEADER("commands.status.arena-header", 0),
+    CMD_STATUS_ARENA_LIST_PREFIX_NO_TEAMS("commands.status.no-teams-arena-list-prefix", 1),
+    CMD_STATUS_ARENA_LIST_PREFIX_TEAMS_LEFT("commands.status.arena-teams-left", 3),
+    CMD_STATUS_ARENA_TEAM_PREFIX("commands.status.arena-team-prefix", 1),
+    CMD_STATUS_ARENA_TEAM_DEAD("commands.status.arena-team-dead", 1),
     // commands.version
     CMD_VERSION_DESCRIPTION("commands.version.description", 0),
     CMD_VERSION_OUTPUT("commands.version.output", 3),
@@ -109,10 +113,25 @@ public enum TransKey {
     // top-commands
     MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
+    // setup-commands.generic
+    SWS_NO_FIRST_POSITION("setup-commands.generic.no-first-position", 0),
+    SWS_NOT_ENOUGH_SPAWNS("setup-commands.generic.not-enough-spawns", 0),
+    SWS_TOO_LATE_SPAWNS_SET("setup-commands.generic.too-late-spawns-set", 0),
+    SWS_NO_ARENA_STARTED("setup-commands.generic.no-arena-started", 0),
+    SWS_ARENA_ALREADY_STARTED("setup-commands.generic.no-arena-started", 0),
     // generic-command-message
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", 0),
     NOT_ENOUGH_PARAMS("generic-command-message.not-enough-parameters", 0),
+    NO_PERMISSION("generic-command-message.no-permission", 1),
+    PLAYER_ONLY("generic-command-message.not-a-player", 1),
+    INVALID_SUB_COMMAND("generic-command-message.invalid-sub-command", 2),
+    // message-colors
+    COLORED_CMD_SUBCMD("message-colors.sub-command-colors", 2),
+    COLORED_CMD("message-colors.base-command-colors", 1),
+    COLORED_CMD_ARG("message-colors.command-argument-listing", 1),
+    COLORED_HELP_MSG("message-colors.help-message-colors", 1),
     // messages
+    HELP_HEADER("messages.help-message-header", 0),
     QUEUE_DEATH("messages.removed-from-queue-because-death", 0),
     NO_CLUE_COMMAND("messages.no-clue-what-command", 1),
     NOT_FULLY_ENABLED("messages.not-fully-enabled", 0),
@@ -144,10 +163,12 @@ public enum TransKey {
     GAME_WINNING_SINGLE_WON("game.winning.single-won", 1, true),
     GAME_WINNING_MULTI_WON("game.winning.multi-won", 1, true),
     GAME_WINNING_MULTI_WON_COMMA("game.winning.multi-won-comma", 0),
+    GAME_WINNING_MULTI_WON_FINAL_COMMA("game.winning.multi-won-final-comma", 0),
     GAME_WINNING_NONE_WON("game.winning.none-won", 0, true),
     // game.starting
     GAME_STARTING_GAMESTARTING("game.starting.game-starting", 1, true),
     GAME_STARTING_GAMESTARTING_COMMA("game.starting.game-starting-comma", 0),
+    GAME_STARTING_GAMESTARTING_FINAL_COMMA("game.starting.game-starting-final-comma", 0),
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
