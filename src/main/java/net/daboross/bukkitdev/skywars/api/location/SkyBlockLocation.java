@@ -111,6 +111,10 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new Location(bukkitWorld, x, y, z);
     }
 
+    public Location toLocationWithWorldObj(World bukkitWorld) {
+        return new Location(bukkitWorld, x, y, z);
+    }
+
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
