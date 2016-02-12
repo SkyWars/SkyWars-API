@@ -46,8 +46,8 @@ public class SkyBoundariesConfig implements SkyBoundaries {
         this.building = building;
         // ensure clearing can never be smaller than building.
         this.clearing = new SkyBlockLocationRange(
-                new SkyBlockLocation(Math.min(building.min.x, clearing.min.x), Math.min(building.min.y, clearing.min.y), Math.min(building.min.z, clearing.min.z), null),
-                new SkyBlockLocation(Math.max(building.max.x, clearing.max.x), Math.max(building.max.y, clearing.max.y), Math.max(building.max.z, clearing.max.z), null),
+                SkyBlockLocation.min(building.min, clearing.min),
+                SkyBlockLocation.max(building.max, clearing.max),
                 clearing.world
         );
     }
