@@ -16,7 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
+import java.util.List;
 import java.util.Map;
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
@@ -28,43 +30,30 @@ public class SkyKitItemConfig implements SkyKitItem {
     private final Material material;
     private final int amount;
     private final Map<Enchantment, Integer> enchantments;
+    private final List<SkyItemMeta> itemMeta;
 
-    public SkyKitItemConfig(Material material) {
+    public SkyKitItemConfig(Material material, int amount, Map<Enchantment, Integer> enchantments, final List<SkyItemMeta> itemMeta) {
         Validate.notNull(material, "Material cannot be null");
         this.material = material;
-        this.amount = 1;
-        this.enchantments = null;
-    }
-
-    public SkyKitItemConfig(Material material, int amount) {
-        Validate.notNull(material, "Material cannot be null");
-        this.material = material;
-        if (amount > material.getMaxStackSize()) {
-            throw new IllegalArgumentException("Material " + material + " can't have a stack size of " + amount + ". It is too high.");
-        } else if (amount < 0) {
+//        if (amount > material.getMaxStackSize()) {
+//            throw new IllegalArgumentException("Material " + material + " can't have a stack size of " + amount + ". It is too high.");
+//        } else
+        if (amount < 0) {
             throw new IllegalArgumentException("Amount can't be negative.");
         }
         this.amount = amount;
-        this.enchantments = null;
-    }
-
-    public SkyKitItemConfig(Material material, int amount, Map<Enchantment, Integer> enchantments) {
-        Validate.notNull(material, "Material cannot be null");
-        this.material = material;
-        if (amount > material.getMaxStackSize()) {
-            throw new IllegalArgumentException("Material " + material + " can't have a stack size of " + amount + ". It is too high.");
-        } else if (amount < 0) {
-            throw new IllegalArgumentException("Amount can't be negative.");
-        }
-        this.amount = amount;
-        this.enchantments = enchantments;
+        this.enchantments = enchantments != null && enchantments.isEmpty() ? null : enchantments;
+        this.itemMeta = itemMeta;
     }
 
     @Override
     public ItemStack toItem() {
         ItemStack itemStack = new ItemStack(material, amount);
         if (enchantments != null) {
-            itemStack.addEnchantments(enchantments);
+            itemStack.addUnsafeEnchantments(enchantments);
+        }
+        for (SkyItemMeta meta : itemMeta) {
+            meta.applyToItem(itemStack);
         }
         return itemStack;
     }
@@ -72,9 +61,10 @@ public class SkyKitItemConfig implements SkyKitItem {
     @Override
     public String toString() {
         return "SkyKitItemConfig{" +
-                "material=" + material +
-                ", amount=" + amount +
+                "amount=" + amount +
+                ", material=" + material +
                 ", enchantments=" + enchantments +
+                ", itemMeta=" + itemMeta +
                 '}';
     }
 
@@ -87,18 +77,20 @@ public class SkyKitItemConfig implements SkyKitItem {
         SkyKitItemConfig config = (SkyKitItemConfig) o;
 
         if (amount != config.amount) return false;
+        if (material != config.material) return false;
         if (enchantments != null ? !enchantments.equals(config.enchantments) : config.enchantments != null)
             return false;
-        if (material != config.material) return false;
+        if (itemMeta != null ? !itemMeta.equals(config.itemMeta) : config.itemMeta != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = material.hashCode();
+        int result = material != null ? material.hashCode() : 0;
         result = 31 * result + amount;
         result = 31 * result + (enchantments != null ? enchantments.hashCode() : 0);
+        result = 31 * result + (itemMeta != null ? itemMeta.hashCode() : 0);
         return result;
     }
 }

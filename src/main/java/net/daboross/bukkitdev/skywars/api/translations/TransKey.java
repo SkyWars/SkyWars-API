@@ -45,6 +45,7 @@ public enum TransKey {
     CMD_DELPORTAL_NO_PORTAL_ERROR("commands.delportal.error-no-portals", 0),
     // commands.cancel
     CMD_CANCEL_DESCRIPTION("commands.cancel.description", 0),
+    CMD_CANCEL_ARGUMENT("commands.cancel.argument", 0),
     CMD_CANCEL_NOT_AN_INT("commands.cancel.argument-not-integer", 1),
     CMD_CANCEL_NO_GAMES_WITH_ID("commands.cancel.no-games-with-id", 1),
     CMD_CANCEL_CONFIRMATION("commands.cancel.confirmation", 1),
@@ -77,6 +78,7 @@ public enum TransKey {
     CMD_FORCESTART_NOT_ENOUGH("commands.forcestart.not-enough-players", 0),
     // commands.kit
     CMD_KIT_DESCRIPTION("commands.kit.description", 0),
+    CMD_KIT_ARGUMENT("commands.kit.argument", 0),
     CMD_KIT_NO_KITS_AVAILABLE("commands.kit.no-kits-available", 0),
     CMD_KIT_UNAVAILABLE_KITS("commands.kit.unavailable-kits", 1),
     CMD_KIT_UNKNOWN_KIT("commands.kit.unknown-kit", 1),
@@ -89,6 +91,10 @@ public enum TransKey {
     CMD_KIT_CURRENT_KIT("commands.kit.current-kit", 1),
     CMD_KIT_CURRENT_KIT_WITH_COST("commands.kit.current-kit-with-cost", 2),
     CMD_KIT_NO_ACCESS("commands.kit.no-access", 1),
+    // commands.testkit
+    CMD_TESTKIT_DESCRIPTION("commands.testkit.description", 0),
+    CMD_TESTKIT_UNKNOWN("commands.testkit.unknown", 1),
+    CMD_TESTKIT_APPLIED("commands.testkit.applied", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
@@ -110,15 +116,24 @@ public enum TransKey {
     SWS_SAVE_SAVING("setup-commands.save.saving", 0),
     SWS_SAVE_SAVED("setup-commands.save.saved", 0),
     SWS_SAVE_FAILED("setup-commands.save.failed", 0),
-    // top-commands
-    MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
-    SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
     // setup-commands.generic
     SWS_NO_FIRST_POSITION("setup-commands.generic.no-first-position", 0),
     SWS_NOT_ENOUGH_SPAWNS("setup-commands.generic.not-enough-spawns", 0),
     SWS_TOO_LATE_SPAWNS_SET("setup-commands.generic.too-late-spawns-set", 0),
     SWS_NO_ARENA_STARTED("setup-commands.generic.no-arena-started", 0),
     SWS_ARENA_ALREADY_STARTED("setup-commands.generic.no-arena-started", 0),
+    // setup-commands.createkit
+    SWS_CREATEKIT_DESCRIPTION("setup-commands.createkit.description", 0),
+    SWS_CREATEKIT_NAME_ARGUMENT_NAME("setup-commands.createkit.argument-name", 0),
+    SWS_CREATEKIT_COST_ARGUMENT_NAME("setup-commands.createkit.argument-cost", 0),
+    SWS_CREATEKIT_PERMISSION_ARGUMENT_NAME("setup-commands.createkit.argument-permission", 0),
+    SWS_CREATEKIT_SAVED("setup-commands.createkit.saved-no-permission", 1),
+    SWS_CREATEKIT_SAVED_PERMISSION("setup-commands.createkit.saved-with-permission", 2),
+    SWS_CREATEKIT_COST_TO_USE("setup-commands.createkit.cost-to-use", 1),
+    SWS_CREATEKIT_KIT_EXISTS("setup-commands.createkit.kit-exists", 1),
+    // top-commands
+    MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
+    SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
     // generic-command-message
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", 0),
     NOT_ENOUGH_PARAMS("generic-command-message.not-enough-parameters", 0),
