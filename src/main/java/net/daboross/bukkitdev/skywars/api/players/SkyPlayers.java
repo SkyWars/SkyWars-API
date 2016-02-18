@@ -27,7 +27,7 @@ public interface SkyPlayers {
      *
      * @return Whether or not storage is enabled.
      */
-    public boolean storageEnabled();
+    boolean storageEnabled();
 
     /**
      * Gets info on the given player.
@@ -35,7 +35,7 @@ public interface SkyPlayers {
      * @param player the player to get info on
      * @return the information stored on the player, or null if the player is offline.
      */
-    public SkyPlayer getPlayer(Player player);
+    SkyPlayer getPlayer(Player player);
 
     /**
      * Gets info on the given player.
@@ -43,15 +43,15 @@ public interface SkyPlayers {
      * @param uuid the name of the player to check, case insensitive
      * @return the information stored on the player, or null if the player is offline.
      */
-    public SkyPlayer getPlayer(UUID uuid);
+    SkyPlayer getPlayer(UUID uuid);
 
     /**
      * Loads the given player from storage.
      */
-    public void loadPlayer(Player player);
+    void loadPlayer(Player player);
 
     /**
      * Unloads the given player from memory.
      */
-    public void unloadPlayer(UUID uuid);
+    void unloadPlayer(UUID uuid);
 }

@@ -23,9 +23,9 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public class SkyBoundariesConfig implements SkyBoundaries {
 
-    private SkyBlockLocationRange origin;
-    private SkyBlockLocationRange building;
-    private SkyBlockLocationRange clearing;
+    private final SkyBlockLocationRange origin;
+    private final SkyBlockLocationRange building;
+    private final SkyBlockLocationRange clearing;
 
     public SkyBoundariesConfig(SkyBlockLocationRange origin) {
         Validate.notNull(origin);

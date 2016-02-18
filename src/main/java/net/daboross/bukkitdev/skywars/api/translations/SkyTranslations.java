@@ -24,5 +24,5 @@ public interface SkyTranslations {
      * @param key The translation key for the given message.
      * @return The translation associated with the given key.
      */
-    public String get(TransKey key);
+    String get(TransKey key);
 }

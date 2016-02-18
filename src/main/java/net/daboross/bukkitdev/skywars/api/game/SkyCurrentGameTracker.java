@@ -26,7 +26,7 @@ public interface SkyCurrentGameTracker {
      * @param uuid UUID of the player to check
      * @return whether or not the given player is in a game.
      */
-    public boolean isInGame(UUID uuid);
+    boolean isInGame(UUID uuid);
 
     /**
      * Gets the ID of the game a given player is in.
@@ -34,5 +34,5 @@ public interface SkyCurrentGameTracker {
      * @param playerUuid the uuid of the player to check.
      * @return the ID of the game the given player is in, or -1 if none.
      */
-    public int getGameId(UUID playerUuid);
+    int getGameId(UUID playerUuid);
 }

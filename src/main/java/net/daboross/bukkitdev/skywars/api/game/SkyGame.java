@@ -24,40 +24,40 @@ import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 
 public interface SkyGame {
 
-    public int getId();
+    int getId();
 
-    public List<UUID> getAlivePlayers();
+    List<UUID> getAlivePlayers();
 
-    public List<UUID> getDeadPlayers();
+    List<UUID> getDeadPlayers();
 
-    public SkyBlockLocation getMin();
+    SkyBlockLocation getMin();
 
-    public SkyBlockLocationRange getBuildingBoundaries();
+    SkyBlockLocationRange getBuildingBoundaries();
 
-    public SkyArena getArena();
+    SkyArena getArena();
 
-    public boolean areTeamsEnabled();
+    boolean areTeamsEnabled();
 
-    public int getTeamNumber(UUID playerUuid);
+    int getTeamNumber(UUID playerUuid);
 
-    public List<UUID> getAlivePlayersInTeam(int teamId);
+    List<UUID> getAlivePlayersInTeam(int teamId);
 
-    public List<UUID> getAllPlayersInTeam(int teamId);
+    List<UUID> getAllPlayersInTeam(int teamId);
 
-    public int getNumTeams();
+    int getNumTeams();
 
-    public int getAliveTeams();
+    int getAliveTeams();
 
-    public SkyGameTeam getTeam(int teamId);
+    SkyGameTeam getTeam(int teamId);
 
-    public interface SkyGameTeam {
+    interface SkyGameTeam {
 
-        public String getName();
+        String getName();
 
-        public int getId();
+        int getId();
 
-        public List<UUID> getPlayers();
+        List<UUID> getPlayers();
 
-        public List<UUID> getAlive();
+        List<UUID> getAlive();
     }
 }

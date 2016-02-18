@@ -21,9 +21,9 @@ import net.daboross.bukkitdev.skywars.api.players.SkyPlayerState;
 
 public interface SkyInternalPlayer extends SkyPlayer {
 
-    public void setState(SkyPlayerState state);
+    void setState(SkyPlayerState state);
 
-    public void setGameId(int id);
+    void setGameId(int id);
 
-    public void loggedOut();
+    void loggedOut();
 }

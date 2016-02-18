@@ -23,13 +23,13 @@ import org.bukkit.entity.Player;
 
 public interface SkyKits {
 
-    public Set<String> getKitNames();
+    Set<String> getKitNames();
 
-    public Collection<SkyKit> getAllKits();
+    Collection<SkyKit> getAllKits();
 
-    public SkyKit getKit(String name);
+    SkyKit getKit(String name);
 
-    public List<SkyKit> getAvailableKits(Player p);
+    List<SkyKit> getAvailableKits(Player p);
 
-    public List<SkyKit> getUnavailableKits(Player p);
+    List<SkyKit> getUnavailableKits(Player p);
 }

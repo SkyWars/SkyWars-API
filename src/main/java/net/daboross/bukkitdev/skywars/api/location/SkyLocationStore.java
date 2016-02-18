@@ -20,11 +20,11 @@ import java.util.List;
 
 public interface SkyLocationStore {
 
-    public SkyPlayerLocation getLobbyPosition();
+    SkyPlayerLocation getLobbyPosition();
 
-    public void setLobbyPosition(SkyPlayerLocation lobbyPosition);
+    void setLobbyPosition(SkyPlayerLocation lobbyPosition);
 
-    public List<SkyBlockLocation> getPortals();
+    List<SkyBlockLocation> getPortals();
 
-    public void save();
+    void save();
 }

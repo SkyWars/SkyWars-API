@@ -22,27 +22,27 @@ import org.bukkit.entity.Player;
 
 public interface SkyPlayer {
 
-    public String getName();
+    String getName();
 
-    public UUID getUuid();
+    UUID getUuid();
 
-    public Player getPlayer();
+    Player getPlayer();
 
-    public int getGameId();
+    int getGameId();
 
-    public SkyPlayerState getState();
+    SkyPlayerState getState();
 
-    public SkyKit getSelectedKit();
+    SkyKit getSelectedKit();
 
-    public void setSelectedKit(SkyKit kit);
+    void setSelectedKit(SkyKit kit);
 
-    public SkySavedInventory getSavedInventory();
+    SkySavedInventory getSavedInventory();
 
-    public void setSavedInventory(SkySavedInventory inventory);
+    void setSavedInventory(SkySavedInventory inventory);
 
-    public int getScore();
+    int getScore();
 
-    public void setScore(int score);
+    void setScore(int score);
 
-    public void addScore(int diff);
+    void addScore(int diff);
 }

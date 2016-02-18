@@ -22,27 +22,27 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public interface SkyArena {
 
-    public String getArenaName();
+    String getArenaName();
 
-    public List<SkyPlayerLocation> getSpawns();
+    List<SkyPlayerLocation> getSpawns();
 
-    public void setSpawns(List<SkyPlayerLocation> spawns);
+    void setSpawns(List<SkyPlayerLocation> spawns);
 
-    public int getNumTeams();
+    int getNumTeams();
 
-    public void setNumTeams(int numTeams);
+    void setNumTeams(int numTeams);
 
-    public int getNumPlayers();
+    int getNumPlayers();
 
-    public int getTeamSize();
+    int getTeamSize();
 
-    public void setTeamSize(int teamSize);
+    void setTeamSize(int teamSize);
 
-    public int getPlacementY();
+    int getPlacementY();
 
-    public void setPlacementY(int placementY);
+    void setPlacementY(int placementY);
 
-    public SkyBoundaries getBoundaries();
+    SkyBoundaries getBoundaries();
 
-    public void serialize(ConfigurationSection configuration);
+    void serialize(ConfigurationSection configuration);
 }

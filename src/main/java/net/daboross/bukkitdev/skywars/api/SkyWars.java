@@ -36,98 +36,80 @@ import org.bukkit.plugin.Plugin;
 public interface SkyWars extends Plugin {
 
     /**
-     * Gets the SkyLocationStore for this plugin.
-     * <br>
-     * This method will never return null if this plugin is enabled.
+     * Gets the SkyLocationStore for this plugin. <br> This method will never return null if this plugin is enabled.
      *
      * @return The SkyLocationStore, or null if this plugin is not yet enabled.
      */
-    public SkyLocationStore getLocationStore();
+    SkyLocationStore getLocationStore();
 
     /**
-     * Gets the SkyGameQueue for this plugin.
-     * <br>
-     * This method will never return null if this plugin is enabled.
+     * Gets the SkyGameQueue for this plugin. <br> This method will never return null if this plugin is enabled.
      *
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
      */
-    public SkyGameQueue getGameQueue();
+    SkyGameQueue getGameQueue();
 
     /**
-     * Gets the SkyPlayers for this plugin. This will store all player info for people in queue &amp; game.
-     * <br>
-     * This method will never return null if this plugin is enabled.
+     * Gets the SkyPlayers for this plugin. This will store all player info for people in queue &amp; game. <br> This
+     * method will never return null if this plugin is enabled.
      *
      * @return The SkyPlayers, or null if this plugin is not yet enabled.
      */
-    public SkyPlayers getPlayers();
+    SkyPlayers getPlayers();
 
     /**
-     * Gets the SkyCurrentGameTrackter for this plugin.
-     * <br>
-     * This method will never return null if the plugin is enabled.
+     * Gets the SkyCurrentGameTrackter for this plugin. <br> This method will never return null if the plugin is
+     * enabled.
      *
      * @return The SkyGameQueue, or null if this plugin is not yet enabled.
      */
-    public SkyCurrentGameTracker getCurrentGameTracker();
+    SkyCurrentGameTracker getCurrentGameTracker();
 
     /**
-     * Gets the SkyGameHandler for this plugin.
-     * <br>
-     * This method will never return null if the plugin is enabled.
+     * Gets the SkyGameHandler for this plugin. <br> This method will never return null if the plugin is enabled.
      *
      * @return The SkyGameHandler, or null if this plugin is not yet enabled.
      */
-    public SkyGameHandler getGameHandler();
+    SkyGameHandler getGameHandler();
 
     /**
-     * Gets the SkyGameHandler for this plugin.
-     * <br>
-     * This method will never return null if the plugin is enabled.
+     * Gets the SkyGameHandler for this plugin. <br> This method will never return null if the plugin is enabled.
      *
      * @return The SkyGameHandler, or null if this plugin is not yet enabled.
      */
-    public SkyIDHandler getIDHandler();
+    SkyIDHandler getIDHandler();
 
     /**
-     * Gets the SkyAttackerStorage for this plugin.
-     * <br>
-     * This method will never return null if this plugin is enabled.
+     * Gets the SkyAttackerStorage for this plugin. <br> This method will never return null if this plugin is enabled.
      *
      * @return The SkyAttackerStorage, or null if this plugin is not yet enabled.
      */
-    public SkyAttackerStorage getAttackerStorage();
+    SkyAttackerStorage getAttackerStorage();
 
     /**
-     * Gets the SkyConfiguration for this plugin.
-     * <br>
-     * This method will never return null if this plugin is enabled.
+     * Gets the SkyConfiguration for this plugin. <br> This method will never return null if this plugin is enabled.
      *
      * @return The SkyConfiguration, or null if this plugin is not yet enabled.
      */
-    public SkyConfiguration getConfiguration();
+    SkyConfiguration getConfiguration();
 
     /**
-     * Gets the SkyScore for this plugin.
-     * <br>
-     * This method will return null if score is not enabled, that is if {@link #getConfiguration()
-     * this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore()
+     * Gets the SkyScore for this plugin. <br> This method will return null if score is not enabled, that is if {@link
+     * #getConfiguration() this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEnableScore()
      * isEnableScore()} returns false.
      *
      * @return The SkyScore, or null if this plugin is not yet enabled or score is disabled.
      */
-    public SkyStorage getScore();
+    SkyStorage getScore();
 
     /**
-     * Gets the SkyEconomyAbstraction for this plugin.
-     * <br>
-     * This method will return null if economy is not enabled, that is if {@link #getConfiguration()
-     * this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEconomyEnabled()
+     * Gets the SkyEconomyAbstraction for this plugin. <br> This method will return null if economy is not enabled, that
+     * is if {@link #getConfiguration() this.getConfiguration()}. {@link net.daboross.bukkitdev.skywars.api.config.SkyConfiguration#isEconomyEnabled()
      * isEconomyEnabled()} returns false.
      *
      * @return The SkyEconomyAbstraction, or null if this plugin is not yet enabled or economy is disabled.
      */
-    public SkyEconomyAbstraction getEconomyHook();
+    SkyEconomyAbstraction getEconomyHook();
 
     /**
      * Gets the SkyTranslations for this plugin. Use of the {@link net.daboross.bukkitdev.skywars.api.translations.SkyTrans
@@ -135,7 +117,7 @@ public interface SkyWars extends Plugin {
      *
      * @return The SkyTranslations, or null if this plugin is not yet enabled.
      */
-    public SkyTranslations getTranslations();
+    SkyTranslations getTranslations();
 
     /**
      * Reloads the translations configuration. Note that this does not reload content that is saved separately from the
@@ -143,28 +125,28 @@ public interface SkyWars extends Plugin {
      *
      * @return True if the new translations configuration was loaded successfully, false otherwise.
      */
-    public boolean reloadTranslations();
+    boolean reloadTranslations();
 
     /**
      * Gets the kit configuration for this plugin. This configuration is loaded from the kits.yml file.
      *
      * @return The SkyKits, or null if this plugin is not yet enabled.
      */
-    public SkyKits getKits();
+    SkyKits getKits();
 
     /**
      * Gets the folder arena configurations are stored in.
      *
      * @return The arena folder
      */
-    public Path getArenaPath();
+    Path getArenaPath();
 
     /**
      * Gets the base data folder for SkyWars, as a path.
      *
      * @return The data folder
      */
-    public Path getDataPath();
+    Path getDataPath();
 
     /**
      * Acts exactly like getResource(), except for throwing a FileNotFoundException when not found
@@ -173,5 +155,5 @@ public interface SkyWars extends Plugin {
      * @return InputStream for file
      * @throws java.io.FileNotFoundException If the file doesn't exist in the jar
      */
-    public InputStream getResourceAsStream(final String filename) throws FileNotFoundException;
+    InputStream getResourceAsStream(final String filename) throws FileNotFoundException;
 }

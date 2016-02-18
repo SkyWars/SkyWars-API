@@ -18,5 +18,5 @@ package net.daboross.bukkitdev.skywars.api.storage;
 
 public interface ScoreCallback {
 
-    public void scoreGetCallback(int score);
+    void scoreGetCallback(int score);
 }

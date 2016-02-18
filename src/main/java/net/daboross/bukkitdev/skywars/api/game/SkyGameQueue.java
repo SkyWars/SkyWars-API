@@ -27,42 +27,42 @@ public interface SkyGameQueue {
      * @param playerUuid the uuid of the player to check.
      * @return true if a player with the given name is in the queue, false otherwise.
      */
-    public boolean inQueue(UUID playerUuid);
+    boolean inQueue(UUID playerUuid);
 
     /**
      * Adds a player to the queue, and starts the game if there are enough people in the queue.
      *
      * @param player the player to add.
      */
-    public void queuePlayer(Player player);
+    void queuePlayer(Player player);
 
     /**
      * Adds a player to the queue, and starts the game if there are enough people in the queue.
      *
      * @param playerUuid the uuid of the player to add.
      */
-    public void queuePlayer(UUID playerUuid);
+    void queuePlayer(UUID playerUuid);
 
     /**
      * Removes a player from the queue.
      *
      * @param player the player to remove.
      */
-    public void removePlayer(Player player);
+    void removePlayer(Player player);
 
     /**
      * Removes a player from the queue.
      *
      * @param playerUuid the name of the player to remove.
      */
-    public void removePlayer(UUID playerUuid);
+    void removePlayer(UUID playerUuid);
 
     /**
      * Gets a copy of the queue.
      *
      * @return a copy of the current queue.
      */
-    public UUID[] getCopy();
+    UUID[] getCopy();
 
-    public int getNumPlayersInQueue();
+    int getNumPlayersInQueue();
 }

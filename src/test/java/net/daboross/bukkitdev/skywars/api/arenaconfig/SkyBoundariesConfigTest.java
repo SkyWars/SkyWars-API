@@ -17,9 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.util.Random;
-import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRange;
 import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationRangeTest;
-import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.Assert;
 import org.junit.Before;

@@ -21,15 +21,15 @@ import org.bukkit.entity.Player;
 
 public interface SkyKit {
 
-    public List<SkyKitItem> getArmorContents();
+    List<SkyKitItem> getArmorContents();
 
-    public List<SkyKitItem> getInventoryContents();
+    List<SkyKitItem> getInventoryContents();
 
-    public String getPermission();
+    String getPermission();
 
-    public int getCost();
+    int getCost();
 
-    public String getName();
+    String getName();
 
-    public void applyTo(Player p);
+    void applyTo(Player p);
 }

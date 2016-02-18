@@ -21,23 +21,23 @@ import org.bukkit.OfflinePlayer;
 
 public interface SkyEconomyAbstraction {
 
-    public String getCurrencySymbolWord(double amount);
+    String getCurrencySymbolWord(double amount);
 
-    public String getCurrencySymbol(double amount);
+    String getCurrencySymbol(double amount);
 
-    public void addReward(OfflinePlayer player, double reward);
+    void addReward(OfflinePlayer player, double reward);
 
-    public void addReward(UUID playerUuid, double reward);
+    void addReward(UUID playerUuid, double reward);
 
-    public boolean canAfford(OfflinePlayer player, double amount);
+    boolean canAfford(OfflinePlayer player, double amount);
 
-    public boolean canAfford(UUID playerUuid, double amount);
+    boolean canAfford(UUID playerUuid, double amount);
 
-    public boolean charge(OfflinePlayer player, double amount);
+    boolean charge(OfflinePlayer player, double amount);
 
-    public boolean charge(UUID playerUuid, double amount);
+    boolean charge(UUID playerUuid, double amount);
 
-    public double getAmount(OfflinePlayer player);
+    double getAmount(OfflinePlayer player);
 
-    public double getAmount(UUID playerUuid);
+    double getAmount(UUID playerUuid);
 }

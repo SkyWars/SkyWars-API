@@ -28,7 +28,7 @@ public interface SkyAttackerStorage {
      * @return the name of the last player / entity who hit the player with the given name, or null if no one has hit
      * that player since they last left a game.
      */
-    public String getKillerName(UUID uuid);
+    String getKillerName(UUID uuid);
 
     /**
      * Gets the uuid of the player who last damaged a given player. This is reset every time a player leaves a game, and
@@ -38,5 +38,5 @@ public interface SkyAttackerStorage {
      * @return the uuid of the last player who hit the player with the given name, or null if no one has hit that player
      * since they last left a game.
      */
-    public UUID getKillerUuid(UUID uuid);
+    UUID getKillerUuid(UUID uuid);
 }

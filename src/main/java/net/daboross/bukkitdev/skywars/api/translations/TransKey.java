@@ -192,11 +192,11 @@ public enum TransKey {
     public final int args;
     public final boolean includePrefix;
 
-    private TransKey(final String key, final int args) {
+    TransKey(final String key, final int args) {
         this(key, args, false);
     }
 
-    private TransKey(final String key, final int args, final boolean includePrefix) {
+    TransKey(final String key, final int args, final boolean includePrefix) {
         this.key = key;
         this.args = args;
         this.includePrefix = includePrefix;

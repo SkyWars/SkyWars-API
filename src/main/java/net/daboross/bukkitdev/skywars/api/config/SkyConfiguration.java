@@ -36,124 +36,124 @@ public interface SkyConfiguration {
      * @throws SkyConfigurationException     If a configuration value is not of the correct type, or if there are other
      *                                       errors in the configuration.
      */
-    public void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;
+    void reload() throws IOException, InvalidConfigurationException, SkyConfigurationException;
 
     /**
      * Gets the folder where arenas are stored.
      *
      * @return The folder where arena files are stored.
      */
-    public Path getArenaFolder();
+    Path getArenaFolder();
 
     /**
      * Gets the order which arenas should be put out.
      *
      * @return The ArenaOrder in which arenas will be chosen.
      */
-    public ArenaOrder getArenaOrder();
+    ArenaOrder getArenaOrder();
 
     /**
      * Gets the message prefix to prefix to all game messages.
      *
      * @return The message prefix to prefix to all game messages.
      */
-    public String getMessagePrefix();
+    String getMessagePrefix();
 
     /**
      * Gets whether inventory saving will be enabled.
      *
      * @return Whether or not to enable inventory saving.
      */
-    public boolean isInventorySaveEnabled();
+    boolean isInventorySaveEnabled();
 
     /**
      * Gets whether experience saving will be enabled.
      *
      * @return Whether or not to enable inventory saving.
      */
-    public boolean isExperienceSaveEnabled();
+    boolean isExperienceSaveEnabled();
 
     /**
      * Gets whether position, gamemode, health (and hunger) saving will be enabled.
      *
      * @return Whether or not to enable PGH saving.
      */
-    public boolean isPghSaveEnabled();
+    boolean isPghSaveEnabled();
 
     /**
      * Gets whether or not to enable score storage.
      *
      * @return Whether or not to enable score.
      */
-    public boolean isEnableScore();
+    boolean isEnableScore();
 
     /**
      * Gets the amount of score to add a player's score when they die.
      *
      * @return The amount of score to add to a player's score when they die.
      */
-    public int getDeathScoreDiff();
+    int getDeathScoreDiff();
 
     /**
      * Gets the amount of score to add to a player's score when they win.
      *
      * @return The amount of score to add to a player's score when they win a game.
      */
-    public int getWinScoreDiff();
+    int getWinScoreDiff();
 
     /**
      * Gets the amount of score to add to a player's score when they kill someone.
      *
      * @return The amount of score to add to a player's score when they kill a player inside a game.
      */
-    public int getKillScoreDiff();
+    int getKillScoreDiff();
 
-    public boolean isScoreUseSql();
+    boolean isScoreUseSql();
 
-    public String getScoreSqlHost();
+    String getScoreSqlHost();
 
-    public int getScoreSqlPort();
+    int getScoreSqlPort();
 
-    public String getScoreSqlDatabase();
+    String getScoreSqlDatabase();
 
-    public String getScoreSqlUsername();
+    String getScoreSqlUsername();
 
-    public String getScoreSqlPassword();
+    String getScoreSqlPassword();
 
     /**
      * Gets the interval that score is to be saved on. This is in seconds.
      *
      * @return The score save interval.
      */
-    public long getScoreSaveInterval();
+    long getScoreSaveInterval();
 
     /**
      * Gets whether or not to enable economy rewards.
      *
      * @return Whether or not to reward people with economy currency.
      */
-    public boolean isEconomyEnabled();
+    boolean isEconomyEnabled();
 
     /**
      * Gets the amount of currency to add to someone's economy account when they win a game.
      *
      * @return The win reward.
      */
-    public int getEconomyWinReward();
+    int getEconomyWinReward();
 
     /**
      * Gets the amount of currency to add to someone's economy account when they kill someone in a game.
      *
      * @return The kill reward.
      */
-    public int getEconomyKillReward();
+    int getEconomyKillReward();
 
     /**
      * Gets whether or not to give in-game messages about economy rewards.
      *
      * @return Whether or not to message for economy rewards.
      */
-    public boolean areEconomyRewardMessagesEnabled();
+    boolean areEconomyRewardMessagesEnabled();
 
     /**
      * Gets the distance between arenas when created. This distance is from one arena's minimum corner to the next
@@ -161,56 +161,56 @@ public interface SkyConfiguration {
      *
      * @return The distance between created arenas.
      */
-    public int getArenaDistanceApart();
+    int getArenaDistanceApart();
 
     /**
      * Gets all enabled arenas.
      *
      * @return A list of SkyArenaConfigs that the next arena will be chosen from.
      */
-    public List<SkyArenaConfig> getEnabledArenas();
+    List<SkyArenaConfig> getEnabledArenas();
 
     /**
      * Save the given arena to file.
      *
      * @param config The arena to save to file.
      */
-    public void saveArena(SkyArenaConfig config);
+    void saveArena(SkyArenaConfig config);
 
     /**
      * Gets whether or not command whitelist is enabled.
      *
      * @return Whether or not in-game commands will be whitelisted / blacklisted.
      */
-    public boolean isCommandWhitelistEnabled();
+    boolean isCommandWhitelistEnabled();
 
     /**
      * Gets whether or not the command whitelist is treated as a blacklist.
      *
      * @return Whether or not the command whitelist is a blacklist.
      */
-    public boolean isCommandWhitelistABlacklist();
+    boolean isCommandWhitelistABlacklist();
 
     /**
      * Gets a command regex that will match all commands in the command whitelist.
      *
      * @return The command regex.
      */
-    public Pattern getCommandWhitelistCommandRegex();
+    Pattern getCommandWhitelistCommandRegex();
 
     /**
      * Gets the chosen locale that should be used for picking translation strings.
      *
      * @return The chosen locale.
      */
-    public String getLocale();
+    String getLocale();
 
     /**
      * Gets whether or not the user has disabled reporting.
      *
      * @return True if the user has disabled /sw report, false otherwise.
      */
-    public boolean isDisableReport();
+    boolean isDisableReport();
 //    /**
 //     * Gets whether or not death messages should only be broadcasted to people
 //     * in the arena.
@@ -232,40 +232,40 @@ public interface SkyConfiguration {
      *
      * @return False if the user has disabled the Multiverse Core hook, true otherwise.
      */
-    public boolean isMultiverseCoreHookEnabled();
+    boolean isMultiverseCoreHookEnabled();
 
     /**
      * Whether or not to attempt to hook with Multiverse Inventories.
      *
      * @return False if the user has disabled the Multiverse Inventories hook, true otherwise.
      */
-    public boolean isMultiverseInventoriesHookEnabled();
+    boolean isMultiverseInventoriesHookEnabled();
 
     /**
      * Whether or not to attempt to hook with WorldEdit.
      *
      * @return False if the user has disabled the WorldEdit hook, true otherwise.
      */
-    public boolean isWorldeditHookEnabled();
+    boolean isWorldeditHookEnabled();
 
     /**
      * Whether or not to skip checking for uuid support.
      *
      * @return True if the user has disabled the uuid check, false otherwise.
      */
-    public boolean isSkipUuidCheck();
+    boolean isSkipUuidCheck();
 
     /**
      * Whether or not a few options which should only be enabled when developing are enabled.
      *
      * @return True if developer options should be enabled, false otherwise.
      */
-    public boolean areDeveloperOptionsEnabled();
+    boolean areDeveloperOptionsEnabled();
 
     /**
      * An Enum to record the order that arenas are chosen.
      */
-    public static enum ArenaOrder {
+    enum ArenaOrder {
 
         RANDOM, ORDERED;
         private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>(2);

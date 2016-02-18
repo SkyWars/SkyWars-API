@@ -20,5 +20,5 @@ import org.bukkit.inventory.ItemStack;
 
 public interface SkyItemMeta {
 
-    public void applyToItem(ItemStack item);
+    void applyToItem(ItemStack item);
 }

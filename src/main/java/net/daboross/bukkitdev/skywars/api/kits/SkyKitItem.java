@@ -20,5 +20,5 @@ import org.bukkit.inventory.ItemStack;
 
 public interface SkyKitItem {
 
-    public ItemStack toItem();
+    ItemStack toItem();
 }

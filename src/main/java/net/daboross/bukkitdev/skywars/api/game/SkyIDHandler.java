@@ -26,7 +26,7 @@ public interface SkyIDHandler {
      * @param id The ID to check.
      * @return true if there is a game running with the given id, false otherwise.
      */
-    public boolean gameRunning(int id);
+    boolean gameRunning(int id);
 
     /**
      * Gets the SkyGame for the given id.
@@ -34,12 +34,12 @@ public interface SkyIDHandler {
      * @param id The ID of the game.
      * @return A SkyGame running under the given id, or null if there is no currently running SkyGame with the given id.
      */
-    public SkyGame getGame(int id);
+    SkyGame getGame(int id);
 
     /**
      * Gets an unmodifiable list containing all IDs of running games.
      *
      * @return an unmodifiable list containing an ID for each running game.
      */
-    public List<Integer> getCurrentIDs();
+    List<Integer> getCurrentIDs();
 }
