@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface SkyIDHandler {
@@ -41,5 +42,5 @@ public interface SkyIDHandler {
      *
      * @return an unmodifiable list containing an ID for each running game.
      */
-    List<Integer> getCurrentIDs();
+    Collection<Integer> getCurrentIDs();
 }
