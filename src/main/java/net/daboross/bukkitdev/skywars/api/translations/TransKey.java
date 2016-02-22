@@ -46,7 +46,6 @@ public enum TransKey {
     // commands.cancel
     CMD_CANCEL_DESCRIPTION("commands.cancel.description", 0),
     CMD_CANCEL_ARGUMENT("commands.cancel.argument", 0),
-    CMD_CANCEL_NOT_AN_INT("commands.cancel.argument-not-integer", 1),
     CMD_CANCEL_NO_GAMES_WITH_ID("commands.cancel.no-games-with-id", 1),
     CMD_CANCEL_CONFIRMATION("commands.cancel.confirmation", 1),
     // commands.status
@@ -131,10 +130,12 @@ public enum TransKey {
     SWS_CREATEKIT_SAVED_PERMISSION("setup-commands.createkit.saved-with-permission", 2),
     SWS_CREATEKIT_COST_TO_USE("setup-commands.createkit.cost-to-use", 1),
     SWS_CREATEKIT_KIT_EXISTS("setup-commands.createkit.kit-exists", 1),
+    SWS_CREATEKIT_SAVE_FAILED("setup-commands.createkit.save-failed", 0),
     // top-commands
     MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
     // generic-command-message
+    NOT_AN_INTEGER("generic-command-message.argument-not-integer", 1),
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", 0),
     NOT_ENOUGH_PARAMS("generic-command-message.not-enough-parameters", 0),
     NO_PERMISSION("generic-command-message.no-permission", 1),

@@ -38,6 +38,7 @@ public class SkyKitConfig implements SkyKit {
         Validate.notNull(armorContents, "Armor contents cannot be null");
         Validate.notNull(name, "Name cannot be null");
         Validate.isTrue(armorContents.size() == 4, "Armor contents size must be 4");
+        Validate.isTrue(cost >= 0);
         this.inventoryContents = inventoryContents;
         this.armorContents = armorContents;
         this.name = name;

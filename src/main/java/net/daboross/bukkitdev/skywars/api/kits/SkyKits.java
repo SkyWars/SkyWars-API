@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -33,5 +34,14 @@ public interface SkyKits {
 
     List<SkyKit> getUnavailableKits(Player p);
 
-    void save();
+    /**
+     * Saves the current kit list to disk in kits.yml. This will overwrite all comments in kits.yml, and all changes
+     * made to kits.yml since the server started.
+     */
+    void save() throws IOException;
+
+    /**
+     * Adds a kit to the current kit list. Recommended to use .save() after this to save all kits to disk.
+     */
+    void addKit(SkyKit kit);
 }
