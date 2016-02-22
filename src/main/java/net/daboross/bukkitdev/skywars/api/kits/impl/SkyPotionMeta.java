@@ -16,55 +16,55 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
-import java.util.List;
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMetaType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.Potion;
 
-public class SkyItemExtraEffects implements SkyItemMeta {
+public class SkyPotionMeta implements SkyItemMeta {
 
-    private final List<PotionEffect> effects;
+    private final Potion potion;
 
-    public SkyItemExtraEffects(final List<PotionEffect> effects) {
-        this.effects = effects != null && effects.isEmpty() ? null : effects;
+    public SkyPotionMeta(final Potion potion) {
+        this.potion = potion;
     }
 
     @Override
     public void applyToItem(final ItemStack itemStack) {
-        if (itemStack.getType() == Material.POTION && effects != null) {
-            PotionMeta meta = (PotionMeta) itemStack.getItemMeta();
-            for (PotionEffect effect : effects) {
-                meta.addCustomEffect(effect, false);
-            }
-            meta.setMainEffect(effects.get(0).getType());
-            itemStack.setItemMeta(meta);
+        if (itemStack.getType() == Material.POTION && potion != null) {
+            potion.apply(itemStack);
         }
     }
 
     @Override
+    public SkyItemMetaType getType() {
+        return SkyItemMetaType.POTION;
+    }
+
+    @Override
     public String toString() {
-        return "SkyItemExtraEffects{" +
-                "effects=" + effects +
+        return "SkyItemPotion{" +
+                "potion=" + potion +
                 '}';
     }
 
-    @SuppressWarnings("RedundantIfStatement")
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof SkyItemExtraEffects)) return false;
+        if (!(o instanceof SkyPotionMeta)) return false;
 
-        SkyItemExtraEffects effects1 = (SkyItemExtraEffects) o;
+        SkyPotionMeta potion1 = (SkyPotionMeta) o;
 
-        if (effects != null ? !effects.equals(effects1.effects) : effects1.effects != null) return false;
-
-        return true;
+        return potion != null ? potion.equals(potion1.potion) : potion1.potion == null;
     }
 
     @Override
     public int hashCode() {
-        return effects != null ? effects.hashCode() : 0;
+        return potion != null ? potion.hashCode() : 0;
+    }
+
+    public Potion getPotion() {
+        return potion;
     }
 }

@@ -16,9 +16,21 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits;
 
+import java.util.List;
+import java.util.Map;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public interface SkyKitItem {
 
     ItemStack toItem();
+
+    Material getMaterial();
+
+    int getAmount();
+
+    Map<Enchantment, Integer> getEnchantments();
+
+    List<SkyItemMeta> getItemMeta();
 }

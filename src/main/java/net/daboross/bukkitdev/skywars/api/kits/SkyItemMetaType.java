@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,22 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import org.bukkit.entity.Player;
-
-public interface SkyKits {
-
-    Set<String> getKitNames();
-
-    Collection<SkyKit> getAllKits();
-
-    SkyKit getKit(String name);
-
-    List<SkyKit> getAvailableKits(Player p);
-
-    List<SkyKit> getUnavailableKits(Player p);
-
-    void save();
+public enum SkyItemMetaType {
+    POTION,
+    EXTRA_EFFECTS,
 }

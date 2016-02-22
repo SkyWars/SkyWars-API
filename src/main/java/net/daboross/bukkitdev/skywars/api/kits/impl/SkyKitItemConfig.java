@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
@@ -92,5 +93,25 @@ public class SkyKitItemConfig implements SkyKitItem {
         result = 31 * result + (enchantments != null ? enchantments.hashCode() : 0);
         result = 31 * result + (itemMeta != null ? itemMeta.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Material getMaterial() {
+        return material;
+    }
+
+    @Override
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public Map<Enchantment, Integer> getEnchantments() {
+        return enchantments == null ? null : Collections.unmodifiableMap(enchantments);
+    }
+
+    @Override
+    public List<SkyItemMeta> getItemMeta() {
+        return itemMeta == null ? null : Collections.unmodifiableList(itemMeta);
     }
 }
