@@ -179,19 +179,14 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     public static SkyPlayerLocation deserialize(Map<String, Object> map) {
         Validate.notNull(map, "Map cannot be null");
         Object worldO = map.get("world");
-        Double x = get(map.get("x"));
-        Double y = get(map.get("y"));
-        Double z = get(map.get("z"));
+        Double x = getEitherDouble(map, "x", "xpos");
+        Double y = getEitherDouble(map, "y", "ypos");
+        Double z = getEitherDouble(map, "z", "zpos");
         Double yaw = get(map.get("yaw"));
         Double pitch = get(map.get("pitch"));
         if (x == null || y == null || z == null) {
-            x = get(map.get("xpos"));
-            y = get(map.get("ypos"));
-            z = get(map.get("zpos"));
-            if (x == null || y == null || z == null) {
-                SkyStatic.getLogger().log(Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
-                return null;
-            }
+            SkyStatic.getLogger().log(Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
+            return null;
         }
         String world = worldO == null ? null : worldO instanceof String ? (String) worldO : worldO.toString();
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
@@ -200,22 +195,33 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
     public static SkyPlayerLocation deserialize(ConfigurationSection configurationSection) {
         Validate.notNull(configurationSection, "Configuration cannot be null");
         Object worldO = configurationSection.get("world");
-        Double x = get(configurationSection.get("x"));
-        Double y = get(configurationSection.get("y"));
-        Double z = get(configurationSection.get("z"));
+        Double x = getEitherDouble(configurationSection, "x", "xpos");
+        Double y = getEitherDouble(configurationSection, "y", "ypos");
+        Double z = getEitherDouble(configurationSection, "z", "zps");
         Double yaw = get(configurationSection.get("yaw"));
         Double pitch = get(configurationSection.get("pitch"));
         if (x == null || y == null || z == null) {
-            x = get(configurationSection.get("xpos"));
-            y = get(configurationSection.get("ypos"));
-            z = get(configurationSection.get("zpos"));
-            if (x == null || y == null || z == null) {
-                SkyStatic.getLogger().log(Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
-                return null;
-            }
+            SkyStatic.getLogger().log(Level.WARNING, "[SkyPlayerLocation] Silently failing deserialization due to x, y or z not existing on map or not being valid doubles.");
+            return null;
         }
         String world = worldO == null ? null : worldO instanceof String ? (String) worldO : worldO.toString();
         return new SkyPlayerLocation(x, y, z, yaw == null ? 0 : yaw, pitch == null ? 0 : pitch, world);
+    }
+
+    private static Double getEitherDouble(Map<String, Object> map, String key1, String key2) {
+        Double result = get(map.get(key1));
+        if (result == null) {
+            result = get(map.get(key2));
+        }
+        return result;
+    }
+
+    private static Double getEitherDouble(ConfigurationSection section, String key1, String key2) {
+        Double result = get(section.get(key1));
+        if (result == null) {
+            result = get(section.get(key2));
+        }
+        return result;
     }
 
     private static Double get(Object o) {
