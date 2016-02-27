@@ -88,6 +88,13 @@ public interface SkyConfiguration {
     boolean isEnableScore();
 
     /**
+     * Get gamerules to be set in the arena world
+     *
+     * @return A map from game rule name to game rule value.
+     */
+    Map<String, String> getArenaGamerules();
+
+    /**
      * Gets the amount of score to add a player's score when they die.
      *
      * @return The amount of score to add to a player's score when they die.
