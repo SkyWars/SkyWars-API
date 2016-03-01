@@ -17,8 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.storage;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import net.daboross.bukkitdev.skywars.api.players.OfflineSkyPlayer;
 import org.bukkit.entity.Player;
 
 public abstract class SkyStorageBackend {
@@ -52,6 +54,18 @@ public abstract class SkyStorageBackend {
      * @param callback   Callback
      */
     public abstract void getScore(UUID playerUuid, ScoreCallback callback);
+
+    /**
+     * Gets the top x players, with the highest scores. First highest score is first in list.
+     * <p/>
+     * This list has no set length, but will be at least size 10 if there are at least 10 players with scores on the
+     * server.
+     *
+     * @param count The ideal number of players to get. It isn't guaranteed that this number will be returned, but it
+     *              may be, depending on the backend.
+     * @return A list of the top players, with the top player being first.
+     */
+    public abstract Collection<? extends OfflineSkyPlayer> getTopPlayers(int count);
 
     public abstract void save() throws IOException;
 
