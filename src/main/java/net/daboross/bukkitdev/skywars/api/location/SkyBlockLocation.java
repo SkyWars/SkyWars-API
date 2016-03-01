@@ -106,7 +106,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
             bukkitWorld = Bukkit.getWorld(world);
         }
         if (bukkitWorld == null) {
-            SkyStatic.log(Level.WARNING, "[SkyBlockLocation] World ''{0}'' not found when using toLocation", world);
+            SkyStatic.log(Level.WARNING, "[SkyBlockLocation] World '%s' not found when using toLocation", world);
         }
         return new Location(bukkitWorld, x, y, z);
     }

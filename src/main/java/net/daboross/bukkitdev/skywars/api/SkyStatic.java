@@ -55,7 +55,7 @@ public class SkyStatic {
     }
 
     public static void log(Level level, String message, Object... args) {
-        logger.log(level, message, args);
+        logger.log(level, String.format(message, args));
     }
 
     public static Logger getLogger() {
