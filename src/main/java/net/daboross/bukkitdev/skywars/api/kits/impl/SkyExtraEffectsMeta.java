@@ -24,7 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
-public class SkyExtraEffectsMeta implements SkyItemMeta {
+public class SkyExtraEffectsMeta extends SkyItemMeta {
 
     private final List<PotionEffect> effects;
 

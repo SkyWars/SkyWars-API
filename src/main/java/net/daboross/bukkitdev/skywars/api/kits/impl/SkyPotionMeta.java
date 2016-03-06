@@ -22,7 +22,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 
-public class SkyPotionMeta implements SkyItemMeta {
+public class SkyPotionMeta extends SkyItemMeta {
 
     private final Potion potion;
 

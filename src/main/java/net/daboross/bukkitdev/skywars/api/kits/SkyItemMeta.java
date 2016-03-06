@@ -18,9 +18,14 @@ package net.daboross.bukkitdev.skywars.api.kits;
 
 import org.bukkit.inventory.ItemStack;
 
-public interface SkyItemMeta {
+public abstract class SkyItemMeta implements Comparable<SkyItemMeta> {
 
-    void applyToItem(ItemStack item);
+    public abstract void applyToItem(ItemStack item);
 
-    SkyItemMetaType getType();
+    public abstract SkyItemMetaType getType();
+
+    @Override
+    public int compareTo(SkyItemMeta other) {
+        return getType().compareTo(other.getType());
+    }
 }
