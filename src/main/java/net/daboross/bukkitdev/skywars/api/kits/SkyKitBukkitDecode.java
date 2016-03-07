@@ -20,14 +20,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import net.daboross.bukkitdev.skywars.api.kits.impl.SkyArmorColorMeta;
+import net.daboross.bukkitdev.skywars.api.kits.impl.SkyDurabilityMeta;
 import net.daboross.bukkitdev.skywars.api.kits.impl.SkyExtraEffectsMeta;
 import net.daboross.bukkitdev.skywars.api.kits.impl.SkyKitConfig;
 import net.daboross.bukkitdev.skywars.api.kits.impl.SkyKitItemConfig;
+import net.daboross.bukkitdev.skywars.api.kits.impl.SkyNameLoreMeta;
 import net.daboross.bukkitdev.skywars.api.kits.impl.SkyPotionMeta;
+import net.daboross.bukkitdev.skywars.api.kits.impl.SkyRawDataMeta;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
@@ -61,15 +67,38 @@ public class SkyKitBukkitDecode {
         int amount = itemStack.getAmount();
         Map<Enchantment, Integer> enchantments = itemStack.getEnchantments();
         List<SkyItemMeta> skyMetaList = new ArrayList<SkyItemMeta>();
+        byte itemData = itemStack.getData().getData();
+        if (itemData != 0) {
+            skyMetaList.add(new SkyRawDataMeta(itemData));
+        }
+        short durability = itemStack.getDurability();
+        if (durability != 0) {
+            skyMetaList.add(new SkyDurabilityMeta(durability));
+        }
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        String name = null;
+        if (itemMeta.hasDisplayName()) {
+            name = itemMeta.getDisplayName();
+        }
+        List<String> lore = null;
+        if (itemMeta.hasLore()) {
+            lore = new ArrayList<String>(itemMeta.getLore());
+        }
+        if (name != null || lore != null) {
+            skyMetaList.add(new SkyNameLoreMeta(name, lore));
+        }
         if (type == Material.POTION) {
             Potion potion = Potion.fromItemStack(itemStack);
             if (potion.getType() != null && potion.getType() != PotionType.WATER) {
                 skyMetaList.add(new SkyPotionMeta(potion));
             }
-            PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
+            PotionMeta potionMeta = (PotionMeta) itemMeta;
             if (potionMeta.hasCustomEffects()) {
                 skyMetaList.add(new SkyExtraEffectsMeta(potionMeta.getCustomEffects()));
             }
+        }
+        if (itemMeta instanceof LeatherArmorMeta) {
+            skyMetaList.add(new SkyArmorColorMeta(((LeatherArmorMeta) itemMeta).getColor()));
         }
         return new SkyKitItemConfig(type, amount, enchantments, skyMetaList);
     }

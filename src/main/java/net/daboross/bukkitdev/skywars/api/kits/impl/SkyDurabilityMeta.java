@@ -14,13 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.kits;
+package net.daboross.bukkitdev.skywars.api.kits.impl;
 
-public enum SkyItemMetaType {
-    DURABILITY,
-    RAW_DATA,
-    NAME_LORE,
-    ARMOR_COLOR,
-    POTION,
-    EXTRA_EFFECTS,
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMetaType;
+import org.bukkit.inventory.ItemStack;
+
+public class SkyDurabilityMeta extends SkyItemMeta {
+
+    private final short durability;
+
+    public SkyDurabilityMeta(final short durability) {
+        this.durability = durability;
+    }
+
+    @Override
+    public void applyToItem(final ItemStack item) {
+        item.setDurability(durability);
+    }
+
+    @Override
+    public SkyItemMetaType getType() {
+        return SkyItemMetaType.DURABILITY;
+    }
+
+    public short getDurability() {
+        return durability;
+    }
 }
