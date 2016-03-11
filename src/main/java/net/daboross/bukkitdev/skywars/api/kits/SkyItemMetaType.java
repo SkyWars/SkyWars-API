@@ -17,6 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.kits;
 
 public enum SkyItemMetaType {
+    DURABILITY,
+    RAW_DATA,
+    NAME_LORE,
+    ARMOR_COLOR,
     POTION,
     EXTRA_EFFECTS,
 }

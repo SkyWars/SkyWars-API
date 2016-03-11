@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,8 @@ public class SkyKitItemConfig implements SkyKitItem {
         }
         this.amount = amount;
         this.enchantments = enchantments != null && enchantments.isEmpty() ? null : enchantments;
-        this.itemMeta = itemMeta;
+        this.itemMeta = new ArrayList<SkyItemMeta>(itemMeta);
+        Collections.sort(this.itemMeta);
     }
 
     @Override

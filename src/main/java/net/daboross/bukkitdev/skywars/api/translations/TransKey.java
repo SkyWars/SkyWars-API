@@ -131,6 +131,13 @@ public enum TransKey {
     SWS_CREATEKIT_COST_TO_USE("setup-commands.createkit.cost-to-use", 1),
     SWS_CREATEKIT_KIT_EXISTS("setup-commands.createkit.kit-exists", 1),
     SWS_CREATEKIT_SAVE_FAILED("setup-commands.createkit.save-failed", 0),
+    // setup-commands.update-arena
+    SWS_UPDATEARENA_DESCRIPTION("setup-commands.update-arena.description", 0),
+    SWS_UPDATEARENA_ARENA_ARGUMENT("setup-commands.update-arena.argument-arena", 0),
+    SWS_UPDATEARENA_COMPLETED("setup-commands.update-arena.completed", 1),
+    SWS_UPDATEARENA_UNKNOWN_ARENA("setup-commands.update-arena.unknown-arena", 1),
+    SWS_UPDATEARENA_FAILED("setup-commands.update-arena.failed", 1),
+    SWS_UPDATEARENA_BUILTIN("setup-commands.update-arena.failed-built-in", 1),
     // top-commands
     MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),

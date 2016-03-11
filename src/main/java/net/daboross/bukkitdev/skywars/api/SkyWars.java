@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
@@ -153,7 +154,7 @@ public interface SkyWars extends Plugin {
      *
      * @param filename Filename to get from internal jar
      * @return InputStream for file
-     * @throws java.io.FileNotFoundException If the file doesn't exist in the jar
+     * @throws java.io.IOException If the file doesn't exist in the jar
      */
-    InputStream getResourceAsStream(final String filename) throws FileNotFoundException;
+    InputStream getResourceAsStream(final String filename) throws IOException;
 }

@@ -14,18 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.kits;
+package net.daboross.bukkitdev.skywars.api.kits.impl;
 
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
+import net.daboross.bukkitdev.skywars.api.kits.SkyItemMetaType;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class SkyItemMeta implements Comparable<SkyItemMeta> {
+public class SkyDurabilityMeta extends SkyItemMeta {
 
-    public abstract void applyToItem(ItemStack item);
+    private final short durability;
 
-    public abstract SkyItemMetaType getType();
+    public SkyDurabilityMeta(final short durability) {
+        this.durability = durability;
+    }
 
     @Override
-    public int compareTo(SkyItemMeta other) {
-        return getType().compareTo(other.getType());
+    public void applyToItem(final ItemStack item) {
+        item.setDurability(durability);
+    }
+
+    @Override
+    public SkyItemMetaType getType() {
+        return SkyItemMetaType.DURABILITY;
+    }
+
+    public short getDurability() {
+        return durability;
     }
 }

@@ -18,53 +18,36 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMetaType;
-import org.bukkit.Material;
+import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-public class SkyPotionMeta extends SkyItemMeta {
+public class SkyArmorColorMeta extends SkyItemMeta {
 
-    private final Potion potion;
+    private final Color color;
 
-    public SkyPotionMeta(final Potion potion) {
-        this.potion = potion;
+    public SkyArmorColorMeta(final Color color) {
+        this.color = color;
     }
 
     @Override
-    public void applyToItem(final ItemStack itemStack) {
-        if (itemStack.getType() == Material.POTION && potion != null) {
-            potion.apply(itemStack);
+    public void applyToItem(final ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+
+        if (meta instanceof LeatherArmorMeta) {
+            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) item.getItemMeta();
+            leatherMeta.setColor(color);
+            item.setItemMeta(leatherMeta);
         }
     }
 
     @Override
     public SkyItemMetaType getType() {
-        return SkyItemMetaType.POTION;
+        return SkyItemMetaType.ARMOR_COLOR;
     }
 
-    @Override
-    public String toString() {
-        return "SkyItemPotion{" +
-                "potion=" + potion +
-                '}';
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SkyPotionMeta)) return false;
-
-        SkyPotionMeta potion1 = (SkyPotionMeta) o;
-
-        return potion != null ? potion.equals(potion1.potion) : potion1.potion == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return potion != null ? potion.hashCode() : 0;
-    }
-
-    public Potion getPotion() {
-        return potion;
+    public Color getColor() {
+        return color;
     }
 }
