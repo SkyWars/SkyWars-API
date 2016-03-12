@@ -94,6 +94,11 @@ public enum TransKey {
     CMD_TESTKIT_DESCRIPTION("commands.testkit.description", 0),
     CMD_TESTKIT_UNKNOWN("commands.testkit.unknown", 1),
     CMD_TESTKIT_APPLIED("commands.testkit.applied", 1),
+    // commands.top
+    CMD_TOP_DESCRIPTION("commands.top.description", 0),
+    CMD_TOP_TITLE("commands.top.title", 1),
+    CMD_TOP_FORMAT("commands.top.format", 3),
+    CMD_TOP_NO_PLAYERS("commands.top.no-players", 0),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
