@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,39 +17,27 @@
 package net.daboross.bukkitdev.skywars.api.players;
 
 import java.util.UUID;
-import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
-import org.bukkit.entity.Player;
 
-public interface SkyPlayer {
+/**
+ * Offline Sky Player - contains offline data from a top player list. Note that the data is in no way guaranteed to be
+ * completely accurate, and it is in no way guaranteed to be updated after being returned.
+ * <p/>
+ * A valid OfflineSkyPlayer implementation returned from getTopPlayers() could just store static values, and the only
+ * way to get new values would be to run getTopPlayers() again.
+ */
+public interface OfflineSkyPlayer {
 
     String getName();
 
     UUID getUuid();
 
-    Player getPlayer();
-
-    int getGameId();
-
-    SkyPlayerState getState();
-
-    SkyKit getSelectedKit();
-
-    void setSelectedKit(SkyKit kit);
-
-    SkySavedInventory getSavedInventory();
-
-    void setSavedInventory(SkySavedInventory inventory);
-
+    /**
+     * Gets the score. Not guaranteed to be as up to date as ScoreStorage.getScore().
+     */
     int getScore();
 
-    void setScore(int score);
-
-    void addScore(int diff);
-
     /**
-     * Get player rank, in top scores. Top score is rank 0 (might want to adjust for displaying).
-     *
-     * @return Player rank.
+     * Gets the rank. Top rank is rank 0. Not guaranteed to be as up to date as ScoreStorage.getRank().
      */
     int getRank();
 }

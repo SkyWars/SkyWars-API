@@ -17,8 +17,10 @@
 package net.daboross.bukkitdev.skywars.api.storage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import net.daboross.bukkitdev.skywars.api.players.OfflineSkyPlayer;
 import org.bukkit.entity.Player;
 
 public abstract class SkyStorageBackend {
@@ -32,28 +34,54 @@ public abstract class SkyStorageBackend {
     /**
      * Adds score to an **OFFLINE** player. This is NOT for use with online players.
      *
-     * @param playerUuid Player UUID
+     * @param uuid Player UUID
      * @param diff       Score diff
      */
-    public abstract void addScore(UUID playerUuid, int diff);
+    public abstract void addScore(UUID uuid, int diff);
 
     /**
      * Sets the score of an **OFFLINE** player. This is NOT for use with online players.
      *
-     * @param playerUuid Player UUID
+     * @param uuid Player UUID
      * @param score      Score
      */
-    public abstract void setScore(UUID playerUuid, int score);
+    public abstract void setScore(UUID uuid, int score);
 
     /**
      * Gets the score of an **OFFLINE** player. This is NOT for use with online players.
      *
-     * @param playerUuid Player UUID
+     * @param uuid Player UUID
      * @param callback   Callback
      */
-    public abstract void getScore(UUID playerUuid, ScoreCallback callback);
+    public abstract void getScore(UUID uuid, ScoreCallback callback);
+
+    /**
+     * Gets the rank of an **OFFLINE** player. The scorecallback will be called with rank instead of score, the highest
+     * rank being rank 0 (might want to adjust for displaying).
+     *
+     * @param uuid Player UUID
+     * @param callback   Callback to give rank to
+     */
+    public abstract void getRank(UUID uuid, ScoreCallback callback);
+
+    /**
+     * Gets the top x players, with the highest scores. First highest score is first in list.
+     * <p/>
+     * This list has no set length, but will be at least size 10 if there are at least 10 players with scores on the
+     * server.
+     * <p/>
+     * Note that a valid OfflineSkyPlayer implementation returned from getTopPlayers() could just store static values,
+     * and the only way to get new values would be to run getTopPlayers() again.
+     *
+     * @param count The ideal number of players to get. It isn't guaranteed that this number will be returned, but it
+     *              may be, depending on the backend.
+     * @return A list of the top players, with the top player being first.
+     */
+    public abstract List<? extends OfflineSkyPlayer> getTopPlayers(int count);
 
     public abstract void save() throws IOException;
+
+    public abstract void updateLeaderboard();
 
     public abstract SkyInternalPlayer loadPlayer(Player player);
 }
