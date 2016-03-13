@@ -35,23 +35,23 @@ public abstract class SkyStorageBackend {
      * Adds score to an **OFFLINE** player. This is NOT for use with online players.
      *
      * @param uuid Player UUID
-     * @param diff       Score diff
+     * @param diff Score diff
      */
     public abstract void addScore(UUID uuid, int diff);
 
     /**
      * Sets the score of an **OFFLINE** player. This is NOT for use with online players.
      *
-     * @param uuid Player UUID
-     * @param score      Score
+     * @param uuid  Player UUID
+     * @param score Score
      */
     public abstract void setScore(UUID uuid, int score);
 
     /**
      * Gets the score of an **OFFLINE** player. This is NOT for use with online players.
      *
-     * @param uuid Player UUID
-     * @param callback   Callback
+     * @param uuid     Player UUID
+     * @param callback Callback
      */
     public abstract void getScore(UUID uuid, ScoreCallback callback);
 
@@ -59,10 +59,28 @@ public abstract class SkyStorageBackend {
      * Gets the rank of an **OFFLINE** player. The scorecallback will be called with rank instead of score, the highest
      * rank being rank 0 (might want to adjust for displaying).
      *
-     * @param uuid Player UUID
-     * @param callback   Callback to give rank to
+     * @param uuid     Player UUID
+     * @param callback Callback to give rank to
      */
     public abstract void getRank(UUID uuid, ScoreCallback callback);
+
+    /**
+     * Gets a snapshot of the score, name and rank of an offline player with the given UUID. Don't call with online
+     * players!
+     *
+     * @param uuid     UUID to search for.
+     * @param callback Callback to give player to - player may be null!
+     */
+    public abstract void getOfflinePlayer(UUID uuid, Callback<OfflineSkyPlayer> callback);
+
+    /**
+     * Gets a snapshot of the score, name and rank of an offline player with the given name. Don't call with online
+     * players!
+     *
+     * @param name     Name to search for.
+     * @param callback Callback to give player to - player may be null!
+     */
+    public abstract void getOfflinePlayer(String name, Callback<OfflineSkyPlayer> callback);
 
     /**
      * Gets the top x players, with the highest scores. First highest score is first in list.
@@ -82,6 +100,8 @@ public abstract class SkyStorageBackend {
     public abstract void save() throws IOException;
 
     public abstract void updateLeaderboard();
+
+    public abstract void updateOnlineIndividualRanks();
 
     public abstract SkyInternalPlayer loadPlayer(Player player);
 }

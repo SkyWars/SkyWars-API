@@ -44,6 +44,28 @@ public abstract class SkyStorage {
 
     public abstract SkyInternalPlayer loadPlayer(Player player);
 
+    /**
+     * Gets a snapshot of the score, name and rank of an offline player with the given UUID.
+     * <p/>
+     * This may return live SkyPlayer objects if the player is online, but could also contain a snapshot of data - act
+     * accordingly.
+     *
+     * @param uuid     UUID to search for.
+     * @param callback Callback to give player to - player may be null!
+     */
+    public abstract void getOfflinePlayer(UUID uuid, Callback<OfflineSkyPlayer> callback);
+
+    /**
+     * Gets a snapshot of the score, name and rank of an offline player with the given name.
+     * <p/>
+     * This may return live SkyPlayer objects if the player is online, but could also contain a snapshot of data - act
+     * accordingly.
+     *
+     * @param name     Name to search for. Case insensitive.
+     * @param callback Callback to give player to - player may be null!
+     */
+    public abstract void getOfflinePlayer(String name, Callback<OfflineSkyPlayer> callback);
+
     public abstract void dataChanged();
 
     /**

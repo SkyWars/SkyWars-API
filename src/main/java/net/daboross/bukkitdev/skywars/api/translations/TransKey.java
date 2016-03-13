@@ -99,6 +99,14 @@ public enum TransKey {
     CMD_TOP_TITLE("commands.top.title", 1),
     CMD_TOP_FORMAT("commands.top.format", 3),
     CMD_TOP_NO_PLAYERS("commands.top.no-players", 0),
+    // commands.rank
+    CMD_RANK_DESCRIPTION("commands.rank.description", 0),
+    CMD_RANK_ARGUMENT("commands.rank.argument", 0),
+    CMD_RANK_HEADER("commands.rank.title", 1),
+    CMD_RANK_SCORE("commands.rank.score", 1),
+    CMD_RANK_RANK("commands.rank.rank", 1),
+    CMD_RANK_NOT_FOUND("commands.rank.not-found", 1),
+    CMD_RANK_NO_OTHER_PERMISSION("commands.rank.no-other-permission", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
@@ -199,7 +207,7 @@ public enum TransKey {
     GAME_STARTING_GAMESTARTING_FINAL_COMMA("game.starting.game-starting-final-comma", 0),
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
-    GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
+    GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0);
     public static final int VERSION = 4;
     public final String key;
     public final int args;

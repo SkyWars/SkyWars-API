@@ -135,6 +135,13 @@ public interface SkyConfiguration {
     long getScoreSaveInterval();
 
     /**
+     * Gets the interval that individual player's (not top 10) rank should be updated at. This is in seconds.
+     *
+     * @return The individual rank update interval.
+     */
+    long getScoreIndividualRankUpdateInterval();
+
+    /**
      * Gets whether or not to enable economy rewards.
      *
      * @return Whether or not to reward people with economy currency.

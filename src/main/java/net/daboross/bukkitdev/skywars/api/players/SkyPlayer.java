@@ -20,10 +20,12 @@ import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import org.bukkit.entity.Player;
 
-public interface SkyPlayer {
+public interface SkyPlayer extends OfflineSkyPlayer {
 
+    @Override
     String getName();
 
+    @Override
     UUID getUuid();
 
     Player getPlayer();
@@ -40,6 +42,7 @@ public interface SkyPlayer {
 
     void setSavedInventory(SkySavedInventory inventory);
 
+    @Override
     int getScore();
 
     void setScore(int score);
@@ -51,5 +54,6 @@ public interface SkyPlayer {
      *
      * @return Player rank.
      */
+    @Override
     int getRank();
 }
