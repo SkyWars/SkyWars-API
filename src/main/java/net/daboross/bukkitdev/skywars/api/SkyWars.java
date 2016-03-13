@@ -16,10 +16,10 @@
  */
 package net.daboross.bukkitdev.skywars.api;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
+import net.daboross.bukkitdev.skywars.api.config.RandomChests;
 import net.daboross.bukkitdev.skywars.api.config.SkyConfiguration;
 import net.daboross.bukkitdev.skywars.api.economy.SkyEconomyAbstraction;
 import net.daboross.bukkitdev.skywars.api.game.SkyAttackerStorage;
@@ -93,6 +93,11 @@ public interface SkyWars extends Plugin {
      * @return The SkyConfiguration, or null if this plugin is not yet enabled.
      */
     SkyConfiguration getConfiguration();
+
+    /**
+     * Gets the RandomChests for this plugin.
+     */
+    RandomChests getChestRandomizer();
 
     /**
      * Gets the SkyScore for this plugin. <br> This method will return null if score is not enabled, that is if {@link
