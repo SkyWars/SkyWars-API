@@ -19,6 +19,8 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationTest;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -39,7 +41,7 @@ public class SkyArenaConfigTest {
     public void testEquals() {
         SkyArenaConfig config = getRandom(r);
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig(null, config.getSpawns(), config.getNumTeams(), config.getTeamSize(), config.getPlacementY(), config.getBoundaries());
+        SkyArenaConfig copy = new SkyArenaConfig(null, config.getSpawns(), config.getNumTeams(), config.getTeamSize(), config.getPlacementY(), config.getBoundaries(), config.getChests());
         assertEquals(config, copy);
     }
 
@@ -67,10 +69,11 @@ public class SkyArenaConfigTest {
 
     public static SkyArenaConfig getRandom(Random r) {
         int numTeams = 2 + r.nextInt(22);
-        List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>();
+        List<SkyPlayerLocation> spawns = new ArrayList<>();
+        List<SkyArenaChest> chests = new ArrayList<>(); // TODO: generate random chest configs
         for (int i = 0; i < Math.max(numTeams, r.nextInt(20)); i++) {
             spawns.add(SkyPlayerLocationTest.getRandomLoc());
         }
-        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r));
+        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r), chests);
     }
 }

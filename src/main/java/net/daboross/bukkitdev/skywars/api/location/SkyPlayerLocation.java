@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import net.daboross.bukkitdev.skywars.api.SkyStatic;
@@ -145,7 +146,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
 
     @Override
     public Map<String, Object> serialize() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("x", x);
         map.put("y", y);
         map.put("z", z);
