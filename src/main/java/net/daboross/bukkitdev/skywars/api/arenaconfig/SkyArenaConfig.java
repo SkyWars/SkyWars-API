@@ -44,7 +44,7 @@ public class SkyArenaConfig implements SkyArena {
         Validate.notNull(spawns);
         Validate.isTrue(spawns.size() >= numTeams, "Number of spawns needs to be at least as big as numTeams");
         this.arenaName = arenaName;
-        this.spawns = new ArrayList<SkyPlayerLocation>(spawns.size());
+        this.spawns = new ArrayList<>(spawns.size());
         for (SkyPlayerLocation l : spawns) {
             this.spawns.add(l.changeWorld(null));
         }

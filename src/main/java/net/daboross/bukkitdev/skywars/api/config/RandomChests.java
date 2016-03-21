@@ -16,9 +16,9 @@
  */
 package net.daboross.bukkitdev.skywars.api.config;
 
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public interface RandomChests {
 
-    void fillChest(Inventory inventory, int chestLevel, int minLevel, int maxLevel);
+    ItemStack[] getItems(int size, int chestLevel, int minItemValue, int maxItemValue);
 }

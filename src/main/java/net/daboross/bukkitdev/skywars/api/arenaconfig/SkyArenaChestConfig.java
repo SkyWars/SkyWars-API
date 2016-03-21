@@ -53,6 +53,16 @@ public class SkyArenaChestConfig implements SkyArenaChest {
     }
 
     @Override
+    public int getMinItemValue() {
+        return minItemValue;
+    }
+
+    @Override
+    public int getMaxItemValue() {
+        return maxItemValue;
+    }
+
+    @Override
     public SkyBlockLocation getLocation() {
         return relativeLocation;
     }

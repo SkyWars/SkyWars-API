@@ -31,5 +31,9 @@ public interface SkyArenaChest extends ConfigurationSerializable {
 
     int getChestLevel();
 
+    int getMinItemValue();
+
+    int getMaxItemValue();
+
     void serialize(ConfigurationSection configuration);
 }
