@@ -277,6 +277,13 @@ public interface SkyConfiguration {
     boolean areDeveloperOptionsEnabled();
 
     /**
+     * Whether or not SkyWars should attempt to recover from score/scoreboard errors.
+     *
+     * @return True if score board error recovery hasn't been disabled, false otherwise.
+     */
+    boolean isRecoverFromScoreErrors();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     enum ArenaOrder {
