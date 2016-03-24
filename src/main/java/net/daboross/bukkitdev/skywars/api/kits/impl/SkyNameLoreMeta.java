@@ -36,7 +36,7 @@ public class SkyNameLoreMeta extends SkyItemMeta {
             this.name = null;
         }
         if (lore != null && !lore.isEmpty()) {
-            this.lore = new ArrayList<String>(lore.size());
+            this.lore = new ArrayList<>(lore.size());
             for (String line : lore) {
                 this.lore.add(ChatColor.translateAlternateColorCodes('&', line));
             }

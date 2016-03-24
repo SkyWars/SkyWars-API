@@ -17,5 +17,6 @@
 package net.daboross.bukkitdev.skywars.api.storage;
 
 public interface Callback<T> {
-    void call(T value) ;
+
+    void call(T value);
 }

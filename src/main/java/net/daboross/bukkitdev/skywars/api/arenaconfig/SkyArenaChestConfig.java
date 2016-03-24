@@ -103,6 +103,7 @@ public class SkyArenaChestConfig implements SkyArenaChest {
         return new SkyArenaChestConfig(randomize, level, minItemValue, maxItemValue, location);
     }
 
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     public static SkyArenaChestConfig deserialize(Map<String, Object> map) {
         Object randomizeObj = map.get("randomize");
         Object levelObj = map.get("total-level");

@@ -282,7 +282,7 @@ public interface SkyConfiguration {
     enum ArenaOrder {
 
         RANDOM, ORDERED;
-        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>(2);
+        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<>(2);
 
         static {
             for (ArenaOrder order : values()) {

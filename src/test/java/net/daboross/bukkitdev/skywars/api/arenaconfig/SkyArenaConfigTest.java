@@ -19,8 +19,6 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
-import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocationTest;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocationTest;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -100,7 +100,7 @@ public class SkyBoundariesConfig implements SkyBoundaries {
     }
 
     @Override
-    @SuppressWarnings("RedundantIfStatement")
+    @SuppressWarnings({"RedundantIfStatement", "SimplifiableIfStatement"})
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SkyBoundariesConfig)) return false;

@@ -162,8 +162,9 @@ public class SkyArenaConfig implements SkyArena {
         List<SkyPlayerLocation> spawns = new ArrayList<>(spawnsObjList.size());
         for (Object obj : spawnsObjList) {
             Validate.isTrue(obj instanceof Map, "Invalid spawn found in arena file");
-            //noinspection unchecked,ConstantConditions
-            SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
+
+            @SuppressWarnings({"unchecked", "ConstantConditions"})
+            SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map<String, Object>) obj);
             if (loc == null) {
                 continue;
             }
@@ -180,7 +181,8 @@ public class SkyArenaConfig implements SkyArena {
             List<?> chestsObjList = configurationSection.getList("chests");
             for (Object obj : chestsObjList) {
                 Validate.isTrue(obj instanceof Map, "Invalid chest found in arena file");
-                SkyArenaChest chest = SkyArenaChestConfig.deserialize((Map) obj);
+                @SuppressWarnings({"unchecked", "ConstantConditions"})
+                SkyArenaChest chest = SkyArenaChestConfig.deserialize((Map<String, Object>) obj);
                 if (chest == null) {
                     continue;
                 }

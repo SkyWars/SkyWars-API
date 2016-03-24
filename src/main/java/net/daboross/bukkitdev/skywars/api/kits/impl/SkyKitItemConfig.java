@@ -45,7 +45,7 @@ public class SkyKitItemConfig implements SkyKitItem {
         }
         this.amount = amount;
         this.enchantments = enchantments != null && enchantments.isEmpty() ? null : enchantments;
-        this.itemMeta = itemMeta == null ? new ArrayList<SkyItemMeta>() : new ArrayList<SkyItemMeta>(itemMeta);
+        this.itemMeta = itemMeta == null ? new ArrayList<SkyItemMeta>() : new ArrayList<>(itemMeta);
         Collections.sort(this.itemMeta);
     }
 
