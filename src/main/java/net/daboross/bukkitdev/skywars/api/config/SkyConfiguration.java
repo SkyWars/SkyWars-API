@@ -249,13 +249,6 @@ public interface SkyConfiguration {
     boolean isMultiverseCoreHookEnabled();
 
     /**
-     * Whether or not to attempt to hook with Multiverse Inventories.
-     *
-     * @return False if the user has disabled the Multiverse Inventories hook, true otherwise.
-     */
-    boolean isMultiverseInventoriesHookEnabled();
-
-    /**
      * Whether or not to attempt to hook with WorldEdit.
      *
      * @return False if the user has disabled the WorldEdit hook, true otherwise.
