@@ -43,7 +43,7 @@ public interface SkyGameHandler {
      * @param broadcast  whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    void removePlayerFromGame(UUID playerUuid, boolean respawn, boolean broadcast);
+    void removePlayerFromGame(UUID playerUuid, LeaveGameReason reason, boolean respawn, boolean broadcast);
 
     /**
      * Removes a player from whatever game they are in.
@@ -53,7 +53,7 @@ public interface SkyGameHandler {
      * @param broadcast whether or not to broadcast the leaving message
      * @throws IllegalArgumentException if the player is not in a game.
      */
-    void removePlayerFromGame(Player player, boolean respawn, boolean broadcast);
+    void removePlayerFromGame(Player player, LeaveGameReason reason, boolean respawn, boolean broadcast);
 
     /**
      * Respawns a player. This should only be called if the removePlayerFromGame method was called with respawn=false.
