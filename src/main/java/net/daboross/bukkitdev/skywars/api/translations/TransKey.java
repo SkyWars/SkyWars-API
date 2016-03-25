@@ -209,7 +209,6 @@ public enum TransKey {
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
-    public static final int VERSION = 4;
     public final String key;
     public final int args;
     public final boolean includePrefix;
