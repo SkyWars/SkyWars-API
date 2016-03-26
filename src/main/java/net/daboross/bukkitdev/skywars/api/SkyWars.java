@@ -95,7 +95,9 @@ public interface SkyWars extends Plugin {
     SkyConfiguration getConfiguration();
 
     /**
-     * Gets the RandomChests for this plugin.
+     * Gets the RandomChests for this plugin. <br> This method will never return null if this plugin is enabled.
+     *
+     * @return The chest randomizer, or null of this plugin is not yet enabled.
      */
     RandomChests getChestRandomizer();
 

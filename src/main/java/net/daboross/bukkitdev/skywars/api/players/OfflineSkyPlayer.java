@@ -21,23 +21,40 @@ import java.util.UUID;
 /**
  * Offline Sky Player - contains offline data from a top player list. Note that the data is in no way guaranteed to be
  * completely accurate, and it is in no way guaranteed to be updated after being returned.
- * <p/>
+ * <p>
  * A valid OfflineSkyPlayer implementation returned from getTopPlayers() could just store static values, and the only
  * way to get new values would be to run getTopPlayers() again.
  */
 public interface OfflineSkyPlayer {
 
+    /**
+     * Gets the player's name.
+     * <p>
+     * Might be null if ScoreStorage.setScore() or ScoreStorage.addScore() was used with an
+     * offline player who never logged on.
+     *
+     * @return This offline player's name.
+     */
     String getName();
 
+    /**
+     * Gets the player's UUID.
+     *
+     * @return This offline player's UUID
+     */
     UUID getUuid();
 
     /**
      * Gets the score. Not guaranteed to be as up to date as ScoreStorage.getScore().
+     *
+     * @return The score cached in this offline sky player.
      */
     int getScore();
 
     /**
      * Gets the rank. Top rank is rank 0. Not guaranteed to be as up to date as ScoreStorage.getRank().
+     *
+     * @return The rank cached in this offline sky player.
      */
     int getRank();
 }

@@ -84,10 +84,10 @@ public abstract class SkyStorageBackend {
 
     /**
      * Gets the top x players, with the highest scores. First highest score is first in list.
-     * <p/>
+     * <p>
      * This list has no set length, but will be at least size 10 if there are at least 10 players with scores on the
      * server.
-     * <p/>
+     * <p>
      * Note that a valid OfflineSkyPlayer implementation returned from getTopPlayers() could just store static values,
      * and the only way to get new values would be to run getTopPlayers() again.
      *

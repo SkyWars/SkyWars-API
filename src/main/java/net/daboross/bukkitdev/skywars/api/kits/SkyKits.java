@@ -37,11 +37,15 @@ public interface SkyKits {
     /**
      * Saves the current kit list to disk in kits.yml. This will overwrite all comments in kits.yml, and all changes
      * made to kits.yml since the server started.
+     *
+     * @throws IOException If an IOException occurs when saving to disk.
      */
     void save() throws IOException;
 
     /**
      * Adds a kit to the current kit list. Recommended to use .save() after this to save all kits to disk.
+     *
+     * @param kit Kit to add.
      */
     void addKit(SkyKit kit);
 }

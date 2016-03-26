@@ -46,7 +46,7 @@ public abstract class SkyStorage {
 
     /**
      * Gets a snapshot of the score, name and rank of an offline player with the given UUID.
-     * <p/>
+     * <p>
      * This may return live SkyPlayer objects if the player is online, but could also contain a snapshot of data - act
      * accordingly.
      *
@@ -57,7 +57,7 @@ public abstract class SkyStorage {
 
     /**
      * Gets a snapshot of the score, name and rank of an offline player with the given name.
-     * <p/>
+     * <p>
      * This may return live SkyPlayer objects if the player is online, but could also contain a snapshot of data - act
      * accordingly.
      *
@@ -70,10 +70,10 @@ public abstract class SkyStorage {
 
     /**
      * Gets the top x players, with the highest scores. First highest score is first in list.
-     * <p/>
+     * <p>
      * This list has no set length, but will be at least size 10 if there are at least 10 players with scores on the
      * server.
-     * <p/>
+     * <p>
      * Note that a valid OfflineSkyPlayer implementation returned from getTopPlayers() could just store static values,
      * and the only way to get new values would be to run getTopPlayers() again.
      *
