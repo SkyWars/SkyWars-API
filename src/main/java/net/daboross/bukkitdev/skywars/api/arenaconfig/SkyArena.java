@@ -45,4 +45,16 @@ public interface SkyArena {
     SkyBoundaries getBoundaries();
 
     void serialize(ConfigurationSection configuration);
+
+    /**
+     * Returns a non-null list of chests. If chests haven't been loaded for this arena, returns a new empty list.
+     */
+    List<SkyArenaChest> getChests();
+
+    /**
+     * Returns a nullable list of chests. If chests haven't been loaded for this arena, returns null.
+     */
+    List<SkyArenaChest> getChestConfiguration();
+
+    void setChests(List<SkyArenaChest> chests);
 }

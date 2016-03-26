@@ -26,7 +26,7 @@ public enum ConfigColorCode {
     NAME('n', '2'),
     BROADCAST('b', 'a'),
     DATA('d', '2');
-    private static final Map<Character, ConfigColorCode> BY_SHORTVER = new HashMap<Character, ConfigColorCode>();
+    private static final Map<Character, ConfigColorCode> BY_SHORTVER = new HashMap<>();
     private final char code;
     private final char shortVer;
     private final String color;

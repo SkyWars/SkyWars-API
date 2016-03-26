@@ -18,6 +18,7 @@ package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import net.daboross.bukkitdev.skywars.api.location.SkyPlayerLocation;
@@ -31,10 +32,11 @@ public class SkyArenaConfig implements SkyArena {
     private Integer teamSize;
     private Integer placementY;
     private final SkyBoundariesConfig boundaries;
+    private List<SkyArenaChest> chests;
     private Path file;
     private String arenaName = "null";
 
-    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, int numTeams, int teamSize, int placementY, SkyBoundariesConfig boundaries) {
+    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, int numTeams, int teamSize, int placementY, SkyBoundariesConfig boundaries, final List<SkyArenaChest> chests) {
         Validate.isTrue(numTeams >= 2, "Num teams can't be smaller than 2");
         Validate.isTrue(teamSize >= 1, "Team size can't be smaller than 1");
         Validate.isTrue(placementY >= 0, "placement-y can't be smaller than 0");
@@ -42,7 +44,7 @@ public class SkyArenaConfig implements SkyArena {
         Validate.notNull(spawns);
         Validate.isTrue(spawns.size() >= numTeams, "Number of spawns needs to be at least as big as numTeams");
         this.arenaName = arenaName;
-        this.spawns = new ArrayList<SkyPlayerLocation>(spawns.size());
+        this.spawns = new ArrayList<>(spawns.size());
         for (SkyPlayerLocation l : spawns) {
             this.spawns.add(l.changeWorld(null));
         }
@@ -50,6 +52,7 @@ public class SkyArenaConfig implements SkyArena {
         this.teamSize = teamSize;
         this.placementY = placementY;
         this.boundaries = boundaries;
+        this.chests = chests;
     }
 
     @Override
@@ -113,18 +116,38 @@ public class SkyArenaConfig implements SkyArena {
 
     @Override
     public void serialize(ConfigurationSection section) {
-        section.set("config-version", 1);
-        if (spawns != null) {
-            List<Map> spawnsList = new ArrayList<Map>(spawns.size());
-            for (SkyPlayerLocation loc : spawns) {
-                spawnsList.add(loc.changeWorld(null).serialize());
-            }
-            section.set("spawns", spawnsList);
+        section.set("config-version", 2);
+        List<Map> spawnsList = new ArrayList<>(spawns.size());
+        for (SkyPlayerLocation loc : spawns) {
+            spawnsList.add(loc.changeWorld(null).serialize());
         }
+        section.set("spawns", spawnsList);
         section.set("num-teams", numTeams);
         section.set("team-size", teamSize);
         boundaries.serialize(section.createSection("boundaries"));
         section.set("placement-y", placementY);
+        if (chests != null) {
+            List<Map> chestsList = new ArrayList<>(chests.size());
+            for (SkyArenaChest chest : chests) {
+                chestsList.add(chest.serialize());
+            }
+            section.set("chests", chestsList);
+        }
+    }
+
+    @Override
+    public List<SkyArenaChest> getChests() {
+        return chests == null ? Collections.<SkyArenaChest>emptyList() : Collections.unmodifiableList(chests);
+    }
+
+    @Override
+    public List<SkyArenaChest> getChestConfiguration() {
+        return chests == null ? null : Collections.unmodifiableList(chests);
+    }
+
+    @Override
+    public void setChests(final List<SkyArenaChest> chests) {
+        this.chests = chests;
     }
 
     public static SkyArenaConfig deserialize(ConfigurationSection configurationSection) {
@@ -133,14 +156,15 @@ public class SkyArenaConfig implements SkyArena {
         Validate.isTrue(configurationSection.isInt("num-teams"), "num-teams must be included in arena");
         Validate.isTrue(configurationSection.isInt("team-size"), "team-size must be included in arena");
         Validate.isTrue(configurationSection.isInt("placement-y"), "placement-y must be included in arena");
-        Validate.isTrue(configurationSection.getInt("config-version") == 1, "Configuration version must be 1");
+        Validate.isTrue(configurationSection.getInt("config-version") == 2, "Configuration version must be 1 or 2");
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries");
         List<?> spawnsObjList = configurationSection.getList("spawns");
-        List<SkyPlayerLocation> spawns = new ArrayList<SkyPlayerLocation>(spawnsObjList.size());
+        List<SkyPlayerLocation> spawns = new ArrayList<>(spawnsObjList.size());
         for (Object obj : spawnsObjList) {
             Validate.isTrue(obj instanceof Map, "Invalid spawn found in arena file");
-            //noinspection unchecked,ConstantConditions
-            SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map) obj);
+
+            @SuppressWarnings({"unchecked", "ConstantConditions"})
+            SkyPlayerLocation loc = SkyPlayerLocation.deserialize((Map<String, Object>) obj);
             if (loc == null) {
                 continue;
             }
@@ -150,7 +174,24 @@ public class SkyArenaConfig implements SkyArena {
         int teamSize = configurationSection.getInt("team-size");
         int placementY = configurationSection.getInt("placement-y");
         SkyBoundariesConfig boundaries = SkyBoundariesConfig.deserialize(boundariesSection);
-        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries);
+        List<SkyArenaChest> chests;
+        if (configurationSection.isList("chests")) {
+            chests = new ArrayList<>();
+
+            List<?> chestsObjList = configurationSection.getList("chests");
+            for (Object obj : chestsObjList) {
+                Validate.isTrue(obj instanceof Map, "Invalid chest found in arena file");
+                @SuppressWarnings({"unchecked", "ConstantConditions"})
+                SkyArenaChest chest = SkyArenaChestConfig.deserialize((Map<String, Object>) obj);
+                if (chest == null) {
+                    continue;
+                }
+                chests.add(chest);
+            }
+        } else {
+            chests = null;
+        }
+        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, chests);
     }
 
     public void setFile(final Path file) {

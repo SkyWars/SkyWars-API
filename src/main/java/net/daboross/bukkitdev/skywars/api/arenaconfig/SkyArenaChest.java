@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,25 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api;
+package net.daboross.bukkitdev.skywars.api.arenaconfig;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import net.daboross.bukkitdev.skywars.api.location.SkyBlockLocation;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
-public class RandomationTest {
+public interface SkyArenaChest extends ConfigurationSerializable {
 
     /**
-     * Test of getRandom method, of class Randomation.
+     * This is the location relative to arena's 0,0, not absolute position.
      */
-    @Test
-    public void testGetRandom() {
-        List<Integer> list = new ArrayList<>();
-        list.addAll(Arrays.asList(1, 0, 2, 320, 43, 21, 123));
-        for (int i = 0; i < 10; i++) {
-            assertEquals(true, list.contains(Randomation.getRandom(list)));
-        }
-    }
+    SkyBlockLocation getLocation();
+
+    boolean isRandomizationEnabled();
+
+    int getChestLevel();
+
+    int getMinItemValue();
+
+    int getMaxItemValue();
+
+    void serialize(ConfigurationSection configuration);
 }

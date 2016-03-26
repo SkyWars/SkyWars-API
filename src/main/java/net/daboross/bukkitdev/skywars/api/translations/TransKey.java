@@ -68,6 +68,7 @@ public enum TransKey {
     // commands.cancelall
     CMD_CANCELALL_DESCRIPTION("commands.cancelall.description", 0),
     CMD_CANCELALL_CANCELING("commands.cancelall.canceling-game", 1),
+    CMD_CANCELALL_NO_GAMES("commands.cancelall.no-games", 0),
     // commands.report
     CMD_REPORT_DESCRIPTION("commands.report.description", 0),
     CMD_REPORT_START("commands.report.start", 0),
@@ -94,6 +95,19 @@ public enum TransKey {
     CMD_TESTKIT_DESCRIPTION("commands.testkit.description", 0),
     CMD_TESTKIT_UNKNOWN("commands.testkit.unknown", 1),
     CMD_TESTKIT_APPLIED("commands.testkit.applied", 1),
+    // commands.top
+    CMD_TOP_DESCRIPTION("commands.top.description", 0),
+    CMD_TOP_TITLE("commands.top.title", 1),
+    CMD_TOP_FORMAT("commands.top.format", 3),
+    CMD_TOP_NO_PLAYERS("commands.top.no-players", 0),
+    // commands.rank
+    CMD_RANK_DESCRIPTION("commands.rank.description", 0),
+    CMD_RANK_ARGUMENT("commands.rank.argument", 0),
+    CMD_RANK_HEADER("commands.rank.title", 1),
+    CMD_RANK_SCORE("commands.rank.score", 1),
+    CMD_RANK_RANK("commands.rank.rank", 1),
+    CMD_RANK_NOT_FOUND("commands.rank.not-found", 1),
+    CMD_RANK_NO_OTHER_PERMISSION("commands.rank.no-other-permission", 1),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
@@ -195,7 +209,6 @@ public enum TransKey {
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
-    public static final int VERSION = 4;
     public final String key;
     public final int args;
     public final boolean includePrefix;

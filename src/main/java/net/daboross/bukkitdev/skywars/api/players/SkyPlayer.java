@@ -20,10 +20,12 @@ import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import org.bukkit.entity.Player;
 
-public interface SkyPlayer {
+public interface SkyPlayer extends OfflineSkyPlayer {
 
+    @Override
     String getName();
 
+    @Override
     UUID getUuid();
 
     Player getPlayer();
@@ -40,9 +42,18 @@ public interface SkyPlayer {
 
     void setSavedInventory(SkySavedInventory inventory);
 
+    @Override
     int getScore();
 
     void setScore(int score);
 
     void addScore(int diff);
+
+    /**
+     * Get player rank, in top scores. Top score is rank 0 (might want to adjust for displaying).
+     *
+     * @return Player rank.
+     */
+    @Override
+    int getRank();
 }

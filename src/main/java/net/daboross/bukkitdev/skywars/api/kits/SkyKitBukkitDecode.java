@@ -43,7 +43,7 @@ public class SkyKitBukkitDecode {
     public static SkyKit inventoryToKit(PlayerInventory inventory, String name, String permission, int cost) {
         SkyKitItem[] armor = decodeArmor(inventory.getArmorContents());
         ItemStack[] rawItems = inventory.getContents();
-        List<SkyKitItem> items = new ArrayList<SkyKitItem>(rawItems.length);
+        List<SkyKitItem> items = new ArrayList<>(rawItems.length);
         for (ItemStack rawItem : rawItems) {
             if (rawItem != null && rawItem.getType() != Material.AIR) {
                 items.add(decodeItem(rawItem));
@@ -66,7 +66,7 @@ public class SkyKitBukkitDecode {
         Material type = itemStack.getType();
         int amount = itemStack.getAmount();
         Map<Enchantment, Integer> enchantments = itemStack.getEnchantments();
-        List<SkyItemMeta> skyMetaList = new ArrayList<SkyItemMeta>();
+        List<SkyItemMeta> skyMetaList = new ArrayList<>();
         byte itemData = itemStack.getData().getData();
         if (itemData != 0) {
             skyMetaList.add(new SkyRawDataMeta(itemData));
@@ -82,7 +82,7 @@ public class SkyKitBukkitDecode {
         }
         List<String> lore = null;
         if (itemMeta.hasLore()) {
-            lore = new ArrayList<String>(itemMeta.getLore());
+            lore = new ArrayList<>(itemMeta.getLore());
         }
         if (name != null || lore != null) {
             skyMetaList.add(new SkyNameLoreMeta(name, lore));

@@ -47,11 +47,15 @@ public interface SkyPlayers {
 
     /**
      * Loads the given player from storage.
+     *
+     * @param player The online player to use for getting name and UUID to load.
      */
     void loadPlayer(Player player);
 
     /**
      * Unloads the given player from memory.
+     *
+     * @param uuid The UUID of the player to unload.
      */
     void unloadPlayer(UUID uuid);
 }

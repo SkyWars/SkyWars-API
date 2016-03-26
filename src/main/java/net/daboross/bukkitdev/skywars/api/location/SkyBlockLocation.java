@@ -117,7 +117,7 @@ public class SkyBlockLocation implements ConfigurationSerializable {
 
     @Override
     public Map<String, Object> serialize() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("x", x);
         map.put("y", y);
         map.put("z", z);

@@ -135,6 +135,13 @@ public interface SkyConfiguration {
     long getScoreSaveInterval();
 
     /**
+     * Gets the interval that individual player's (not top 10) rank should be updated at. This is in seconds.
+     *
+     * @return The individual rank update interval.
+     */
+    long getScoreIndividualRankUpdateInterval();
+
+    /**
      * Gets whether or not to enable economy rewards.
      *
      * @return Whether or not to reward people with economy currency.
@@ -242,13 +249,6 @@ public interface SkyConfiguration {
     boolean isMultiverseCoreHookEnabled();
 
     /**
-     * Whether or not to attempt to hook with Multiverse Inventories.
-     *
-     * @return False if the user has disabled the Multiverse Inventories hook, true otherwise.
-     */
-    boolean isMultiverseInventoriesHookEnabled();
-
-    /**
      * Whether or not to attempt to hook with WorldEdit.
      *
      * @return False if the user has disabled the WorldEdit hook, true otherwise.
@@ -270,12 +270,19 @@ public interface SkyConfiguration {
     boolean areDeveloperOptionsEnabled();
 
     /**
+     * Whether or not SkyWars should attempt to recover from score/scoreboard errors.
+     *
+     * @return True if score board error recovery hasn't been disabled, false otherwise.
+     */
+    boolean isRecoverFromScoreErrors();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     enum ArenaOrder {
 
         RANDOM, ORDERED;
-        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<String, ArenaOrder>(2);
+        private static final Map<String, ArenaOrder> BY_NAME = new HashMap<>(2);
 
         static {
             for (ArenaOrder order : values()) {

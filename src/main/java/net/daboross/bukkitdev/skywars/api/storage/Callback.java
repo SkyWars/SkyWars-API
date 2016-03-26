@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,25 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api;
+package net.daboross.bukkitdev.skywars.api.storage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
+public interface Callback<T> {
 
-public class RandomationTest {
-
-    /**
-     * Test of getRandom method, of class Randomation.
-     */
-    @Test
-    public void testGetRandom() {
-        List<Integer> list = new ArrayList<>();
-        list.addAll(Arrays.asList(1, 0, 2, 320, 43, 21, 123));
-        for (int i = 0; i < 10; i++) {
-            assertEquals(true, list.contains(Randomation.getRandom(list)));
-        }
-    }
+    void call(T value);
 }
