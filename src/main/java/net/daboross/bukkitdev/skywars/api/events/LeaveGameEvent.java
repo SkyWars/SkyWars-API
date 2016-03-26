@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.events;
 
 import net.daboross.bukkitdev.skywars.api.SkyWars;
+import net.daboross.bukkitdev.skywars.api.game.LeaveGameReason;
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -31,9 +32,11 @@ public class LeaveGameEvent extends PlayerEvent {
     private static final HandlerList handlerList = new HandlerList();
     private final SkyWars plugin;
     private final int id;
+    private final LeaveGameReason reason;
 
-    public LeaveGameEvent(SkyWars plugin, int id, Player who) {
+    public LeaveGameEvent(SkyWars plugin, int id, Player who, final LeaveGameReason reason) {
         super(who);
+        this.reason = reason;
         Validate.notNull(plugin, "Plugin cannot be null");
         Validate.notNull(who, "Player cannot be null");
         this.plugin = plugin;
@@ -52,6 +55,10 @@ public class LeaveGameEvent extends PlayerEvent {
         return id;
     }
 
+    public LeaveGameReason getReason() {
+        return reason;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlerList;
@@ -63,6 +70,7 @@ public class LeaveGameEvent extends PlayerEvent {
                 "plugin=" + plugin +
                 ", id=" + id +
                 ", player=" + player +
+                ", reason=" + reason +
                 '}';
     }
 
@@ -77,6 +85,7 @@ public class LeaveGameEvent extends PlayerEvent {
         if (id != event.id) return false;
         if (!player.equals(event.player)) return false;
         if (!plugin.equals(event.plugin)) return false;
+        if (reason != event.reason) return false;
 
         return true;
     }
@@ -86,6 +95,7 @@ public class LeaveGameEvent extends PlayerEvent {
         int result = plugin.hashCode();
         result = 31 * result + id;
         result = 31 * result + player.hashCode();
+        result = 31 * result + reason.hashCode();
         return result;
     }
 }

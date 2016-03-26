@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,13 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.daboross.bukkitdev.skywars.api.players;
+package net.daboross.bukkitdev.skywars.api.game;
 
-public enum SkyPlayerState {
-    IN_QUEUE,
-    WAITING_IN_GAME,
-    NOT_IN_GAME,
-    IN_RUNNING_GAME,
-    WAITING_FOR_RESPAWN,
-    DEAD_WAITING_FOR_RESPAWN,
+public enum LeaveGameReason {
+    LEAVE_COMMAND,
+    DISCONNECTED,
+    GAME_ENDED,
+    DIED;
 }
