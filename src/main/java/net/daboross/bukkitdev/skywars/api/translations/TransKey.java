@@ -128,6 +128,7 @@ public enum TransKey {
     SWS_SAVE_DESCRIPTION("setup-commands.save.description", 0),
     SWS_SAVE_SAVING("setup-commands.save.saving", 0),
     SWS_SAVE_SAVED("setup-commands.save.saved", 0),
+    SWS_SAVE_SAVED_LINE_TWO("setup-commands.save.saved-line-2", 1),
     SWS_SAVE_FAILED("setup-commands.save.failed", 0),
     // setup-commands.generic
     SWS_NO_FIRST_POSITION("setup-commands.generic.no-first-position", 0),
