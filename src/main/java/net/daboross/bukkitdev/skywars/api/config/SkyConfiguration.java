@@ -263,6 +263,12 @@ public interface SkyConfiguration {
     boolean isSkipUuidCheck();
 
     /**
+     * Whether or not to force respawn players immediately after they die.
+     *
+     * @return True if the user has enabled skipping the respawn screen, false otherwise.
+     */
+    boolean isRespawnPlayersImmediately();
+    /**
      * Whether or not a few options which should only be enabled when developing are enabled.
      *
      * @return True if developer options should be enabled, false otherwise.
