@@ -24,7 +24,15 @@ public interface SkyLocationStore {
 
     void setLobbyPosition(SkyPlayerLocation lobbyPosition);
 
+    /**
+     * @return the current and original portal list (not a copy).
+     */
     List<SkyBlockLocation> getPortals();
+
+    /**
+     * @return the current and original sign list (not a copy).
+     */
+    List<SkyBlockLocation> getSigns();
 
     void save();
 }

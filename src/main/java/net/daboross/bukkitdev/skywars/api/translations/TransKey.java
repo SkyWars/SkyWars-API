@@ -190,6 +190,9 @@ public enum TransKey {
     GENERIC_IN_GAME("messages.in-game", 0),
     // disable report
     REPORT_DISABLED("messages.report-disabled", 0),
+    // signs
+    // I would have liked to write "can't" here.
+    NO_PERMISSION_CANNOT_PLACE_JOIN_SIGN("messages.signs.cannot-place-join-sign", 0),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2, true),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1, true),

@@ -283,6 +283,13 @@ public interface SkyConfiguration {
     boolean isRecoverFromScoreErrors();
 
     /**
+     * Returns a list of sign lines to put on join signs.
+     *
+     * @return An array of four strings, all non-null.
+     */
+    String[] getJoinSignLines();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     enum ArenaOrder {

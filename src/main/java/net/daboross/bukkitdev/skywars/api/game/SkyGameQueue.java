@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.game;
 
 import java.util.UUID;
+import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
 import org.bukkit.entity.Player;
 
 public interface SkyGameQueue {
@@ -64,5 +65,17 @@ public interface SkyGameQueue {
      */
     UUID[] getCopy();
 
+    /**
+     * Gets the number of players currently queued.
+     *
+     * @return the number of players in the queue
+     */
     int getNumPlayersInQueue();
+
+    /**
+     * Gets the next planned arena people are queuing for.
+     *
+     * @return the next arena to be started
+     */
+    SkyArena getPlannedArena();
 }

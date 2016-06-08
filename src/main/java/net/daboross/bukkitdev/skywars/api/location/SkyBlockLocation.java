@@ -111,6 +111,14 @@ public class SkyBlockLocation implements ConfigurationSerializable {
         return new Location(bukkitWorld, x, y, z);
     }
 
+    public Block toBlock() {
+        World bukkitWorld = null;
+        if (world != null) {
+            bukkitWorld = Bukkit.getWorld(world);
+        }
+        return bukkitWorld == null ? null : new Location(bukkitWorld, x, y, z).getBlock();
+    }
+
     public Location toLocationWithWorldObj(World bukkitWorld) {
         return new Location(bukkitWorld, x, y, z);
     }

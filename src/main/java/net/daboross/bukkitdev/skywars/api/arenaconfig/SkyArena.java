@@ -32,8 +32,14 @@ public interface SkyArena {
 
     void setNumTeams(int numTeams);
 
+    /**
+     * @return The total maximum number of players to occupy this arena.
+     */
     int getNumPlayers();
 
+    /**
+     * @return The maximum size of teams for players in this arena.
+     */
     int getTeamSize();
 
     void setTeamSize(int teamSize);
