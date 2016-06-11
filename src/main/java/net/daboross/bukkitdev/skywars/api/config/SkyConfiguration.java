@@ -225,21 +225,28 @@ public interface SkyConfiguration {
      * @return True if the user has disabled /sw report, false otherwise.
      */
     boolean isDisableReport();
-//    /**
-//     * Gets whether or not death messages should only be broadcasted to people
-//     * in the arena.
-//     *
-//     * @return whether or not per arena death messages are enabled.
-//     */
-//    public boolean arePerArenaDeathMessagesEnabled();
 
-//    /**
-//     * Gets whether or not win messages should only be broadcasted to people in
-//     * the arena.
-//     *
-//     * @return whether or not per arena win messages are enabled.
-//     */
-//    public boolean arePerArenaWinMessagesEnabled();
+    /**
+     * Gets whether or not arena start messages should only be broadcasted to people in the arena.
+     * @return whether or not to limit start messages to arena players.
+     */
+    boolean shouldLimitStartMessagesToArenaPlayers();
+
+    /**
+     * Gets whether or not death messages should only be broadcasted to people
+     * in the arena.
+     *
+     * @return whether or not limit death messages to arena players.
+     */
+    boolean shouldLimitDeathMessagesToArenaPlayers();
+
+    /**
+     * Gets whether or not win messages should only be broadcasted to people in
+     * the arena.
+     *
+     * @return whether or not to limit win messages to arena players.
+     */
+    boolean shouldLimitEndMessagesToArenaPlayers();
 
     /**
      * Whether or not to attempt to hook with Multiverse Core.
