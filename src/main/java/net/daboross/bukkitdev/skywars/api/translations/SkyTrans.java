@@ -42,8 +42,10 @@ public class SkyTrans {
         }
         if (key.args == 0) {
             return instance.get(key);
-        } else if (key.args < args.length) {
+        } else if (key.args > args.length) {
             throw new IllegalArgumentException("Not enough args for key " + key.key);
+        } else if (key.args < args.length) {
+            throw new IllegalArgumentException("Too many args for key " + key.key);
         } else {
             String format = instance.get(key);
             try {
