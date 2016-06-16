@@ -228,21 +228,20 @@ public interface SkyConfiguration {
 
     /**
      * Gets whether or not arena start messages should only be broadcasted to people in the arena.
+     *
      * @return whether or not to limit start messages to arena players.
      */
     boolean shouldLimitStartMessagesToArenaPlayers();
 
     /**
-     * Gets whether or not death messages should only be broadcasted to people
-     * in the arena.
+     * Gets whether or not death messages should only be broadcasted to people in the arena.
      *
      * @return whether or not limit death messages to arena players.
      */
     boolean shouldLimitDeathMessagesToArenaPlayers();
 
     /**
-     * Gets whether or not win messages should only be broadcasted to people in
-     * the arena.
+     * Gets whether or not win messages should only be broadcasted to people in the arena.
      *
      * @return whether or not to limit win messages to arena players.
      */
@@ -275,6 +274,7 @@ public interface SkyConfiguration {
      * @return True if the user has enabled skipping the respawn screen, false otherwise.
      */
     boolean isRespawnPlayersImmediately();
+
     /**
      * Whether or not a few options which should only be enabled when developing are enabled.
      *
