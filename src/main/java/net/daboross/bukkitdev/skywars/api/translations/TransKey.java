@@ -193,6 +193,7 @@ public enum TransKey {
     // signs
     // I would have liked to write "can't" here.
     NO_PERMISSION_CANNOT_PLACE_JOIN_SIGN("messages.signs.cannot-place-join-sign", 0),
+    NO_PERMISSION_CANNOT_USE_JOIN_SIGN("messages.signs.cannot-use-join-sign", 0),
     // game.death
     GAME_DEATH_KILLED_BY_PLAYER_AND_VOID("game.death.killed-by-player-and-void", 2, true),
     GAME_DEATH_KILLED_BY_VOID("game.death.killed-by-void", 1, true),
