@@ -27,6 +27,7 @@ import net.daboross.bukkitdev.skywars.api.game.SkyCurrentGameTracker;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameHandler;
 import net.daboross.bukkitdev.skywars.api.game.SkyGameQueue;
 import net.daboross.bukkitdev.skywars.api.game.SkyIDHandler;
+import net.daboross.bukkitdev.skywars.api.kits.SkyKitGui;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKits;
 import net.daboross.bukkitdev.skywars.api.location.SkyLocationStore;
 import net.daboross.bukkitdev.skywars.api.players.SkyPlayers;
@@ -141,6 +142,13 @@ public interface SkyWars extends Plugin {
      * @return The SkyKits, or null if this plugin is not yet enabled.
      */
     SkyKits getKits();
+
+    /**
+     * Gets the kit GUI manager for this plugin.
+     *
+     * @return The SkyKitGui, or null if this plugin is not yet enabled.
+     */
+    SkyKitGui getKitGui();
 
     /**
      * Gets the folder arena configurations are stored in.

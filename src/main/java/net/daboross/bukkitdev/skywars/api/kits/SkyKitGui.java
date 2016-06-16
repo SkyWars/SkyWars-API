@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Dabo Ross <http://www.daboross.net/>
+ * Copyright (C) 2016 Dabo Ross <http://www.daboross.net/>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,32 +16,22 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits;
 
-import java.util.List;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public interface SkyKit {
-
-    List<SkyKitItem> getArmorContents();
-
-    List<SkyKitItem> getInventoryContents();
-
-    String getPermission();
-
-    int getCost();
-
-    String getName();
-
-    String getDescription();
+public interface SkyKitGui {
 
     /**
-     * Gets the description, with translated color codes, split over new lines.
+     * Opens a kit GUI for the player. This will work at any time, and will open up an inventory screen immediately. If
+     * this is used when a player is in a SkyWars match, the kit selection made will apply for the next match they
+     * join.
      *
-     * @return `Arrays.asList(ChatColor.translateAlternateColorCodes(getDescription).split('\n'))`
+     * @param player the player to show the inventory gui to.
      */
-    List<String> getDisplayDescription();
+    void openKitGui(Player player);
 
-    Material getTotem();
-
-    void applyTo(Player p);
+    /**
+     * Gets the title used for kit inventory GUIs. This can be used to tell whether or not an interaction occurs in a
+     * SkyWars kit GUI.
+     */
+    String getKitGuiTitle();
 }

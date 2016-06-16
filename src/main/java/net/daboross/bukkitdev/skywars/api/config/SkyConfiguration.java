@@ -297,6 +297,27 @@ public interface SkyConfiguration {
     String[] getJoinSignLines();
 
     /**
+     * Whether or not to show unavailable kits in the kit inventory gui.
+     *
+     * @return True if unavailable kits should be shown, false otherwise.
+     */
+    boolean isShowUnavailableKitsInGui();
+
+    /**
+     * Whether or not to completely replace the `/sw kit` command with a kit gui.
+     *
+     * @return True if `/sw kit` should directly launch a kit gui, false if `/sw kit gui` should be required.
+     */
+    boolean isReplaceKitCommandWithGui();
+
+    /**
+     * Whether or not to show the kit gui when a player joins the queue.
+     *
+     * @return True if kit gui should automatically be shown on join, false otherwise.
+     */
+    boolean isShowKitGuiOnJoin();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     enum ArenaOrder {

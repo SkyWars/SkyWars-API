@@ -16,11 +16,14 @@
  */
 package net.daboross.bukkitdev.skywars.api.kits.impl;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.apache.commons.lang.Validate;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -32,16 +35,24 @@ public class SkyKitConfig implements SkyKit {
     private final int cost;
     private final String permission;
     private final String name;
+    private final String description;
+    private final Material totem;
+    private final List<String> displayDescription;
 
-    public SkyKitConfig(List<SkyKitItem> inventoryContents, List<SkyKitItem> armorContents, String name, int cost, String permissionNode) {
+    public SkyKitConfig(List<SkyKitItem> inventoryContents, List<SkyKitItem> armorContents, String name, final String description, final Material totem, int cost, String permissionNode) {
         Validate.notNull(inventoryContents, "Inventory cannot be null");
         Validate.notNull(armorContents, "Armor contents cannot be null");
         Validate.notNull(name, "Name cannot be null");
+        Validate.notNull(description, "Description cannot be null");
+        Validate.notNull(totem, "Totem cannot be null");
         Validate.isTrue(armorContents.size() == 4, "Armor contents size must be 4");
         Validate.isTrue(cost >= 0);
         this.inventoryContents = inventoryContents;
         this.armorContents = armorContents;
         this.name = name;
+        this.description = description.replace(ChatColor.COLOR_CHAR, '&');
+        this.displayDescription = Arrays.asList(ChatColor.translateAlternateColorCodes('&', description).split("\n"));
+        this.totem = totem;
         this.cost = cost;
         this.permission = permissionNode;
     }
@@ -93,13 +104,31 @@ public class SkyKitConfig implements SkyKit {
     }
 
     @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public List<String> getDisplayDescription() {
+        return displayDescription;
+    }
+
+    @Override
+    public Material getTotem() {
+        return totem;
+    }
+
+    @Override
     public String toString() {
         return "SkyKitConfig{" +
-                "inventoryContents=" + inventoryContents +
-                ", armorContents=" + armorContents +
+                "armorContents=" + armorContents +
+                ", inventoryContents=" + inventoryContents +
                 ", cost=" + cost +
                 ", permission='" + permission + '\'' +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", totem=" + totem +
+                ", displayDescription=" + displayDescription +
                 '}';
     }
 
@@ -112,10 +141,12 @@ public class SkyKitConfig implements SkyKit {
         SkyKitConfig config = (SkyKitConfig) o;
 
         if (cost != config.cost) return false;
-        if (!armorContents.equals(config.armorContents)) return false;
         if (!inventoryContents.equals(config.inventoryContents)) return false;
-        if (!name.equals(config.name)) return false;
+        if (!armorContents.equals(config.armorContents)) return false;
         if (permission != null ? !permission.equals(config.permission) : config.permission != null) return false;
+        if (!name.equals(config.name)) return false;
+        if (!description.equals(config.description)) return false;
+        if (totem != config.totem) return false;
 
         return true;
     }
@@ -127,6 +158,8 @@ public class SkyKitConfig implements SkyKit {
         result = 31 * result + cost;
         result = 31 * result + (permission != null ? permission.hashCode() : 0);
         result = 31 * result + name.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + totem.hashCode();
         return result;
     }
 }

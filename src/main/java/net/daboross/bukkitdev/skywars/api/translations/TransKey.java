@@ -91,6 +91,8 @@ public enum TransKey {
     CMD_KIT_CURRENT_KIT("commands.kit.current-kit", 1),
     CMD_KIT_CURRENT_KIT_WITH_COST("commands.kit.current-kit-with-cost", 2),
     CMD_KIT_NO_ACCESS("commands.kit.no-access", 1),
+    // commands.kitgui
+    CMD_KIT_GUI_DESCRIPTION("commands.kitgui.description", 0),
     // commands.testkit
     CMD_TESTKIT_DESCRIPTION("commands.testkit.description", 0),
     CMD_TESTKIT_UNKNOWN("commands.testkit.unknown", 1),
@@ -213,7 +215,18 @@ public enum TransKey {
     GAME_STARTING_GAMESTARTING_FINAL_COMMA("game.starting.game-starting-final-comma", 0),
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
-    GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),;
+    GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),
+    // gui
+    KIT_GUI_TITLE("gui.kit-picker.title", 0),
+    KIT_GUI_TOTEM_TITLE("gui.kit-picker.totem-title", 1),
+    KIT_GUI_UNAVAILABLE_TOTEM_TITLE("gui.kit-picker.unavailable-totem-title", 1),
+    KIT_GUI_COST_LORE("gui.kit-picker.lore.cost", 1),
+    KIT_GUI_UNAFFORDABLE_COST_LORE("gui.kit-picker.lore.unaffordable-cost", 1),
+    KIT_GUI_UNAFFORDABLE_COST_LORE_2("gui.kit-picker.lore.unaffordable-cost-2", 1),
+    KIT_GUI_NO_PERMISSION_LORE("gui.kit-picker.lore.no-permission", 1),
+    KIT_GUI_KIT_DISAPPEARED("gui.kit-picker.messages.kit-disappeared", 0),
+    // configuration
+    CONFIG_KIT_DEFAULT_DESCRIPTION("configuration.kits.default-kit-description", 1);
     public final String key;
     public final int args;
     public final boolean includePrefix;
