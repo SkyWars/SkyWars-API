@@ -30,6 +30,15 @@ public interface SkyKitGui {
     void openKitGui(Player player);
 
     /**
+     * Opens a kit GUI for the player if the player has the `skywars.kitgui` permission, and the "show-kit-gui-on-join"
+     * configuration is enabled.
+     *
+     * @param player the player to show the inventory GUI to, if appropriate
+     * @return true if the inventory GUI was opened, false if it was not.
+     */
+    boolean autoOpenGuiIfApplicable(Player player);
+
+    /**
      * Gets the title used for kit inventory GUIs. This can be used to tell whether or not an interaction occurs in a
      * SkyWars kit GUI.
      */

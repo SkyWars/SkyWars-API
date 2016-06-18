@@ -140,7 +140,7 @@ public class SkyPlayerLocation implements ConfigurationSerializable {
                     world, this
             });
         }
-        return new Location(bukkitWorld, x, y, z, (float)yaw, (float)pitch);
+        return new Location(bukkitWorld, x, y, z, (float) yaw, (float) pitch);
     }
 
     @Override

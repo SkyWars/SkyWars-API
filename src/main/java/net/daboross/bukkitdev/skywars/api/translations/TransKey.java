@@ -86,7 +86,7 @@ public enum TransKey {
     CMD_KIT_CHOSE_KIT("commands.kit.chose-kit", 1),
     CMD_KIT_CHOSE_KIT_WITH_COST("commands.kit.chose-kit-with-cost", 2),
     CMD_KIT_HOW_TO_REMOVE("commands.kit.how-to-remove", 0),
-    CMD_KIT_REMOVED_KIT("commands.kit.removed-kit", 1),
+    CMD_KIT_REMOVED_KIT("commands.kit.removed-kit", 0),
     CMD_KIT_NO_KIT_REMOVED("commands.kit.no-kit-removed", 0),
     CMD_KIT_CURRENT_KIT("commands.kit.current-kit", 1),
     CMD_KIT_CURRENT_KIT_WITH_COST("commands.kit.current-kit-with-cost", 2),
@@ -109,7 +109,7 @@ public enum TransKey {
     CMD_RANK_SCORE("commands.rank.score", 1),
     CMD_RANK_RANK("commands.rank.rank", 1),
     CMD_RANK_NOT_FOUND("commands.rank.not-found", 1),
-    CMD_RANK_NO_OTHER_PERMISSION("commands.rank.no-other-permission", 1),
+    CMD_RANK_NO_OTHER_PERMISSION("commands.rank.no-other-permission", 0),
     // setup-commands.start
     SWS_START_DESCRIPTION("setup-commands.start.description", 0),
     SWS_START_NAME_ARGUMENT("setup-commands.start.argument-name", 0),
@@ -202,7 +202,7 @@ public enum TransKey {
     GAME_DEATH_KILLED_BY_PLAYER("game.death.killed-by-player", 2, true),
     GAME_DEATH_KILLED_BY_ENVIRONMENT("game.death.killed-by-environment", 1, true),
     GAME_DEATH_FORFEITED_WHILE_ATTACKED("game.death.forfeited-while-attacked", 2, true),
-    GAME_DEATH_FORFEITED("game.death.forfeited", 2, true),
+    GAME_DEATH_FORFEITED("game.death.forfeited", 1, true),
     // game.winning
     GAME_WINNING_SINGLE_WON("game.winning.single-won", 1, true),
     GAME_WINNING_MULTI_WON("game.winning.multi-won", 1, true),
@@ -223,7 +223,7 @@ public enum TransKey {
     KIT_GUI_COST_LORE("gui.kit-picker.lore.cost", 1),
     KIT_GUI_UNAFFORDABLE_COST_LORE("gui.kit-picker.lore.unaffordable-cost", 1),
     KIT_GUI_UNAFFORDABLE_COST_LORE_2("gui.kit-picker.lore.unaffordable-cost-2", 1),
-    KIT_GUI_NO_PERMISSION_LORE("gui.kit-picker.lore.no-permission", 1),
+    KIT_GUI_NO_PERMISSION_LORE("gui.kit-picker.lore.no-permission", 0),
     KIT_GUI_KIT_DISAPPEARED("gui.kit-picker.messages.kit-disappeared", 0),
     // configuration
     CONFIG_KIT_DEFAULT_DESCRIPTION("configuration.kits.default-kit-description", 1);

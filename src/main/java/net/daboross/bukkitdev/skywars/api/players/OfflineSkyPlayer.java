@@ -30,8 +30,8 @@ public interface OfflineSkyPlayer {
     /**
      * Gets the player's name.
      * <p>
-     * Might be null if ScoreStorage.setScore() or ScoreStorage.addScore() was used with an
-     * offline player who never logged on.
+     * Might be null if ScoreStorage.setScore() or ScoreStorage.addScore() was used with an offline player who never
+     * logged on.
      *
      * @return This offline player's name.
      */
