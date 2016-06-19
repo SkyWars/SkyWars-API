@@ -36,7 +36,7 @@ public class SkyArmorColorMeta extends SkyItemMeta {
         ItemMeta meta = item.getItemMeta();
 
         if (meta instanceof LeatherArmorMeta) {
-            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) item.getItemMeta();
+            LeatherArmorMeta leatherMeta = (LeatherArmorMeta) meta;
             leatherMeta.setColor(color);
             item.setItemMeta(leatherMeta);
         }
