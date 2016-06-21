@@ -40,7 +40,6 @@ public class SkyArenaConfig implements SkyArena {
         Validate.isTrue(numTeams >= 2, "Num teams can't be smaller than 2");
         Validate.isTrue(teamSize >= 1, "Team size can't be smaller than 1");
         Validate.isTrue(placementY >= 0, "placement-y can't be smaller than 0");
-        Validate.notNull(arenaName);
         Validate.notNull(boundaries);
         Validate.notNull(spawns);
         Validate.isTrue(spawns.size() >= numTeams, "Number of spawns needs to be at least as big as numTeams");
