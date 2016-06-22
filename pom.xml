@@ -113,10 +113,6 @@
         <url>https://github.com/SkyWars/SkyWars/issues</url>
         <system>Github Issues</system>
     </issueManagement>
-    <ciManagement>
-        <system>teamcity</system>
-        <url>http://ci.dabo.guru/p/SkyWarsParent_SkyWarsApi</url>
-    </ciManagement>
     <distributionManagement>
         <repository>
             <id>dabo.guru</id>
