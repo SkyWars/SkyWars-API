@@ -216,6 +216,12 @@ public enum TransKey {
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),
+    // game.timer
+    GAME_TIMER_STARTING_IN_MINUTES("game.timer.starting-in-minutes", 1, true),
+    GAME_TIMER_STARTING_IN_MINUTES_UNLESS("game.timer.starting-in-minutes-unless", 1, true),
+    GAME_TIMER_STARTING_IN_SECONDS("game.timer.starting-in-seconds", 1, true),
+    GAME_TIMER_STARTING_IN_SECONDS_UNLESS("game.timer.starting-in-seconds-unless", 1, true),
+    GAME_TIMER_STARTING_IN_SECONDS_VOTE_NOW("game.timer.starting-in-seconds-vote-now", 1, true),
     // gui
     KIT_GUI_TITLE("gui.kit-picker.title", 0),
     KIT_GUI_TOTEM_TITLE("gui.kit-picker.totem-title", 1),
