@@ -130,14 +130,14 @@ public interface SkyConfiguration {
     /**
      * Gets the interval that score is to be saved on. This is in seconds.
      *
-     * @return The score save interval.
+     * @return The score save interval, in seconds.
      */
     long getScoreSaveInterval();
 
     /**
      * Gets the interval that individual player's (not top 10) rank should be updated at. This is in seconds.
      *
-     * @return The individual rank update interval.
+     * @return The individual rank update interval, in seconds.
      */
     long getScoreIndividualRankUpdateInterval();
 
@@ -316,6 +316,35 @@ public interface SkyConfiguration {
      * @return True if kit gui should automatically be shown on join, false otherwise.
      */
     boolean isShowKitGuiOnJoin();
+
+    /**
+     * The time till a game starts after the maximum number of players have joined the game.
+     *
+     * @return The time to wait until starting a game, in seconds.
+     */
+    long getTimeTillStartAfterMaxPlayers();
+
+    /**
+     * The time till a game starts after the last player has joined, and there are at least the minimum number of
+     * players.
+     *
+     * @return The time to wait until starting a game, in seconds.
+     */
+    long getTimeTillStartAfterMinPlayers();
+
+    /**
+     * The time before a game start to freeze map votes, and to copy the arena. This is currently not used.
+     *
+     * @return The time before a game starts to copy the arena, in seconds.
+     */
+    long getTimeBeforeGameStartToCopyArena();
+
+    /**
+     * The time after players are teleported into an arena (game start) before they are allowed to move.
+     *
+     * @return How long to freeze players after teleportation, in seconds.
+     */
+    long getInGamePlayerFreezeTime();
 
     /**
      * An Enum to record the order that arenas are chosen.
