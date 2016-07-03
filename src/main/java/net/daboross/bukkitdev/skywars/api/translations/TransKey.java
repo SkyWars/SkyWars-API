@@ -216,6 +216,7 @@ public enum TransKey {
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),
+    GAME_STARTING_TEAM_ALONE("game.starting.team-message-alone", 1),
     // gui
     KIT_GUI_TITLE("gui.kit-picker.title", 0),
     KIT_GUI_TOTEM_TITLE("gui.kit-picker.totem-title", 1),
