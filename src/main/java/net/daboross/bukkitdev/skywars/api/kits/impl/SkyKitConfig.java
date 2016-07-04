@@ -19,6 +19,7 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.apache.commons.lang.Validate;
@@ -68,8 +69,10 @@ public class SkyKitConfig implements SkyKit {
             }
         }
         inv.setArmorContents(armor);
-        ItemStack[] contents = new ItemStack[inventoryContents.size()];
-        for (int i = 0; i < contents.length; i++) {
+
+        ItemStack[] contents = new ItemStack[inv.getContents().length];
+        int numItems = Math.min(contents.length, inventoryContents.size());
+        for (int i = 0; i < numItems; i++) {
             SkyKitItem skyKitItem = inventoryContents.get(i);
             if (skyKitItem != null) {
                 contents[i] = skyKitItem.toItem();
