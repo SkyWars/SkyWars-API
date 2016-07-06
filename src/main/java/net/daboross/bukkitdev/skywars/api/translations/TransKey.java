@@ -216,6 +216,7 @@ public enum TransKey {
     GAME_STARTING_TEAM_MESSAGE("game.starting.team-message", 2),
     GAME_STARTING_TEAM_COMMA("game.starting.team-message-comma", 0),
     GAME_STARTING_TEAM_FINAL_COMMA("game.starting.team-message-final-comma", 0),
+    GAME_STARTING_TEAM_ALONE("game.starting.team-message-alone", 1),
     // game.timer
     GAME_TIMER_STARTING_IN_MINUTES("game.timer.starting-in-minutes", 1, true),
     GAME_TIMER_STARTING_IN_MINUTES_UNLESS("game.timer.starting-in-minutes-unless", 1, true),
