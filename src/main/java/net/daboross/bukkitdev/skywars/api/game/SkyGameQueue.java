@@ -33,6 +33,7 @@ public interface SkyGameQueue {
     /**
      * Adds a player to the queue, and starts the game if there are enough people in the queue.
      *
+     * @throws IllegalStateException if {@code this.isQueueFull() == true}.
      * @param player the player to add.
      */
     void queuePlayer(Player player);
@@ -78,4 +79,16 @@ public interface SkyGameQueue {
      * @return the next arena to be started
      */
     SkyArena getPlannedArena();
+
+    /**
+     * Gets whether or not the number of queued players is equal to the maximum player count for the next arena.
+     * @return true if the queue is full, false otherwise.
+     */
+    boolean isQueueFull();
+
+    /**
+     * Gets whether or not the number of queued players is equal to or greater than the minimum player count for the next arena.
+     * @return true if the minimum number of players are present, false otherwise.
+     */
+    boolean areMinPlayersPresent();
 }

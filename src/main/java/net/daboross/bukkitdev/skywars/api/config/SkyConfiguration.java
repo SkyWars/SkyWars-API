@@ -229,7 +229,7 @@ public interface SkyConfiguration {
     /**
      * Gets whether or not arena start messages should only be broadcasted to people in the arena.
      *
-     * @return whether or not to limit start messages to arena players.
+     * @return whether or not to limit start messages to queued players.
      */
     boolean shouldLimitStartMessagesToArenaPlayers();
 
@@ -246,6 +246,13 @@ public interface SkyConfiguration {
      * @return whether or not to limit win messages to arena players.
      */
     boolean shouldLimitEndMessagesToArenaPlayers();
+
+    /**
+     * Gets whether or not start timer messages should only be broadcasted to people in the arena.
+     *
+     * @return wheter or not to limit "starting in x seconds" messages to queued players.
+     */
+    boolean shouldLimitStartTimerMessagesToArenaPlayers();
 
     /**
      * Whether or not to attempt to hook with Multiverse Core.
@@ -345,6 +352,12 @@ public interface SkyConfiguration {
      * @return How long to freeze players after teleportation, in seconds.
      */
     long getInGamePlayerFreezeTime();
+
+    /**
+     * A list of times in seconds to broadcast a "starting in x seconds" message.
+     * @return A list of times before game start, in seconds.
+     */
+    List<Long> getStartTimerMessageTimes();
 
     /**
      * An Enum to record the order that arenas are chosen.
