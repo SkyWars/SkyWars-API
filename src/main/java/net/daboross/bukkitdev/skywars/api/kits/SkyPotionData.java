@@ -24,7 +24,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.material.MaterialData;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
@@ -64,10 +63,10 @@ public class SkyPotionData {
     private static SkyPotionData getDataRawData(ItemStack item) {
         Validate.isTrue(item.getType() == Material.POTION);
 
-        return new SkyPotionData(item.getData().getData());
+        return new SkyPotionData(item.getDurability());
     }
 
-    private final PotionType potionType;
+    private final FullPotionType potionType;
     private final boolean extended;
     private final boolean upgraded;
     private final boolean splash;
@@ -82,7 +81,7 @@ public class SkyPotionData {
      */
     public SkyPotionData(Material type, PotionMeta meta) {
         PotionData data = meta.getBasePotionData();
-        this.potionType = data.getType();
+        this.potionType = FullPotionType.fromBukkit(data.getType());
         this.extended = data.isExtended();
         this.upgraded = data.isUpgraded();
         switch (type) {
@@ -107,7 +106,7 @@ public class SkyPotionData {
         }
     }
 
-    public SkyPotionData(PotionType potionType, boolean extended, boolean upgraded, boolean splash, boolean lingering) {
+    public SkyPotionData(FullPotionType potionType, boolean extended, boolean upgraded, boolean splash, boolean lingering) {
         Validate.notNull(potionType);
         this.potionType = potionType;
         this.extended = extended;
@@ -124,66 +123,66 @@ public class SkyPotionData {
      */
     public SkyPotionData(int rawData) {
         // This is some byte manipulation to get from old data to modern data.
-        PotionType type;
+        FullPotionType type;
         // first four bits determine type
         switch (rawData & 15) {
             case 1:
-                type = PotionType.REGEN;
+                type = FullPotionType.REGEN;
                 break;
             case 2:
-                type = PotionType.SPEED;
+                type = FullPotionType.SPEED;
                 break;
             case 3:
-                type = PotionType.FIRE_RESISTANCE;
+                type = FullPotionType.FIRE_RESISTANCE;
                 break;
             case 4:
-                type = PotionType.POISON;
+                type = FullPotionType.POISON;
                 break;
             case 5:
-                type = PotionType.INSTANT_HEAL;
+                type = FullPotionType.INSTANT_HEAL;
                 break;
             case 6:
-                type = PotionType.NIGHT_VISION;
+                type = FullPotionType.NIGHT_VISION;
                 break;
             case 8:
-                type = PotionType.WEAKNESS;
+                type = FullPotionType.WEAKNESS;
                 break;
             case 9:
-                type = PotionType.STRENGTH;
+                type = FullPotionType.STRENGTH;
                 break;
             case 10:
-                type = PotionType.SLOWNESS;
+                type = FullPotionType.SLOWNESS;
                 break;
             case 11:
-                type = PotionType.JUMP;
+                type = FullPotionType.JUMP;
                 break;
             case 12:
-                type = PotionType.INSTANT_DAMAGE;
+                type = FullPotionType.INSTANT_DAMAGE;
                 break;
             case 13:
-                type = PotionType.WATER_BREATHING;
+                type = FullPotionType.WATER_BREATHING;
                 break;
             case 14:
-                type = PotionType.INVISIBILITY;
+                type = FullPotionType.INVISIBILITY;
                 break;
             default:
                 switch (rawData) {
                     case 0:
-                        type = PotionType.WATER;
+                        type = FullPotionType.WATER;
                         break;
                     case 16:
-                        type = PotionType.AWKWARD;
+                        type = FullPotionType.AWKWARD;
                         break;
                     case 32:
-                        type = PotionType.THICK;
+                        type = FullPotionType.THICK;
                         break;
                     case 64:
                     case 8192:
-                        type = PotionType.MUNDANE;
+                        type = FullPotionType.MUNDANE;
                         break;
                     default:
                         // This is an invalid potion! Make it water.
-                        type = PotionType.WATER;
+                        type = FullPotionType.WATER;
                 }
         }
         boolean upgraded = (rawData & 32) == 32;
@@ -192,8 +191,8 @@ public class SkyPotionData {
         // since splash is only recorded as a boolean in the new API, we can get away with this.
         boolean splash = (rawData & 16384) == 16384;
         this.potionType = type;
-        this.upgraded = upgraded && type.isUpgradeable();
-        this.extended = extended && type.isExtendable();
+        this.upgraded = upgraded && type.upgradeable;
+        this.extended = extended && type.extendable;
         this.splash = splash;
         this.lingering = false; // Lingering potions didn't exist pre-1.9 (when this data format was valid).
     }
@@ -217,7 +216,7 @@ public class SkyPotionData {
         ItemMeta bukkitMeta = item.getItemMeta();
         Validate.isTrue(bukkitMeta instanceof PotionMeta, "Cannot apply potion to non-potion item.");
         PotionMeta meta = (PotionMeta) item.getItemMeta();
-        PotionData bukkitData = new PotionData(potionType, extended, upgraded);
+        PotionData bukkitData = new PotionData(potionType.toBukkit(), extended, upgraded);
         meta.setBasePotionData(bukkitData);
         item.setItemMeta(meta);
     }
@@ -293,21 +292,16 @@ public class SkyPotionData {
                 SkyStatic.debug("Couldn't find old-data equivalent for new-data potion type! %s", potionType);
                 break;
         }
-        boolean upgraded = (rawData & 32) == 32;
-        boolean extended = (rawData & 64) == 64;
-        // Technically we should check `((rawData & 8192) == 8192)` to detect a non-splash potion, but
-        // since splash is only recorded as a boolean in the new API, we can get away with this.
-        boolean splash = (rawData & 16384) == 16384;
         if (upgraded) {
             rawData |= 32;
         }
         if (extended) {
             rawData |= 64;
         }
-        if (!(potionType == PotionType.WATER
-                || potionType == PotionType.AWKWARD
-                || potionType == PotionType.THICK
-                || potionType == PotionType.MUNDANE)) {
+        if (!(potionType == FullPotionType.WATER
+                || potionType == FullPotionType.AWKWARD
+                || potionType == FullPotionType.THICK
+                || potionType == FullPotionType.MUNDANE)) {
             if (splash) {
                 rawData |= 16384;
             } else {
@@ -316,9 +310,7 @@ public class SkyPotionData {
             }
         }
 
-        MaterialData data = item.getData();
-        data.setData((byte) rawData);
-        item.setData(data);
+        item.setDurability((short) rawData);
     }
 
     public boolean isExtended() {
@@ -329,7 +321,7 @@ public class SkyPotionData {
         return lingering;
     }
 
-    public PotionType getPotionType() {
+    public FullPotionType getPotionType() {
         return potionType;
     }
 
@@ -379,4 +371,200 @@ public class SkyPotionData {
         return result;
     }
 
+    /**
+     * This is an enum that is available on all server versions, which mimics the Bukkit {@link
+     * org.bukkit.potion.PotionType} class.
+     * <p>
+     * Even though PotionType is available both pre-1.9 and post-1.9, this is needed in order to access a full range of
+     * allowed names, which don't all exist in pre-1.9 bukkit.
+     */
+    public enum FullPotionType {
+        UNCRAFTABLE(false, false),
+        WATER(false, false),
+        MUNDANE(false, false),
+        THICK(false, false),
+        AWKWARD(false, false),
+        NIGHT_VISION(false, true),
+        INVISIBILITY(false, true),
+        JUMP(true, true),
+        FIRE_RESISTANCE(false, true),
+        SPEED(true, true),
+        SLOWNESS(false, true),
+        WATER_BREATHING(false, true),
+        INSTANT_HEAL(true, false),
+        INSTANT_DAMAGE(true, false),
+        POISON(true, true),
+        REGEN(true, true),
+        STRENGTH(true, true),
+        WEAKNESS(false, true),
+        LUCK(false, false);
+
+        public final boolean upgradeable;
+        public final boolean extendable;
+
+        FullPotionType(boolean upgradeable, boolean extendable) {
+            this.upgradeable = upgradeable;
+            this.extendable = extendable;
+        }
+
+        public static FullPotionType fromBukkit(PotionType bukkitType) {
+            switch (bukkitType) {
+                case WATER:
+                    return FullPotionType.WATER;
+                case NIGHT_VISION:
+                    return FullPotionType.NIGHT_VISION;
+                case INVISIBILITY:
+                    return FullPotionType.INVISIBILITY;
+                case JUMP:
+                    return FullPotionType.JUMP;
+                case FIRE_RESISTANCE:
+                    return FullPotionType.FIRE_RESISTANCE;
+                case SPEED:
+                    return FullPotionType.SPEED;
+                case SLOWNESS:
+                    return FullPotionType.SLOWNESS;
+                case WATER_BREATHING:
+                    return FullPotionType.WATER_BREATHING;
+                case INSTANT_HEAL:
+                    return FullPotionType.INSTANT_HEAL;
+                case INSTANT_DAMAGE:
+                    return FullPotionType.INSTANT_DAMAGE;
+                case POISON:
+                    return FullPotionType.POISON;
+                case REGEN:
+                    return FullPotionType.REGEN;
+                case STRENGTH:
+                    return FullPotionType.STRENGTH;
+                case WEAKNESS:
+                    return FullPotionType.WEAKNESS;
+                default:
+                    if (modernApiSupported) {
+                        switch (bukkitType) {
+                            case LUCK:
+                                return FullPotionType.LUCK;
+                            case UNCRAFTABLE:
+                                return FullPotionType.UNCRAFTABLE;
+                            case MUNDANE:
+                                return FullPotionType.MUNDANE;
+                            case THICK:
+                                return FullPotionType.THICK;
+                            case AWKWARD:
+                                return FullPotionType.AWKWARD;
+                            default:
+                                Bukkit.getLogger().log(Level.WARNING, "[SkyWars] Failed to find potion type for {0}", bukkitType);
+                                return FullPotionType.WATER;
+                        }
+                    } else {
+                        Bukkit.getLogger().log(Level.WARNING, "[SkyWars] Failed to find potion type for {0} (excluded new potion types post-1.9)", bukkitType);
+                        return FullPotionType.WATER;
+                    }
+            }
+        }
+
+        public static FullPotionType fromString(String str) {
+            switch (str.toLowerCase().replaceAll("( |-)", "_")) {
+                case "uncraftable":
+                    return UNCRAFTABLE;
+                case "water":
+                    return WATER;
+                case "mundane":
+                    return MUNDANE;
+                case "thick":
+                    return THICK;
+                case "awkward":
+                    return AWKWARD;
+                case "night_vision":
+                    return NIGHT_VISION;
+                case "invisibility":
+                    return INVISIBILITY;
+                case "jump":
+                    return JUMP;
+                case "fire_resistance":
+                    return FIRE_RESISTANCE;
+                case "speed":
+                    return SPEED;
+                case "slowness":
+                    return SLOWNESS;
+                case "water_breathing":
+                    return WATER_BREATHING;
+                case "instant_heal":
+                    return INSTANT_HEAL;
+                case "instant_damage":
+                    return INSTANT_DAMAGE;
+                case "poison":
+                    return POISON;
+                case "regen":
+                    return REGEN;
+                case "strength":
+                    return STRENGTH;
+                case "weakness":
+                    return WEAKNESS;
+                case "luck":
+                    return LUCK;
+                // Names from PotionEffectTypes
+                case "harm":
+                    return INSTANT_DAMAGE;
+                case "regeneration":
+                    return REGEN;
+                case "heal":
+                    return INSTANT_HEAL;
+                case "increase_damage":
+                    return STRENGTH;
+                case "slow":
+                    return SLOWNESS;
+                default:
+                    throw new IllegalArgumentException("Unknown potion type!");
+            }
+        }
+
+        public PotionType toBukkit() {
+            switch (this) {
+                case WATER:
+                    return PotionType.WATER;
+                case NIGHT_VISION:
+                    return PotionType.NIGHT_VISION;
+                case INVISIBILITY:
+                    return PotionType.INVISIBILITY;
+                case JUMP:
+                    return PotionType.JUMP;
+                case FIRE_RESISTANCE:
+                    return PotionType.FIRE_RESISTANCE;
+                case SPEED:
+                    return PotionType.SPEED;
+                case SLOWNESS:
+                    return PotionType.SLOWNESS;
+                case WATER_BREATHING:
+                    return PotionType.WATER_BREATHING;
+                case INSTANT_HEAL:
+                    return PotionType.INSTANT_HEAL;
+                case INSTANT_DAMAGE:
+                    return PotionType.INSTANT_DAMAGE;
+                case POISON:
+                    return PotionType.POISON;
+                case REGEN:
+                    return PotionType.REGEN;
+                case STRENGTH:
+                    return PotionType.STRENGTH;
+                case WEAKNESS:
+                    return PotionType.WEAKNESS;
+                default:
+                    if (modernApiSupported) {
+                        switch (this) {
+                            case UNCRAFTABLE:
+                                return PotionType.UNCRAFTABLE;
+                            case LUCK:
+                                return PotionType.LUCK;
+                            case MUNDANE:
+                                return PotionType.MUNDANE;
+                            case THICK:
+                                return PotionType.THICK;
+                            case AWKWARD:
+                                return PotionType.AWKWARD;
+                        }
+                    }
+                    // This should never happen, but return water just in case.
+                    return PotionType.WATER;
+            }
+        }
+    }
 }
