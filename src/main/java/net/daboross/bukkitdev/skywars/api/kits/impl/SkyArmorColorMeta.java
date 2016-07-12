@@ -50,4 +50,26 @@ public class SkyArmorColorMeta extends SkyItemMeta {
     public Color getColor() {
         return color;
     }
+
+    @Override
+    public String toString() {
+        return "SkyArmorColorMeta{" +
+                "color=" + color +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyArmorColorMeta)) return false;
+
+        SkyArmorColorMeta meta = (SkyArmorColorMeta) o;
+
+        return color != null ? color.equals(meta.color) : meta.color == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return color != null ? color.hashCode() : 0;
+    }
 }

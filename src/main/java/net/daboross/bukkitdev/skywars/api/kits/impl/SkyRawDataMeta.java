@@ -41,4 +41,26 @@ public class SkyRawDataMeta extends SkyItemMeta {
     public byte getData() {
         return data;
     }
+
+    @Override
+    public String toString() {
+        return "SkyRawDataMeta{" +
+                "data=" + data +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyRawDataMeta)) return false;
+
+        SkyRawDataMeta meta = (SkyRawDataMeta) o;
+
+        return data == meta.data;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) data;
+    }
 }

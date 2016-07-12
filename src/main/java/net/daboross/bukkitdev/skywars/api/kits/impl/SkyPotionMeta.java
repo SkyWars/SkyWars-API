@@ -18,28 +18,31 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMeta;
 import net.daboross.bukkitdev.skywars.api.kits.SkyItemMetaType;
-import org.bukkit.Material;
+import net.daboross.bukkitdev.skywars.api.kits.SkyPotionData;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
 
 public class SkyPotionMeta extends SkyItemMeta {
 
-    private final Potion potion;
+    private final SkyPotionData potion;
 
-    public SkyPotionMeta(final Potion potion) {
+    public SkyPotionMeta(final SkyPotionData potion) {
         this.potion = potion;
     }
 
     @Override
     public void applyToItem(final ItemStack itemStack) {
-        if (itemStack.getType() == Material.POTION && potion != null) {
-            potion.apply(itemStack);
+        if (potion != null) {
+            potion.applyTo(itemStack);
         }
     }
 
     @Override
     public SkyItemMetaType getType() {
         return SkyItemMetaType.POTION;
+    }
+
+    public SkyPotionData getPotion() {
+        return potion;
     }
 
     @Override
@@ -62,9 +65,5 @@ public class SkyPotionMeta extends SkyItemMeta {
     @Override
     public int hashCode() {
         return potion != null ? potion.hashCode() : 0;
-    }
-
-    public Potion getPotion() {
-        return potion;
     }
 }

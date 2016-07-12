@@ -41,4 +41,26 @@ public class SkyDurabilityMeta extends SkyItemMeta {
     public short getDurability() {
         return durability;
     }
+
+    @Override
+    public String toString() {
+        return "SkyDurabilityMeta{" +
+                "durability=" + durability +
+                '}';
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyDurabilityMeta)) return false;
+
+        SkyDurabilityMeta meta = (SkyDurabilityMeta) o;
+
+        return durability == meta.durability;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) durability;
+    }
 }

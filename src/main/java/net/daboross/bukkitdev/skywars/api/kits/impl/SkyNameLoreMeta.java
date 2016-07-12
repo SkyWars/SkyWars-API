@@ -69,4 +69,33 @@ public class SkyNameLoreMeta extends SkyItemMeta {
     public List<String> getLore() {
         return lore;
     }
+
+    @Override
+    public String toString() {
+        return "SkyNameLoreMeta{" +
+                "name='" + name + '\'' +
+                ", lore=" + lore +
+                '}';
+    }
+
+    @Override
+    @SuppressWarnings("RedundantIfStatement")
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SkyNameLoreMeta)) return false;
+
+        SkyNameLoreMeta meta = (SkyNameLoreMeta) o;
+
+        if (name != null ? !name.equals(meta.name) : meta.name != null) return false;
+        if (!lore.equals(meta.lore)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + lore.hashCode();
+        return result;
+    }
 }
