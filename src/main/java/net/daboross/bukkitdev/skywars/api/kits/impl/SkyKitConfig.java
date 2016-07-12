@@ -19,7 +19,6 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.apache.commons.lang.Validate;
@@ -61,24 +60,47 @@ public class SkyKitConfig implements SkyKit {
     @Override
     public void applyTo(Player p) {
         PlayerInventory inv = p.getInventory();
-        ItemStack[] armor = new ItemStack[4];
-        for (int i = 0; i < 4; i++) {
-            SkyKitItem skyKitItem = armorContents.get(i);
-            if (skyKitItem != null) {
-                armor[i] = skyKitItem.toItem();
+        int inventoryLength = inv.getContents().length;
+        if (inventoryLength > 36) {
+            // In Minecraft versions 1.9+, the inventory "contents" actually also contains armor and the "off hand" item.
+            ItemStack[] fullContents = new ItemStack[inv.getContents().length];
+            // Hardcoded 36: the number of "storage" slot (not including the armor)
+            int numItems = Math.min(36, inventoryContents.size());
+            for (int i = 0; i < numItems; i++) {
+                SkyKitItem skyKitItem = inventoryContents.get(i);
+                if (skyKitItem != null) {
+                    fullContents[i] = skyKitItem.toItem();
+                }
             }
-        }
-        inv.setArmorContents(armor);
+            // Set the armor contents as the last part of the full contents.
+            for (int i = 0; i < armorContents.size(); i++) {
+                SkyKitItem skyKitItem = armorContents.get(i);
+                if (skyKitItem != null) {
+                    fullContents[36 + i] = skyKitItem.toItem();
+                }
+            }
+            inv.setContents(fullContents);
+        } else {
+            // In versions before 1.9, we need to apply armor and inventory contents separately.
+            ItemStack[] armor = new ItemStack[inv.getArmorContents().length];
+            for (int i = 0; i < armor.length; i++) {
+                SkyKitItem skyKitItem = armorContents.get(i);
+                if (skyKitItem != null) {
+                    armor[i] = skyKitItem.toItem();
+                }
+            }
+            inv.setArmorContents(armor);
 
-        ItemStack[] contents = new ItemStack[inv.getContents().length];
-        int numItems = Math.min(contents.length, inventoryContents.size());
-        for (int i = 0; i < numItems; i++) {
-            SkyKitItem skyKitItem = inventoryContents.get(i);
-            if (skyKitItem != null) {
-                contents[i] = skyKitItem.toItem();
+            ItemStack[] contents = new ItemStack[inventoryLength];
+            int numItems = Math.min(contents.length, inventoryContents.size());
+            for (int i = 0; i < numItems; i++) {
+                SkyKitItem skyKitItem = inventoryContents.get(i);
+                if (skyKitItem != null) {
+                    contents[i] = skyKitItem.toItem();
+                }
             }
+            inv.setContents(contents);
         }
-        inv.setContents(contents);
     }
 
     @Override
