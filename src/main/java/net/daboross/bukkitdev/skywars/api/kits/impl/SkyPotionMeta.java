@@ -41,6 +41,10 @@ public class SkyPotionMeta extends SkyItemMeta {
         return SkyItemMetaType.POTION;
     }
 
+    public SkyPotionData getPotion() {
+        return potion;
+    }
+
     @Override
     public String toString() {
         return "SkyItemPotion{" +
@@ -61,9 +65,5 @@ public class SkyPotionMeta extends SkyItemMeta {
     @Override
     public int hashCode() {
         return potion != null ? potion.hashCode() : 0;
-    }
-
-    public SkyPotionData getPotion() {
-        return potion;
     }
 }

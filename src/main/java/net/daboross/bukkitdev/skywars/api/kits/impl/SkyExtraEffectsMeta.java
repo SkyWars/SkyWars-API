@@ -56,7 +56,6 @@ public class SkyExtraEffectsMeta extends SkyItemMeta {
                 '}';
     }
 
-    @SuppressWarnings("RedundantIfStatement")
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -64,9 +63,7 @@ public class SkyExtraEffectsMeta extends SkyItemMeta {
 
         SkyExtraEffectsMeta effects1 = (SkyExtraEffectsMeta) o;
 
-        if (effects != null ? !effects.equals(effects1.effects) : effects1.effects != null) return false;
-
-        return true;
+        return effects != null ? effects.equals(effects1.effects) : effects1.effects == null;
     }
 
     @Override
