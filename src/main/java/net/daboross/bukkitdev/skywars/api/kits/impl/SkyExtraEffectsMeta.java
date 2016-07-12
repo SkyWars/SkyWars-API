@@ -39,7 +39,6 @@ public class SkyExtraEffectsMeta extends SkyItemMeta {
             for (PotionEffect effect : effects) {
                 meta.addCustomEffect(effect, false);
             }
-            meta.setMainEffect(effects.get(0).getType());
             itemStack.setItemMeta(meta);
         }
     }
