@@ -146,14 +146,13 @@ public class SkyKitConfig implements SkyKit {
     @Override
     public String toString() {
         return "SkyKitConfig{" +
-                "armorContents=" + armorContents +
-                ", inventoryContents=" + inventoryContents +
-                ", cost=" + cost +
-                ", permission='" + permission + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", totem=" + totem +
-                ", displayDescription=" + displayDescription +
+                (cost == 0 ? "" : (", cost=" + cost)) +
+                (permission == null ? "" : (", permission='" + permission + '\'')) +
+                ", inventoryContents=" + inventoryContents +
+                ", armorContents=" + armorContents +
                 '}';
     }
 

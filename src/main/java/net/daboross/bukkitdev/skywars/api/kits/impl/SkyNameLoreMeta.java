@@ -73,8 +73,8 @@ public class SkyNameLoreMeta extends SkyItemMeta {
     @Override
     public String toString() {
         return "SkyNameLoreMeta{" +
-                "name='" + name + '\'' +
-                ", lore=" + lore +
+                (name == null ? "" : ("name='" + name + '\'')) +
+                (lore == null ? "" : (", lore=" + lore)) +
                 '}';
     }
 
