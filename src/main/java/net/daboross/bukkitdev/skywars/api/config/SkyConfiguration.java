@@ -318,6 +318,19 @@ public interface SkyConfiguration {
     boolean isShowKitGuiOnJoin();
 
     /**
+     * Whether or not to output debug output. Generally SkyStatic.debug() is used instead of this, but this can be used
+     * if creating a debug string is an expensive operation, or to pass to libraries as a debug variable.
+     */
+    boolean isDebug();
+
+    /**
+     * Whether or not plugin-statistics should be enabled.
+     *
+     * @see <a href='https://github.com/daboross/plugin-statistics'>https://github.com/daboross/plugin-statistics</a>
+     */
+    boolean isReportPluginStatistics();
+
+    /**
      * An Enum to record the order that arenas are chosen.
      */
     enum ArenaOrder {
