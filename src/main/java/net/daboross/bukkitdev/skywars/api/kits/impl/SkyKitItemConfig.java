@@ -64,10 +64,10 @@ public class SkyKitItemConfig implements SkyKitItem {
     @Override
     public String toString() {
         return "SkyKitItemConfig{" +
-                "amount=" + amount +
-                ", material=" + material +
-                ", enchantments=" + enchantments +
-                ", itemMeta=" + itemMeta +
+                "material=" + material +
+                ", amount=" + amount +
+                (enchantments == null ? "" : (", enchantments=" + enchantments)) +
+                (itemMeta.isEmpty() ? "" : (", itemMeta=" + itemMeta)) +
                 '}';
     }
 
