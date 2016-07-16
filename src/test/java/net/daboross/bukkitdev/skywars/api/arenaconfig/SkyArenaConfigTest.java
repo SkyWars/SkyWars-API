@@ -39,7 +39,7 @@ public class SkyArenaConfigTest {
     public void testEquals() {
         SkyArenaConfig config = getRandom(r);
         // It shouldn't take into account the arena name, so 'null' is passed.
-        SkyArenaConfig copy = new SkyArenaConfig(null, config.getSpawns(), config.getNumTeams(), config.getTeamSize(), config.getPlacementY(), config.getBoundaries(), config.getChests());
+        SkyArenaConfig copy = new SkyArenaConfig(null, config.getSpawns(), config.getNumTeams(), config.getTeamSize(), config.getMinPlayers(), config.getPlacementY(), config.getBoundaries(), config.getChests());
         assertEquals(config, copy);
     }
 
@@ -67,11 +67,12 @@ public class SkyArenaConfigTest {
 
     public static SkyArenaConfig getRandom(Random r) {
         int numTeams = 2 + r.nextInt(22);
+        int teamSize = 1 + r.nextInt(33);
         List<SkyPlayerLocation> spawns = new ArrayList<>();
         List<SkyArenaChest> chests = new ArrayList<>(); // TODO: generate random chest configs
         for (int i = 0; i < Math.max(numTeams, r.nextInt(20)); i++) {
             spawns.add(SkyPlayerLocationTest.getRandomLoc());
         }
-        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, 1 + r.nextInt(33), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r), chests);
+        return new SkyArenaConfig(r.nextBoolean() ? "name1" : "name2", spawns, numTeams, teamSize, r.nextInt(numTeams * teamSize), r.nextInt(22), SkyBoundariesConfigTest.getRandom(r), chests);
     }
 }

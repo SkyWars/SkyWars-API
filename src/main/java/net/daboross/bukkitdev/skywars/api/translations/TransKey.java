@@ -24,11 +24,14 @@ public enum TransKey {
     // commands.join
     CMD_JOIN_DESCRIPTION("commands.join.description", 0),
     CMD_JOIN_CONFIRMATION("commands.join.confirmation", 0),
+    CMD_JOIN_JOINED_SECONDARY_QUEUE("commands.join.joined-secondary-queue", 0),
     CMD_JOIN_ALREADY_QUEUED("commands.join.already-queued", 0),
+    CMD_JOIN_ALREADY_IN_SECONDARY_QUEUE("commands.join.already-in-secondary-queue", 0),
     CMD_JOIN_IN_GAME("commands.join.in-game", 0),
     // commands.leave
     CMD_LEAVE_DESCRIPTION("commands.leave.description", 0),
     CMD_LEAVE_REMOVED_FROM_QUEUE("commands.leave.removed-from-queue", 0),
+    CMD_LEAVE_REMOVED_FROM_SECONDARY_QUEUE("commands.leave.removed-from-secondary-queue", 0),
     CMD_LEAVE_REMOVED_FROM_GAME("commands.leave.removed-from-game", 0),
     CMD_LEAVE_NOT_IN("commands.leave.not-in-any", 0),
     // commands.setlobby
@@ -52,6 +55,7 @@ public enum TransKey {
     CMD_STATUS_DESCRIPTION("commands.status.description", 0),
     CMD_STATUS_HEADER("commands.status.header", 0),
     CMD_STATUS_IN_QUEUE("commands.status.in-queue", 1),
+    CMD_STATUS_IN_SECONDARY_QUEUE("commands.status.in-secondary-queue", 1),
     CMD_STATUS_COMMA("commands.status.queue-comma", 0),
     CMD_STATUS_ARENA_HEADER("commands.status.arena-header", 0),
     CMD_STATUS_ARENA_LIST_PREFIX_NO_TEAMS("commands.status.no-teams-arena-list-prefix", 1),
@@ -173,6 +177,8 @@ public enum TransKey {
     // messages
     HELP_HEADER("messages.help-message-header", 0),
     QUEUE_DEATH("messages.removed-from-queue-because-death", 0),
+    SECONDARY_QUEUE_DEATH("messages.removed-from-secondary-queue-because-death", 0),
+    SECONDARY_QUEUE_EXPLANATION("messages.secondary-queue-explanation", 0),
     NO_CLUE_COMMAND("messages.no-clue-what-command", 1),
     NOT_FULLY_ENABLED("messages.not-fully-enabled", 0),
     // messages.economy-reward

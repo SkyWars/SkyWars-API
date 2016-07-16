@@ -38,6 +38,11 @@ public interface SkyArena {
     int getNumPlayers();
 
     /**
+     * @return The minimum number of players needed to play this arena.
+     */
+    int getMinPlayers();
+
+    /**
      * @return The maximum size of teams for players in this arena.
      */
     int getTeamSize();

@@ -28,17 +28,19 @@ import org.bukkit.configuration.ConfigurationSection;
 public class SkyArenaConfig implements SkyArena {
 
     private List<SkyPlayerLocation> spawns;
-    private Integer numTeams;
-    private Integer teamSize;
-    private Integer placementY;
+    private int numTeams;
+    private int teamSize;
+    private int minPlayers;
+    private int placementY;
     private final SkyBoundariesConfig boundaries;
     private List<SkyArenaChest> chests;
     private Path file;
     private String arenaName = "null";
 
-    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, int numTeams, int teamSize, int placementY, SkyBoundariesConfig boundaries, final List<SkyArenaChest> chests) {
+    public SkyArenaConfig(String arenaName, List<SkyPlayerLocation> spawns, int numTeams, int teamSize, final int minPlayers, int placementY, SkyBoundariesConfig boundaries, final List<SkyArenaChest> chests) {
         Validate.isTrue(numTeams >= 2, "Num teams can't be smaller than 2");
         Validate.isTrue(teamSize >= 1, "Team size can't be smaller than 1");
+        Validate.isTrue(minPlayers <= numTeams * teamSize, "Min players can't be smaller tha max players (num teams * team size)");
         Validate.isTrue(placementY >= 0, "placement-y can't be smaller than 0");
         Validate.notNull(boundaries);
         Validate.notNull(spawns);
@@ -50,6 +52,7 @@ public class SkyArenaConfig implements SkyArena {
         }
         this.numTeams = numTeams;
         this.teamSize = teamSize;
+        this.minPlayers = minPlayers;
         this.placementY = placementY;
         this.boundaries = boundaries;
         this.chests = chests;
@@ -99,7 +102,12 @@ public class SkyArenaConfig implements SkyArena {
 
     @Override
     public int getNumPlayers() {
-        return getNumTeams() * getTeamSize();
+        return numTeams * teamSize;
+    }
+
+    @Override
+    public int getMinPlayers() {
+        return minPlayers;
     }
 
     @Override
@@ -116,7 +124,7 @@ public class SkyArenaConfig implements SkyArena {
 
     @Override
     public void serialize(ConfigurationSection section) {
-        section.set("config-version", 2);
+        section.set("config-version", 3);
         List<Map> spawnsList = new ArrayList<>(spawns.size());
         for (SkyPlayerLocation loc : spawns) {
             spawnsList.add(loc.changeWorld(null).serialize());
@@ -124,6 +132,7 @@ public class SkyArenaConfig implements SkyArena {
         section.set("spawns", spawnsList);
         section.set("num-teams", numTeams);
         section.set("team-size", teamSize);
+        section.set("min-players", minPlayers);
         boundaries.serialize(section.createSection("boundaries"));
         section.set("placement-y", placementY);
         if (chests != null) {
@@ -155,8 +164,9 @@ public class SkyArenaConfig implements SkyArena {
         Validate.isTrue(configurationSection.isList("spawns"), "Spawns must be included in arena");
         Validate.isTrue(configurationSection.isInt("num-teams"), "num-teams must be included in arena");
         Validate.isTrue(configurationSection.isInt("team-size"), "team-size must be included in arena");
+        Validate.isTrue(configurationSection.isInt("min-players"), "min-players must be included in arena");
         Validate.isTrue(configurationSection.isInt("placement-y"), "placement-y must be included in arena");
-        Validate.isTrue(configurationSection.getInt("config-version") == 2, "Configuration version must be 1 or 2");
+        Validate.isTrue(configurationSection.getInt("config-version") == 3, "Configuration version must be 3");
         ConfigurationSection boundariesSection = configurationSection.getConfigurationSection("boundaries");
         List<?> spawnsObjList = configurationSection.getList("spawns");
         List<SkyPlayerLocation> spawns = new ArrayList<>(spawnsObjList.size());
@@ -172,6 +182,7 @@ public class SkyArenaConfig implements SkyArena {
         }
         int numPlayers = configurationSection.getInt("num-teams");
         int teamSize = configurationSection.getInt("team-size");
+        int minPlayers = configurationSection.getInt("min-players");
         int placementY = configurationSection.getInt("placement-y");
         SkyBoundariesConfig boundaries = SkyBoundariesConfig.deserialize(boundariesSection);
         List<SkyArenaChest> chests;
@@ -191,7 +202,7 @@ public class SkyArenaConfig implements SkyArena {
         } else {
             chests = null;
         }
-        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, placementY, boundaries, chests);
+        return new SkyArenaConfig(null, spawns, numPlayers, teamSize, minPlayers, placementY, boundaries, chests);
     }
 
     public void setFile(final Path file) {
@@ -209,11 +220,13 @@ public class SkyArenaConfig implements SkyArena {
     @Override
     public String toString() {
         return "SkyArenaConfig{" +
-                "rawSpawns=" + spawns +
-                ", rawNumTeams=" + numTeams +
-                ", rawTeamSize=" + teamSize +
-                ", rawPlacementY=" + placementY +
+                "spawns=" + spawns +
+                ", numTeams=" + numTeams +
+                ", minPlayers=" + minPlayers +
+                ", teamSize=" + teamSize +
+                ", placementY=" + placementY +
                 ", boundaries=" + boundaries +
+                ", chests=" + chests +
                 ", file=" + file +
                 ", arenaName='" + arenaName + '\'' +
                 '}';
@@ -227,23 +240,29 @@ public class SkyArenaConfig implements SkyArena {
 
         SkyArenaConfig config = (SkyArenaConfig) o;
 
+        if (numTeams != config.numTeams) return false;
+        if (minPlayers != config.minPlayers) return false;
+        if (teamSize != config.teamSize) return false;
+        if (placementY != config.placementY) return false;
+        if (!spawns.equals(config.spawns)) return false;
         if (!boundaries.equals(config.boundaries)) return false;
-        if (numTeams != null ? !numTeams.equals(config.numTeams) : config.numTeams != null) return false;
-        if (placementY != null ? !placementY.equals(config.placementY) : config.placementY != null)
-            return false;
-        if (spawns != null ? !spawns.equals(config.spawns) : config.spawns != null) return false;
-        if (teamSize != null ? !teamSize.equals(config.teamSize) : config.teamSize != null) return false;
+        if (chests != null ? !chests.equals(config.chests) : config.chests != null) return false;
+        if (file != null ? !file.equals(config.file) : config.file != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = spawns != null ? spawns.hashCode() : 0;
-        result = 31 * result + (numTeams != null ? numTeams.hashCode() : 0);
-        result = 31 * result + (teamSize != null ? teamSize.hashCode() : 0);
-        result = 31 * result + (placementY != null ? placementY.hashCode() : 0);
+        int result = spawns.hashCode();
+        result = 31 * result + numTeams;
+        result = 31 * result + minPlayers;
+        result = 31 * result + teamSize;
+        result = 31 * result + placementY;
         result = 31 * result + boundaries.hashCode();
+        result = 31 * result + (chests != null ? chests.hashCode() : 0);
+        result = 31 * result + (file != null ? file.hashCode() : 0);
+        result = 31 * result + (arenaName != null ? arenaName.hashCode() : 0);
         return result;
     }
 }

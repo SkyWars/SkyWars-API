@@ -16,6 +16,7 @@
  */
 package net.daboross.bukkitdev.skywars.api.game;
 
+import java.util.Collection;
 import java.util.UUID;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArena;
 import org.bukkit.entity.Player;
@@ -26,24 +27,27 @@ public interface SkyGameQueue {
      * Checks if a given player is in the queue.
      *
      * @param playerUuid the uuid of the player to check.
-     * @return true if a player with the given name is in the queue, false otherwise.
+     * @return true if a player with the given name is in the queue, false if in the secondary queue, or if not in any
+     * queue.
      */
     boolean inQueue(UUID playerUuid);
 
     /**
-     * Adds a player to the queue, and starts the game if there are enough people in the queue.
+     * Checks if a given player is in the secondary queue.
      *
-     * @throws IllegalStateException if {@code this.isQueueFull() == true}.
-     * @param player the player to add.
+     * @param playerUuid the uuid of the player to check.
+     * @return true if the player is in the secondary queue, false if in the primary queue or if not in any queue.
      */
-    void queuePlayer(Player player);
+    boolean inSecondaryQueue(UUID playerUuid);
 
     /**
-     * Adds a player to the queue, and starts the game if there are enough people in the queue.
+     * Adds a player to the queue, and starts a queue timer if neccessary. If the queue is full, the player will be
+     * added to a secondary queue, and will be added to the queue after the game starts.
      *
-     * @param playerUuid the uuid of the player to add.
+     * @param player the player to add.
+     * @return true if the player was added to the primary queue, false if they were added to the secondary queue.
      */
-    void queuePlayer(UUID playerUuid);
+    boolean queuePlayer(Player player);
 
     /**
      * Removes a player from the queue.
@@ -53,14 +57,29 @@ public interface SkyGameQueue {
     void removePlayer(Player player);
 
     /**
-     * Removes a player from the queue.
+     * Gets a view onto the current queue. Do not queue or unqueue players while holding this collection. In addition,
+     * this collection is not guaranteed to remain updated between game ticks. It should be re-retrieved if it
+     * is needed multiple times.
+     * <p>
+     * Not thread safe.
      *
-     * @param playerUuid the name of the player to remove.
+     * @return an unmodifiable version of the current queue.
      */
-    void removePlayer(UUID playerUuid);
+    Collection<UUID> getInQueue();
 
     /**
-     * Gets a copy of the queue.
+     * Gets a view onto the current secondary queue. Do not queue or unqueue players while holding this collection. In
+     * addition, this collection is not guaranteed to remain updated between game ticks. It should be re-retrieved if it
+     * is needed multiple times.
+     * <p>
+     * Not thread safe.
+     *
+     * @return an unmodifiable version of the current queue.
+     */
+    Collection<UUID> getInSecondaryQueue();
+
+    /**
+     * Gets a copy of the queue. Use {@code SkyGameQueue.getInQueue()} instead when possible.
      *
      * @return a copy of the current queue.
      */
@@ -82,12 +101,15 @@ public interface SkyGameQueue {
 
     /**
      * Gets whether or not the number of queued players is equal to the maximum player count for the next arena.
+     *
      * @return true if the queue is full, false otherwise.
      */
     boolean isQueueFull();
 
     /**
-     * Gets whether or not the number of queued players is equal to or greater than the minimum player count for the next arena.
+     * Gets whether or not the number of queued players is equal to or greater than the minimum player count for the
+     * next arena.
+     *
      * @return true if the minimum number of players are present, false otherwise.
      */
     boolean areMinPlayersPresent();
