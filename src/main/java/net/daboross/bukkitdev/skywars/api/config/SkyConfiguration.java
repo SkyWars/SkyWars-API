@@ -336,6 +336,7 @@ public interface SkyConfiguration {
      * @see <a href='https://github.com/daboross/plugin-statistics'>https://github.com/daboross/plugin-statistics</a>
      */
     boolean isReportPluginStatistics();
+
     /**
      * The time till a game starts after the maximum number of players have joined the game.
      *
@@ -367,9 +368,18 @@ public interface SkyConfiguration {
 
     /**
      * A list of times in seconds to broadcast a "starting in x seconds" message.
+     *
      * @return A list of times before game start, in seconds.
      */
     List<Long> getStartTimerMessageTimes();
+
+    /**
+     * Get the arena copying "block size". This is the number of blocks to copy at once in multi-part arena copying
+     * operations.
+     *
+     * @return The block size for arena copying and clearing.
+     */
+    int getArenaCopyingBlockSize();
 
     /**
      * An Enum to record the order that arenas are chosen.

@@ -26,11 +26,7 @@ public interface SkyArena {
 
     List<SkyPlayerLocation> getSpawns();
 
-    void setSpawns(List<SkyPlayerLocation> spawns);
-
     int getNumTeams();
-
-    void setNumTeams(int numTeams);
 
     /**
      * @return The total maximum number of players to occupy this arena.
@@ -47,11 +43,7 @@ public interface SkyArena {
      */
     int getTeamSize();
 
-    void setTeamSize(int teamSize);
-
     int getPlacementY();
-
-    void setPlacementY(int placementY);
 
     SkyBoundaries getBoundaries();
 

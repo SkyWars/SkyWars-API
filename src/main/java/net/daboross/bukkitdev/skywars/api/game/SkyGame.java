@@ -26,6 +26,8 @@ public interface SkyGame {
 
     int getId();
 
+    int getLocationId();
+
     List<UUID> getAlivePlayers();
 
     List<UUID> getDeadPlayers();

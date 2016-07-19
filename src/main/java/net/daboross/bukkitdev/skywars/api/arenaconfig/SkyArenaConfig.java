@@ -89,18 +89,6 @@ public class SkyArenaConfig implements SkyArena {
     }
 
     @Override
-    public void setSpawns(List<SkyPlayerLocation> spawns) {
-        Validate.notNull(spawns);
-        this.spawns = spawns;
-    }
-
-    @Override
-    public void setNumTeams(int numTeams) {
-        Validate.isTrue(numTeams >= 2, "num-teams can't be smaller than 2");
-        this.numTeams = numTeams;
-    }
-
-    @Override
     public int getNumPlayers() {
         return numTeams * teamSize;
     }
@@ -108,18 +96,6 @@ public class SkyArenaConfig implements SkyArena {
     @Override
     public int getMinPlayers() {
         return minPlayers;
-    }
-
-    @Override
-    public void setTeamSize(int teamSize) {
-        Validate.isTrue(teamSize >= 1, "Team size can't be smaller than 1");
-        this.teamSize = teamSize;
-    }
-
-    @Override
-    public void setPlacementY(int placementY) {
-        Validate.isTrue(placementY >= 0, "Placement y cannot be smaller than 0.");
-        this.placementY = placementY;
     }
 
     @Override
@@ -220,15 +196,15 @@ public class SkyArenaConfig implements SkyArena {
     @Override
     public String toString() {
         return "SkyArenaConfig{" +
-                "spawns=" + spawns +
+                "arenaName='" + arenaName + '\'' +
+                ", file=" + file +
+                ", spawns=" + spawns +
                 ", numTeams=" + numTeams +
                 ", minPlayers=" + minPlayers +
                 ", teamSize=" + teamSize +
                 ", placementY=" + placementY +
                 ", boundaries=" + boundaries +
                 ", chests=" + chests +
-                ", file=" + file +
-                ", arenaName='" + arenaName + '\'' +
                 '}';
     }
 
@@ -262,7 +238,6 @@ public class SkyArenaConfig implements SkyArena {
         result = 31 * result + boundaries.hashCode();
         result = 31 * result + (chests != null ? chests.hashCode() : 0);
         result = 31 * result + (file != null ? file.hashCode() : 0);
-        result = 31 * result + (arenaName != null ? arenaName.hashCode() : 0);
         return result;
     }
 }
