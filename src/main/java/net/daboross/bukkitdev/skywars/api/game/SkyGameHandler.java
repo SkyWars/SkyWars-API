@@ -38,16 +38,6 @@ public interface SkyGameHandler {
     /**
      * Removes a player from whatever game they are in.
      *
-     * @param playerUuid the uuid of the player to remove
-     * @param respawn    whether or not to call a PlayerRespawnAfterLeaveGameEvent
-     * @param broadcast  whether or not to broadcast the leaving message
-     * @throws IllegalArgumentException if the player is not in a game.
-     */
-    void removePlayerFromGame(UUID playerUuid, LeaveGameReason reason, boolean respawn, boolean broadcast);
-
-    /**
-     * Removes a player from whatever game they are in.
-     *
      * @param player    the player to remove
      * @param respawn   whether or not to call a PlayerRespawnAfterLeaveGameEvent
      * @param broadcast whether or not to broadcast the leaving message
