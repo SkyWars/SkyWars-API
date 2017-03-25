@@ -19,6 +19,7 @@ package net.daboross.bukkitdev.skywars.api.kits.impl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import net.daboross.bukkitdev.skywars.api.SkyStatic;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKit;
 import net.daboross.bukkitdev.skywars.api.kits.SkyKitItem;
 import org.apache.commons.lang.Validate;
@@ -59,6 +60,7 @@ public class SkyKitConfig implements SkyKit {
 
     @Override
     public void applyTo(Player p) {
+        SkyStatic.debug("Appling kit to %s. [SkyKitConfig.applyTo]", p.getUniqueId());
         PlayerInventory inv = p.getInventory();
         int inventoryLength = inv.getContents().length;
         if (inventoryLength > 36) {

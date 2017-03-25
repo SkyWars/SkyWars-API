@@ -25,6 +25,7 @@ public class SkyStatic {
     private static final String classImplementationVersion = SkyStatic.class.getPackage().getImplementationVersion();
     private static final String implementationVersion = classImplementationVersion == null ? "" : classImplementationVersion;
     private static final Logger defaultLogger = Bukkit.getLogger();
+    /** set in SkyWarsConfiguration's initialization. */
     private static boolean debug = false;
     private static Logger logger = defaultLogger;
     private static String pluginName = "SkyWars";
