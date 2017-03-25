@@ -57,10 +57,21 @@ public interface SkyGameHandler {
 
     /**
      * Respawns a player. This should only be called if the removePlayerFromGame method was called with respawn=false.
+     * <p>
+     * This method is slightly less efficient than respawnPlayer(Player), since it has to fetch the player from the
+     * server with getPlayer(UUID). Prefer to use respawnPlayer(Player).
      *
      * @param playerUuid the uuid of the player to respawn
      */
     void respawnPlayer(UUID playerUuid);
+
+    /**
+     * Respawns a player. This should only be called if the removePlayerFromGame method was called with respawn=false.
+     *
+     * @param player                the player to respawn
+     * @param forceEverythingInSync If true, make sure nothing happens in later ticks, it all should occur immediately.
+     */
+    void respawnPlayer(Player player, boolean forceEverythingInSync);
 
     /**
      * Respawns a player. This should only be called if the removePlayerFromGame method was called with respawn=false.

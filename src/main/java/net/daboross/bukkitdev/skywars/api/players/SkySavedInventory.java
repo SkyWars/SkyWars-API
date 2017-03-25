@@ -20,5 +20,34 @@ import org.bukkit.entity.Player;
 
 public interface SkySavedInventory {
 
+    /**
+     * Applies a saved inventory to a given player.
+     *
+     * @param p                 The player to apply to
+     * @param restoreExperience If true, also apply saved experience
+     * @param restorePgh        If true, also apply saved gamemode, health, hunger, etc. and teleport the player to
+     *                          their old position.
+     */
     void apply(Player p, boolean restoreExperience, boolean restorePgh);
+
+    /**
+     * Applies a saved inventory to a player, with the exception that if restorePgh is enabled, position is not
+     * restored.
+     *
+     * @param p                 The player to apply to
+     * @param restoreExperience If true, also apply saved experience
+     * @param restorePgh        If true, also apply saved gamemode, health, hunger, etc. (does NOT teleport the player
+     *                          to their old position).
+     */
+    void applyNoTeleportation(Player p, boolean restoreExperience, boolean restorePgh);
+
+    /**
+     * If apply() would have teleported the player, teleport the player. Does not do any other restoration.
+     *
+     * @param p                 The player to apply to
+     * @param restoreExperience If true, exprience should be restored with apply() (not used here, included in case this
+     *                          is ever a condition for teleporting in the future).
+     * @param restorePgh        If true, teleport the player to their old position.
+     */
+    void teleportOnlyAndIfPgh(Player p, boolean restoreExperience, boolean restorePgh);
 }

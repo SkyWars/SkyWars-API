@@ -262,6 +262,20 @@ public interface SkyConfiguration {
     boolean isMultiverseCoreHookEnabled();
 
     /**
+     * Whether or not SkyWars should attempt to find MultiInv, and if found, enable the workaround.
+     *
+     * @return False if the user has disabled the workaround, true otherwise.
+     */
+    boolean isMultiinvWorkaroundPossible();
+
+    /**
+     * Whether or not SkyWars should force the MultiInv workaround even if not found.
+     *
+     * @return True if the user has forced the workaround, false otherwise.
+     */
+    boolean isMultiinvWorkaroundForced();
+
+    /**
      * Whether or not to attempt to hook with WorldEdit.
      *
      * @return False if the user has disabled the WorldEdit hook, true otherwise.

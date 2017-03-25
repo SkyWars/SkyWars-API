@@ -172,4 +172,13 @@ public interface SkyWars extends Plugin {
      * @throws java.io.IOException If the file doesn't exist in the jar
      */
     InputStream getResourceAsStream(final String filename) throws IOException;
+
+    /**
+     * Tests if the MultiInv plugin workaround has been enabled due to either force enabling by the user or if it has
+     * been allowed by the user and MultiInv is present.
+     *
+     * @return true if kit and saved inventory application should be delayed by 4 ticks after teleportation, false
+     * otherwise.
+     */
+    boolean isMultiinvWorkaroundEnabled();
 }
