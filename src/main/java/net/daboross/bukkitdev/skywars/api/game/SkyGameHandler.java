@@ -29,6 +29,16 @@ public interface SkyGameHandler {
     /**
      * Ends a game with the given ID.
      *
+     * @param id                       the id of the game to end.
+     * @param broadcast                whether or not to broadcast the winner(s) of the game
+     * @param endSyncNowPluginShutdown if true, do not run any delayed operations for arena clearing, end NOW.
+     * @throws IllegalArgumentException if there is no running game with the given id.
+     */
+    void endGame(int id, boolean broadcast, boolean endSyncNowPluginShutdown);
+
+    /**
+     * Ends a game with the given ID, and possible non-sync shutdown operations like arena clearing.
+     *
      * @param id        the id of the game to end.
      * @param broadcast whether or not to broadcast the winner(s) of the game
      * @throws IllegalArgumentException if there is no running game with the given id.
