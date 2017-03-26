@@ -48,6 +48,17 @@ public interface SkyGameHandler {
     /**
      * Removes a player from whatever game they are in.
      *
+     * @param player                the player to remove
+     * @param respawn               whether or not to call a PlayerRespawnAfterLeaveGameEvent
+     * @param broadcast             whether or not to broadcast the leaving message
+     * @param forceTeleportInSync if true, do not run any delayed operations for arena clearing, end NOW.
+     * @throws IllegalArgumentException if the player is not in a game.
+     */
+    void removePlayerFromGame(Player player, LeaveGameReason reason, boolean respawn, boolean broadcast, boolean forceTeleportInSync);
+
+    /**
+     * Removes a player from whatever game they are in.
+     *
      * @param player    the player to remove
      * @param respawn   whether or not to call a PlayerRespawnAfterLeaveGameEvent
      * @param broadcast whether or not to broadcast the leaving message

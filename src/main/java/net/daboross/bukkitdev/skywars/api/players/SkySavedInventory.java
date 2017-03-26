@@ -27,8 +27,9 @@ public interface SkySavedInventory {
      * @param restoreExperience If true, also apply saved experience
      * @param restorePgh        If true, also apply saved gamemode, health, hunger, etc. and teleport the player to
      *                          their old position.
+     * @return whether or not teleportation was successful. If it wasn't, inventory wasn't yet applied, and should be done on a delayed basis.
      */
-    void apply(Player p, boolean restoreExperience, boolean restorePgh);
+    boolean apply(Player p, boolean restoreExperience, boolean restorePgh);
 
     /**
      * Applies a saved inventory to a player, with the exception that if restorePgh is enabled, position is not
@@ -48,6 +49,8 @@ public interface SkySavedInventory {
      * @param restoreExperience If true, exprience should be restored with apply() (not used here, included in case this
      *                          is ever a condition for teleporting in the future).
      * @param restorePgh        If true, teleport the player to their old position.
+     *
+     * @return whether or not teleportation was successful.
      */
-    void teleportOnlyAndIfPgh(Player p, boolean restoreExperience, boolean restorePgh);
+    boolean teleportOnlyAndIfPgh(Player p, boolean restoreExperience, boolean restorePgh);
 }
