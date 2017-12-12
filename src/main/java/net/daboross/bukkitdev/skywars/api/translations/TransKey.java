@@ -36,6 +36,8 @@ public enum TransKey {
     CMD_LEAVE_DESCRIPTION("commands.leave.description", 0),
     CMD_LEAVE_REMOVED_FROM_QUEUE("commands.leave.removed-from-queue", 0),
     CMD_LEAVE_REMOVED_FROM_SECONDARY_QUEUE("commands.leave.removed-from-secondary-queue", 0),
+    CMD_LEAVE_REMOVED_FROM_SPECIFIC_QUEUE("commands.leave.removed-from-specific-queue", 1),
+    CMD_LEAVE_REMOVED_FROM_SPECIFIC_SECONDARY_QUEUE("commands.leave.removed-from-specific-secondary-queue", 1),
     CMD_LEAVE_REMOVED_FROM_GAME("commands.leave.removed-from-game", 0),
     CMD_LEAVE_NOT_IN("commands.leave.not-in-any", 0),
     // commands.setlobby
@@ -45,7 +47,6 @@ public enum TransKey {
     // commands.setportal
     CMD_SETPORTAL_DESCRIPTION("commands.setportal.description", 0),
     CMD_SETPORTAL_DESCRIPTION_WITH_QUEUES("commands.setportal.description-with-queues-enabled", 0),
-    CMD_SETPORTAL_ARGUMENT("commands.setportal.argument", 0),
     CMD_SETPORTAL_CONFIRMATION("commands.setportal.confirmation", 0),
     CMD_SETPORTAL_CONFIRMATION_COMBINED_QUEUE("commands.setportal.confirmation-combined-queue", 0),
     CMD_SETPORTAL_CONFIRMATION_SPECIFIC_QUEUE("commands.setportal.confirmation-specific-queue", 1),
@@ -183,7 +184,7 @@ public enum TransKey {
     INVALID_SUB_COMMAND("generic-command-message.invalid-sub-command", 2),
     NOT_A_QUEUE_NAME("generic-command-message.invalid-queue-name", 1),
     GENERIC_QUEUE_LIST("generic-command-message.queue-name-list", 1),
-    GENERIC_QUEUE_LIST_COMMA("generic-command-message.queue-name-list", 0),
+    GENERIC_QUEUE_LIST_COMMA("generic-command-message.queue-name-list-comma", 0),
     // message-colors
     COLORED_CMD_SUBCMD("message-colors.sub-command-colors", 2),
     COLORED_CMD("message-colors.base-command-colors", 1),
