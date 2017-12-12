@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import net.daboross.bukkitdev.skywars.api.arenaconfig.SkyArenaConfig;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -178,11 +179,37 @@ public interface SkyConfiguration {
     int getArenaDistanceApart();
 
     /**
-     * Gets all enabled arenas.
+     * Gets all enabled arenas in all queues.
      *
      * @return A list of SkyArenaConfigs that the next arena will be chosen from.
      */
     List<SkyArenaConfig> getEnabledArenas();
+
+    /**
+     * Gets whether multiple queues are enabled. If true, a valid queuename should be passed wherever one is expected.
+     *
+     * If false, `null` should be used as the queue name for everything.
+     *
+     * @return Whether there is more than one queue enabled.
+     */
+    boolean areMultipleQueuesEnabled();
+
+    /**
+     * Gets all configured queues. Arenas can be retrieved with getArenasForQueue();
+     *
+     * If areMultipleQueuesEnabled is false, this returns a set with the single item 'null'
+     *
+     * @return A set of queue names enabled.
+     */
+    Set<String> getQueueNames();
+
+    /**
+     * Gets the list of arenas enabled for a specific queue.
+     *
+     * @param queueName the name of the queue
+     * @return A list of SkyArenaConfigs that the next arena in the queue can be chosen from.
+     */
+    List<SkyArenaConfig> getArenasForQueue(String queueName);
 
     /**
      * Save the given arena to file.

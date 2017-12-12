@@ -17,6 +17,7 @@
 package net.daboross.bukkitdev.skywars.api.location;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SkyLocationStore {
 
@@ -27,12 +28,35 @@ public interface SkyLocationStore {
     /**
      * @return the current and original portal list (not a copy).
      */
-    List<SkyBlockLocation> getPortals();
-
-    /**
-     * @return the current and original sign list (not a copy).
-     */
-    List<SkyBlockLocation> getSigns();
+    List<SkyPortalData> getPortals();
 
     void save();
+
+    /**
+     * Retrieves a sign we know about at the given location
+     *
+     * @param loc the location to look for
+     * @return the SkySignData for the sign at the given location, or null if there is no known sign there.
+     */
+    SkySignData getSignAt(SkyBlockLocation loc);
+
+    /**
+     * Retrieves all signs registered to a given queue. If queue is null, or multi-queue is disabled, returns all signs.
+     *
+     * The returned list is modifyable, but it should not be modified.
+     *
+     * @param queueName The queue, or null for non-multi-queue mode.
+     * @return a list of all signs registered for that queue.
+     */
+    List<SkySignData> getQueueSigns(String queueName);
+
+    /**
+     * Registers a new sign data.
+     */
+    void registerSign(SkySignData data);
+
+    /**
+     * Removes a sign registration.
+     */
+    void removeSign(SkySignData data);
 }

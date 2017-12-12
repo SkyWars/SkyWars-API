@@ -27,6 +27,10 @@ public enum TransKey {
     CMD_JOIN_JOINED_SECONDARY_QUEUE("commands.join.joined-secondary-queue", 0),
     CMD_JOIN_ALREADY_QUEUED("commands.join.already-queued", 0),
     CMD_JOIN_ALREADY_IN_SECONDARY_QUEUE("commands.join.already-in-secondary-queue", 0),
+    CMD_JOIN_CONFIRMATION_SPECIFIC_QUEUE("commands.join.confirmation-specific-queue", 1),
+    CMD_JOIN_JOINED_SPECIFIC_SECONDARY_QUEUE("commands.join.joined-secondary-queue-specific-queue", 1),
+    CMD_JOIN_ALREADY_IN_SPECIFIC_QUEUE("commands.join.already-queued-specific-queue", 1),
+    CMD_JOIN_ALREADY_IN_SPECIFIC_SECONDARY_QUEUE("commands.join.already-in-secondary-queue-specific-queue", 1),
     CMD_JOIN_IN_GAME("commands.join.in-game", 0),
     // commands.leave
     CMD_LEAVE_DESCRIPTION("commands.leave.description", 0),
@@ -40,7 +44,11 @@ public enum TransKey {
     CMD_SETLOBBY_IN_GAME("commands.setlobby.in-game", 0),
     // commands.setportal
     CMD_SETPORTAL_DESCRIPTION("commands.setportal.description", 0),
+    CMD_SETPORTAL_DESCRIPTION_WITH_QUEUES("commands.setportal.description-with-queues-enabled", 0),
+    CMD_SETPORTAL_ARGUMENT("commands.setportal.argument", 0),
     CMD_SETPORTAL_CONFIRMATION("commands.setportal.confirmation", 0),
+    CMD_SETPORTAL_CONFIRMATION_COMBINED_QUEUE("commands.setportal.confirmation-combined-queue", 0),
+    CMD_SETPORTAL_CONFIRMATION_SPECIFIC_QUEUE("commands.setportal.confirmation-specific-queue", 1),
     CMD_SETPORTAL_IN_GAME("commands.setportal.in-game", 0),
     // commands.delportal
     CMD_DELPORTAL_DESCRIPTION("commands.delportal.description", 0),
@@ -57,6 +65,8 @@ public enum TransKey {
     CMD_STATUS_IN_QUEUE("commands.status.in-queue", 1),
     CMD_STATUS_IN_SECONDARY_QUEUE("commands.status.in-secondary-queue", 1),
     CMD_STATUS_COMMA("commands.status.queue-comma", 0),
+    CMD_STATUS_IN_SPECIFIC_QUEUE("commands.status.in-specific-queue", 2),
+    CMD_STATUS_IN_SPECIFIC_SECONDARY_QUEUE("commands.status.in-specific-secondary-queue", 2),
     CMD_STATUS_ARENA_HEADER("commands.status.arena-header", 0),
     CMD_STATUS_ARENA_LIST_PREFIX_NO_TEAMS("commands.status.no-teams-arena-list-prefix", 1),
     CMD_STATUS_ARENA_LIST_PREFIX_TEAMS_LEFT("commands.status.arena-teams-left", 3),
@@ -162,6 +172,8 @@ public enum TransKey {
     // top-commands
     MAIN_CMD_DESCRIPTION("top-commands.main.description", 0),
     SETUP_CMD_DESCRIPTION("top-commands.setup.description", 0),
+    // generic-command-arg
+    CMD_ARG_QUEUE_NAME("generic-command-arg.queue-name", 0),
     // generic-command-message
     NOT_AN_INTEGER("generic-command-message.argument-not-integer", 1),
     TOO_MANY_PARAMS("generic-command-message.too-many-parameters", 0),
@@ -169,6 +181,9 @@ public enum TransKey {
     NO_PERMISSION("generic-command-message.no-permission", 1),
     PLAYER_ONLY("generic-command-message.not-a-player", 1),
     INVALID_SUB_COMMAND("generic-command-message.invalid-sub-command", 2),
+    NOT_A_QUEUE_NAME("generic-command-message.invalid-queue-name", 1),
+    GENERIC_QUEUE_LIST("generic-command-message.queue-name-list", 1),
+    GENERIC_QUEUE_LIST_COMMA("generic-command-message.queue-name-list", 0),
     // message-colors
     COLORED_CMD_SUBCMD("message-colors.sub-command-colors", 2),
     COLORED_CMD("message-colors.base-command-colors", 1),

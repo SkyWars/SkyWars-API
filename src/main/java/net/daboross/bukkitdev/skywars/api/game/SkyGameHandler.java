@@ -24,7 +24,7 @@ public interface SkyGameHandler {
     /**
      * Starts a new game with the contents of the players in the queue.
      */
-    void startNewGame();
+    void startNewGame(String queueName);
 
     /**
      * Ends a game with the given ID.
