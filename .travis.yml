@@ -3,6 +3,6 @@ sudo: false
 install: mvn -U --fail-never
 script: mvn
 jdk:
-  - oraclejdk8
-  - oraclejdk7
-  - openjdk7
+- oraclejdk9
+- oraclejdk8
+- openjdk7
